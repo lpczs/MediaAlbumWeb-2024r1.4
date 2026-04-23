@@ -1,0 +1,21 @@
+{$appname} - Email address successfully changed
+
+Email address successfully changed
+
+Hello {$contactfirstname},
+
+The email for your account on {$displayurl} has been successfully changed.
+
+Previous email address: {$originalemail}
+New email address: {$newemail}
+
+{if $signinwithemail}
+Please use your new email address to sign in from now on.
+{else}
+These changes are for the account with the username '{$username}'.
+{/if}
+
+If this wasn't you, please contact customer support.
+
+
+{$emailsignature}

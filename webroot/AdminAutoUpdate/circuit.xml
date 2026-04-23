@@ -1,0 +1,228 @@
+<!-- Admin Auto Update -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="initialize2">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize2()" />
+	</fuseaction>
+
+	<fuseaction name="listApplication">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="listApplication()" />
+	</fuseaction>
+	
+	<fuseaction name="initializeApplication">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeApplication()" />
+	</fuseaction>
+
+	<fuseaction name="deleteApplication">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteApplication()" />
+	</fuseaction>
+
+	<fuseaction name="getFileList">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getFileList()" />
+	</fuseaction>
+	
+	<fuseaction name="initializeMasks">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeMasks()" />
+	</fuseaction>
+
+	<fuseaction name="initializeBackgrounds">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeBackgrounds()" />
+	</fuseaction>
+
+	<fuseaction name="initializeScrapbookPictures">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeScrapbookPictures()" />
+	</fuseaction>
+	
+	<fuseaction name="initializeFrames">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeFrames()" />
+	</fuseaction>
+
+	<fuseaction name="activateApplicationFile">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateApplicationFile()" />
+	</fuseaction>
+	
+	<fuseaction name="activateApplicationFileOnline">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateApplicationFileOnline()" />
+	</fuseaction>
+
+	<fuseaction name="deleteApplicationFile">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteApplicationFile()" />
+	</fuseaction>
+
+	<fuseaction name="initializeLicenseKeys">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeLicenseKeys()" />
+	</fuseaction>
+
+	<fuseaction name="listLicenseKeys">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="listLicenseKeys()" />
+	</fuseaction>
+	
+	<fuseaction name="activateLicenseKey">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateLicenseKey()" />
+	</fuseaction>
+	
+	<fuseaction name="activateLicenseKeyOnline">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateLicenseKeyOnline()" />
+	</fuseaction>
+	
+	<fuseaction name="changeLicenseKeyPriority">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeLicenseKeyPriority()" />
+	</fuseaction>
+	
+	<fuseaction name="changeApplicationFilePriority">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeApplicationFilePriority()" />
+	</fuseaction>
+
+	<fuseaction name="editLicenseKeyDisplay">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="editLicenseKeyDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="editLicenseKey">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="editLicenseKey()" />
+	</fuseaction>
+
+	<fuseaction name="deleteLicenseKey">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteLicenseKey()" />
+	</fuseaction>
+
+	<fuseaction name="initializeProducts">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initializeProducts()" />
+	</fuseaction>
+	
+	<fuseaction name="listProducts">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="listProducts()" />
+	</fuseaction>
+	
+	<fuseaction name="deleteProduct">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteProduct()" />
+	</fuseaction>
+	
+	<fuseaction name="activateProductCollection">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateProductCollection()" />
+	</fuseaction>
+	
+	<fuseaction name="changeProductCollectionPriority">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeProductCollectionPriority()" />
+	</fuseaction>
+
+	<fuseaction name="changeApplicationPriority">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeApplicationPriority()" />
+	</fuseaction>
+	
+	<fuseaction name="getDesignerSplashScreenImage">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getDesignerSplashScreenImage() " />
+	</fuseaction>
+	
+	<fuseaction name="uploadDesignerSplashScreenImage">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="uploadDesignerSplashScreenImage()" />
+	</fuseaction>
+	
+	<fuseaction name="getBannerImage">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getBannerImage() " />
+	</fuseaction>
+	
+	<fuseaction name="uploadBannerImage">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="uploadBannerImage()" />
+	</fuseaction>
+
+	<fuseaction name="getPromoPanelImage">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getPromoPanelImage()" />
+	</fuseaction>
+
+	<fuseaction name="uploadPromoPanelImage">
+		<instantiate object="control" class="AdminAutoUpdate_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="uploadPromoPanelImage()" />
+	</fuseaction>
+</circuit>

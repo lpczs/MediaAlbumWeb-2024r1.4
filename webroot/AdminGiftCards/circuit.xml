@@ -1,0 +1,106 @@
+<!-- Admin Gift Cards -->
+<circuit access="public">
+
+	<fuseaction name="displayList">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="displayList()" />
+	</fuseaction>
+
+	<fuseaction name="listGiftCards">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="listGiftCards()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="giftcardAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="giftcardEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardDelete()" />
+	</fuseaction>
+
+    <fuseaction name="createDisplay">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="giftcardCreateDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="create">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardCreate()" />
+	</fuseaction>
+	
+	<fuseaction name="importDisplay">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="giftcardImportDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="import">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardImport()" />
+	</fuseaction>
+
+	<fuseaction name="giftcardActivate">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardActivate()" />
+	</fuseaction>
+
+    <fuseaction name="deleteNew">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="giftcardDeleteNew()" />
+	</fuseaction>
+
+    <fuseaction name="returnToList">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="giftcardReturnToList()" />
+	</fuseaction>
+	
+    <fuseaction name="export">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="giftcardExport()" />
+	</fuseaction>
+	
+	<fuseaction name="displayGiftCardsWindow">
+		<instantiate object="control" class="AdminGiftCards_control" />
+		<invoke object="control" methodcall="displayGiftCardsWindow()" />
+	</fuseaction>
+
+</circuit>

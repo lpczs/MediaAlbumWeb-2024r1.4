@@ -1,0 +1,36 @@
+<!-- Admin Export Event -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminExportEvent_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="eventActivate">
+		<instantiate object="control" class="AdminExportEvent_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="eventActivate()" />
+	</fuseaction>
+
+	<fuseaction name="showGrid">
+		<instantiate object="control" class="AdminExportEvent_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="eventShowGrid()" />
+	</fuseaction>
+
+	<fuseaction name="edit">
+		<instantiate object="control" class="AdminExportEvent_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="eventEdit()" />
+	</fuseaction>
+
+	<fuseaction name="getEventList">
+		<instantiate object="control" class="AdminExportEvent_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getEventList()" />
+	</fuseaction>
+
+</circuit>

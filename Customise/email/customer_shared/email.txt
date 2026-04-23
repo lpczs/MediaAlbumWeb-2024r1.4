@@ -1,0 +1,18 @@
+{$appname}
+
+{$emailTitle}
+
+{$emailText}
+
+{if $sharedurl|@is_array}
+You can access the previews here:
+
+{foreach from=$sharedurl item=row name=url}
+	{assign var="i" value=$smarty.foreach.url.index}
+		"{$sharednames.$i}"
+{/foreach}
+{else}
+You can access the preview of "{$sharednames}" here : {$sharedurl}
+{/if}
+
+{$emailsignature}

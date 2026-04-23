@@ -1,0 +1,17 @@
+#
+SET FOREIGN_KEY_CHECKS = 0;
+
+#
+# DDL START
+#
+
+UPDATE `SYSTEMCONFIG` SET `webversiondate` = '2022-07-20';
+UPDATE `SYSTEMCONFIG` SET `webversionnumber` = '2022.1.1';
+UPDATE `SYSTEMCONFIG` SET `webversionstring`= '2022r1.1';
+
+#
+# DDL END
+#
+
+SET FOREIGN_KEY_CHECKS = 1;
+

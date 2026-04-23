@@ -1,0 +1,28 @@
+<!-- Admin Taopix Online / Font List -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminTaopixOnlineFontLists_control" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="getgriddata">
+		<instantiate object="control" class="AdminTaopixOnlineFontLists_control" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="formdisplay">
+		<instantiate object="control" class="AdminTaopixOnlineFontLists_control" />
+		<invoke object="control" methodcall="formDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="savefontlist">
+		<instantiate object="control" class="AdminTaopixOnlineFontLists_control" />
+		<invoke object="control" methodcall="saveFontList()" />
+	</fuseaction>
+
+	<fuseaction name="deletefontlists">
+		<instantiate object="control" class="AdminTaopixOnlineFontLists_control" />
+		<invoke object="control" methodcall="deleteFontLists()" />
+	</fuseaction>
+</circuit>

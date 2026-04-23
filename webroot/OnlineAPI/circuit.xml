@@ -1,0 +1,259 @@
+<circuit access="public">
+
+	<fuseaction name="create">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="create()" />
+	</fuseaction>
+
+	<fuseaction name="createProject2">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="create2()" />
+	</fuseaction>
+
+	<fuseaction name="createProject3">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="create3()" />
+	</fuseaction>
+
+	<fuseaction name="editProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="openProject(TPX_BASKETWORKFLOWTYPE_LOWLEVELAPI, TPX_OPEN_MODE_EXISTING_PROJECT, '')" />
+	</fuseaction>
+
+	<fuseaction name="previewProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="openProject(TPX_BASKETWORKFLOWTYPE_LOWLEVELAPI, TPX_OPEN_MODE_PREVIEW_EXISITING, '')" />
+	</fuseaction>
+
+	<fuseaction name="previewSharedProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="previewSharedProject()" />
+	</fuseaction>
+
+	<fuseaction name="renameProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="renameProject()" />
+	</fuseaction>
+
+	<fuseaction name="duplicateProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="duplicateProject()" />
+	</fuseaction>
+
+	<fuseaction name="deleteProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="deleteProject()" />
+	</fuseaction>
+
+	<fuseaction name="hlEditProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelEditProject()" />
+	</fuseaction>
+
+	<fuseaction name="hlRenameProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelRenameProject()" />
+	</fuseaction>
+
+	<fuseaction name="hlDuplicateProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelDuplicateProject()" />
+	</fuseaction>
+
+	<fuseaction name="hlDeleteProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelDeleteProject()" />
+	</fuseaction>
+
+	<fuseaction name="touchProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="touchProject()" />
+	</fuseaction>
+
+	<fuseaction name="deleteUnflagProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="deleteUnflagProject()" />
+	</fuseaction>
+
+	<fuseaction name="lockProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="lockProject()" />
+	</fuseaction>
+
+	<fuseaction name="unlockProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="unlockProject()" />
+	</fuseaction>
+
+	<fuseaction name="externalCheckout">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="externalCheckout()" />
+	</fuseaction>
+
+	<fuseaction name="clearProjectBatchRef">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="clearProjectBatchRef()" />
+	</fuseaction>
+
+	<fuseaction name="basketInit">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelBasketInitialise()" />
+	</fuseaction>
+
+	<fuseaction name="hlViewProjectsList">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelViewProjectsList()" />
+	</fuseaction>
+
+	<fuseaction name="removeItemFromBasket">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelRemoveItemFromBasket()" />
+	</fuseaction>
+
+	<fuseaction name="emptyBasket">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelEmptyBasket()" />
+	</fuseaction>
+
+	<fuseaction name="checkout">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelCheckout()" />
+	</fuseaction>
+
+	<fuseaction name="signInInit">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelSignInInit()" />
+	</fuseaction>
+
+	<fuseaction name="registerInit">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelRegisterInit()" />
+	</fuseaction>
+
+	<fuseaction name="myAccountInit">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelMyAccountInit()" />
+	</fuseaction>
+
+	<fuseaction name="hlSignInDisplay">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelSignInDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="hlRegisterDisplay">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelRegisterDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="hlMyAccountDisplay">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelMyAccountDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="processLogin">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelProcessLogin()" />
+	</fuseaction>
+
+	<fuseaction name="createNewAccountLarge">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelCreateNewAccountLarge()" />
+	</fuseaction>
+
+    <fuseaction name="createNewAccountSmall">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelCreateNewAccountSmall()" />
+	</fuseaction>
+
+	<fuseaction name="checkUserSession">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelCheckUserSession()" />
+	</fuseaction>
+
+	<fuseaction name="hlLogout">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelLogout()" />
+	</fuseaction>
+
+	<fuseaction name="hlAccountPageLogout">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelAccountPageLogout()" />
+	</fuseaction>
+
+	<fuseaction name="queryOrderStatus">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="queryOrderStatus()" />
+	</fuseaction>
+	
+	<fuseaction name="reorder">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="reorder()" />
+	</fuseaction>
+
+	<fuseaction name="callback">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="callback()" />
+	</fuseaction>
+
+	<fuseaction name="checkDataAvailable">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="checkDataAvailable()" />
+	</fuseaction>
+
+	<fuseaction name="getBrandAssetLogo">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="getBrandAssetLogo()" />
+	</fuseaction>
+
+	<fuseaction name="viewUsersProjectList">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="usersProjectList(TPX_USER_PROJECT_LIST_MODE_VIEW)" />
+	</fuseaction>
+
+	<fuseaction name="getUsersProjectList">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="usersProjectList(TPX_USER_PROJECT_LIST_MODE_GET)" />
+	</fuseaction>
+
+	<fuseaction name="leaveUsersProjectList">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="leaveUsersProjectList()" />
+	</fuseaction>
+
+	<fuseaction name="sharePreview">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="generateSharePreviewLink()" />
+	</fuseaction>
+
+	<fuseaction name="highLevelShareProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelShareProject()" />
+	</fuseaction>
+
+	<fuseaction name="highLevelKeepProject">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="highLevelKeepProject()" />
+	</fuseaction>
+	
+	<fuseaction name="getWebViewCartItem">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="getWebViewCartItem()" />
+	</fuseaction>
+
+	<fuseaction name="webViewCheckout">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="webViewCheckout()" />
+	</fuseaction>
+	
+	<fuseaction name="webViewOrderConfirm">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="webViewOrderConfirm()" />
+	</fuseaction>
+	
+	<fuseaction name="webViewRemoveItemsFromCart">
+		<instantiate object="control" class="OnlineAPI_control" />
+		<invoke object="control" methodcall="webViewRemoveItemsFromCart()" />
+	</fuseaction>
+
+
+</circuit>

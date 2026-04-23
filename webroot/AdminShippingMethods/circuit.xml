@@ -1,0 +1,62 @@
+<!-- Admin Shipping Methods -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+	
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="shippingMethodAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingMethodAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="shippingMethodEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingMethodEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingMethodDelete()" />
+	</fuseaction>
+
+	<fuseaction name="uploadLogo">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="uploadLogo()" />
+	</fuseaction>
+	
+	<fuseaction name="getPreviewImage">
+		<instantiate object="control" class="AdminShippingMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getPreviewImage() " />
+	</fuseaction>
+
+</circuit>

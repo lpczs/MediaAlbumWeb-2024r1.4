@@ -1,0 +1,49 @@
+<!-- Admin Currencies -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="currencyAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="currencyAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="currencyEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="currencyEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminCurrencies_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="currencyDelete()" />
+	</fuseaction>
+
+</circuit>

@@ -1,0 +1,28 @@
+<!-- Admin Taopix Online / Product URL Admin -->
+<circuit access="public">
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminTaopixOnlineProductURLAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminTaopixOnlineProductURLAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+	
+	<fuseaction name="productURLExport">
+		<instantiate object="control" class="AdminTaopixOnlineProductURLAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="productURLExport()" />
+	</fuseaction>
+	
+	<fuseaction name="productURLDecrypt">
+		<instantiate object="control" class="AdminTaopixOnlineProductURLAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productURLDecrypt()" />
+	</fuseaction>
+</circuit>

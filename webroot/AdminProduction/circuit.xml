@@ -1,0 +1,129 @@
+<!-- Admin Production  -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="getListData">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getListData()" />
+	</fuseaction>
+
+	<fuseaction name="orderDetailsDisplay">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="orderDetailsDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="onHoldDisplay">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="onHoldDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="updateItemOnHoldStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemOnHoldStatus()" />
+	</fuseaction>
+
+	<fuseaction name="confirmPaymentDisplay">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="confirmPaymentDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="updateOrderPaymentStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateOrderPaymentStatus()" />
+	</fuseaction>
+	
+	<fuseaction name="preferencesDisplay">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="preferencesDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="updatePreferences">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updatePreferences()" />
+	</fuseaction>
+	
+	<fuseaction name="updateItemCanUploadFilesStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemCanUploadFilesStatus()" />
+	</fuseaction>
+	
+	<fuseaction name="updateOverrideSaveStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateOverrideSaveStatus()" />
+	</fuseaction>
+	  
+	<fuseaction name="updateItemCanModifyStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemCanModifyStatus()" />
+	</fuseaction>
+
+	<fuseaction name="updateItemCanUploadFilesOverrideProductCodeStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemCanUploadFilesOverrideProductCodeStatus()" />
+	</fuseaction>
+
+	<fuseaction name="updateItemCanUploadFilesOverridePageCountStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemCanUploadFilesOverridePageCountStatus()" />
+	</fuseaction>
+	
+	<fuseaction name="updateItemActiveStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemActiveStatus()" />
+	</fuseaction>
+	
+	<fuseaction name="updateItemStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemStatus()" />
+	</fuseaction>
+
+	<fuseaction name="shippingDisplay">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="updateItemShippingStatus">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateItemShippingStatus()" />
+	</fuseaction>
+
+	<fuseaction name="statusCheck">
+		<instantiate object="control" class="AdminProduction_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="statusCheck()" />
+	</fuseaction>
+</circuit>

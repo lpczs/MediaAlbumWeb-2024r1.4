@@ -1,0 +1,18 @@
+{$appname} - Password Reset
+
+
+Password Reset Requested
+
+
+Hello {$contactfirstname},
+
+We have received a request to reset the password for the following account:
+{$loginname}
+
+If you made this request, click on the link to continue:
+{$reseturl}
+
+If you didn't make this request, just ignore this email and no changes will be made to your account.
+
+
+{$emailsignature}

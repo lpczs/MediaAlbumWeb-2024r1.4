@@ -1,0 +1,20 @@
+#
+SET FOREIGN_KEY_CHECKS = 0;
+
+#
+# DDL START
+#
+
+UPDATE `SYSTEMCONFIG` SET `webversiondate` = '2020-07-23';
+UPDATE `SYSTEMCONFIG` SET `webversionnumber` = '2020.3.0';
+UPDATE `SYSTEMCONFIG` SET `webversionstring`= '2020r3';
+
+
+ALTER TABLE `ORDERITEMS` ADD `projectaimode` TINYINT(3) UNSIGNED NOT NULL DEFAULT 0;
+
+#
+# DDL END
+#
+
+SET FOREIGN_KEY_CHECKS = 1;
+

@@ -1,0 +1,34 @@
+{$appname} - Order '{$ordernumber}' Collection Notification
+Hello {$billingcontactfirstname},
+
+We're pleased to inform you that the following items from your order are now ready to collect.
+
+{$qty} x {$productname}
+{strip}{if ($papercode!='')&&(($papercode!=$defaultpapercode)||($papercount>1))}{#str_LabelPaper#}: {$papername}{/if}{/strip}
+{strip}{if $covercode!=''}{#str_LabelCover#}: {$covername}{/if}{/strip}
+{#str_LabelShippingMethod#}: {$shippingmethod}
+
+{#str_LabelOrderTotal#}: {$formattedordertotal}
+{if $ordergiftcardtotal > 0}
+{#str_LabelGiftCard#}: -{$formattedordergiftcardtotal}
+{#str_LabelAmountToPay#}: {$formattedordertotaltopay}
+{/if}
+{strip}{if $paymentmethodcode!='NONE'}{#str_LabelPaymentMethod#}: {$paymentmethodname}{/if}{/strip}
+
+
+{#str_LabelStoreAddress#}:
+{$shippingaddress}
+
+{strip}{if $shippingcustomertelephonenumber!=''}{#str_LabelTelephoneNumber#}: {$shippingcustomertelephonenumber}{/if}{/strip}
+{strip}{if $shippingcustomeremailaddress!=''}{#str_LabelEmailAddress#}: {$shippingcustomeremailaddress}{/if}{/strip}
+{strip}{if $storeurl!=''}{#str_LabelWebSite#}: {$storeurl}{/if}{/strip}
+
+{strip}{if $storeopeningtimes!=''}{#str_LabelOpeningTimes#}: {$storeopeningtimes}{/if}{/strip}
+
+
+
+You can access your account at any time via the URL
+{$homeurl}
+
+
+{$emailsignature}

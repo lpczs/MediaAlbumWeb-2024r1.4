@@ -1,0 +1,108 @@
+<!-- Admin Vouchers -->
+<circuit access="public">
+
+	<fuseaction name="displayList">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="displayList()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="voucherAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="voucherEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherDelete()" />
+	</fuseaction>
+
+    <fuseaction name="createDisplay">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="voucherCreateDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="create">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherCreate()" />
+	</fuseaction>
+	
+	<fuseaction name="importDisplay">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="voucherImportDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="import">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherImport()" />
+	</fuseaction>
+
+	<fuseaction name="voucherActivate">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherActivate()" />
+	</fuseaction>
+
+    <fuseaction name="deleteNew">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherDeleteNew()" />
+	</fuseaction>
+
+    <fuseaction name="returnToList">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="voucherReturnToList()" />
+	</fuseaction>
+	
+    <fuseaction name="export">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="voucherExport()" />
+	</fuseaction>
+	
+	<fuseaction name="listVouchers">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="listVouchers()" />
+	</fuseaction>
+	
+	<fuseaction name="displayVouchersWindow">
+		<instantiate object="control" class="AdminVouchers_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="displayVouchersWindow()" />
+	</fuseaction>
+
+</circuit>

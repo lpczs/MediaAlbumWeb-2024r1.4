@@ -1,0 +1,17 @@
+{$appname} - Pay Later Confirmation - Ref: {$ordernumber}
+Hello {$billingcontactfirstname},
+
+Thank you for your order.
+
+Your order number is {$ordernumber}, please quote this in any correspondence with us.
+
+Before we can process your order you must first upload your project and then log into your account to complete the ordering process.
+
+To access your account please use the following URL:
+{$homeurl}
+
+NOTE
+The ability to order this project will only be available until {$formattedexpirydate}.
+
+
+{$emailsignature}

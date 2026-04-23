@@ -1,0 +1,29 @@
+#
+SET FOREIGN_KEY_CHECKS = 0;
+
+#
+# DDL START
+#
+
+INSERT INTO `ACTIVITYLOG`
+	(`id`, `datecreated`, `sessionid`, `orderid`, `userid`, `userlogin`, `username`, `importance`, `sectioncode`, `actioncode`, `actionnotes`, `success`)
+	VALUES (0, now(), 0, 0, 0, '', (SELECT USER()), 0, 'UPGRADE', '3.1.0a2', 'STARTED', 1);
+
+ALTER TABLE `ORDERITEMS` ADD COLUMN `voucherapplied` INTEGER NOT NULL DEFAULT 0 AFTER `subtotal`;
+
+UPDATE `ORDERITEMS` `oi` LEFT JOIN `ORDERHEADER` `oh` ON `oi`.`orderid` = `oh`.`id` SET `oi`.`voucherapplied` = 1 WHERE `oh`.`vouchercode` <> "";
+
+
+UPDATE `SYSTEMCONFIG` SET `webversiondate` = '2011-12-15';
+UPDATE `SYSTEMCONFIG` SET `webversionnumber` = '3.1.0.2';
+UPDATE `SYSTEMCONFIG` SET `webversionstring`= '3.1.0a2';
+
+INSERT INTO `ACTIVITYLOG`
+	(`id`, `datecreated`, `sessionid`, `orderid`, `userid`, `userlogin`, `username`, `importance`, `sectioncode`, `actioncode`, `actionnotes`, `success`)
+	VALUES (0, now(), 0, 0, 0, '', (SELECT USER()), 0, 'UPGRADE', '3.1.0a2', 'FINISHED', 1);
+
+#
+# DDL END
+#
+
+SET FOREIGN_KEY_CHECKS = 1;

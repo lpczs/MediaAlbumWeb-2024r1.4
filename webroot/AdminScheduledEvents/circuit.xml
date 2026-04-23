@@ -1,0 +1,51 @@
+<!-- Admin Scheduled Events -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="displayList">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="displayList()" />
+	</fuseaction>
+	
+	<fuseaction name="eventDelete">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="eventDelete()" />
+	</fuseaction>
+	
+	<fuseaction name="eventActivate">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="eventActivate()" />
+	</fuseaction>
+	
+	<fuseaction name="detailsDisplay">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="detailsDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="eventEdit">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="eventEdit()" />
+	</fuseaction>
+	
+	<fuseaction name="eventRun">
+		<instantiate object="control" class="AdminScheduledEvents_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="eventRun()" />
+	</fuseaction>
+
+</circuit>

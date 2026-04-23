@@ -1,0 +1,248 @@
+/* --- Light box payment form --- */
+
+/* Give the dialog a specific size for the payment form */
+.lightbox-payment-dialog
+{
+    width: 300px!important;
+    position: relative;
+}
+
+.lightbox-payment-dialog .tpx-dialog-box-content 
+{
+    padding-top: 30px;
+    margin: 0;
+}
+
+.lightbox-payment-form__error-container
+{
+    min-height: 60px;
+    padding: 10px 0 0;
+}
+
+/* The form error message */
+.lightbox-payment-form__error-message 
+{
+    display: none;
+    padding: 0.5em;
+    color: #FB8800;
+    background-color: #fff2d5;
+    border: 1px solid #ffc044;
+    border-radius: 4px;
+    margin: 0;
+    line-height: 1.5;
+    padding-left: 28px;
+    position: relative;
+}
+
+.lightbox-payment-form__error-message:before 
+{
+    content: '';
+    background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='16.2px' height='15px' viewBox='0 0 16.2 15' style='overflow:visible;enable-background:new 0 0 16.2 15;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23F18613;%7D .st1%7Bfill:%23FFFFFF;%7D%0A%3C/style%3E%3Cdefs%3E%3C/defs%3E%3Cpath class='st0' d='M1.3,15c-1.1,0-1.6-0.8-1-1.8L7.2,0.7c0.5-1,1.4-1,1.9,0L16,13.3c0.5,1,0.1,1.8-1,1.8H1.3z'/%3E%3Cg%3E%3Cpath class='st1' d='M9.1,4.6l-0.2,5.7H7.4L7.1,4.6H9.1z M8.1,10.9c0.3,0,0.6,0.1,0.7,0.3s0.3,0.4,0.3,0.7c0,0.3-0.1,0.5-0.3,0.7 s-0.4,0.3-0.7,0.3c-0.3,0-0.5-0.1-0.7-0.3s-0.3-0.4-0.3-0.7c0-0.3,0.1-0.5,0.3-0.7S7.8,10.9,8.1,10.9z'/%3E%3C/g%3E%3C/svg%3E%0A");
+    display: inline-block;
+    width: 16px;
+    height: 15px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+.lightbox-payment-form__error-message--visible
+{
+    display: block;
+}
+
+.lightbox-payment-form 
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lightbox-payment-form__field-wrapper
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.lightbox-payment-form__label 
+{
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 4px;
+    position: relative;
+}
+
+.lightbox-payment-form__label--card-number:after 
+{
+    content: '';
+    display: block;
+    width: 40px;
+    height: 26px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-size: 100%;
+}
+
+/* Card Logos */
+.lightbox-payment-form__label.visa:after
+{
+    background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='30px' height='18.7px' viewBox='0 0 30 18.7' style='overflow:visible;enable-background:new 0 0 30 18.7;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23EFEFEF;%7D .st1%7Bfill:%231166B0;%7D .st2%7Bfill:%23F7A536;%7D%0A%3C/style%3E%3Cdefs%3E%3C/defs%3E%3Cg%3E%3Cpath class='st0' d='M30,17.8c0,0.6-0.4,1-1,1H1c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h28c0.6,0,1,0.4,1,1V17.8z'/%3E%3Cg%3E%3Cg%3E%3Cpolygon class='st1' points='13.8,12.2 12.3,12.2 13.3,6.6 14.7,6.6 '/%3E%3Cpath class='st1' d='M11.1,6.6l-1.4,3.9L9.5,9.6v0L9.1,7.1c0,0-0.1-0.5-0.7-0.5H6l0,0.1c0,0,0.7,0.1,1.5,0.6l1.3,4.9h1.5l2.3-5.6 H11.1z'/%3E%3Cpath class='st1' d='M22.6,12.2H24l-1.2-5.6h-1.2C21.1,6.6,21,7,21,7l-2.2,5.2h1.5l0.3-0.8h1.9L22.6,12.2z M21,10.2l0.8-2.1 l0.4,2.1H21z'/%3E%3Cpath class='st1' d='M18.9,7.9l0.2-1.2c0,0-0.6-0.2-1.3-0.2c-0.7,0-2.5,0.3-2.5,1.9c0,1.5,2,1.5,2,2.2c0,0.8-1.8,0.6-2.4,0.1 L14.7,12c0,0,0.7,0.3,1.7,0.3c1,0,2.5-0.5,2.5-1.9c0-1.5-2-1.6-2-2.2C16.8,7.5,18.3,7.6,18.9,7.9z'/%3E%3C/g%3E%3Cpath class='st2' d='M9.5,9.6L9.1,7.1c0,0-0.1-0.5-0.7-0.5H6l0,0.1c0,0,1.1,0.2,2.2,1.1C9.2,8.6,9.5,9.6,9.5,9.6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+}
+
+.lightbox-payment-form__label.amex:after
+{
+    background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='30px' height='18.7px' viewBox='0 0 30 18.7' style='overflow:visible;enable-background:new 0 0 30 18.7;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23EFEFEF;%7D .st1%7Bfill-rule:evenodd;clip-rule:evenodd;fill:%233A98D4;%7D%0A%3C/style%3E%3Cdefs%3E%3C/defs%3E%3Cg%3E%3Cpath class='st0' d='M30,17.7c0,0.6-0.4,1-1,1H1c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h28c0.6,0,1,0.4,1,1V17.7z'/%3E%3Cpath class='st1' d='M6.3,10h1.6L7.1,8L6.3,10z M16.5,12.2h-1.1V8.3l-1.7,3.9h-1L11,8.3v3.9H8.7l-0.4-1.1H5.9l-0.4,1.1H4.2l2.1-5H8 l1.9,4.7V7.2h1.9l1.5,3.4l1.4-3.4h1.9v5H16.5z M26.4,12.2h-1.5l-1.3-1.7l-1.5,1.7h-4.5v-5h4.6l1.4,1.6l1.5-1.6h1.4l-2.2,2.5 L26.4,12.2z M18.7,8.2v0.9h2.5v1h-2.5v1h2.8l1.3-1.5l-1.2-1.4H18.7z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.lightbox-payment-form__label.mastercard:after
+{
+    background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='30px' height='18.7px' viewBox='0 0 30 18.7' style='overflow:visible;enable-background:new 0 0 30 18.7;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23EFEFEF;%7D .st1%7Bfill-rule:evenodd;clip-rule:evenodd;fill:%23F9B035;%7D .st2%7Bfill-rule:evenodd;clip-rule:evenodd;fill:%23E62532;%7D%0A%3C/style%3E%3Cdefs%3E%3C/defs%3E%3Cg%3E%3Cpath class='st0' d='M30,17.8c0,0.6-0.4,1-1,1H1c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1h28c0.6,0,1,0.4,1,1V17.8z'/%3E%3Cg%3E%3Cpath class='st1' d='M15.3,13.6c1,0.9,2.4,1.5,3.9,1.5c3.2,0,5.8-2.6,5.8-5.8c0-3.2-2.6-5.8-5.8-5.8c-1.5,0-2.9,0.6-3.9,1.5 c-1.2,1.1-1.9,2.6-1.9,4.3S14.2,12.6,15.3,13.6L15.3,13.6z'/%3E%3Cpath class='st2' d='M13.6,10.6c0-0.2-0.1-0.4-0.1-0.6h3.7c0-0.2,0-0.4,0-0.6c0,0,0,0,0,0h-3.8c0,0,0,0,0,0c0-0.2,0-0.4,0-0.6h3.7 c0,0,0,0,0,0c0-0.2-0.1-0.4-0.1-0.6h-3.5c0-0.2,0.1-0.4,0.2-0.6H17c-0.1-0.2-0.2-0.4-0.2-0.6H14c0.1-0.2,0.2-0.4,0.3-0.6h2.1 c-0.1-0.2-0.3-0.4-0.4-0.6h-1.2c0.2-0.2,0.4-0.4,0.6-0.6c-1-0.9-2.4-1.5-3.9-1.5c-3.2,0-5.8,2.6-5.8,5.8c0,3.2,2.6,5.8,5.8,5.8 c1.5,0,2.9-0.6,3.9-1.5c0.2-0.2,0.4-0.4,0.6-0.6h-1.2c-0.2-0.2-0.3-0.4-0.4-0.6h2.1c0.1-0.2,0.2-0.4,0.3-0.6H14 c-0.1-0.2-0.2-0.4-0.2-0.6H17c0.1-0.2,0.1-0.4,0.2-0.6c0,0,0,0,0,0H13.6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+}
+
+/* Make the date and security code fields sit on the same line */
+.lightbox-payment-form__field-wrapper.expiry, 
+.lightbox-payment-form__field-wrapper.securitycode 
+{
+    width: calc(50% - 5px);
+}
+
+.lightbox-payment-form__field-wrapper.expiry 
+{
+    margin-right: 10px;
+}
+.lightbox-payment-form input[type='text'] 
+{
+    padding: 4px 10px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    height: 40px;
+    font-size: 14px;
+}
+
+.lightbox-payment-form input[type='text']::placeholder 
+{
+    color: #ccc;
+}
+
+/*  Error styling on the input fields */
+.lightbox-payment-form__label--error+input[type='text'] 
+{
+    border: 2px solid #ffc044;
+    outline: none;
+}
+
+.lightbox-payment-form__submit-button 
+{
+    width: 100%;
+}
+
+/* Padlock icon on the submit button */
+.lightbox-payment-form__submit-button:before 
+{
+    content: '';
+    width: 16px;
+    height: 18px;
+    display: block;
+    position: absolute;
+    margin: auto;
+    top: -3px;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='14.9px' height='18.1px' viewBox='0 0 14.9 18.1' style='overflow:visible;enable-background:new 0 0 14.9 18.1;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23FFFFFF;%7D%0A%3C/style%3E%3Cdefs%3E%3C/defs%3E%3Cpath class='st0' d='M12.9,7.8L12.9,7.8l-0.1-2.4c0-3-2.4-5.4-5.4-5.4h0C4.5,0,2,2.4,2,5.4v2.4H1.9C0.9,7.8,0,8.6,0,9.7v6.4 c0,1.1,0.9,1.9,1.9,1.9h11c1.1,0,1.9-0.9,1.9-1.9V9.7C14.9,8.6,14,7.8,12.9,7.8z M5,5.4C5,4.1,6.1,3,7.4,3c1.3,0,2.4,1.1,2.4,2.4 v2.4H5V5.4z M12.5,11.3l-5,5.1c-0.2,0.2-0.6,0.4-0.9,0.4c0,0,0,0,0,0c-0.3,0-0.7-0.1-0.9-0.4l-2.8-3c-0.5-0.5-0.4-1.3,0.1-1.8 c0.5-0.5,1.3-0.4,1.8,0.1l1.9,2.1l4.1-4.2C11.2,9,12,9,12.5,9.5C13,10,13,10.8,12.5,11.3z'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+}
+
+.lightbox-payment-form__help-link 
+{
+    appearance: none;
+    display: block;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    text-indent: -100em;
+    cursor: pointer;
+    opacity: 0.2;
+    background-image: url("data:image/svg+xml,%3C!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In --%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='16px' height='16px' viewBox='0 0 16 16' style='overflow:visible;enable-background:new 0 0 16 16;' xml:space='preserve'%3E%3Ccircle cx='8' cy='8' r='8'/%3E%3Cg%3E%3Cpath fill='%23ffffff' d='M4.6,5.7c0-0.4,0.1-0.9,0.4-1.3s0.7-0.8,1.2-1.1s1.2-0.4,1.9-0.4c0.7,0,1.2,0.1,1.8,0.4s0.9,0.6,1.2,1 s0.4,0.9,0.4,1.4c0,0.4-0.1,0.7-0.2,1s-0.3,0.5-0.6,0.8S10,7.9,9.5,8.4C9.3,8.5,9.2,8.7,9.1,8.8S8.9,9,8.9,9.1S8.8,9.2,8.8,9.3 S8.7,9.6,8.7,9.8c-0.1,0.5-0.4,0.7-0.8,0.7c-0.2,0-0.4-0.1-0.6-0.2S7,9.9,7,9.6c0-0.4,0.1-0.7,0.2-1s0.3-0.5,0.5-0.7 c0.2-0.2,0.5-0.5,0.8-0.8c0.3-0.3,0.5-0.4,0.6-0.6s0.2-0.3,0.3-0.4s0.1-0.3,0.1-0.5c0-0.4-0.1-0.7-0.4-0.9s-0.6-0.4-1-0.4 C7.6,4.3,7.2,4.4,7,4.6S6.5,5.3,6.4,5.8C6.2,6.3,5.9,6.5,5.5,6.5C5.2,6.5,5,6.4,4.8,6.3S4.6,5.9,4.6,5.7z M7.9,13.2 c-0.3,0-0.5-0.1-0.7-0.3s-0.3-0.4-0.3-0.8c0-0.3,0.1-0.5,0.3-0.7s0.4-0.3,0.7-0.3c0.3,0,0.5,0.1,0.7,0.3s0.3,0.4,0.3,0.7 c0,0.3-0.1,0.6-0.3,0.8S8.2,13.2,7.9,13.2z'/%3E%3C/g%3E%3C/svg%3E%0A");
+}
+
+.lightbox-payment-form__help-link:hover
+{
+    opacity: 0.4;
+}
+
+.lightbox-payment-form__help-popup 
+{
+    display: none;
+    position: absolute;
+    width: calc(100% - 60px);
+    height: calc(100% - 60px);
+    height: fit-content;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    background: white;
+    top: 0;
+    z-index: 1;
+}
+
+.lightbox-payment-form__help-popup--visible
+{
+    display: block;
+}
+
+.help-popup__content 
+{
+    overflow-y: auto;
+    font-size: 13px;
+    color: #888;
+    line-height: 1.3;
+}
+
+.help-popup__close-link
+{
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    top: -12.5px;
+    right: -12.5px;
+    border: 3px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+    text-indent: -100em;
+    background-color: #c5c5c5;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%23666' d='M15.83,5.34,14.66,4.17,10,8.82,5.34,4.17,4.17,5.34,8.82,10,4.17,14.66l1.17,1.17L10,11.18l4.66,4.65,1.17-1.17L11.18,10Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* The image of the card in the cvv help popup */
+.help-popup__close-link:hover
+{
+    background-color: #ababab;
+}
+
+/* The image of the card in the cvv help popup */
+.help-popup__cvv-image 
+{
+    display: block;
+    margin: 10px 0 20px;
+}
+
+/* Hide whichever help content isn't required */
+.help_content_hidden 
+{
+    display: none;
+}

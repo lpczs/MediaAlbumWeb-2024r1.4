@@ -1,0 +1,63 @@
+<!-- Admin Sites / Sites Admin -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+		
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="orderRoutingAddDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="getConditionValueStore">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getConditionValueStore()" />
+	</fuseaction>
+
+	<fuseaction name="routingAdd">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="routingAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="orderRoutingEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="routingRulesEdit">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="routingRulesEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="routingRuleDelete()" />
+	</fuseaction>
+	
+	<fuseaction name="toggle">
+		<instantiate object="control" class="AdminSitesOrderRouting_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="routingRulesTogglePriority()" />
+	</fuseaction>
+
+</circuit>

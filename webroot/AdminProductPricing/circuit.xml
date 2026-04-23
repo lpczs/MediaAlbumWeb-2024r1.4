@@ -1,0 +1,116 @@
+<!-- Admin Product Pricing -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="priceListsInitialize">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="priceListsInitialize()" />
+	</fuseaction>
+
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="getPriceListGridData">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getPriceListGridData()" />
+	</fuseaction>
+
+	<fuseaction name="pricingActivate">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="pricingActivate()" />
+	</fuseaction>
+
+	<fuseaction name="activatePriceList">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activatePriceList()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="pricingAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="priceListAddDisplay">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="priceListAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="pricingAdd()" />
+	</fuseaction>
+
+	<fuseaction name="addPriceList">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="addPriceList();" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="pricingEditDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="priceListEditDisplay">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="priceListEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="pricingEdit()" />
+	</fuseaction>
+
+	<fuseaction name="priceListEdit">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="priceListEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="pricingDelete()" />
+	</fuseaction>
+
+	<fuseaction name="priceListDelete">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productPriceListDelete()" />
+	</fuseaction>
+
+	<fuseaction name="getLicenseKeyFromCompany">
+		<instantiate object="control" class="AdminProductPricing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getLicenseKeyFromCompany()" />
+	</fuseaction>
+
+</circuit>

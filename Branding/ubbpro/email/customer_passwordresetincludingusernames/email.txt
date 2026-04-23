@@ -1,0 +1,28 @@
+{$appname} - Password Reset
+
+
+Password Reset Requested
+
+
+Hello,
+
+We have received a request to reset the password for the following account:
+{$loginname}
+
+There are multiple accounts registered to this email address.
+
+Please choose which account you would like to reset the password for, and enter that username instead of your email on the forgotten password form.
+
+The following accounts are registered to this email address:
+
+{foreach from=$accountlist item=i key=prd}
+• {$i.login} (Last log in: {$i.lastlogindate})
+{/foreach}
+
+
+Reset your password via username:
+{$reseturl}
+
+If you didn't make this request, just ignore this email and no changes will be made to your account.
+
+{$emailsignature}

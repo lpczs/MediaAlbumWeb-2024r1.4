@@ -1,0 +1,13 @@
+{$appname} - Existing Accounts
+
+You've already got an account
+Someone tried to sign in to {$homeurl} using your email.
+
+If this was you, the following accounts are registered to this email address, please try signing in using one of these usernames instead:
+{foreach from=$usernames item=i key=prd}
+• {$i.login} (Last log in: {$i.lastlogindate})
+{/foreach}
+
+If this wasn't you, please contact customer services.
+
+{$emailsignature}

@@ -1,0 +1,78 @@
+<!-- Admin Shipping Rates -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+	
+	<fuseaction name="shippingRateActivate">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingRateActivate()" />
+	</fuseaction>
+		
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="shippingRateAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingRateAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="shippingRateEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingRateEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shippingRateDelete()" />
+	</fuseaction>
+	
+	<fuseaction name="getShippingZonesFromCompany">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getShippingZonesFromCompany()" />
+	</fuseaction>
+	
+	<fuseaction name="getProductsFromCompany">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getProductsFromCompany()" />
+	</fuseaction>
+	
+	<fuseaction name="getLicenseKeyFromCompany">
+		<instantiate object="control" class="AdminShippingRates_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getLicenseKeyFromCompany()" />
+	</fuseaction>
+
+</circuit>

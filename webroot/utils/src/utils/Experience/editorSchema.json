@@ -1,0 +1,1095 @@
+{
+  "$ref": "#/definitions/Editor",
+  "definitions": {
+    "Editor": {
+      "type": "object",
+      "title": "editor",
+      "additionalProperties": false,
+      "properties": {
+        "editorType": {
+          "$ref": "#/definitions/EditorType"
+        },
+        "textEditing": {
+          "$ref": "#/definitions/TextEditing"
+        },
+        "pageEditing": {
+          "$ref": "#/definitions/PageEditing"
+        },
+        "header": {
+          "$ref": "#/definitions/Header"
+        },
+        "componentOptions": {
+          "$ref": "#/definitions/ComponentOptions"
+        },
+        "toolPalette": {
+          "$ref": "#/definitions/ToolPalette"
+        },
+        "calendarEvents": {
+          "$ref": "#/definitions/CalendarEvents"
+        },
+        "calendarSettings": {
+          "$ref": "#/definitions/CalendarSettings"
+        },
+        "pictures": {
+          "$ref": "#/definitions/Pictures"
+        },
+        "backgrounds": {
+          "$ref": "#/definitions/Backgrounds"
+        },
+        "layouts": {
+          "$ref": "#/definitions/Layouts"
+        },
+        "stickers": {
+          "$ref": "#/definitions/Stickers"
+        },
+        "settings": {
+          "$ref": "#/definitions/Settings"
+        },
+        "backgroundOptions": {
+          "$ref": "#/definitions/BackgroundOptions"
+        },
+        "pictureBoxOptions": {
+          "$ref": "#/definitions/PictureBoxOptions"
+        },
+        "stickerOptions": {
+          "$ref": "#/definitions/StickerOptions"
+        },
+        "textBoxOptions": {
+          "$ref": "#/definitions/TextBoxOptions"
+        },
+        "shapeBoxOptions": {
+          "$ref": "#/definitions/ShapeBoxOptions"
+        },
+        "workArea": {
+          "type": "object",
+          "properties": {
+            "general": {
+              "type": "object",
+              "properties": {
+                "undoRedoButtons": {
+                  "$ref": "#/definitions/UndoRedo"
+                },
+                "viewModeSelector": {
+                  "$ref": "#/definitions/ViewMode"
+                },
+                "showContextMenu": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "pageNonAccessibleMessage": {
+                  "$ref": "#/definitions/Bool"
+                }
+              }
+            },
+            "defaultView": {
+              "$ref": "#/definitions/StringVal"
+            },
+            "previewMode": {
+              "type": "object",
+              "properties": {
+                "includePreviewOption": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "use3dPreview": {
+                  "$ref": "#/definitions/Bool"
+                }
+              }
+            },
+            "editingViewModes": {
+              "type": "object",
+              "properties": {
+                "list": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "page": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "grid": {
+                  "$ref": "#/definitions/Bool"
+                }
+              }
+            },
+            "listView": {
+              "type": "object",
+              "properties": {
+                "zoomControl": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "pageActionButtons": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "layout": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addPictureBox": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addTextBox": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addDeletePage": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "showMoreButtonPosition": {
+                  "$ref": "#/definitions/StringVal"
+                },
+                "showMoreButtonIcon": {
+                  "$ref": "#/definitions/StringVal"
+                }
+              }
+            },
+            "singlePage": {
+              "type": "object",
+              "properties": {
+                "zoomControl": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "nextPreviousPageButtons": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "pageActionButtons": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "layout": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addPictureBox": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addTextBox": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "deletePage": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addPage": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "pageThumbnailBar": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "pageThumbnailAddPages": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "pageThumbnailRearrangePage": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "showMoreButtonPosition": {
+                  "$ref": "#/definitions/StringVal"
+                },
+                "showMoreButtonIcon": {
+                  "$ref": "#/definitions/StringVal"
+                }
+              }
+            },
+            "gridView": {
+              "type": "object",
+              "properties": {
+                "gridSizeControl": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "canRearrangePages": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "addDeletePage": {
+                  "$ref": "#/definitions/Bool"
+                },
+                "showMoreButtonIcon": {
+                  "$ref": "#/definitions/StringVal"
+                }
+              }
+            }
+          }
+        },
+        "upgradeProject": {
+          "$ref": "#/definitions/UpgradeProject"
+        },
+        "upsellPages": {
+          "$ref": "#/definitions/UpsellPages"
+        },
+        "smartGuides": {
+          "$ref": "#/definitions/SmartGuides"
+        }
+      }
+    },
+    "EditorType": {
+      "title": "editorType",
+      "type": "object",
+      "properties": {
+        "useGreetingCardEditor": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "PageEditing": {
+      "title": "pageEditing",
+      "type": "object",
+      "properties": {
+        "canEditPageLayout": {
+          "$ref": "#/definitions/Bool"
+        },
+        "allowUsersToToggleLocking": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "TextEditing": {
+      "title": "textEditing",
+      "type": "object",
+      "properties": {
+        "controlsContainer": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fontMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fontStyleMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fontSizeMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fontColorMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "colorBox": {
+          "$ref": "#/definitions/Bool"
+        },
+        "boldBtn": {
+          "$ref": "#/definitions/Bool"
+        },
+        "italicBtn": {
+          "$ref": "#/definitions/Bool"
+        },
+        "underlineBtn": {
+          "$ref": "#/definitions/Bool"
+        },
+        "strikethroughBtn": {
+          "$ref": "#/definitions/Bool"
+        },
+        "textOutlineMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignParaMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignVertMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignCombinedMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "writingDirectionMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "spacingMenuControl": {
+          "$ref": "#/definitions/Bool"
+        },
+        "textEditorMode": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "Header": {
+      "title": "header",
+      "type": "object",
+      "properties": {
+        "logo": {
+          "$ref": "#/definitions/Bool"
+        },
+        "save": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shareProject": {
+          "$ref": "#/definitions/Bool"
+        },
+        "changeProduct": {
+          "$ref": "#/definitions/Bool"
+        },
+        "projectSummary": {
+          "$ref": "#/definitions/Bool"
+        },
+        "price": {
+          "$ref": "#/definitions/Bool"
+        },
+        "priceDisclaimer": {
+          "$ref": "#/definitions/Bool"
+        },
+        "projectNameAndPageCount": {
+          "$ref": "#/definitions/Bool"
+        },
+        "optionsAndExtrasButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "orderButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "headerHeight": {
+          "$ref": "#/definitions/StringVal"
+        },
+        "undoRedoButtons": {
+          "$ref": "#/definitions/UndoRedo"
+        },
+        "viewModeSelector": {
+          "$ref": "#/definitions/ViewMode"
+        }
+      }
+    },
+    "ComponentOptions": {
+      "title": "componentOptions",
+      "type": "object",
+      "properties": {
+        "showComponentOptionsOnOpen": {
+          "$ref": "#/definitions/Bool"
+        },
+        "showComponentOptionsOnOrder": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "ToolPalette": {
+      "title": "toolPalette",
+      "type": "object",
+      "properties": {
+        "showAddPicturesButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "showSmartDesignButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "mobileSlideUpPanels": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "CalendarEvents": {
+      "title": "calendarEvents",
+      "type": "object",
+      "properties": {
+        "calendarEventsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "allowCustomEvents": {
+          "$ref": "#/definitions/Bool"
+        },
+        "showEventSets": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "CalendarSettings": {
+      "title": "calendarSettings",
+      "type": "object",
+      "properties": {
+        "calendarSettingsPalette": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Pictures": {
+      "title": "pictures",
+      "type": "object",
+      "properties": {
+        "picturePalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "addPicturesButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "autoFillButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "showAdvancedAutofill": {
+          "$ref": "#/definitions/Bool"
+        },
+        "defaultPictureManagerSortOrder": {
+          "$ref": "#/definitions/StringVal"
+        },
+        "defaultPictureManagerThumbnailLayout": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "Backgrounds": {
+      "title": "backgrounds",
+      "type": "object",
+      "properties": {
+        "backgroundsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "designs": {
+          "$ref": "#/definitions/Bool"
+        },
+        "colours": {
+          "$ref": "#/definitions/Bool"
+        },
+        "categoryFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "applyToAllPagesButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "editBackgroundButton": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Layouts": {
+      "title": "layouts",
+      "type": "object",
+      "properties": {
+        "layoutsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "contentTypeFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "pictureBoxFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "categoryFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "applyToAllPagesButton": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Stickers": {
+      "title": "stickers",
+      "type": "object",
+      "properties": {
+        "stickersPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "categoryFilter": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Settings": {
+      "title": "settings",
+      "type": "object",
+      "properties": {
+        "settingsPalette": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "BackgroundOptions": {
+      "title": "backgroundOptions",
+      "type": "object",
+      "properties": {
+        "backgroundOptionsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "rotateAndFlip": {
+          "$ref": "#/definitions/Bool"
+        },
+        "flipHorizontal": {
+          "$ref": "#/definitions/Bool"
+        },
+        "flipVertical": {
+          "$ref": "#/definitions/Bool"
+        },
+        "horizonAngle": {
+          "$ref": "#/definitions/Bool"
+        },
+        "enhance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "autoEnhance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "brightness": {
+          "$ref": "#/definitions/Bool"
+        },
+        "contrast": {
+          "$ref": "#/definitions/Bool"
+        },
+        "filter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "transparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "masks": {
+          "$ref": "#/definitions/Bool"
+        },
+        "masksCategoryFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "clearMaskButton": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "PictureBoxOptions": {
+      "title": "pictureBoxOptions",
+      "type": "object",
+      "properties": {
+        "pictureBoxOptionsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "rotateAndFlip": {
+          "$ref": "#/definitions/Bool"
+        },
+        "rotate90": {
+          "$ref": "#/definitions/Bool"
+        },
+        "flipHorizontal": {
+          "$ref": "#/definitions/Bool"
+        },
+        "flipVertical": {
+          "$ref": "#/definitions/Bool"
+        },
+        "horizonAngle": {
+          "$ref": "#/definitions/Bool"
+        },
+        "enhance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "autoEnhance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "brightness": {
+          "$ref": "#/definitions/Bool"
+        },
+        "contrast": {
+          "$ref": "#/definitions/Bool"
+        },
+        "filter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "border": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderSize": {
+          "$ref": "#/definitions/Bool"
+        },
+        "roundedCorners": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderTransparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shadow": {
+          "$ref": "#/definitions/Bool"
+        },
+        "blur": {
+          "$ref": "#/definitions/Bool"
+        },
+        "distance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "angle": {
+          "$ref": "#/definitions/Bool"
+        },
+        "opacity": {
+          "$ref": "#/definitions/Bool"
+        },
+        "expand": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shadowColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "masks": {
+          "$ref": "#/definitions/Bool"
+        },
+        "masksCategoryFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "clearMaskButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "transparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignToPage": {
+          "$ref": "#/definitions/Bool"
+        },
+        "arrange": {
+          "$ref": "#/definitions/Bool"
+        },
+        "sizeAndPosition": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fillPageSpread": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fitPictureToBox": {
+          "$ref": "#/definitions/Bool"
+        },
+        "nudge": {
+          "$ref": "#/definitions/Bool"
+        },
+        "advanced": {
+          "$ref": "#/definitions/Bool"
+        },
+        "lockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shape": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shapeSelection": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shapeLockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        },
+        "swapPictures": {
+          "$ref": "#/definitions/Bool"
+        },
+        "clearPictureButton": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "StickerOptions": {
+      "title": "stickerOptions",
+      "type": "object",
+      "properties": {
+        "stickerOptionsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "rotate90": {
+          "$ref": "#/definitions/Bool"
+        },
+        "rotateAndFlip": {
+          "$ref": "#/definitions/Bool"
+        },
+        "flipHorizontal": {
+          "$ref": "#/definitions/Bool"
+        },
+        "flipVertical": {
+          "$ref": "#/definitions/Bool"
+        },
+        "horizonAngle": {
+          "$ref": "#/definitions/Bool"
+        },
+        "transparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignToPage": {
+          "$ref": "#/definitions/Bool"
+        },
+        "arrange": {
+          "$ref": "#/definitions/Bool"
+        },
+        "sizeAndPosition": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fillPageSpread": {
+          "$ref": "#/definitions/Bool"
+        },
+        "nudge": {
+          "$ref": "#/definitions/Bool"
+        },
+        "advanced": {
+          "$ref": "#/definitions/Bool"
+        },
+        "lockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        },
+        "border": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderSize": {
+          "$ref": "#/definitions/Bool"
+        },
+        "roundedCorners": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderTransparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "enhance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "brightness": {
+          "$ref": "#/definitions/Bool"
+        },
+        "contrast": {
+          "$ref": "#/definitions/Bool"
+        },
+        "filter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shadow": {
+          "$ref": "#/definitions/Bool"
+        },
+        "blur": {
+          "$ref": "#/definitions/Bool"
+        },
+        "distance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "angle": {
+          "$ref": "#/definitions/Bool"
+        },
+        "opacity": {
+          "$ref": "#/definitions/Bool"
+        },
+        "expand": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shadowColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shape": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shapeSelection": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shapeLockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "TextBoxOptions": {
+      "title": "textBoxOptions",
+      "type": "object",
+      "properties": {
+        "textBoxOptionsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "background": {
+          "$ref": "#/definitions/Bool"
+        },
+        "backgroundColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "backgroundTransparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "border": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderSize": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderTransparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignToPage": {
+          "$ref": "#/definitions/Bool"
+        },
+        "arrange": {
+          "$ref": "#/definitions/Bool"
+        },
+        "sizeAndPosition": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fillPageSpread": {
+          "$ref": "#/definitions/Bool"
+        },
+        "nudge": {
+          "$ref": "#/definitions/Bool"
+        },
+        "advanced": {
+          "$ref": "#/definitions/Bool"
+        },
+        "lockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "ShapeBoxOptions": {
+      "title": "shapeBoxOptions",
+      "type": "object",
+      "properties": {
+        "shapeBoxOptionsPalette": {
+          "$ref": "#/definitions/Bool"
+        },
+        "border": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderSize": {
+          "$ref": "#/definitions/Bool"
+        },
+        "roundedCorners": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderTransparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "borderColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shadow": {
+          "$ref": "#/definitions/Bool"
+        },
+        "blur": {
+          "$ref": "#/definitions/Bool"
+        },
+        "distance": {
+          "$ref": "#/definitions/Bool"
+        },
+        "angle": {
+          "$ref": "#/definitions/Bool"
+        },
+        "opacity": {
+          "$ref": "#/definitions/Bool"
+        },
+        "expand": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shadowColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "masks": {
+          "$ref": "#/definitions/Bool"
+        },
+        "masksCategoryFilter": {
+          "$ref": "#/definitions/Bool"
+        },
+        "clearMaskButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "alignToPage": {
+          "$ref": "#/definitions/Bool"
+        },
+        "transparency": {
+          "$ref": "#/definitions/Bool"
+        },
+        "arrange": {
+          "$ref": "#/definitions/Bool"
+        },
+        "sizeAndPosition": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fillPageSpread": {
+          "$ref": "#/definitions/Bool"
+        },
+        "nudge": {
+          "$ref": "#/definitions/Bool"
+        },
+        "advanced": {
+          "$ref": "#/definitions/Bool"
+        },
+        "lockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shape": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shapeSelection": {
+          "$ref": "#/definitions/Bool"
+        },
+        "shapeLockBoxProportions": {
+          "$ref": "#/definitions/Bool"
+        },
+        "background": {
+          "$ref": "#/definitions/Bool"
+        },
+        "backgroundColour": {
+          "$ref": "#/definitions/Bool"
+        },
+        "backgroundTransparency": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "WorkArea": {
+      "title": "workArea",
+      "type": "object",
+      "properties": {
+        "general": {
+          "type": "object",
+          "properties": {
+            "undoRedoButtons": {
+              "$ref": "#/definitions/UndoRedo"
+            },
+            "viewModeSelector": {
+              "$ref": "#/definitions/ViewMode"
+            },
+            "showContextMenu": {
+              "$ref": "#/definitions/Bool"
+            }
+          }
+        },
+        "defaultView": {
+          "$ref": "#/definitions/StringVal"
+        },
+        "previewMode": {
+          "type": "object",
+          "properties": {
+            "includePreviewOption": {
+              "$ref": "#/definitions/Bool"
+            },
+            "use3dPreview": {
+              "$ref": "#/definitions/Bool"
+            }
+          }
+        },
+        "editingViewModes": {
+          "type": "object",
+          "properties": {
+            "list": {
+              "$ref": "#/definitions/Bool"
+            },
+            "page": {
+              "$ref": "#/definitions/Bool"
+            },
+            "grid": {
+              "$ref": "#/definitions/Bool"
+            }
+          }
+        },
+        "listView": {
+          "type": "object",
+          "properties": {
+            "zoomControl": {
+              "$ref": "#/definitions/Bool"
+            },
+            "pageActionButtons": {
+              "$ref": "#/definitions/Bool"
+            },
+            "layout": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addPictureBox": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addTextBox": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addDeletePage": {
+              "$ref": "#/definitions/Bool"
+            }
+          }
+        },
+        "singlePage": {
+          "type": "object",
+          "properties": {
+            "zoomControl": {
+              "$ref": "#/definitions/Bool"
+            },
+            "nextPreviousPageButtons": {
+              "$ref": "#/definitions/Bool"
+            },
+            "pageActionButtons": {
+              "$ref": "#/definitions/Bool"
+            },
+            "layout": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addPictureBox": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addTextBox": {
+              "$ref": "#/definitions/Bool"
+            },
+            "deletePage": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addPage": {
+              "$ref": "#/definitions/Bool"
+            },
+            "pageThumbnailBar": {
+              "$ref": "#/definitions/Bool"
+            },
+            "pageThumbnailAddPages": {
+              "$ref": "#/definitions/Bool"
+            },
+            "pageThumbnailRearrangePage": {
+              "$ref": "#/definitions/Bool"
+            }
+          }
+        },
+        "gridView": {
+          "type": "object",
+          "properties": {
+            "gridSizeControl": {
+              "$ref": "#/definitions/Bool"
+            },
+            "canRearrangePages": {
+              "$ref": "#/definitions/Bool"
+            },
+            "addDeletePage": {
+              "$ref": "#/definitions/Bool"
+            }
+          }
+        }
+      }
+    },
+    "UpgradeProject": {
+      "title": "upgradeProject",
+      "type": "object",
+      "properties": {
+        "showUpgradeProjectPromptOnOpen": {
+          "$ref": "#/definitions/Bool"
+        },
+        "showUpgradeProjectPromptOnOrder": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "UpsellPages": {
+      "title": "upsellPages",
+      "type": "object",
+      "properties": {
+        "enableUpsellPages": {
+          "$ref": "#/definitions/Bool"
+        },
+        "recommendedAveragePicturesPerPage": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "SmartGuides": {
+      "title": "smartGuides",
+      "type": "object",
+      "properties": {
+        "initialSmartGuideSetting": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Bool": {
+      "type": [
+        "boolean"
+      ],
+      "title": "Bool"
+    },
+    "StringVal": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "title": "StringVal"
+    },
+    "UndoRedo": {
+      "title": "UndoRedo",
+      "type": "object",
+      "properties": {
+        "undoRedoSmall": {
+          "$ref": "#/definitions/Bool"
+        },
+        "undoRedoLarge": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "ViewMode": {
+      "title": "ViewMode",
+      "type": "object",
+      "properties": {
+        "viewModeSelectorLarge": {
+          "$ref": "#/definitions/Bool"
+        },
+        "viewModeSelectorSmall": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    }
+  }
+}

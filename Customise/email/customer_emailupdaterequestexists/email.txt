@@ -1,0 +1,23 @@
+{$appname} - Unable to change email address
+
+
+Unable to change email address
+
+Hello {$contactfirstname},
+
+{if !empty($changes)}
+You have changed the following details in your account for {$displayurl}.
+{foreach from=$changes item=i key=k}
+• {$i[0]}
+{/foreach}
+You also requested to change your email:
+{else}
+You have requested the following change to your email:
+{/if}
+
+Previous email address: {$originalemail}
+New email address: {$newemail}
+
+Unfortunately we have been unable to change your email as there is already an account registered to this email address.
+
+{$emailsignature}

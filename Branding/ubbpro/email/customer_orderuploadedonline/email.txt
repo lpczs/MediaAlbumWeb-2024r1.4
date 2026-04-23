@@ -1,0 +1,11 @@
+{$appname} - Order '{$ordernumber}' Received Confirmation
+
+Dear {$billingcontactfirstname},
+
+Your order has been received!
+
+Order number '{$ordernumber}' has been received and is now ready to process.
+
+See the preview here - {$sharedurl}
+
+{$emailsignature}

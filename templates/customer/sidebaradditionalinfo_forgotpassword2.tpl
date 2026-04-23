@@ -1,0 +1,1 @@
+{if $sidebaradditionalinfo_default != ''}{include file="$sidebaradditionalinfo_default"}{/if}

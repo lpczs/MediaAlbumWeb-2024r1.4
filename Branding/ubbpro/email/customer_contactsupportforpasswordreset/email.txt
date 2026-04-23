@@ -1,0 +1,17 @@
+{$appname} - Password Reset Requested
+
+
+Password Reset Requested
+
+
+Hello {$contactfirstname},
+
+We have received a request to reset the password for the following account:
+{$loginname}
+
+Unfortunately you don't have permission to change your password.
+
+Please contact customer support for assistance.
+
+
+{$emailsignature}

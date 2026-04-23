@@ -1,0 +1,5 @@
+{$appname} - Test email settings
+
+Test email from Taopix To: {$section}
+
+{$data}

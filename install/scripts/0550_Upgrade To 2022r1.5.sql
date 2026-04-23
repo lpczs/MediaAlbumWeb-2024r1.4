@@ -1,0 +1,19 @@
+#
+SET FOREIGN_KEY_CHECKS = 0;
+
+#
+# DDL START
+#
+
+UPDATE `SYSTEMCONFIG` SET `webversiondate` = '2023-04-03';
+UPDATE `SYSTEMCONFIG` SET `webversionnumber` = '2022.1.5';
+UPDATE `SYSTEMCONFIG` SET `webversionstring`= '2022r1.5';
+
+ALTER TABLE `CACHEDATA` MODIFY `datacachekey` varchar(256) NOT NULL;
+
+#
+# DDL END
+#
+
+SET FOREIGN_KEY_CHECKS = 1;
+

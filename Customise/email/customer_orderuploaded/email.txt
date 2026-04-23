@@ -1,0 +1,11 @@
+{$appname} - Order '{$ordernumber}' Upload Confirmation
+
+Dear {$billingcontactfirstname},
+
+Your order has been uploaded!
+
+Order number '{$ordernumber}' has been uploaded and is now ready to process.
+
+See the preview here - {$sharedurl}
+
+{$emailsignature}

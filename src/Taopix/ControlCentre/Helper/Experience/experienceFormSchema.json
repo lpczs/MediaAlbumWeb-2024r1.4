@@ -1,0 +1,3976 @@
+{
+  "WIZARD": {
+    "designAssistantType": {
+      "label": "str_LabelDesignAssistantType",
+      "productType": 0,
+      "sections": {
+        "designAssistantType": {
+          "dataType": "radio",
+          "key": "dat",
+          "options": {
+            "off": {
+              "label": "str_LabelOff",
+              "key": "off",
+              "hidden": true
+            },
+            "standard": {
+              "label": "str_LabelStandard",
+              "productType": 0,
+              "retroPrint": false,
+              "key": "std",
+              "helpText": "str_HelpTextStandardDesignAssistant"
+            },
+            "advanced": {
+              "label": "str_LabelAdvanced",
+              "productType": 0,
+              "key": "adv",
+              "helpText": "str_HelpTextAdvancedDesignAssistant"
+            },
+            "smartDesign": {
+              "label": "str_LabelSmartDesign",
+              "productType": 0,
+              "retroPrint": false,
+              "key": "sd",
+              "helpText": "str_HelpTextSmartDesign",
+              "condition": {
+                "featureControl": {
+                  "aiEnabled": true,
+                  "helpText": "str_MessageAINotInstalledOnLicenseKey"
+                }
+              }
+            },
+            "pictureSelectionOnly": {
+              "label": "str_LabelPictureSelection",
+              "key": "pso",
+              "helpText": "str_HelpTextPictureSelection"
+            }
+          },
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "assistantLocation.atProjectStart"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "std",
+                      "adv",
+                      "sd",
+                      "pso"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "assistantLocation.fromEditor"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "assistantLocation.fromEditor"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "sd"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "pictureSelectionOnlyOptions.autoFlowSelectedPicturesAtProjectStart"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      "sd",
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "welcomeScreen.showWelcomeScreen"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "welcomeScreen.showWelcomeScreen"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "sd",
+                      "std",
+                      "adv"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "cover1Step.allowCustomersToSelectPicturesAndText"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "sd",
+                      "std",
+                      "adv"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "backCoverStep.allowCustomersToSelectPicturesAndText"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "sd",
+                      "std",
+                      "adv"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "cover1Step.allowCustomersToSelectPicturesAndText"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "backCoverStep.allowCustomersToSelectPicturesAndText"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "advancedDesignAssistantOptions": {
+      "label": "str_LabelAdvancedDesignAssistantOptions",
+      "sections": {
+        "applyLayoutToCover1": {
+          "label": "str_LabelApplyLayoutToCover1",
+          "productType": 3,
+          "retroPrint": false,
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextApplyLayoutToCover1"
+        },
+        "applyLayoutToBackCover": {
+          "label": "str_LabelApplyLayoutToBackCover",
+          "productType": 3,
+          "retroPrint": false,
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextApplyLayoutToBackCover"
+        },
+        "includeTextLayouts": {
+          "label": "str_LabelIncludeLayoutsWithTextBoxes",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextIncludeLayoutsWithTextBoxes",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "productType": 0,
+                "action": [
+                  {
+                    "parentValue": ["std", "pso"]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailableAdvancedOrSmartDesign"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "productType": 0,
+            "action": [
+              {
+                "parentValue": ["std", "pso"]
+              }
+            ],
+            "helpText": "str_HelpTextOnlyAvailableAdvancedAssistant"
+          }
+        ]
+      }
+    },
+    "assistantLocation": {
+      "label": "str_LabelSmartAssistantLocation",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "atProjectStart": {
+          "label": "str_LabelAtProjectStart",
+          "helpText": "str_HelpTextSmartAssistantLocation",
+          "dataType": "checkbox",
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "welcomeScreen.showWelcomeScreen"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ],
+            "disableControl": [
+              {
+                "featureControl": {
+                  "aiEnabled": true,
+                  "helpText": "str_MessageAINotInstalledOnLicenseKey"
+                },
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+              }
+            ]
+          }
+        },
+        "fromEditor": {
+          "label": "str_LabelFromTheEditor",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "featureControl": {
+                  "aiEnabled": true,
+                  "helpText": "str_MessageAINotInstalledOnLicenseKey"
+                },
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "sd",
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextSmartDesignFromEditor"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "featureControl": {
+              "aiEnabled": true,
+              "helpText": "str_MessageAINotInstalledOnLicenseKey"
+            },
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "std",
+                  "adv",
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+          }
+        ]
+      }
+    },
+    "pictureSelectionOnlyOptions": {
+      "label": "str_LabelPictureSelectionOnlyOptions",
+      "productType": 0,
+      "sections": {
+        "autoFlowSelectedPicturesAtProjectStart": {
+          "label": "str_LabelAutoflowTheSelectedPicturesIntoPagesAtProjectStart",
+          "helpText": "str_HelpTipAutomaticAutoFlow",
+          "dataType": "checkbox",
+          "key": "aftspitpaps",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "sd",
+                      "std",
+                      "adv"
+                    ],
+                    "action": [
+                      {
+                        "value": false,
+                        "parentValue": [
+                          true
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailablePictureSelectionOnlyAssistant"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "sd",
+                  "std",
+                  "adv"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      true
+                    ]
+                  }
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextOnlyAvailablePictureSelectionOnlyAssistant"
+          }
+        ]
+      }
+    },
+    "welcomeScreen": {
+      "label": "str_LabelWelcomeScreen",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "showWelcomeScreen": {
+          "label": "str_LabelShowWelcomeScreen",
+          "helpText": "str_HelpTextWelcomeScreen",
+          "dataType": "checkbox",
+          "key": "sws",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "assistantLocation.atProjectStart"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableWithoutAtProjectStart"
+              },
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "assistantLocation.atProjectStart"
+            ],
+            "action": [
+              {
+                "value": true,
+                "parentValue": [
+                  false
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextNotAvailableWithoutAtProjectStart"
+          },
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+          }
+        ]
+      }
+    },
+    "addPicturesStep": {
+      "label": "str_LabelAddPicturesStep",
+      "sections": {
+        "defaultSortOrder": {
+          "label": "str_LabelSortOrder",
+          "dataType": "radio",
+          "key": "apsdso",
+          "options": {
+            "dateTaken": {
+              "label": "str_LabelDateTaken",
+              "key": "dt",
+              "helpText": "str_HelpTextSortOrderDateTaken"
+            },
+            "size": {
+              "label": "str_LabelSize",
+              "key": "s",
+              "helpText": "str_HelpTextSortOrderSize"
+            },
+            "fileName": {
+              "label": "str_LabelFilename",
+              "key": "fn",
+              "helpText": "str_HelpTextSortOrderFilename"
+            },
+            "orientation": {
+              "label": "str_LabelOrientation",
+              "key": "o",
+              "helpText": "str_HelpTextSortOrderOrientation"
+            }
+          }
+        },
+        "thumbnailLayout": {
+          "label": "str_LabelThumbnailLayout",
+          "dataType": "radio",
+          "key": "tmbl",
+          "options": {
+            "fullFrameTile": {
+              "label": "str_LabelFullFrameTiles",
+              "key": "fft",
+              "helpText": "str_HelpTextThumbnailLayoutFullFrameTiles"
+            },
+            "squareTiles": {
+              "label": "str_LabelSquareTiles",
+              "key": "st",
+              "helpText": "str_HelpTextThumbnailLayoutSquareTiles"
+            },
+            "fileInfoList": {
+              "label": "str_LabelFileInfoList",
+              "key": "fil",
+              "helpText": "str_HelpTextThumbnailLayoutullFileInfoList"
+            }
+          }
+        }
+      }
+    },
+    "picSelectionModeStep": {
+      "label": "str_LabelPictureSelectionModeStep",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "defaultMode": {
+          "label": "",
+          "dataType": "radio",
+          "options": {
+            "intelligentlySelectPictures": {
+              "label": "str_LabelIntelligentlySelectPictures",
+              "key": "isp",
+              "helpText": "str_HelpTextPictureSelectionIntelligentlySelectPictures"
+            },
+            "useAllPics": {
+              "label": "str_LabelUseAllPictures",
+              "key": "uap",
+              "helpText": "str_HelpTextPictureSelectionUseAllPictures"
+            },
+            "customerCanChoose": {
+              "label": "str_LabelCustomerCanChoose",
+              "key": "ccc",
+              "helpText": "str_HelpTextPictureSelectionCustomerCanChoose"
+            }
+          },
+          "condition": {
+            "featureControl": {
+              "aiEnabled": true,
+              "helpText": "str_MessageAINotInstalledOnLicenseKey"
+            },
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "featureControl": {
+          "aiEnabled": true,
+          "helpText": "str_MessageAINotInstalledOnLicenseKey"
+        },
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "std",
+                  "adv",
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+          }
+        ]
+      }
+    },
+    "pageCountModeStep": {
+      "label": "str_LabelPageCountModeStep",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "defaultMode": {
+          "label": "",
+          "dataType": "radio",
+          "options": {
+            "intelligentlyDecidePageCount": {
+              "label": "str_LabelIntelligentlyDecidePageCount",
+              "key": "idpc",
+              "helpText": "str_HelpTextPageCountModeIntelligentlySelect"
+            },
+            "customerCanChoose": {
+              "label": "str_LabelCustomerCanChoose",
+              "key": "ccc",
+              "helpText": "str_HelpTextPageCountModeCustomerCanChoose"
+            }
+          },
+          "condition": {
+            "featureControl": {
+              "aiEnabled": true,
+              "helpText": "str_MessageAINotInstalledOnLicenseKey"
+            },
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "featureControl": {
+          "aiEnabled": true,
+          "helpText": "str_MessageAINotInstalledOnLicenseKey"
+        },
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "std",
+                  "adv",
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+          }
+        ]
+      }
+    },
+    "cover1Step": {
+      "label": "str_LabelCover1Step",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "allowCustomersToSelectPicturesAndText": {
+          "label": "str_LabelShowCover1Step",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextCover1StepAllowCustomerSelect",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+          }
+        ]
+      }
+    },
+    "backCoverStep": {
+      "label": "str_LabelBackCoverStep",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "allowCustomersToSelectPicturesAndText": {
+          "label": "str_LabelShowBackCoverStep",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextBackCoverStepDoNotModifyAllowCustomerSelect",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+          }
+        ]
+      }
+    },
+    "smartPictureSelectionStep": {
+      "label": "str_LabelSmartPictureSelectionStep",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "showSmartPictureSelectionStep": {
+          "label": "str_LabelShowSmartPictureSelectionStep",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextShowSmartPictureSelectionStep",
+          "condition": {
+            "disableControl": [
+              {
+                "featureControl": {
+                  "aiEnabled": true,
+                  "helpText": "str_MessageAINotInstalledOnLicenseKey"
+                },
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "std",
+                      "adv",
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "featureControl": {
+          "aiEnabled": true,
+          "helpText": "str_MessageAINotInstalledOnLicenseKey"
+        },
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "std",
+                  "adv",
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextOnlyAvailableSmartDesign"
+          }
+        ]
+      }
+    },
+    "previewStep": {
+      "label": "str_LabelPreviewStep",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "showPreviewStep": {
+          "label": "str_LabelShowPreviewStep",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextShowPreviewStep",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              }
+            ]
+          }
+        },
+        "allowBackgroundChange": {
+          "label": "str_LabelAllowCustomerToChangeBackgrounds",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextAllowCustomerToChangeBackgrounds",
+          "parent": "previewStep.showPreviewStep",
+          "level": 2,
+          "hidden": true,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "std",
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOnlyAvailableAdvancedOrSmartDesign"
+              }
+            ]
+          }
+        },
+        "save": {
+          "label": "str_LabelSaveButton",
+          "dataType": "checkbox",
+          "parent": "previewStep.showPreviewStep",
+          "level": 2,
+          "productType": 0,
+          "helpText": "str_HelpTextHeaderSaveButton",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              }
+            ]
+          }
+        },
+        "editButton": {
+          "label": "str_LabelEditButton",
+          "dataType": "checkbox",
+          "parent": "previewStep.showPreviewStep",
+          "level": 2,
+          "helpText": "str_HelpTextHeaderEditButton",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              },
+              {
+                "keys": [
+                  "previewStep.orderButton"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextEditButtonMustBePresentIfNoOrderButton"
+              }
+            ],
+            "dependencies": [
+              {
+                "keys": [
+                  "previewStep.orderButton"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": false
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "previewStep.perPageEditButton"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "perPageEditButton": {
+          "label": "str_LabelPerPageEditButton",
+          "dataType": "checkbox",
+          "parent": "previewStep.showPreviewStep.editButton",
+          "level": 3,
+          "helpText": "str_HelpTextPerPageEditButton",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              },
+              {
+                "keys": [
+                  "previewStep.editButton"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "orderButton": {
+          "label": "str_LabelOrderButton",
+          "dataType": "checkbox",
+          "parent": "previewStep.showPreviewStep",
+          "level": 2,
+          "helpText": "str_HelpTextHeaderOrderButton",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              },
+              {
+                "keys": [
+                  "previewStep.editButton"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextOrderButtonMustBePresentIfNoEditButton"
+              }
+            ],
+            "dependencies": [
+              {
+                "keys": [
+                  "previewStep.editButton"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "parentValue": [
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+          }
+        ]
+      }
+    },
+    "header": {
+      "label": "str_LabelHeader",
+      "sections": {
+        "logo": {
+          "label": "str_LabelLogo",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextHeaderLogo"
+        },
+        "projectSummary": {
+          "label": "str_LabelProjectSummary",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorHeaderProjectSummary"
+        },
+        "price": {
+          "label": "str_LabelPrice",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextHeaderPrice",
+          "parent": "header.projectSummary",
+          "level": 2
+        },
+        "priceDisclaimer": {
+          "label": "str_LabelPriceDisclaimer",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextHeaderPriceDisclaimer",
+          "parent": "header.projectSummary.price",
+          "level": 3
+        },
+        "projectNameAndPageCount": {
+          "label": "str_LabelProjectNameAndPageCount",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextProjectNameAndPageCount",
+          "parent": "header.projectSummary",
+          "level": 2
+        },
+        "optionsAndExtrasButton": {
+          "label": "str_LabelOptionsAndExtrasButton",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextHeaderOptionsAndExtrasButton",
+          "parent": "header.projectSummary",
+          "level": 2
+        }
+      }
+    },
+    "navigation": {
+      "label": "str_LabelNavigation",
+      "productType": 0,
+      "retroPrint": false,
+      "sections": {
+        "breadcrumbTrail": {
+          "label": "str_LabelBreadcrumbTrail",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "designAssistantType.designAssistantType"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      "pso"
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+              }
+            ]
+          }
+        }
+      },
+      "condition": {
+        "disableControl": [
+          {
+            "keys": [
+              "designAssistantType.designAssistantType"
+            ],
+            "action": [
+              {
+                "value": false,
+                "parentValue": [
+                  "pso"
+                ]
+              }
+            ],
+            "helpText": "str_HelpTextNotAvailablePictureSelectionOnly"
+          }
+        ]
+      }
+    }
+  },
+  "EDITOR": {
+    "editorType": {
+      "label": "str_LabelEditorType",
+      "productType": 0,
+      "retroPrint": false,
+      "hidden": true,
+      "sections": {
+        "useGreetingCardEditor": {
+          "label": "str_LabelEditorGreetingCard",
+          "dataType": "checkbox"
+        }
+      }
+    },
+    "pageEditing": {
+      "label": "str_LabelPageEditing",
+      "retroPrint": false,
+      "sections": {
+        "canEditPageLayout": {
+          "label": "str_LabelLockPageObjects",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorGeneralCanEditPageLayout",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        },
+        "allowUsersToToggleLocking": {
+          "label": "str_LabelAllowUsersToToggleLocking",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorGeneralCanChangeLayoutLocking",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "textEditing": {
+      "label": "str_LabelTextEditing",
+      "retroPrint": false,
+      "hidden": true,
+      "sections": {
+        "textEditorMode": {
+          "label": "str_LabelTextEditorMode",
+          "dataType": "radio",
+          "key": "txtmde",
+          "options": {
+            "float": {
+              "label": "str_LabelFloat",
+              "helpText": "str_LabelFloatHelpMessage",
+              "key": "flt",
+              "retroPrint": false
+            },
+            "box": {
+              "label": "str_LabelBox",
+              "helpText": "str_LabelBoxHelpMessage",
+              "key": "box",
+              "retroPrint": false
+            }
+          }
+        },
+        "controlsContainer": {
+          "label": "str_LabelShowTextControls",
+          "dataType": "checkbox"
+        },
+        "fontMenuControl": {
+          "label": "str_LabelFontMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "fontStyleMenuControl": {
+          "label": "str_LabelFontStyleMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "fontSizeMenuControl": {
+          "label": "str_LabelFontSizeMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "fontColorMenuControl": {
+          "label": "str_LabelFontColorMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "colorBox": {
+          "label": "str_LabelColorBox",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "boldBtn": {
+          "label": "str_LabelBoldBtn",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "italicBtn": {
+          "label": "str_LabelItalicBtn",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "underlineBtn": {
+          "label": "str_LabelUnderlineBtn",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "strikethroughBtn": {
+          "label": "str_LabelStrikethroughBtn",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "textOutlineMenuControl": {
+          "label": "str_LabelTextOutlineMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "alignParaMenuControl": {
+          "label": "str_LabelAlignParaMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "alignVertMenuControl": {
+          "label": "str_LabelAlignVertMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "alignCombinedMenuControl": {
+          "label": "str_LabelAlignCombinedMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "writingDirectionMenuControl": {
+          "label": "str_LabelWritingDirectionMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        },
+        "spacingMenuControl": {
+          "label": "str_LabelSpacingMenuControl",
+          "dataType": "checkbox",
+          "parent": "textEditing.str_LabelShowTextControls",
+          "level": 2
+        }
+      }
+    },
+    "header": {
+      "label": "str_LabelEditorHeader",
+      "sections": {
+        "logo": {
+          "label": "str_LabelLogo",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorHeaderBrandLogo"
+        },
+        "save": {
+          "label": "str_LabelSaveButton",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorHeaderSave"
+        },
+        "shareProject": {
+          "label": "str_LabelShareProject",
+          "dataType": "checkbox"
+        },
+        "changeProduct": {
+          "label": "str_LabelChangeProduct",
+          "productType": 0,
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorHeaderChangeProduct"
+        },
+        "projectSummary": {
+          "label": "str_LabelProjectSummary",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorHeaderProjectSummary"
+        },
+        "price": {
+          "label": "str_LabelPrice",
+          "dataType": "checkbox",
+          "parent": "editorHeader.projectSummary",
+          "level": 2,
+          "helpText": "str_HelpTextEditorHeaderPrice"
+        },
+        "priceDisclaimer": {
+          "label": "str_LabelPriceDisclaimer",
+          "dataType": "checkbox",
+          "parent": "editorHeader.projectSummary.price",
+          "level": 3,
+          "helpText": "str_HelpTextEditorHeaderPriceDisclaimer"
+        },
+        "projectNameAndPageCount": {
+          "label": "str_LabelProjectNameAndPageCount",
+          "dataType": "checkbox",
+          "parent": "editorHeader.projectSummary",
+          "level": 2,
+          "helpText": "str_HelpTextProjectNameAndPageCount"
+        },
+        "optionsAndExtrasButton": {
+          "label": "str_LabelOptionsAndExtrasButton",
+          "dataType": "checkbox",
+          "parent": "editorHeader.projectSummary",
+          "level": 2,
+          "helpText": "str_HelpTextEditorHeaderOptionsAndExtrasButton"
+        },
+        "orderButton": {
+          "label": "str_LabelOrderOrAddToBasketButton",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextEditorHeaderOrderButton",
+          "disabled": true
+        },
+        "headerHeight": {
+          "label": "str_LabelHeaderHeight",
+          "dataType": "radio",
+          "key": "hh",
+          "options": {
+            "medium": {
+              "label": "str_LabelMedium",
+              "key": "md"
+            },
+            "small": {
+              "label": "str_LabelSmall",
+              "key": "sm"
+            }
+          }
+        },
+        "undoRedoButtons": {
+          "label": "str_LabelUndoRedoButtons",
+          "productType": 0,
+          "subSection": true,
+          "sections": {
+            "undoRedoLarge": {
+              "label": "str_LabelLargerScreens",
+              "key": "urbl",
+              "dataType": "checkbox"
+            },
+            "undoRedoSmall": {
+              "label": "str_LabelMobile",
+              "key": "urbm",
+              "dataType": "checkbox"
+            }
+          }
+        },
+        "viewModeSelector": {
+          "label": "str_LabelViewModeSelector",
+          "key": "vms",
+          "subSection": true,
+          "sections": {
+            "viewModeSelectorLarge": {
+              "label": "str_LabelLargerScreens",
+              "key": "vmsl",
+              "dataType": "checkbox"
+            },
+            "viewModeSelectorSmall": {
+              "label": "str_LabelMobile",
+              "key": "vmsm",
+              "dataType": "checkbox"
+            }
+          }
+        }
+      }
+    },
+    "workArea": {
+      "label": "str_LabelWorkArea",
+      "sections": {
+        "general": {
+          "label": "str_LabelGeneral",
+          "subSection": true,
+          "sections": {
+            "undoRedoButtons": {
+              "label": "str_LabelUndoRedoButtons",
+              "productType": 0,
+              "subSection": true,
+              "sections": {
+                "undoRedoLarge": {
+                  "label": "str_LabelLargerScreens",
+                  "key": "urbl",
+                  "dataType": "checkbox"
+                },
+                "undoRedoSmall": {
+                  "label": "str_LabelMobile",
+                  "key": "urbm",
+                  "dataType": "checkbox"
+                }
+              }
+            },
+            "viewModeSelector": {
+              "label": "str_LabelViewModeSelector",
+              "subSection": true,
+              "sections": {
+                "viewModeSelectorLarge": {
+                  "label": "str_LabelLargerScreens",
+                  "key": "vmsl",
+                  "dataType": "checkbox"
+                },
+                "viewModeSelectorSmall": {
+                  "retroPrint": false,
+                  "label": "str_LabelMobile",
+                  "key": "vmsm",
+                  "dataType": "checkbox"
+                }
+              }
+            },
+            "pageNonAccessibleMessage": {
+              "label": "str_LabelNonAccessiblePage",
+              "productType": 0,
+              "helpText": "str_HelpTextNonAccessiblePage",
+              "dataType": "checkbox"
+            },
+            "showContextMenu": {
+              "label": "str_LabelShowContextMenu",
+              "productType": 0,
+              "dataType": "checkbox",
+              "hidden": true
+            }
+          }
+        },
+        "defaultView": {
+          "label": "str_LabelDefaultView",
+          "dataType": "radio",
+          "key": "dv",
+          "options": {
+            "list": {
+              "label": "str_LabelList",
+              "key": "ls",
+              "retroPrint": false
+            },
+            "singlePage": {
+              "label": "str_LabelPage",
+              "key": "spv",
+              "retroPrint": false
+            },
+            "grid": {
+              "label": "str_LabelGrid",
+              "key": "gv"
+            }
+          },
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "workArea.editingViewModes.page"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "spv"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "workArea.editingViewModes.list"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "ls"
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "workArea.editingViewModes.grid"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      "gv"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "editingViewModes": {
+          "label": "str_LabelEditingViewModes",
+          "retroPrint": false,
+          "subSection": true,
+          "sections": {
+            "list": {
+              "label": "str_LabelList",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaEditingViewModesList",
+              "retroPrint": false,
+              "condition": {
+                "disableControl": [
+                  {
+                    "keys": [
+                      "workArea.defaultView"
+                    ],
+                    "action": [
+                      {
+                        "value": true,
+                        "parentValue": [
+                          "ls"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "page": {
+              "label": "str_LabelPage",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaEditingViewModesPage",
+              "retroPrint": false,
+              "condition": {
+                "disableControl": [
+                  {
+                    "keys": [
+                      "workArea.defaultView"
+                    ],
+                    "action": [
+                      {
+                        "value": true,
+                        "parentValue": [
+                          "spv"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "grid": {
+              "label": "str_LabelGrid",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaEditingViewModesGrid",
+              "condition": {
+                "disableControl": [
+                  {
+                    "keys": [
+                      "workArea.defaultView"
+                    ],
+                    "action": [
+                      {
+                        "value": true,
+                        "parentValue": [
+                          "gv"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "previewMode": {
+          "label": "str_LabelPreviewMode",
+          "retroPrint": false,
+          "subSection": true,
+          "sections": {
+            "includePreviewOption": {
+              "label": "str_LabelIncludePreviewOption",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaPreviewModesIncludePreviewOption"
+            },
+            "zoomControl": {
+              "label": "str_LabelZoomControl",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaZoomControl",
+              "level": 2
+            },
+            "use3dPreview": {
+              "label": "str_LabelUse3dPreview",
+              "productType": 0,
+              "dataType": "checkbox",
+              "parent": "workArea.previewMode.includePreviewOption",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaPreviewModesUse3D"
+            }
+          }
+        },
+        "listView": {
+          "label": "str_LabelListView",
+          "retroPrint": false,
+          "subSection": true,
+          "sections": {
+            "zoomControl": {
+              "label": "str_LabelZoomControl",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaZoomControl"
+            },
+            "pageActionButtons": {
+              "label": "str_LabelPageActionButtons",
+              "dataType": "checkbox"
+            },
+            "layout": {
+              "label": "str_LabelAutoLayout",
+              "dataType": "checkbox",
+              "parent": "workArea.listView.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextApplyRandomLayout",
+              "hidden": false
+            },
+            "addPictureBox": {
+              "label": "str_LabelAddPictureBox",
+              "dataType": "checkbox",
+              "parent": "workArea.listView.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddPictureBox"
+            },
+            "addTextBox": {
+              "label": "str_LabelAddTextBox",
+              "dataType": "checkbox",
+              "parent": "workArea.listView.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddTextBox"
+            },
+            "addDeletePage": {
+              "label": "str_LabelAddDeletePage",
+              "productType": 0,
+              "dataType": "checkbox",
+              "parent": "workArea.listView.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddDeletePage"
+            },
+            "showMoreButtonPosition": {
+              "label": "str_LabelShowMoreButtonPosition",
+              "productType": 0,
+              "level": 2,
+              "dataType": "radio",
+              "key": "smbp",
+              "options": {
+                "left": {
+                  "label": "str_LabelButtonPositionLeft",
+                  "key": "left",
+                  "retroPrint": false
+                },
+                "right": {
+                  "label": "str_LabelButtonPositionRight",
+                  "key": "right",
+                  "retroPrint": false
+                }
+              }
+            },
+            "showMoreButtonIcon": {
+              "label": "str_LabelShowMoreButtonIcon",
+              "productType": 0,
+              "level": 2,
+              "dataType": "radio",
+              "key": "smbi",
+              "options": {
+                "dots": {
+                  "label": "str_LabelButtonIconDots",
+                  "key": "dots",
+                  "retroPrint": false
+                },
+                "pencil": {
+                  "label": "str_LabelButtonIconPencil",
+                  "key": "pncl",
+                  "retroPrint": false
+                }
+              }
+            }
+          }
+        },
+        "singlePage": {
+          "label": "str_LabelSinglePageView",
+          "retroPrint": false,
+          "subSection": true,
+          "sections": {
+            "zoomControl": {
+              "label": "str_LabelZoomControl",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaZoomControl"
+            },
+            "nextPreviousPageButtons": {
+              "label": "str_LabelNextPreviousPageButtons",
+              "dataType": "checkbox"
+            },
+            "pageActionButtons": {
+              "label": "str_LabelPageActionButtons",
+              "dataType": "checkbox"
+            },
+            "layout": {
+              "label": "str_LabelAutoLayout",
+              "dataType": "checkbox",
+              "parent": "workArea.listView.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextApplyRandomLayout",
+              "hidden": false
+            },
+            "addPictureBox": {
+              "label": "str_LabelAddPictureBox",
+              "dataType": "checkbox",
+              "parent": "workArea.singlePage.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddPictureBox"
+            },
+            "addTextBox": {
+              "label": "str_LabelAddTextBox",
+              "dataType": "checkbox",
+              "parent": "workArea.singlePage.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddTextBox"
+            },
+            "addPage": {
+              "label": "str_ButtonAddPages",
+              "productType": 0,
+              "dataType": "checkbox",
+              "parent": "workArea.singlePage.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddPage"
+            },
+            "deletePage": {
+              "label": "str_LabelDeletePage",
+              "productType": 0,
+              "dataType": "checkbox",
+              "parent": "workArea.singlePage.pageActionButtons",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaDeletePage"
+            },
+            "showMoreButtonPosition": {
+              "label": "str_LabelShowMoreButtonPosition",
+              "productType": 0,
+              "level": 2,
+              "dataType": "radio",
+              "key": "smbp",
+              "options": {
+                "left": {
+                  "label": "str_LabelButtonPositionLeft",
+                  "key": "left",
+                  "retroPrint": false
+                },
+                "right": {
+                  "label": "str_LabelButtonPositionRight",
+                  "key": "right",
+                  "retroPrint": false
+                }
+              }
+            },
+            "showMoreButtonIcon": {
+              "label": "str_LabelShowMoreButtonIcon",
+              "productType": 0,
+              "level": 2,
+              "dataType": "radio",
+              "key": "smbi",
+              "options": {
+                "dots": {
+                  "label": "str_LabelButtonIconDots",
+                  "key": "dots",
+                  "retroPrint": false
+                },
+                "pencil": {
+                  "label": "str_LabelButtonIconPencil",
+                  "key": "pncl",
+                  "retroPrint": false
+                }
+              }
+            },
+            "pageThumbnailBar": {
+              "label": "str_LabelPageThumbnailBar",
+              "dataType": "checkbox"
+            },
+            "pageThumbnailAddPages": {
+              "label": "str_ButtonAddPages",
+              "productType": 0,
+              "dataType": "checkbox",
+              "parent": "workArea.singlePage.pageThumbnailBar",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaAddPageThumbnail"
+            },
+            "pageThumbnailRearrangePage": {
+              "label": "str_LabelRearrangePage",
+              "productType": 0,
+              "dataType": "checkbox",
+              "parent": "workArea.singlePage.pageThumbnailBar",
+              "level": 2,
+              "helpText": "str_HelpTextWorkAreaSinglePageThumbnailRearrangePages"
+            }
+          }
+        },
+        "gridView": {
+          "label": "str_LabelGridView",
+          "subSection": true,
+          "sections": {
+            "gridSizeControl": {
+              "label": "str_LabelZoomControl",
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaGridViewSizeSelector"
+            },
+            "canRearrangePages": {
+              "label": "str_LabelRearrangePage",
+              "productType": 0,
+              "retroPrint": false,
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaGridViewRearrangePages"
+            },
+            "addDeletePage": {
+              "label": "str_LabelAddDeletePage",
+              "productType": 0,
+              "dataType": "checkbox",
+              "helpText": "str_HelpTextWorkAreaAddDeletePageGrid"
+            },
+            "showMoreButtonIcon": {
+              "label": "str_LabelShowMoreButtonIcon",
+              "dataType": "radio",
+              "productType": 0,
+              "key": "smbi",
+              "options": {
+                "dots": {
+                  "label": "str_LabelButtonIconDots",
+                  "key": "dots",
+                  "retroPrint": false
+                },
+                "pencil": {
+                  "label": "str_LabelButtonIconPencil",
+                  "key": "pncl",
+                  "retroPrint": false
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "toolPalette": {
+      "label": "str_LabelSidebar",
+      "helpText": "str_HelpTextSidebar",
+      "sections": {
+        "showAddPicturesButton": {
+          "label": "str_LabelShowAddPicturesButton",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextAddPicturesButtonDoesNotShowOnSmallScreen"
+        },
+        "showSmartDesignButton": {
+          "label": "str_LabelShowSmartDesignButton",
+          "dataType": "checkbox",
+          "productType": 0,
+          "retroPrint": false,
+          "helpText": "str_HelpTextToolPaletteShowSmartDesignButton"
+        },
+        "mobileSlideUpPanels": {
+          "label": "str_LabelMobileSlideUpPanels",
+          "dataType": "radio",
+          "key": "msup",
+          "options": {
+            "mobileSlideUpCover": {
+              "label": "str_LabelMobileToolbarCover",
+              "key": "msuc",
+              "helpText": "str_HelpTextToolbarCover"
+            },
+            "mobileSlideUpOver": {
+              "label": "str_LabelMobileToolbarOver",
+              "key": "msuo",
+              "helpText": "str_HelpTextToolbarOver"
+            }
+          }
+        }
+      }
+    },
+    "calendarEvents": {
+      "label": "str_LabelCalendarEvents",
+      "productType": 3,
+      "sections": {
+        "calendarEventsPalette": {
+          "label": "str_LabelCalendarEventsPalette",
+          "dataType": "checkbox"
+        },
+        "allowCustomEvents": {
+          "label": "str_LabelAllowCustomEvents",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextAllowCustomEvents",
+          "parent": "calendarEvents.calendarEventsPalette",
+          "level": 2,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "calendarEvents.calendarEventsPalette"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "showEventSets": {
+          "label": "str_LabelShowEventSets",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextShowEventSets",
+          "parent": "calendarEvents.calendarEventsPalette",
+          "level": 2,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "calendarEvents.calendarEventsPalette"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "calendarSettings": {
+      "label": "str_LabelCalendarSettings",
+      "productType": 3,
+      "sections": {
+        "calendarSettingsPalette": {
+          "label": "str_LabelCalendarSettingsPalette",
+          "dataType": "checkbox"
+        }
+      }
+    },
+    "pictures": {
+      "label": "str_LabelPictures",
+      "sections": {
+        "picturePalette": {
+          "label": "str_LabelPicturePalette",
+          "dataType": "checkbox"
+        },
+        "addPicturesButton": {
+          "label": "str_LabelAddPicturesButton",
+          "dataType": "checkbox",
+          "parent": "pictures.picturePalette",
+          "level": 2,
+          "helpText": "str_HelpTextPicturesPaletteAddPicturesButton"
+        },
+        "autoFillButton": {
+          "label": "str_LabelAutoFillButton",
+          "dataType": "checkbox",
+          "parent": "pictures.picturePalette",
+          "level": 2,
+          "helpText": "str_HelpTextPicturesAutofillButton"
+        },
+        "showAdvancedAutofill": {
+          "label": "str_LabelShowAdvancedAutofill",
+          "productType": 0,
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextShowAdvancedAutofill",
+          "parent": "pictures.picturePalette.autoFillButton",
+          "level": 3,
+          "retroPrint": false
+        },
+        "defaultPictureManagerSortOrder": {
+          "label": "str_LabelDefaultSortOrder",
+          "dataType": "radio",
+          "parent": "pictures.picturePalette",
+          "level": 2,
+          "options": {
+            "dateTaken": {
+              "label": "str_LabelDateTaken",
+              "key": "dt"
+            },
+            "size": {
+              "label": "str_LabelSize",
+              "key": "s"
+            },
+            "fileName": {
+              "label": "str_LabelFilename",
+              "key": "fn"
+            },
+            "orientation": {
+              "label": "str_LabelOrientation",
+              "key": "o"
+            }
+          }
+        },
+        "defaultPictureManagerThumbnailLayout": {
+          "label": "str_LabelThumbnailLayout",
+          "dataType": "radio",
+          "key": "dpmtl",
+          "parent": "pictures.picturePalette",
+          "level": 2,
+          "options": {
+            "fullFrameTile": {
+              "label": "str_LabelFullFrameTiles",
+              "key": "fft"
+            },
+            "squareTiles": {
+              "label": "str_LabelSquareTiles",
+              "key": "st"
+            },
+            "fileInfoList": {
+              "label": "str_LabelFileInfoList",
+              "key": "fil"
+            }
+          }
+        }
+      }
+    },
+    "layouts": {
+      "label": "str_LabelLayouts",
+      "sections": {
+        "layoutsPalette": {
+          "label": "str_LabelLayoutsPalette",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextLayoutsPaletteShow"
+        },
+        "contentTypeFilter": {
+          "label": "str_LabelContentTypeFilter",
+          "dataType": "checkbox",
+          "parent": "layouts.layoutsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextFilterOnlyShowIfOptionsAvailable"
+        },
+        "pictureBoxFilter": {
+          "label": "str_LabelPictureBoxFilter",
+          "dataType": "checkbox",
+          "parent": "layouts.layoutsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextFilterOnlyShowIfOptionsAvailable"
+        },
+        "categoryFilter": {
+          "label": "str_LabelCategoryFilter",
+          "dataType": "checkbox",
+          "parent": "layouts.layoutsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextFilterOnlyShowIfOptionsAvailable"
+        },
+        "applyToAllPagesButton": {
+          "label": "str_LabelApplyToAllPagesButton",
+          "dataType": "checkbox",
+          "parent": "layouts.layoutsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextFilterOnlyShowIfOptionsAvailable"
+        }
+      }
+    },
+    "backgrounds": {
+      "label": "str_LabelBackgrounds",
+      "sections": {
+        "backgroundsPalette": {
+          "label": "str_LabelBackgroundsPalette",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextBackgroundsPaletteShow"
+        },
+        "designs": {
+          "label": "str_LabelTheme",
+          "dataType": "checkbox",
+          "parent": "backgrounds.backgroundsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextBackgroundsPaletteDesigns"
+        },
+        "colours": {
+          "label": "str_LabelColours",
+          "dataType": "checkbox",
+          "parent": "backgrounds.backgroundsPalette",
+          "level": 2
+        },
+        "categoryFilter": {
+          "label": "str_LabelCategoryFilter",
+          "dataType": "checkbox",
+          "parent": "backgrounds.backgroundsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextFilterOnlyShowIfOptionsAvailable"
+        },
+        "applyToAllPagesButton": {
+          "label": "str_LabelApplyToAllPagesButton",
+          "dataType": "checkbox",
+          "parent": "backgrounds.backgroundsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextBackgroundsPaletteApplyToAllPages"
+        },
+        "editBackgroundButton": {
+          "label": "str_ButtonEditBackground",
+          "dataType": "checkbox",
+          "parent": "backgrounds.backgroundsPalette",
+          "helpText": "str_HelpTextEditBackgroundButton",
+          "level": 2
+        }
+      }
+    },
+    "stickers": {
+      "label": "str_LabelStickers",
+      "retroPrint": false,
+      "sections": {
+        "stickersPalette": {
+          "label": "str_LabelStickersPalette",
+          "dataType": "checkbox",
+          "helpText": "str_HelpTextStickersPaletteShow"
+        },
+        "categoryFilter": {
+          "label": "str_LabelCategoryFilter",
+          "dataType": "checkbox",
+          "parent": "stickers.stickersPalette",
+          "level": 2
+        }
+      }
+    },
+    "settings": {
+      "label": "str_LabelSettings",
+      "sections": {
+        "settingsPalette": {
+          "label": "str_LabelSettingsPalette",
+          "dataType": "checkbox"
+        }
+      }
+    },
+    "backgroundOptions": {
+      "label": "str_LabelBackgroundOptions",
+      "retroPrint": false,
+      "sections": {
+        "backgroundOptionsPalette": {
+          "label": "str_LabelBackgroundOptionsPalette",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        },
+        "rotateAndFlip": {
+          "label": "str_LabelRotateAndFlip",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette",
+          "level": 2,
+          "retroPrint": false
+        },
+        "flipHorizontal": {
+          "label": "str_LabelFlipHorizontal",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "flipVertical": {
+          "label": "str_LabelFlipVertical",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "horizonAngle": {
+          "label": "str_LabelHorizonAngle",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "enhance": {
+          "label": "str_LabelEnhance",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextBackgroundOptionsPaletteEnhance",
+          "retroPrint": false
+        },
+        "autoEnhance": {
+          "label": "str_LabelAutoEnhance",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.enhance",
+          "level": 3,
+          "helpText": "str_HelpTextBackgroundOptionsPaletteAutoEnhance",
+          "retroPrint": false,
+          "hidden": true
+        },
+        "brightness": {
+          "label": "str_LabelBrightness",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "contrast": {
+          "label": "str_LabelContrast",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "filter": {
+          "label": "str_LabelFilter",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "transparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette",
+          "level": 2,
+          "retroPrint": false
+        },
+        "masks": {
+          "label": "str_LabelMasks",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextMasksPaletteShow",
+          "retroPrint": false
+        },
+        "masksCategoryFilter": {
+          "label": "str_LabelCategoryFilter",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.masks",
+          "level": 3
+        },
+        "clearMaskButton": {
+          "label": "str_LabelClearMaskButton",
+          "dataType": "checkbox",
+          "parent": "backgroundOptions.backgroundOptionsPalette.masks",
+          "level": 3
+        }
+      }
+    },
+    "pictureBoxOptions": {
+      "label": "str_LabelPictureBoxOptions",
+      "retroPrint": false,
+      "sections": {
+        "pictureBoxOptionsPalette": {
+          "label": "str_LabelPictureBoxOptionsPalette",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        },
+        "clearPictureButton": {
+          "label": "str_LabelClearPictureBox",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "helpText": "str_HelpTextClearPictureButton",
+          "level": 2
+        },
+        "rotateAndFlip": {
+          "label": "str_LabelRotateAndFlip",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "rotate90": {
+          "label": "str_LabelRotate90Degrees",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "flipHorizontal": {
+          "label": "str_LabelFlipHorizontal",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "flipVertical": {
+          "label": "str_LabelFlipVertical",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "horizonAngle": {
+          "label": "str_LabelHorizonAngle",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "enhance": {
+          "label": "str_LabelEnhance",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "autoEnhance": {
+          "label": "str_LabelAutoEnhance",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "brightness": {
+          "label": "str_LabelBrightness",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "contrast": {
+          "label": "str_LabelContrast",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "filter": {
+          "label": "str_LabelFilter",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "border": {
+          "label": "str_LabelBorder",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "borderSize": {
+          "label": "str_LabelSize",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "roundedCorners": {
+          "label": "str_LabelRoundedCorners",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderTransparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shadow": {
+          "label": "str_LabelShadow",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "blur": {
+          "label": "str_LabelBlur",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "distance": {
+          "label": "str_LabelDistance",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "angle": {
+          "label": "str_LabelAngle",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "opacity": {
+          "label": "str_LabelOpacity",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "expand": {
+          "label": "str_LabelExpand",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shadowColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "masks": {
+          "label": "str_LabelMasks",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextMasksPaletteShow"
+        },
+        "masksCategoryFilter": {
+          "label": "str_LabelCategoryFilter",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.masks",
+          "level": 3
+        },
+        "clearMaskButton": {
+          "label": "str_LabelClearMaskButton",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.masks",
+          "level": 3
+        },
+        "transparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "alignToPage": {
+          "label": "str_LabelAlignToPage",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "arrange": {
+          "label": "str_LabelArrange",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "sizeAndPosition": {
+          "label": "str_LabelSizeAndPosition",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectSizeOrProtectPostionOrCanEditObjectsDisabled",
+          "retroPrint": false
+        },
+        "fillPageSpread": {
+          "label": "str_LabelFillPageSpread",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "fitPictureToBox": {
+          "label": "str_LabelFitPictureToBox",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "nudge": {
+          "label": "str_LabelNudge",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "advanced": {
+          "label": "str_LabelAdvanced",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "lockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shape": {
+          "label": "str_LabelShape",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "retroPrint": false
+        },
+        "shapeSelection": {
+          "label": "str_LabelShapeSelection",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shape",
+          "level": 3,
+          "helpText": "str_HelpTextOptionDisableIfProtectContentsOnOrLayoutLocked",
+          "retroPrint": false
+        },
+        "shapeLockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette.shape",
+          "level": 3,
+          "helpText": "str_HelpTextOptionDisableIfProtectContrainProportionsOrLayoutLocked",
+          "retroPrint": false
+        },
+        "swapPictures": {
+          "label": "str_LabelSwapPictures",
+          "dataType": "checkbox",
+          "parent": "pictureBoxOptions.pictureBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        }
+      }
+    },
+    "stickerOptions": {
+      "label": "str_LabelStickerOptions",
+      "retroPrint": false,
+      "sections": {
+        "stickerOptionsPalette": {
+          "label": "str_LabelStickerOptionsPalette",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        },
+        "rotateAndFlip": {
+          "label": "str_LabelRotateAndFlip",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "rotate90": {
+          "label": "str_LabelRotate90Degrees",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "flipHorizontal": {
+          "label": "str_LabelFlipHorizontal",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "flipVertical": {
+          "label": "str_LabelFlipVertical",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "horizonAngle": {
+          "label": "str_LabelHorizonAngle",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.rotateAndFlip",
+          "level": 3,
+          "retroPrint": false
+        },
+        "enhance": {
+          "label": "str_LabelEnhance",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalettePalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "brightness": {
+          "label": "str_LabelBrightness",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "contrast": {
+          "label": "str_LabelContrast",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "filter": {
+          "label": "str_LabelFilter",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.enhance",
+          "level": 3,
+          "retroPrint": false
+        },
+        "border": {
+          "label": "str_LabelBorder",
+          "productType": 0,
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "borderSize": {
+          "label": "str_LabelSize",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "roundedCorners": {
+          "label": "str_LabelRoundedCorners",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderTransparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shadow": {
+          "label": "str_LabelShadow",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "blur": {
+          "label": "str_LabelBlur",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "distance": {
+          "label": "str_LabelDistance",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "angle": {
+          "label": "str_LabelAngle",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "opacity": {
+          "label": "str_LabelOpacity",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "expand": {
+          "label": "str_LabelExpand",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shadowColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "transparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalettePalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "alignToPage": {
+          "label": "str_LabelAlignToPage",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalettePalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "arrange": {
+          "label": "str_LabelArrange",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalettePalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "sizeAndPosition": {
+          "label": "str_LabelSizeAndPosition",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalettePalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectSizeOrProtectPostionOrCanEditObjectsDisabled",
+          "retroPrint": false
+        },
+        "fillPageSpread": {
+          "label": "str_LabelFillPageSpread",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "nudge": {
+          "label": "str_LabelNudge",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "advanced": {
+          "label": "str_LabelAdvanced",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "lockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shape": {
+          "label": "str_LabelShape",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette",
+          "level": 2,
+          "retroPrint": false
+        },
+        "shapeSelection": {
+          "label": "str_LabelShapeSelection",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shape",
+          "level": 3,
+          "helpText": "str_HelpTextOptionDisableIfProtectContentsOnOrLayoutLocked",
+          "retroPrint": false
+        },
+        "shapeLockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "stickerOptions.stickerOptionsPalette.shape",
+          "level": 3,
+          "helpText": "str_HelpTextOptionDisableIfProtectContrainProportionsOrLayoutLocked",
+          "retroPrint": false
+        }
+      }
+    },
+    "textBoxOptions": {
+      "label": "str_LabelTextBoxOptions",
+      "retroPrint": false,
+      "sections": {
+        "textBoxOptionsPalette": {
+          "label": "str_LabelTextBoxOptionsPalette",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        },
+        "background": {
+          "label": "str_LabelBackground",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "backgroundColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.background",
+          "level": 3,
+          "retroPrint": false
+        },
+        "backgroundTransparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.background",
+          "level": 3,
+          "retroPrint": false
+        },
+        "border": {
+          "label": "str_LabelBorder",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "borderSize": {
+          "label": "str_LabelSize",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderTransparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "alignToPage": {
+          "label": "str_LabelAlignToPage",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "arrange": {
+          "label": "str_LabelArrange",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "sizeAndPosition": {
+          "label": "str_LabelSizeAndPosition",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectSizeOrProtectPostionOrCanEditObjectsDisabled",
+          "retroPrint": false
+        },
+        "fillPageSpread": {
+          "label": "str_LabelFillPageSpread",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "nudge": {
+          "label": "str_LabelNudge",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "advanced": {
+          "label": "str_LabelAdvanced",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "lockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "textBoxOptions.textBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        }
+      }
+    },
+    "shapeBoxOptions": {
+      "label": "str_LabelShapeOptions",
+      "retroPrint": false,
+      "sections": {
+        "shapeBoxOptionsPalette": {
+          "label": "str_LabelShapeOptionsPalette",
+          "dataType": "checkbox",
+          "condition": {
+            "disableControl": [
+              {
+                "productType": 0,
+                "retroPrint": true,
+                "keys": [],
+                "action": [
+                  {
+                    "value": true
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableForRetroPrint"
+              }
+            ]
+          }
+        },
+        "border": {
+          "label": "str_LabelBorder",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "borderSize": {
+          "label": "str_LabelSize",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "roundedCorners": {
+          "label": "str_LabelRoundedCorners",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderTransparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.sborder",
+          "level": 3,
+          "retroPrint": false
+        },
+        "borderColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.border",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shadow": {
+          "label": "str_LabelShadow",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "blur": {
+          "label": "str_LabelBlur",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "distance": {
+          "label": "str_LabelDistance",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "angle": {
+          "label": "str_LabelAngle",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "opacity": {
+          "label": "str_LabelOpacity",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "expand": {
+          "label": "str_LabelExpand",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shadowColour": {
+          "label": "str_LabelShadowColour",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shadow",
+          "level": 3,
+          "retroPrint": false
+        },
+        "masks": {
+          "label": "str_LabelMasks",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextMasksPaletteShow",
+          "retroPrint": false
+        },
+        "masksCategoryFilter": {
+          "label": "str_LabelCategoryFilter",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.masks",
+          "level": 3
+        },
+        "clearMaskButton": {
+          "label": "str_LabelClearMaskButton",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.masks",
+          "level": 3
+        },
+        "background": {
+          "label": "str_LabelBackground",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "retroPrint": false
+        },
+        "backgroundTransparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.background",
+          "level": 3,
+          "retroPrint": false
+        },
+        "backgroundColour": {
+          "label": "str_LabelColour",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.background",
+          "level": 3,
+          "retroPrint": false
+        },
+        "transparency": {
+          "label": "str_LabelTransparency",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectContentsOn",
+          "retroPrint": false
+        },
+        "alignToPage": {
+          "label": "str_LabelAlignToPage",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "arrange": {
+          "label": "str_LabelArrange",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectPostionOnOrCanEditPageObjectsDisabled",
+          "retroPrint": false
+        },
+        "sizeAndPosition": {
+          "label": "str_LabelSizeAndPosition",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "helpText": "str_HelpTextSectionDisableIfProtectSizeOrProtectPostionOrCanEditObjectsDisabled",
+          "retroPrint": false
+        },
+        "fillPageSpread": {
+          "label": "str_LabelFillPageSpread",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "nudge": {
+          "label": "str_LabelNudge",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "advanced": {
+          "label": "str_LabelAdvanced",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "lockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.sizeAndPosition",
+          "level": 3,
+          "retroPrint": false
+        },
+        "shape": {
+          "label": "str_LabelShape",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette",
+          "level": 2,
+          "retroPrint": false
+        },
+        "shapeSelection": {
+          "label": "str_LabelShapeSelection",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shape",
+          "level": 3,
+          "helpText": "str_HelpTextOptionDisableIfProtectContentsOnOrLayoutLocked",
+          "retroPrint": false
+        },
+        "shapeLockBoxProportions": {
+          "label": "str_LabelLockBoxProportions",
+          "dataType": "checkbox",
+          "parent": "shapeBoxOptions.shapeBoxOptionsPalette.shape",
+          "level": 3,
+          "helpText": "str_HelpTextOptionDisableIfProtectContrainProportionsOrLayoutLocked",
+          "retroPrint": false
+        }
+      }
+    },
+    "componentOptions": {
+      "label": "str_LabelComponentUpsell",
+      "helpText": "str_HelpTextShowComponentOptionsIfConfigured",
+      "sections": {
+        "showComponentOptionsOnOpen": {
+          "label": "str_LabelShowComponentOptionsWindowOnOpen",
+          "dataType": "checkbox"
+        },
+        "showComponentOptionsOnOrder": {
+          "label": "str_LabelShowComponentOptionsOnOrder",
+          "dataType": "checkbox"
+        }
+      }
+    },
+    "upgradeProject": {
+      "label": "str_LabelUpgradeProject",
+      "productType": 0,
+      "helpText": "str_HelpTextUpgradeProject",
+      "sections": {
+        "showUpgradeProjectPromptOnOpen": {
+          "label": "str_LabelShowUpgradeProjectPromptOnOpen",
+          "dataType": "checkbox",
+          "key": "suppoo"
+        },
+        "showUpgradeProjectPromptOnOrder": {
+          "label": "str_LabelShowUpgradeProjectPromptOnOrder",
+          "dataType": "checkbox",
+          "key": "suppoord"
+        }
+      }
+    },
+    "upsellPages": {
+      "label": "str_LabelUpsellPages",
+      "retroPrint": false,
+      "productType": 0,
+      "sections": {
+        "enableUpsellPages": {
+          "label": "str_LabelEnableUpsellPages",
+          "dataType": "checkbox",
+          "key": "eusp",
+          "helpText": "str_HelpTextEnableUpsellPages"
+        },
+        "recommendedAveragePicturesPerPage": {
+          "label": "str_LabelRecommendedAveragePicturesPerPage",
+          "dataType": "number",
+          "min": 1,
+          "max": 10,
+          "key": "rappp",
+          "parent": "workArea.upsellPages.enableUpsellPages",
+          "level": 2,
+          "helpText": "str_HelpTextRecommendedAveragePicturesPerPage"
+        }
+      }
+    },
+    "smartGuides": {
+      "label": "str_TitleSmartGuides",
+      "key": "sg",
+      "sections": {
+        "initialSmartGuideSetting": {
+          "label": "str_LabelEnableSmartGuides",
+          "dataType": "checkbox",
+          "key": "isgs",
+          "helpText": "str_HelpTextSmartGuidesOnByDefault"
+        }
+      }
+    }
+  },
+  "SETTINGS": {
+    "guestAccess": {
+      "label": "str_LabelGuestAccessToAssistantAndEditor",
+      "sections": {
+        "allowGuestAccess": {
+          "label": "str_LabelAllowGuestAccessToAssistantAndEditor",
+          "dataType": "checkbox",
+          "key": "aga",
+          "helpText": "str_HelpTextSettingsAllowGuestAccess",
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "guestAccess.promptGuestsToSignIn"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      true
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "guestAccess.promptGuestsToSignIn"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "promptGuestsToSignIn": {
+          "label": "str_LabelPromptGuestsToSignIn",
+          "dataType": "checkbox",
+          "key": "pgtsi",
+          "helpText": "str_HelpTextSettingsPromptGuestsToSignIn",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "guestAccess.allowGuestAccess"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "allowGuestsToRegister": {
+          "label": "str_LabelAllowGuestToRegister",
+          "dataType": "checkbox",
+          "key": "agtr",
+          "helpText": "str_HelpTextSettingsAllowGuestsToRegister",
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "appMenu.register"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              },
+              {
+                "keys": [
+                  "appMenu.register"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      true
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "terms": {
+          "label": "str_LabelShowTerms",
+          "dataType": "checkbox",
+          "key": "trm",
+          "helpText": "str_HelpTextSettingsShowTerms"
+        }
+      }
+    },
+    "appMenu": {
+      "label": "str_LabelAppMenu",
+      "sections": {
+        "saveButton": {
+          "label": "str_LabelSaveButton",
+          "dataType": "checkbox",
+          "key": "sb"
+        },
+        "share": {
+          "label": "str_LabelShare",
+          "dataType": "checkbox",
+          "key": "shr"
+        },
+        "signInSignOut": {
+          "label": "str_LabelSignInSignOut",
+          "dataType": "checkbox",
+          "key": "siso",
+          "helpText": "str_HelpTextSettingsAppMenuSignInOut"
+        },
+        "register": {
+          "label": "str_LabelRegister",
+          "dataType": "checkbox",
+          "key": "reg",
+          "helpText": "str_HelpTextSettingsAppMenuRegister",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "guestAccess.allowGuestsToRegister"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ],
+                "helpText": "str_HelpTextNotAvailableWhenRegisterDisabled"
+              }
+            ]
+          }
+        },
+        "language": {
+          "label": "str_LabelLanguage",
+          "dataType": "checkbox",
+          "key": "lang"
+        },
+        "about": {
+          "label": "str_LabelShowAbout",
+          "dataType": "checkbox",
+          "key": "ab",
+          "helpText": "str_HelpTextShowAbout"
+        },
+        "help": {
+          "label": "str_LabelShowHelp",
+          "dataType": "checkbox",
+          "key": "h",
+          "helpText": "str_HelpTextShowHelp"
+        },
+        "changeProduct": {
+          "label": "str_LabelChangeProduct",
+          "dataType": "checkbox",
+          "key": "cp",
+          "helpText": "str_HelpTextSettingsAppMenuChangeProduct"
+        }
+      }
+    },
+    "standardAssetServices": {
+      "label": "str_LabelStandardAssetServices",
+      "sections": {
+        "upload": {
+          "label": "str_LabelUpload",
+          "dataType": "checkbox",
+          "key": "u",
+          "helpText": "str_HelpTextStandardPictureSourcesUpload"
+        },
+        "uploadFromPhone": {
+          "label": "str_LabelUploadFromPhone",
+          "dataType": "checkbox",
+          "key": "ufp",
+          "helpText": "str_HelpTextStandardPictureSourcesUploadFromPhone"
+        },
+        "previousUploads": {
+          "label": "str_LabelPreviousUploads",
+          "dataType": "checkbox",
+          "key": "pu"
+        }
+      }
+    },
+    "externalAssetServices": {
+      "label": "str_ExternalAssetServices",
+      "sections": {
+        "libraryLink": {
+          "label": "str_LabelLibraryLink",
+          "dataType": "checkbox",
+          "key": "ll"
+        },
+        "facebook": {
+          "label": "str_LabelFacebook",
+          "dataType": "checkbox",
+          "key": "fb"
+        },
+        "flickr": {
+          "label": "str_LabelFlickr",
+          "dataType": "checkbox",
+          "key": "flk"
+        },
+        "googlePhotos": {
+          "label": "str_LabelGooglePhotos",
+          "dataType": "checkbox",
+          "key": "gp"
+        },
+        "instagram": {
+          "label": "str_LabelInstagram",
+          "dataType": "checkbox",
+          "key": "ig"
+        }
+      }
+    },
+    "previousUploadsWindow": {
+      "label": "str_LabelPreviousUploadsWindow",
+      "sections": {
+        "defaultSortOrder": {
+          "label": "str_LabelDefaultSortOrder",
+          "dataType": "radio",
+          "key": "dso",
+          "options": {
+            "dateTaken": {
+              "label": "str_LabelDateTaken",
+              "key": "dt"
+            },
+            "size": {
+              "label": "str_LabelSize",
+              "key": "s"
+            },
+            "fileName": {
+              "label": "str_LabelFilename",
+              "key": "fn"
+            },
+            "orientation": {
+              "label": "str_LabelOrientation",
+              "key": "o"
+            },
+            "project": {
+              "label": "str_LabelProject",
+              "key": "prj"
+            }
+          }
+        },
+        "defaultPictureListMode": {
+          "label": "str_LabelDefaultPictureListMode",
+          "dataType": "radio",
+          "key": "dso",
+          "options": {
+            "fullFrameTile": {
+              "label": "str_LabelFullFrameTiles",
+              "key": "fft"
+            },
+            "squareTiles": {
+              "label": "str_LabelSquareTiles",
+              "key": "st"
+            },
+            "fileInfoList": {
+              "label": "str_LabelFileInfoList",
+              "key": "fil"
+            }
+          }
+        }
+      }
+    },
+    "units": {
+      "label": "str_LabelDefaultUnits",
+      "sections": {
+        "units": {
+          "label": "",
+          "dataType": "radio",
+          "key": "u",
+          "options": {
+            "mm": {
+              "label": "str_LabelMillimetres",
+              "key": "mm"
+            },
+            "cm": {
+              "label": "str_LabelCentimetres",
+              "key": "cm"
+            },
+            "i": {
+              "label": "str_LabelInches",
+              "key": "i"
+            }
+          }
+        }
+      }
+    },
+    "autoImageEnhancement": {
+      "label": "str_LabelAutoImageEnhancement",
+      "sections": {
+        "enhanceAllUserImagesAuto": {
+          "label": "str_LabelEnhanceAllUserImagesAuto",
+          "dataType": "checkbox",
+          "key": "eauia",
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "autoImageEnhancement.allowCustomersToOptOut"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "allowCustomersToOptOut": {
+          "label": "str_LabelAllowCustomersToOptOut",
+          "dataType": "checkbox",
+          "key": "actoo",
+          "parent": "autoImageEnhancement.enhanceAllUserImagesAuto",
+          "level": 2,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "autoImageEnhancement.enhanceAllUserImagesAuto"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "savePromptDelay": {
+      "label": "str_LabelSavePromptDelay",
+      "sections": {
+        "savePromptDelay": {
+          "label": "str_LabelMinutes",
+          "dataType": "number",
+          "min": 10,
+          "max": 5000,
+          "key": "spd",
+          "allowDecimal": false
+        }
+      },
+      "helpText": "str_HelpTextSavePromptDelay"
+    },
+    "inactivityDelay": {
+      "label": "str_LabelInactivityDelay",
+      "sections": {
+        "inactivityDelay": {
+          "label": "str_LabelMinutes",
+          "dataType": "number",
+          "min": 15,
+          "max": 1000,
+          "key": "id",
+          "allowDecimal": false
+        }
+      },
+      "helpText": "str_HelpTextInactivityDelay"
+    },
+    "imageScaling": {
+      "label": "str_LabelImageScaling",
+      "sections": {
+        "scaleBeforeUpload": {
+          "label": "str_LabelImageScalingBefore",
+          "dataType": "checkbox",
+          "key": "sbu",
+          "condition": {
+            "featureControl": {
+              "imageScaleBeforeUploadEnabled": true
+            }
+          }
+        },
+        "maxScaleBeforeUploadMP": {
+          "label": "str_LabelMaxMegaPixels",
+          "dataType": "number",
+          "min": 2.0,
+          "max": 999.99,
+          "key": "msbump",
+          "allowDecimal": true,
+          "condition": {
+            "featureControl": {
+              "imageScaleBeforeUploadEnabled": true
+            },
+            "disableControl": [
+              {
+                "keys": [
+                  "imageScaling.scaleBeforeUpload"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "scaleAfterUpload": {
+          "label": "str_LabelImageScalingAfter",
+          "dataType": "checkbox",
+          "key": "sau"
+        },
+        "maxScaleAfterUploadMP": {
+          "label": "str_LabelMaxMegaPixels",
+          "dataType": "number",
+          "min": 30.0,
+          "max": 999.99,
+          "key": "msaump",
+          "allowDecimal": true,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "imageScaling.scaleAfterUpload"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "orderButtonLabel": {
+      "label": "str_LabelOrderButtonLabel",
+      "sections": {
+        "orderButtonLabel": {
+          "label": "",
+          "dataType": "radio",
+          "key": "obl",
+          "options": {
+            "addToBasket": {
+              "label": "str_LabelAddToBasket",
+              "key": "atbkt",
+              "helpText": "str_HelpTextLabelDisplayedInUserLang"
+            },
+            "checkout": {
+              "label": "str_LabelCheckout",
+              "key": "chko",
+              "helpText": "str_HelpTextLabelDisplayedInUserLang"
+            },
+            "custom": {
+              "label": "str_LabelCustom",
+              "key": "cust"
+            }
+          }
+        },
+        "customOrderButtonLabel": {
+          "label": "str_LabelOrderButtonLabel",
+          "editLabel": "str_ButtonEditCustomLabel",
+          "dataType": "text",
+          "localized": true,
+          "key": "cobl",
+          "required": true,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "orderButtonLabel.orderButtonLabel"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "chko",
+                      "atbkt"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "submitEditedOrderButtonLabel": {
+      "label": "str_LabelSubmitEditedOrderButtonLabel",
+      "sections": {
+        "submitEditedOrderButtonLabel": {
+          "label": "",
+          "dataType": "radio",
+          "key": "obl",
+          "options": {
+            "submit": {
+              "label": "str_LabelSubmit",
+              "key": "sbmt",
+              "helpText": "str_HelpTextInProductionSubmit"
+            },
+            "custom": {
+              "label": "str_LabelCustom",
+              "key": "cust"
+            }
+          }
+        },
+        "customEditedOrderButtonLabel": {
+          "label": "str_LabelSubmitEditedOrderButtonLabel",
+          "editLabel": "str_ButtonEditCustomLabel",
+          "dataType": "text",
+          "localized": true,
+          "key": "cobl",
+          "required": true,
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "submitEditedOrderButtonLabel.submitEditedOrderButtonLabel"
+                ],
+                "action": [
+                  {
+                    "parentValue": [
+                      "sbmt"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "defaultProjectName": {
+      "label": "str_LabelDefaultProjectName",
+      "sections": {
+        "defaultProjectName": {
+          "label": "str_LabelDefaultProjectName",
+          "editLabel": "str_ButtonEditDefaultProjectName",
+          "dataType": "text",
+          "localized": true,
+          "key": "dpn",
+          "required": true,
+          "helpText": "str_HelpTextDefaultProjectName"
+        }
+      }
+    },
+    "logoLinkUrl": {
+      "label": "str_LabelLogoLink",
+      "sections": {
+        "logoLinkUrl": {
+          "label": "str_LabelLogoLinkURL",
+          "dataType": "text",
+          "key": "llurl",
+          "validator": "url",
+          "helpText": "str_HelpTextLogoLinkURL"
+        },
+        "logoLinkToolTipText": {
+          "label": "str_LabelLogoLinkToolTip",
+          "editLabel": "str_ButtonEditToolTipLabel",
+          "dataType": "text",
+          "localized": true,
+          "key": "llttt",
+          "required": true
+        }
+      }
+    },
+    "orderSummaryWindow": {
+      "label": "str_LabelOrderSummaryWindow",
+      "sections": {
+        "showOrderSummaryWindow": {
+          "label": "str_LabelShowOrderSummaryWindow",
+          "dataType": "checkbox",
+          "key": "sosw",
+          "helpText": "str_HelpTextDisplayOrderSummaryWindow",
+          "condition": {
+            "dependencies": [
+              {
+                "keys": [
+                  "orderSummaryWindow.showProjectQuantityDropdown"
+                ],
+                "action": [
+                  {
+                    "value": false,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "showProjectQuantityDropdown": {
+          "label": "str_LabelShowProjectQuantityOption",
+          "dataType": "checkbox",
+          "key": "spqd",
+          "parent": "orderSummaryWindow.showOrderSummaryWindow",
+          "level": 2,
+          "helpText": "str_HelpTextAllowsCustomerToInreaseProjectQuantity",
+          "condition": {
+            "disableControl": [
+              {
+                "keys": [
+                  "orderSummaryWindow.showOrderSummaryWindow"
+                ],
+                "action": [
+                  {
+                    "value": true,
+                    "parentValue": [
+                      false
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

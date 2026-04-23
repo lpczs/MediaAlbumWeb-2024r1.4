@@ -1,0 +1,1196 @@
+DateTime: 2025-12-29 03:53:29
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 03:59:17
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 03:59:21
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 03:59:23
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 03:59:49
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:00:23
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:01:09
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:01:11
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:01:20
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:31:28
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:37:31
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:46:05
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:48:05
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:48:13
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 04:48:52
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:13:22
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:18:19
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:19:19
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:21:53
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:22:34
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:22:51
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:23:03
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------
+DateTime: 2025-12-29 05:23:15
+Extra datas::Array
+(
+    [result] => 
+    [resultparam] => 
+    [recordid] => 1
+    [homecountrycode] => HK
+    [defaultcurrencycode] => HKD
+    [defaultlanguagecode] => en
+    [defaultcreditlimit] => 0.00
+    [taxaddress] => 0
+    [defaultipaccesslist] => 
+    [maxloginattempts] => 10
+    [accountlockouttime] => 15
+    [maxiploginattempts] => 15
+    [maxiploginattemptsminutes] => 15
+    [minpasswordscore] => 0
+    [customerupdateauthrequired] => 0
+    [webversiondate] => 2024-10-21
+    [webversionnumber] => 2024.1.4
+    [webversionstring] => 2024r1.4
+    [config] => 1407374883612665
+    [optioncfs] => 1
+    [optionms] => 0
+    [optionams] => 0
+    [optionmc] => 0
+    [optionscbo] => 1
+    [optionwscrp] => 1
+    [optionptsnpr] => 1
+    [optionai] => 1
+    [optiondesdt] => 1
+    [optiondesol] => 1
+    [optiontdpv] => 1
+    [optionscmlol] => 1
+    [optionhcc] => 0
+    [optionholdes] => 0
+    [optionptphbk] => 1
+    [optionptpfbk] => 1
+    [optionptcndr] => 1
+    [optionscntr] => 0
+    [optionbc] => 5
+    [localeFormatCache] => Array
+        (
+        )
+
+    [pricecachedata] => Array
+        (
+        )
+
+    [initlang] => 
+)
+---------------------------------------------------

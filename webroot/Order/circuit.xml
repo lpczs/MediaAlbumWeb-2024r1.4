@@ -1,0 +1,237 @@
+<!-- Order -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="initialize2">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize2()" />
+	</fuseaction>
+
+	<fuseaction name="duplicate">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="duplicate()" />
+	</fuseaction>
+
+	<fuseaction name="remove">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="remove()" />
+	</fuseaction>
+
+    <fuseaction name="continue">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="orderContinue()" />
+	</fuseaction>
+
+	<fuseaction name="back">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="orderBack()" />
+	</fuseaction>
+
+	<fuseaction name="cancel">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="cancel()" />
+	</fuseaction>
+
+	<fuseaction name="revive">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="revive()" />
+	</fuseaction>
+
+	<fuseaction name="offline">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="offlineOrderRevive()" />
+	</fuseaction>
+
+    <fuseaction name="changeComponentDisplay">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="changeComponentDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="changeComponent">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="changeComponent()" />
+	</fuseaction>
+
+	<fuseaction name="changeComponentCancel">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="changeComponentCancel()" />
+	</fuseaction>
+
+	<fuseaction name="selectStoreDisplay">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="selectStoreDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="selectStore">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="selectStore()" />
+	</fuseaction>
+
+	<fuseaction name="selectStoreCancel">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="selectStoreCancel()" />
+	</fuseaction>
+
+	<fuseaction name="changeShippingAddressDisplay">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeShippingAddressDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="changeShippingAddress">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeShippingAddress()" />
+	</fuseaction>
+	
+	<fuseaction name="changeShippingMethod">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="changeShippingMethod()" />
+	</fuseaction>
+	
+	<fuseaction name="changeBillingAddressDisplay">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeBillingAddressDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="changeBillingAddress">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeBillingAddress()" />
+	</fuseaction>
+	
+	<fuseaction name="updateAccountDetails">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateAccountDetails()" />
+	</fuseaction>
+
+	<fuseaction name="changeAddressCancel">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changeAddressCancel()" />
+	</fuseaction>
+
+	<fuseaction name="copyShippingAddress">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="copyShippingAddress()" />
+	</fuseaction>
+
+    <fuseaction name="setVoucher">
+        <instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="setVoucher()" />
+    </fuseaction>
+    
+    <fuseaction name="setGiftCard">
+        <instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="setGiftCard()" />
+    </fuseaction>
+    
+	<fuseaction name="refresh">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="refresh()" />
+	</fuseaction>
+	
+    <fuseaction name="ccAutomaticCallback">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="ccAutomaticCallback()" />
+	</fuseaction>
+
+    <fuseaction name="ccManualCallback">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="ccManualCallback()" />
+	</fuseaction>
+
+    <fuseaction name="ccCancelCallback">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="ccCancelCallback()" />
+	</fuseaction>
+	
+	<fuseaction name="ccResume">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="ccResume()" />
+	</fuseaction>
+		
+	<fuseaction name="getStoreLocatorLogo">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getStoreLocatorLogo()" />
+	</fuseaction>
+
+	<fuseaction name="getAsset">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getAsset()" />
+	</fuseaction>
+		
+    <fuseaction name="reorder">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="reorder()" />
+	</fuseaction>
+	
+	<fuseaction name="addGiftCard">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="addGiftCard()" />
+	</fuseaction>
+	
+	<fuseaction name="deleteGiftCard">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteGiftCard()" />
+	</fuseaction>    
+	
+	<fuseaction name="initPaymentGatewayPaymentOptions">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="initPaymentGatewayPaymentOptions()" />
+	</fuseaction>
+
+	<fuseaction name="initPayNowOrder">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="initPayNowOrder()" />
+	</fuseaction>
+
+	<fuseaction name="requestPaymentParams">
+		<instantiate object="control" class="Order_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="requestPaymentParams()" />
+	</fuseaction>
+        
+</circuit>

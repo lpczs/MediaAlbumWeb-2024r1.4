@@ -1,0 +1,23 @@
+<!-- Admin Export Manual -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminExportManual_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="report">
+		<instantiate object="control" class="AdminExportManual_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="report()" />
+	</fuseaction>
+
+	<fuseaction name="export">
+		<instantiate object="control" class="AdminExportManual_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="export()" />
+	</fuseaction>
+
+</circuit>

@@ -1,0 +1,5 @@
+{$appname} - Offline Credit Card Transaction Update
+
+The following credit card transactions have been updated:
+
+{$data}

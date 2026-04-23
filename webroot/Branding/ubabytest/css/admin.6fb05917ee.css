@@ -1,0 +1,614 @@
+#header {
+    overflow: hidden
+}
+#header div {
+    line-height: 29px;
+    height: 29px;
+    margin-left: 5px;
+}
+
+#header div img {
+    vertical-align: middle;
+}
+
+#header div, #header h1 {
+    float: left;
+}
+
+#header #logOutBtnHolder {
+    float: right;
+    margin-right: 5px;
+    padding-top: 4px;
+}
+
+/* general */
+.grid .x-grid3-header .x-grid3-header-inner .x-grid3-header-offset table .x-grid3-hd-row td.x-grid3-cell{
+    font-weight: bold !important;
+}
+
+.inactive, .inactive td {
+    color: gray;
+    font-style: italic;
+}
+
+.error, .error td {
+	color: red;
+}
+
+.notools .x-tool {
+    background-image: none !important;
+}
+
+.submenu {
+    padding: 5px 22px;
+}
+
+.submenu li {
+    padding: 5px 0;
+    line-height: 17px;
+}
+
+.submenu a {
+    line-height: 17px;
+    color: black;
+    text-decoration:none;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 11px;
+}
+
+.submenu a:visited {
+    color: black;
+    text-decoration:none;
+}
+
+.submenu a:hover {
+    color: black;
+    text-decoration:none;
+}
+
+.submenu li img {
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+#accordionPanel .x-panel-body {
+    background: rgb(237, 240, 252);
+}
+
+.x-window-dlg .x-window-header .x-tool-close {
+    display: none !important;
+}
+
+.left-right-buttons .x-panel-btns table, .left-right-buttons .x-panel-fbar {
+    width: 100% !important;
+}
+
+.left-right-buttons .x-panel-btns .x-btn-right {
+    float: right;
+}
+
+.left-right-buttons .x-panel-btns .x-toolbar-left {
+    width: 0 !important;
+}
+
+.left-right-buttons .x-panel-btns table.x-btn {
+    width: 75px !important;
+}
+
+.width_100 {
+    width: 100%;
+}
+
+.x-form-check-wrap {
+    text-align: left;
+}
+
+/* branding emails grid */
+#emailsGrid .x-grid-group-hd {
+    padding-top: 0;
+}
+
+#emailsGrid .x-grid-group-hd div {
+    height: 22px;
+    line-height: 22px;
+}
+
+#emailsGrid .x-grid-group-hd div.x-grid-group-title {
+    background-position: 3px 8px;
+}
+
+.gridHeaderCheckboxHolder {
+    float:right;
+    overflow: hidden;
+}
+
+.gridHeaderCheckboxHolder .gridHeaderCheckbox {
+    float: left;
+}
+
+.gridHeaderCheckboxHolder .gridHeaderButtons {
+    float: right;
+    margin-left: 10px;
+    overflow: hidden;
+    width: 54px;
+    margin-right:4px;
+}
+
+.gridHeaderCheckboxHolder .gridHeaderButtons .gridHeaderButton {
+    float: left;
+    margin-left: 5px;
+}
+
+.hide-expand-collapse {
+    margin-left:10px;
+}
+
+.hide-expand-collapse-inactive a span {color: grey !important; font-style:italic;}
+
+.hide-expand-collapse-inactive {margin-left:10px;}
+
+.component-options-column .x-tree-ec-icon 
+{
+    display:none;
+}
+
+
+/* metadata keywords */
+#keywordsGrid .marginLeft10 {
+    margin-left: 10px;
+}
+
+#keywordsGrid div .previewImage {
+    margin-right: 5px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+#keywordsGrid .localizedLanguageName {
+    width: 90px !important;
+}
+
+/* manual export */
+.xml_pic {
+    background-image: url('../utils/ext/images/taopix/xml_simple.png') !important;
+}
+
+.bxml_pic {
+    background-image: url('../utils/ext/images/taopix/xml_beautified.png') !important;
+}
+
+.txt_pic {
+    background-image: url('../utils/ext/images/taopix/txt_simple.png') !important;
+}
+
+.tbarText {
+    width:380px;
+    overflow:hidden;
+}
+
+#startDateLabel {
+    margin-right: 50px;
+}
+
+#startDateLabel, #filterLabel, #endEndLabel {
+    color: #245296;
+    font-size: 12px;
+}
+
+#startDateLabel, #endEndLabel { }
+#buttonGroupEF {
+    width: 100%;
+}
+
+#buttonGroupEF .x-btn-group-body {
+    width: 100%;
+}
+
+#buttonGroupEF .x-btn-group-body .x-table-layout {
+    width: 100%;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle {
+    width: 100% !important;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .xtb-text {
+    color: #3E6AAA;
+    padding: 0;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer,
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns,
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns td.x-toolbar-cell {
+    padding: 0;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns-right .x-panel-fbar {
+    float:	none;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns .x-toolbar-left table {
+    margin: 0 auto;
+}
+
+/* FIXES FOR IE: */
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns.x-panel-btns-right .x-clear {
+    font: 0 sans-serif;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns .x-toolbar-left {
+    text-align: center;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-tc {
+    vertical-align: top;
+}
+
+div.maskClass div {
+    padding: 15px;
+    color: #787878  ;
+    font-size: 18px !important;
+    background: white;
+    border: 0;
+}
+
+.processed-row {
+    background: white url('../utils/ext/images/silk/exclamation.png') no-repeat 10% center;
+    padding: 1px 0;
+}
+
+/* product configuration */
+.send_to_Bottom {
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_last.png') !important;
+}
+
+.send_to_top {
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_first.png') !important;
+}
+
+.move_up {
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_up.png') !important;
+}
+
+.move_down {
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_down.png') !important;
+}
+
+.checkboxComponentChecked {
+    background: url('../utils/ext/images/taopix/checkbox_001.gif') no-repeat !important;
+}
+
+.checkboxComponentUnchecked {
+    background: url('../utils/ext/images/taopix/checkbox_002.gif') no-repeat !important;
+}
+
+.default-list-component-bold {
+    font-weight: bold;
+}
+
+.default-list-component-normal {
+    font-weight: normal;
+}
+
+.x-tree-node .corrupted-price-link-record a span 
+{
+    color: #0056ff;
+}
+
+.list-component-inactive a span {color: #808080 !important;}
+
+input[type="radio"]{
+    width: 16px;
+}
+
+.errorrecord {
+    color: red !important
+}
+
+.highPriority {
+    margin: 0 auto;
+    display: block;
+    background-image: url('../utils/ext/images/silk/flag_red.png') !important;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+}
+
+.x-grid3-cell-inner, .x-grid3-hd-inner {
+    white-space: normal;
+}
+
+.loadingShim div {
+    background: white !important;
+    padding: 10px 20px 10px 15px;
+}
+
+.loadingShim div img {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/** preview image **/
+#bannerTab #bannerpreviewimage, #desingerSplashScreenTab #previewimage{
+    max-width: 800px;
+    max-height: 800px;
+}
+
+
+/** word wrap **/
+.x-grid3-cell-inner, .x-grid3-hd-inner{
+    white-space: normal !important;
+}
+
+
+/* 3d preview */
+.threeDPreview
+{
+    background-image: url('../utils/ext/images/taopix/3d-preview.png') !important;
+}
+
+.upload-model
+{
+	width: auto !important;
+}
+
+/** compositefield **/
+.x-form-invalid.x-form-composite.x-form-field
+{
+    background-color: transparent;
+}
+
+/** Hide Inactive **/
+.hideInactiveButton
+{
+	background-image: url('../utils/ext/images/taopix/hide_inactive_icon.png');
+}
+
+/* Apply class "x-toolbar-standardbutton" to buttons on a toolbar
+ * to make them appear with "normal" button styling, instead of toolbar button styling */
+ .x-toolbar .x-toolbar-standardbutton .x-btn-tl { background-position: 0 0; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-tr { background-position: -3px 0; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-tc { background-position: 0 -6px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-ml { background-position: 0px -24px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-mr { background-position: -3px -24px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-mc { background-position: 0 -1096px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-bl { background-position: 0 -3px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-br { background-position: -3px -3px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-bc { background-position: 0 -15px; }
+ .x-toolbar .x-toolbar-standardbutton .x-btn-mc em button { margin-left:2px; margin-right:2px; min-width:20px; }
+
+/* Apply class "brandingCustomiseButton" to buttons in a button group
+	to prevent button text being to close to the sides of the buttons */
+ .brandingCustomiseButton .x-btn-mc em button { margin-left: 10px; margin-right: 10px; min-width: 20px; }
+ .multilinetoolbar .x-toolbar-cell { vertical-align: top !important; }
+ .multilinelangcheckbox { margin-bottom: 8px; }
+
+ .upload-Warning-text
+ {
+	color: rgb(161, 161, 161);
+	font-size: 14px;
+	font-style: italic;
+	padding: 10px;
+	display: block;
+ }
+
+/* Unlock accounts tooltip */
+td.x-grid3-td-accountlocked.tooltip-delayed
+{
+    cursor: pointer;
+}
+
+.tooltip-delayed:hover:after
+{
+   opacity: 1;
+   z-index: 100;
+   -webkit-transition: opacity 0s .4s;
+   -o-transition: opacity 0s .4s;
+   transition: opacity 0s .4s;
+   z-index: 1;
+}
+
+.tooltip-delayed:after
+{
+    content: attr(data-tooltip);
+    display: block;
+    font: normal 11px tahoma,arial,helvetica,sans-serif;
+    color: #444;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    background: #e9f2ff;
+    position: absolute;
+    border: 1px solid #93a9d0;
+    border-radius: 4px;
+    line-height: 14px;
+    padding: 2px 4px;
+    opacity: 0;
+    z-index: -1;
+}
+
+.preview-icon
+{
+	position: absolute;
+	width: 19px;
+	height: 19px;
+	border: 1px solid black;
+	background-color: #96BDE7;
+	bottom: 8px;
+	right: 8px;
+	padding: 2px;
+	cursor: pointer;
+}
+
+.preview-icon:after
+{
+    content: '';
+    display: block;
+    background-image: url(../images/admin/preview-icon.svg);
+	background-size: 19px 19px;
+	width: 19px;
+	height: 19px;
+}
+
+.x-table-layout-cell.top-align { vertical-align: top; }
+#dataArchivingPanel legend , #purgePanel legend { text-align: left; }
+#purgePanel .grey-text { color: #787878; }
+#dataArchivingPanel .center-item , #purgePanel .center-item { text-align: center !important; }
+#dataArchivingPanel .cell-header , #purgePanel .cell-header { min-height: 30px; vertical-align: bottom; padding: 0px 5px; }
+
+.warning-bar > .x-panel { border-bottom: 1px solid #b5b8c8; }
+.warning-bar .x-panel-body { border: none; background-color: #fdfcd2; padding: 7px; border-top: 1px solid #d2d1b8; }
+.warning-message:before {
+	background-image: url('../utils/ext/images/silk/error.png');
+	background-repeat: no-repeat;
+	content: '';
+	left: 7px;
+	top: 6px;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+}
+.warning-message { padding-left: 24px; color: #484848; }
+
+.dormatDays > input
+{
+	background: none;
+	border: none;
+	opacity: 1 !important;
+	color: #000 !important;
+}
+
+
+/* Override styles for Components window */
+
+.tpx-component-button-wrap-outer
+{
+    display: flex;
+    align-items: center;
+}
+
+.tpx-component-button-wrap-outer .x-btn
+{
+    margin-top: 0 !important;
+}
+
+.tpx-components-window .x-column-inner
+{
+    display: flex;
+    align-items: stretch;
+    height: 80vh;
+}
+
+.tpx-components-window .x-column
+{
+    height: 100%;
+}
+
+.tpx-components-window .x-tree
+{
+    height: calc(100% - 3px);
+}
+
+.tpx-components-window #tree2.x-tree
+{
+    height: calc(100% - 25px);
+}
+
+.tpx-components-window .x-panel-bwrap
+{
+    height: 100%;
+}
+
+.tpx-components-window .x-panel-body-noheader
+{
+    height: calc(100% - 27px) !important;
+}
+
+.tpx-components-window .component-options-column .x-panel-body-noheader
+{
+    height: 100% !important;
+}
+
+.tpx-components-subgrid
+{
+    padding-left: 10px;
+    width: calc(100% - 10px) !important;
+}
+
+.tpx-components-alllayoutstext
+{
+    font-style:italic;
+}
+
+.tpx-components-collapsed
+{
+    display: none;
+}
+
+#collectiongrid .x-grid3-hd-checker
+{
+    display: none;
+}
+
+.silk-book-link { background-image: url(../utils/ext/images/silk/book_link.png) !important; background-repeat: no-repeat; }
+.silk-page-copy { background-image: url(../utils/ext/images/silk/page_copy.png) !important; background-repeat: no-repeat; }
+.silk-bullet-arrow-down { background-image: url(../utils/ext/images/silk/bullet_arrow_down.png) !important; background-repeat: no-repeat; }
+.silk-bullet-arrow-right { background-image: url(../utils/ext/images/silk/bullet_arrow_down.png) !important; background-repeat: no-repeat; transform: rotate(-90deg)}
+.tpx-shopify-connector {
+    background-image: url('../utils/ext/images/silk/shopify-icon.png') !important;
+    background-repeat: no-repeat;
+}
+
+.no-icon {
+    display: none;
+    background-image: none !important;
+}
+
+.top-align td {
+    vertical-align: top;
+}
+
+.white-panel,
+.white-panel .x-panel-mc
+{
+    background-color: #FFF;
+}
+
+.white-panel .x-panel-ml,
+.white-panel .x-panel-mr,
+.white-panel .x-panel-bl,
+.white-panel .x-panel-br,
+.white-panel .x-panel-bc
+{
+    background-image: none;
+}
+
+.font-view li ul {
+    margin-left: 20px;
+}
+
+/* Added as we have reordered the checkbox and icons in trees */
+#fonts .x-tree-node-expanded .x-tree-node-icon,
+#fonts .x-tree-node-icon
+{
+    margin-left: 3px;
+}
+
+.x-panel .bordered-left {
+    border-left: 1px solid #99bbe8;
+    padding: 0px 10px;
+}
+
+.silk-application-form-magnify {
+    background-image: url('../utils/ext/images/silk/application_form_magnify.png') !important;
+    background-repeat: no-repeat;
+}
+
+.silk-control-play-blue {
+    background-image: url('../utils/ext/images/silk/control_play_blue.png') !important;
+    background-repeat: no-repeat;
+}
+
+.silk-page-white-star {
+    background-image: url('../utils/ext/images/silk/page_white_star.png') !important;
+    background-repeat: no-repeat;
+}

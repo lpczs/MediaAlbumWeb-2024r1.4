@@ -1,0 +1,55 @@
+#################################################
+# Auto Layout Configuration File
+#################################################
+#
+# This configuration file is used to control which product collections and/or product layouts or 
+# all products collections and product layouts.
+# 
+# The format of the settings is:
+# <productcollection_code>.<product_layout_code>=<show_auto_layout_options (On/Off)>,<default_value (On/Off)>
+# For example:
+# If your product collection code is PRODUCT1 and your product layout code is LAYOUT1 and you 
+# require the auto layout option to display and be on by default the setting would be -
+#
+# PRODUCT1.LAYOUT1=On,On
+#
+# If your product layout code is LAYOUT1 and you require the auto layout option to display and 
+# be on by default no matter what the product collection code is the setting would be -
+#
+# *.LAYOUT1=On,On
+#
+# If product collection code is PRODUCT1 and you require the auto layout option to display and 
+# be off by default for all it's layouts the setting would be -
+#
+# PRODUCT1.*=On,Off
+# 
+# If you require the auto layout option to be hidden for all layouts and products the setting would be - 
+# 
+# *.*=Off,Off
+# 
+# The settings are matched to the project in the following order:
+# 1) Product collection and layout code match the project
+# 2) Just the layout code matches the project
+# 3) Just the product collection matches the project
+# 4) Use the all products and layout setting if nothing matched.
+# 
+# Once one of the settings is matched no other setting will be applied.
+# For example
+# If your auto layout confirguration file was:
+# 
+# *.*=Off,Off
+# PRODUCT1.LAYOUT1=On,On
+# *.LAYOUT1=On,On
+# PRODUCT1.*=On,Off
+# 
+# A project for product collection PRODUCT1 and LAYOUT1 we would match:
+# PRODUCT1.LAYOUT1=On,On
+# 
+# A project for product collection PRODUCT1 and LAYOUT1123 we would match:
+# PRODUCT1.*=On,Off
+# 
+# A project for product collection PRODUCT1123 and LAYOUT1 we would match:
+# *.LAYOUT1=On,On
+# 
+# A project for product collection PRODUCT1123 and LAYOUT1123 we would match:
+# *.*=Off,Off

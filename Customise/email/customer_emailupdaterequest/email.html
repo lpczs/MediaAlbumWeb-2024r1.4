@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$appname} - Confirm change of email address</title>
+<style type="text/css">
+    {literal}
+    .existingTableCell {
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .existingTableHeaderCell {
+        padding-bottom: 6px; 
+        width: 150px;
+    }
+    {/literal}
+</style>
+</head>
+    <body>
+        <table style="border: 1px solid #000000; border-collapse : collapse; margin-left: 1%; width:600px;">
+            <!-- TAOPIX logo-->
+            <tr>
+                <td height="80px">
+                    <img src="{$brandLogo}" id="headerImage"  height="60px"/>
+                </td>
+            </tr>
+            <tr style="background-color: #575757; text-indent: 12px; font-size: 13px; font-weight:bold; color: #FFFFFF; font-family: Lucida Grande;" >
+                <td width="100%" style="padding-top: 5px; padding-bottom: 5px; word-break:break-all;">
+                    Confirm change of email address
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p>Hello {$contactfirstname},</p>
+
+                    {if !empty($changes)}
+                        <p>You have changed the following details in your account for {$displayurl}.</p>
+                        <ul>
+                            {foreach from=$changes item=i key=k}
+                            <li>{$i[0]}</li>
+                            {/foreach}
+                        </ul>
+                        <p>You also requested to change your email: </p>
+                    {else}
+                        <p>You have requested the following change to your email: </p>
+                    {/if}
+
+                    <p>
+                        Old email: {$originalemail}
+                        <br />
+                        New email: {$newemail}
+                    </p>
+
+					{if $displayusername}
+					<p>These changes are for the account with the username '{$username}'.</p>
+					{/if}
+                        
+                    <p>Click the link to confirm you want to change your email address:</p>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td style="word-break:break-all; text-align: center;">
+                    <table cellspacing="0" cellpadding="0" width="100%">
+                        <tr>
+                            <td style="background: green; text-align: center; padding: 15px 0; font-size: 14px; border-radius: 4px;">
+                                <a href="{$reseturl}" style="color: #fff; text-decoration: none; display: block; padding: 0 30px;">Confirm email change</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p>If you didn't request these changes, please contact customer support.</p>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px; display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p>{$emailsignature}</p>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

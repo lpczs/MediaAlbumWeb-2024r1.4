@@ -1,0 +1,56 @@
+<!-- Share -->
+<circuit access="public">
+	<fuseaction name="shareAddToAny">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shareAddToAny()" />
+	</fuseaction>
+
+	<fuseaction name="shareByEmail">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="shareByEmail()" />
+	</fuseaction>
+
+    <fuseaction name="mailTo">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="mailTo()" />
+	</fuseaction>
+
+	<fuseaction name="preview">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST', 'GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="preview()" />
+	</fuseaction>
+
+	<fuseaction name="reorder">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="reorder()" />
+	</fuseaction>
+
+	<fuseaction name="unshare">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="unshare()" />
+	</fuseaction>
+
+	<fuseaction name="login">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="login()" />
+	</fuseaction>
+
+    <fuseaction name="unsharelist">
+		<instantiate object="control" class="Share_control" />
+		<invoke object="control" methodcall="unShareList()" />
+	</fuseaction>
+</circuit>

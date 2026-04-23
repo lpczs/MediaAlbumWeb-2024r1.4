@@ -1,0 +1,23 @@
+doctrine:
+    dbal:
+        url: '%env(string:DATABASE_URL)%'
+        charset: 'utf8'
+        types:
+            datetime: Taopix\ControlCentre\DBAL\Types\TaopixDateTime
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.default
+        auto_mapping: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        controller_resolver:
+            auto_mapping: false
+        metadata_cache_driver:
+            type: pool
+            pool: doctrine.system_cache_pool
+        mappings:
+            Taopix\ControlCentre:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Taopix/ControlCentre/Entity'
+                prefix: 'Taopix\ControlCentre\Entity'
+                type: attribute

@@ -1,0 +1,26 @@
+{$appname} - New Account Confirmation
+Hello {$contactfirstname},
+
+Thank you for registering with {$appname} 'Online'.
+
+---------------------------------------
+Welcome to your new account
+---------------------------------------
+
+{if $additionalaccount == 1}
+You already have an account for this email address so we have generated a username for you.
+{/if}
+
+Your login is: {$loginname}
+You can access your account at any time via the URL {$homeurl}
+
+---------------------------------------
+Existing accounts
+---------------------------------------
+You already have accounts registered using this email address. Below is a reminder of the usernames for those accounts if you need to log in to them again:
+
+{foreach from=$usernames item=i key=prd}
+• {$i.login} (Last log in: {$i.lastlogindate})
+{/foreach}
+
+{$emailsignature}

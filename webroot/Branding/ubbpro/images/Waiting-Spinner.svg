@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Waiting-Spinner</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M9,0 C4.0294373,0 0,4.029437 0,9 C0,13.970563 4.0294373,18 9,18 C13.9705627,18 18,13.970563 18,9 L16,9 C16,12.865993 12.8659932,16 9,16 C5.1340068,16 2,12.865993 2,9 C2,5.134007 5.1340068,2 9,2 L9,0 Z" id="Waiting-Spinner" fill="#FFFFFF" fill-rule="nonzero"></path>
+    </g>
+</svg>

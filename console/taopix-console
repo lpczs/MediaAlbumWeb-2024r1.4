@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+use Taopix\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+
+if (!is_file(dirname(__DIR__) . '/libs/external/vendor/autoload_runtime.php')) {
+    throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+}
+
+require_once dirname(__DIR__) . '/libs/external/vendor/autoload_runtime.php';
+
+$_SERVER['APP_RUNTIME_OPTIONS'] = [
+    'dotenv_path' => '/config/.env',
+    'project_dir' => dirname(__DIR__, 1),
+];
+
+return function (array $context) {
+    $kernel = new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+
+    return new Application($kernel);
+};

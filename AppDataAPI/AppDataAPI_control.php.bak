@@ -1,0 +1,265 @@
+<?php
+
+require_once('../AppDataAPI/AppDataAPI_model.php');
+require_once('../AppDataAPI/AppDataAPI_view.php');
+
+class AppDataAPI_control
+{
+	static function login()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('authenticate');
+		
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::login($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+		
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function query()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::query($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function insert()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::insert($decryptedPOST, 1);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function update()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::update($decryptedPOST, 1);
+			$result['error'] = '';
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function delete()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::delete($decryptedPOST, 1);
+			$result['error'] = '';
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'],$decryptedPOST['ivregenerated']);
+	}
+
+
+	static function batch()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::batch($decryptedPOST);
+			$result['error'] = '';
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function execute()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::execute($decryptedPOST, 1);
+			$result['error'] = '';
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function triggerOrder()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::triggerOrder($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function cancelOrder()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::cancelOrder($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function testSession()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::testSession($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function endSession()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::endSession($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function deleteSession()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::deleteSession($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+
+	static function orderFilesAvailable()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::orderFilesAvailable($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+	static function getProjectOrderData()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::getProjectOrderData($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+
+	static function insertOrder()
+	{
+		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
+
+		if ($decryptedPOST['error'] == '')
+		{
+			$result = AppDataAPI_model::insertOrder($decryptedPOST);
+		}
+		else
+		{
+			$result = Array('error' => $decryptedPOST['error']);
+		}
+
+		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
+	}
+}
+
+?>

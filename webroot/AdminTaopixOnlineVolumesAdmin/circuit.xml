@@ -1,0 +1,49 @@
+<!-- Admin Taopix Online / Volumes Admin -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getgriddata">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+	
+	<fuseaction name="adddisplay">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="volumeAddDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="editdisplay">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="volumeEditDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="addeditvolume">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="addEditVolume()" />
+	</fuseaction>
+	
+	<fuseaction name="activate">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateVolume()" />
+	</fuseaction>
+	
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminTaopixOnlineVolumesAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteVolume()" />
+	</fuseaction>
+	
+</circuit>

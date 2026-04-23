@@ -1,0 +1,15 @@
+Unsubscribed from marketing emails
+
+Hello {$contactfirstname},
+
+This email is to let you know that the following account has been unsubscribed from all marketing emails:
+
+{$login}
+
+If you would like to opt back in to receive marketing emails from us, please log in to My Account and go to Change Preferences.
+
+You can log in to My Account here:
+{$homeurl}
+
+
+{$emailsignature}

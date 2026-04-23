@@ -1,0 +1,60 @@
+<table style="border: 1px solid #000000; border-collapse : collapse; margin-left: 1%; width:600px;">
+    <!-- TAOPIX logo-->
+    <tr>
+        <td height="80px">
+            <img src="../resources/logo.jpg" id="headerImage"  height="34px"/>
+        </td>
+    </tr>
+    <tr style="background-color: #2E3C47; text-indent: 12px; font-size: 13px; font-weight:bold; color: #FFFFFF; font-family: Lucida Grande;" >
+        <td width="100%" style="padding-top: 5px; padding-bottom: 5px; word-break:break-all;">
+            [新訂單] Ubabybaby訂單確認 編號 '{$ordernumber}' 
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:break-all;">
+            親愛的{$billingcontactfirstname},
+            <br />
+            <br />
+            感謝您惠顧Ubabybaby的產品﹗付款確定後成品約將七至十個工作天製作完成; 如果該訂單包括書套或禮盒,生產時間約延長5個工作日。
+            <br />
+            以下是您所訂購產品的訂單詳細資料，如發覺有任何錯誤，請盡快致電 (852) 3655-6123與我們聯絡修正。
+            <br />
+            <br />
+
+            
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:break-all;">
+            {$emailContent}
+
+        </td>
+    </tr>
+	<tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 10px;  display: block; color: #575757; font-family: Lucida Grande;">
+	 <td>
+	    <table>
+		   <tr><th style="text-align:left;">客人联络资料</th></tr>
+		   <tr><td>联络电话：{$billingcustomertelephonenumber}</td></tr>
+		   <tr><td>電郵地址：<a href="mailto:{$billingcustomeremailaddress}">{$billingcustomeremailaddress}</a></td></tr>
+
+		</table>
+	      
+	 </td>
+	 
+	</tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">    
+        <td style="word-break:break-all;">
+            您可隨時透過  <a href="{$homeurl}">{$homeurl}</a> 登入『您的賬戶』,查看訂單狀態或者再次訂購。
+        </td>
+    </tr>
+	<tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+	   <td>再次感謝您惠顧Ubabybaby的產品!</td>
+	</tr>
+	
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 10px;  display: inline-block; color: #575757; font-family: Lucida Grande;text-align:right;width:620px;">    
+        <td style="width: 100%; text-align:right;display:inline-block;">
+            © 2017 Ubabybaby, Inc. All rights reserved. 
+        </td>
+    </tr>    
+
+</table>

@@ -1,0 +1,3 @@
+controllers:
+  resource: ../../src/Taopix/ControlCentre/Controller/
+  type: attribute

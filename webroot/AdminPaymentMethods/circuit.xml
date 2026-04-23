@@ -1,0 +1,37 @@
+<!-- Admin Payment Methods -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminPaymentMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminPaymentMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="paymentMethodActivate">
+		<instantiate object="control" class="AdminPaymentMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="paymentMethodActivate()" />
+	</fuseaction>
+	
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminPaymentMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="paymentMethodEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminPaymentMethods_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="paymentMethodEdit()" />
+	</fuseaction>
+
+</circuit>

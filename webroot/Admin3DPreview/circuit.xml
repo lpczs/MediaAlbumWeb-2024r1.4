@@ -1,0 +1,64 @@
+<!-- Admin 3D Preview -->
+<circuit access="public">
+
+	<fuseaction name="modelListGrid">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="modelListGrid()" />
+	</fuseaction>
+
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="addDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="deleteModel">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteModel()" />
+	</fuseaction>
+
+	<fuseaction name="link3DPreviewModelToProducts">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="link3DPreviewModelToProducts()" />
+	</fuseaction>
+
+	<fuseaction name="unLink3DPreviewModelToProducts">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="unLink3DPreviewModelToProducts()" />
+	</fuseaction>
+
+	<fuseaction name="upload3DPreviewModel">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="upload3DPreviewModel()" />
+	</fuseaction>
+
+	<fuseaction name="setModelActivateStatus">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="setModelActivateStatus()" />
+	</fuseaction>
+
+	<fuseaction name="get3DModelList">
+		<instantiate object="control" class="Admin3DPreview_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="get3DModelList()" />
+	</fuseaction>
+
+</circuit>

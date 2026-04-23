@@ -1,0 +1,1 @@
+{if $sidebarleft_default != ''}{include file="$sidebarleft_default"}{/if}

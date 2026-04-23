@@ -1,0 +1,27 @@
+<!-- AJAX calls -->
+<circuit access="public">
+	<fuseaction name="callback">
+		<instantiate object="control" class="AjaxAPI_control" />
+		<invoke object="control" methodcall="callback()" />
+	</fuseaction>
+	
+	<fuseaction name="getAddressForm">
+		<instantiate object="control" class="AjaxAPI_control" />
+		<invoke object="control" methodcall="getAddressForm()" />
+	</fuseaction>
+	
+	<fuseaction name="getRegionList">
+		<instantiate object="control" class="AjaxAPI_control" />
+		<invoke object="control" methodcall="getRegionList()" />
+	</fuseaction>
+	
+	<fuseaction name="verifyAddress">
+		<instantiate object="control" class="AjaxAPI_control" />
+		<invoke object="control" methodcall="verifyAddress()" />
+	</fuseaction>
+
+	<fuseaction name="getRegionList">
+		<instantiate object="control" class="AjaxAPI_control" />
+		<invoke object="control" methodcall="getRegionList()" />
+	</fuseaction>
+</circuit>

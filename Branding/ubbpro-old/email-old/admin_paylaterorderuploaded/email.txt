@@ -1,0 +1,13 @@
+{$appname} - Pay Later Upload Confirmation - Ref: {$ordernumber}
+Note To Production.
+
+Pay Later reference number '{$ordernumber}' has been uploaded by the customer but still requires payment.
+
+Product: {$productname}
+------------------------------------------------------------------------------
+
+{#str_LabelShippingAddress#}:
+{$shippingaddress}
+
+{#str_LabelBillingAddress#}:
+{$billingaddress}

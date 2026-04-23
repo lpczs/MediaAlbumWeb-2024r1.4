@@ -1,0 +1,19 @@
+<!-- Production Application API -->
+<circuit access="public">
+
+	<fuseaction name="callback">
+		<instantiate object="control" class="AppProductionAPI_control" />
+		<invoke object="control" methodcall="callback()" />
+	</fuseaction>
+
+	<fuseaction name="jdfcallback">
+		<instantiate object="control" class="AppProductionAPI_control" />
+		<invoke object="control" methodcall="epwHPJDFCallback()" />
+	</fuseaction>
+	
+	<fuseaction name="hpprintoscallback">
+		<instantiate object="control" class="AppProductionAPI_control" />
+		<invoke object="control" methodcall="epwHPPrintOSCallback()" />
+	</fuseaction>
+	
+</circuit>

@@ -1,0 +1,27 @@
+<?php
+
+namespace Taopix\ControlCentre\Enum\Price;
+
+/**
+ * define('TPX_PRICINGMODEL_NOPRICING', 0);
+define('TPX_PRICINGMODEL_PERORDER', 1);
+define('TPX_PRICINGMODEL_PERLINE', 2);
+define('TPX_PRICINGMODEL_PERQTY', 3);
+define('TPX_PRICINGMODEL_PERPAGEQTY', 4);
+define('TPX_PRICINGMODEL_PERSIDEQTY', 5);
+define('TPX_PRICINGMODEL_PERCHARACTER',	6);
+define('TPX_PRICINGMODEL_PERPRODCMPQTY', 7);
+define('TPX_PRICINGMODEL_PERSIDEPERPRODPERCMPQTY', 8);
+ */
+enum Model: int
+{
+	case NO_PRICE = 0;
+	case PER_ORDER = 1;
+	case PER_LINE = 2;
+	case PER_QTY = 3;
+	case PER_PAGE_QTY = 4;
+	case PER_SIDE_QTY = 5;
+	case PER_CHARACTER = 6;
+	case PER_PRODUCT_COMPONENT_QTY = 7;
+	case PER_SIDE_PER_PRODUCT_COMPONENT_QTY = 8;
+}

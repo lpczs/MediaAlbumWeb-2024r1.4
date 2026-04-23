@@ -1,0 +1,12 @@
+{$appname} - New Account Confirmation
+Hello {$contactfirstname},
+
+Thank you for registering with TAOPIX 'Online'.
+
+Your login is: {$loginname}
+
+You can access your account at any time via the URL 
+{$homeurl}
+
+
+{$emailsignature}

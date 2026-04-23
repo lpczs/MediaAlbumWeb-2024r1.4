@@ -1,0 +1,35 @@
+:root {
+  all: initial;
+  font-family: Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 14px;
+  font-weight: 400;
+  user-select: none;
+}
+
+/* Any changes to the control centre theme need to be prevented from applying to .tpx-theme-main (i.e. in the theme editor) */
+.cc-theme-main:not(.tpx-theme-main) {
+  --tds-theme-text-colour: #a4a4a4;
+  --tds-theme-background-colour: #f9f9f9;
+  --tds-theme-corner-size: 5px;
+}
+.cc-theme-main .cc-theme-dialog {
+  --tds-theme-background-colour: #fff;
+}
+.cc-theme-main .tds-theme-prominent:not(.tpx-theme-main .tds-theme-prominent) {
+  --tds-theme-background-colour: #0079db11;
+}
+.cc-theme-main .tds-button-special:not(.tpx-theme-main .tds-button-special) {
+  --tds-button-background-colour-pressed: #0079db11;
+  --tds-button-accent-colour-hover: transparent;
+  --tds-button-accent-colour-default: transparent;
+  --tds-button-border-size: 0;
+}
+.cc-theme-main .tds-button-standard:not(.tpx-theme-main .tds-button-standard) {
+  --tds-button-background-colour-pressed: #0000001c;
+  --tds-button-text-colour-default: #555;
+}
+
+.cc-theme-main .tds-theme-container:not(.tpx-theme-main .tds-theme-container) {
+  --tds-theme-background-colour: #f2f2f2;
+}

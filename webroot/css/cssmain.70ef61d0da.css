@@ -1,0 +1,72 @@
+null {}
+body {background:#ffffff; margin:4px; padding:0px}
+
+/* text styles */
+.textdivider {font-family:"lucida grande","Arial"; font-size:5; font-weight:normal}
+.textsmall {font-family:"lucida grande","Arial"; font-size:9; font-weight:normal}
+.text {font-family:"lucida grande","Arial"; font-size:11; font-weight:normal}
+.text1 {font-family:"lucida grande","Arial"; font-size:11; font-weight:bold}
+.text2 {font-family:"lucida grande","Arial"; font-size:13; font-weight:bold}
+.text3 {font-family:"lucida grande","Arial"; font-size:15; font-weight:bold}
+
+.orderstage {font-family:"lucida grande","Arial"; font-size:16; font-weight:bold; text-decoration:underline; color:#428A2F}
+.ordersubstage {font-family:"lucida grande","Arial"; font-size:12; font-weight:bold; color:#101099}
+
+.paperTitle {font-family:"lucida grande","Arial"; font-size:12; font-weight:bold}
+.coverTitle {font-family:"lucida grande","Arial"; font-size:12; font-weight:bold}
+
+/* header styles */
+#headerDivider {display:-moz-inline-block; display:inline-block; background-image:url(../images/header_divider.gif); background-repeat:repeat-x; height:10px; width:100%; z-index:0}
+
+/* button styles */
+input.button1 {font-family:"lucida grande","Arial"; font-size:11; min-width:55}
+
+/* list table border styles */
+td.tableHeadBorderLeft {border-top-width:1px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid}
+td.tableHeadBorderMiddle {border-top-width:1px; border-bottom-width:1px; border-left-width:0px; border-right-width:1px; border-style:solid}
+td.tableColBorderLeft {border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid}
+td.tableColBorderMiddle {border-top-width:0px; border-bottom-width:1px; border-left-width:0px; border-right-width:1px; border-style:solid}
+td.tableColAltBorderLeft {border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid; background-color:#E0E0E0}
+td.tableColAltBorderMiddle {border-top-width:0px; border-bottom-width:1px; border-left-width:0px; border-right-width:1px; border-style:solid; background-color:#E0E0E0}
+
+/* order form styles */
+.orderformbackground {background-color:#ffffff}
+.orderformbuttonbackground {background-color:#ffffff}
+.orderformdivider {background-color:#ffffff}
+.orderformheader {background-color:#e0e0e0}
+.orderformfooter {background-color:#ffffff}
+.itemdescriptionbackground {background-color:#eeeeee}
+.itempricenotavailable {color:red; font-weight:bold}
+.shippingaddressbackground {background-color:#eeeeee}
+.shippingmethodsbackground {background-color:#eeeeee}
+.shippingmethodsfooter {background-color:#ffffff}
+.itemtaxrowbackground {background-color:#eeeeee}
+.itemtotalbackground {background-color:#ccff99}
+.shippingbackground {background-color:#ffffff}
+.shippingtaxrowbackground {background-color:#ffffff}
+.shippingtotalrowbackground {background-color:#cc99ff}
+.updateqtybackground {background-color:#99ccff}
+.ordersubtotalbackground {background-color:#99ffcc}
+.ordertaxrowbackground {background-color:#ffffff}
+.ordertotaldiscountrowbackground {background-color:#ffffff}
+.ordertotalbackground {background-color:#99ccff}
+.paymentmethodsbackground {background-color:#eeeeee}
+.shippingmethodsfooter {background-color:#ffffff}
+.metadatabackground {background-color:#eeeeee}
+
+.footer {font-family:"lucida grande","Arial"; font-size:12; font-weight:bold; color:white; background-color:#BE461A; width:100%}
+/* new login stuff */
+
+.popNegative {
+	border: 1px solid #808080;
+	padding: 0 0 0 0;
+	width: 320px;
+	}
+	
+.popNegative h3 {
+	font-size: 1em;
+	font-weight: bold;
+	margin: 1em 0;
+	padding-left: 40px;
+	text-transform: none;
+	}

@@ -1,0 +1,16 @@
+<!-- Admin Vouchers Single -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminVouchersSingle_control" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+    <fuseaction name="deleteExpired">
+		<instantiate object="control" class="AdminVouchersSingle_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="voucherDeleteExpired()" />
+	</fuseaction>
+
+</circuit>

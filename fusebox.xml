@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fusebox>
+	<circuits>
+		<circuit alias="Admin" path="webroot/Admin/" />
+		<circuit alias="AdminHome" path="webroot/AdminHome/" />
+		<circuit alias="AdminAbout" path="webroot/AdminAbout/" />
+		<circuit alias="AdminConnectors" path="webroot/AdminConnectors/" />
+		<circuit alias="AdminAutoUpdate" path="webroot/AdminAutoUpdate/" />
+		<circuit alias="AdminBranding" path="webroot/AdminBranding/" />
+		<circuit alias="AdminComponentCategories" path="webroot/AdminComponentCategories/" />
+		<circuit alias="AdminComponents" path="webroot/AdminComponents/" />
+
+		<circuit alias="AdminComponentsPricing" path="webroot/AdminComponentsPricing/" />
+		<circuit alias="AdminConstants" path="webroot/AdminConstants/" />
+		<circuit alias="AdminCurrencies" path="webroot/AdminCurrencies/" />
+		<circuit alias="AdminCustomers" path="webroot/AdminCustomers/" />
+		<circuit alias="AdminExport" path="webroot/AdminExport/" />
+		<circuit alias="AdminExportEvent" path="webroot/AdminExportEvent/" />
+		<circuit alias="AdminExportManual" path="webroot/AdminExportManual/" />
+		<circuit alias="AdminMetadataKeywords" path="webroot/AdminMetadataKeywords/" />
+		<circuit alias="AdminMetadataKeywordsGroups" path="webroot/AdminMetadataKeywordsGroups/" />
+		<circuit alias="AdminPaymentMethods" path="webroot/AdminPaymentMethods/" />
+		<circuit alias="AdminProductPricing" path="webroot/AdminProductPricing/" />
+		<circuit alias="Admin3DPreview" path="webroot/Admin3DPreview/" />
+		<circuit alias="AdminProducts" path="webroot/AdminProducts/" />
+		<circuit alias="AdminProductGroups" path="webroot/AdminProductGroups/" />
+		<circuit alias="AdminScheduledEvents" path="webroot/AdminScheduledEvents/" />
+		<circuit alias="AdminScheduledTasks" path="webroot/AdminScheduledTasks/" />
+		<circuit alias="AdminShipping" path="webroot/AdminShipping/" />
+		<circuit alias="AdminShippingMethods" path="webroot/AdminShippingMethods/" />
+		<circuit alias="AdminShippingRates" path="webroot/AdminShippingRates/" />
+		<circuit alias="AdminShippingZones" path="webroot/AdminShippingZones/" />
+		<circuit alias="AdminSites" path="webroot/AdminSites/" />
+		<circuit alias="AdminSitesCompanies" path="webroot/AdminSitesCompanies/" />
+		<circuit alias="AdminSitesOrderRouting" path="webroot/AdminSitesOrderRouting/" />
+		<circuit alias="AdminSitesSiteGroups" path="webroot/AdminSitesSiteGroups/" />
+		<circuit alias="AdminSitesSitesAdmin" path="webroot/AdminSitesSitesAdmin/" />
+		<circuit alias="AdminTaopixOnlineFontLists" path="webroot/AdminTaopixOnlineFontLists/" />
+		<circuit alias="AdminTaopixOnlineImageServersAdmin" path="webroot/AdminTaopixOnlineImageServersAdmin/" />
+		<circuit alias="AdminTaopixOnlineVolumesAdmin" path="webroot/AdminTaopixOnlineVolumesAdmin/" />
+		<circuit alias="AdminTaopixOnlineProductURLAdmin" path="webroot/AdminTaopixOnlineProductURLAdmin/" />
+		<circuit alias="AdminDataRetentionAdmin" path="webroot/AdminDataRetentionAdmin/" />
+		<circuit alias="AdminTax" path="webroot/AdminTax/" />
+		<circuit alias="AdminTaxRates" path="webroot/AdminTaxRates/" />
+		<circuit alias="AdminTaxZones" path="webroot/AdminTaxZones/" />
+		<circuit alias="AdminUsers" path="webroot/AdminUsers/" />
+		<circuit alias="AdminGiftCards" path="webroot/AdminGiftCards/" />
+		<circuit alias="AdminVouchers" path="webroot/AdminVouchers/" />
+		<circuit alias="AdminVouchersPromotion" path="webroot/AdminVouchersPromotion/" />
+		<circuit alias="AdminVouchersSingle" path="webroot/AdminVouchersSingle/" />
+		<circuit alias="AjaxAPI" path="webroot/AjaxAPI/" />
+		<circuit alias="AppAPI" path="webroot/AppAPI/" />
+		<circuit alias="AppDataAPI" path="webroot/AppDataAPI/" />
+		<circuit alias="AppProductionAPI" path="webroot/AppProductionAPI/" />
+		<circuit alias="CollectFromStore" path="webroot/CollectFromStore/" />
+		<circuit alias="Customer" path="webroot/Customer/" />
+		<circuit alias="Order" path="webroot/Order/" />
+		<circuit alias="Share" path="webroot/Share/" />
+		<circuit alias="Welcome" path="webroot/Welcome/" />
+		<circuit alias="OnlineAPI" path="webroot/OnlineAPI/" />
+		<circuit alias="DataRedactionAPI" path="webroot/DataRedactionAPI/" />
+		<circuit alias="AdminProduction" path="webroot/AdminProduction/" />
+		<circuit alias="AdminExperienceEditing" path="webroot/AdminExperienceEditing/" />
+		<circuit alias="AdminOAuthProvider" path="webroot/AdminOAuthProvider/" />
+	</circuits>
+
+	<classes>
+		<class alias="Admin_control" classpath="Admin/Admin_control.php" />
+		<class alias="AdminHome_control" classpath="AdminHome/AdminHome_control.php" />
+		<class alias="AdminAbout_control" classpath="AdminAbout/AdminAbout_control.php" />
+		<class alias="AdminConnectors_control" classpath="AdminConnectors/AdminConnectors_control.php" />
+		<class alias="AdminAutoUpdate_control" classpath="AdminAutoUpdate/AdminAutoUpdate_control.php" />
+		<class alias="AdminBranding_control" classpath="AdminBranding/AdminBranding_control.php" />
+		<class alias="AdminComponentCategories_control" classpath="AdminComponentCategories/AdminComponentCategories_control.php" />
+		<class alias="AdminComponents_control" classpath="AdminComponents/AdminComponents_control.php" />
+		<class alias="AdminComponentsPricing_control" classpath="AdminComponentsPricing/AdminComponentsPricing_control.php" />
+		<class alias="AdminConstants_control" classpath="AdminConstants/AdminConstants_control.php" />
+		<class alias="AdminCurrencies_control" classpath="AdminCurrencies/AdminCurrencies_control.php" />
+		<class alias="AdminCustomers_control" classpath="AdminCustomers/AdminCustomers_control.php" />
+		<class alias="AdminExport_control" classpath="AdminExport/AdminExport_control.php" />
+		<class alias="AdminExportEvent_control" classpath="AdminExportEvent/AdminExportEvent_control.php" />
+		<class alias="AdminExportManual_control" classpath="AdminExportManual/AdminExportManual_control.php" />
+		<class alias="AdminMetadataKeywords_control" classpath="AdminMetadataKeywords/AdminMetadataKeywords_control.php" />
+		<class alias="AdminMetadataKeywordsGroups_control" classpath="AdminMetadataKeywordsGroups/AdminMetadataKeywordsGroups_control.php" />
+		<class alias="AdminPaymentMethods_control" classpath="AdminPaymentMethods/AdminPaymentMethods_control.php" />
+		<class alias="AdminProductPricing_control" classpath="AdminProductPricing/AdminProductPricing_control.php" />
+		<class alias="Admin3DPreview_control" classpath="Admin3DPreview/Admin3DPreview_control.php" />
+		<class alias="AdminProducts_control" classpath="AdminProducts/AdminProducts_control.php" />
+		<class alias="AdminProductGroups_control" classpath="AdminProductGroups/AdminProductGroups_control.php" />
+		<class alias="AdminScheduledEvents_control" classpath="AdminScheduledEvents/AdminScheduledEvents_control.php" />
+		<class alias="AdminScheduledTasks_control" classpath="AdminScheduledTasks/AdminScheduledTasks_control.php" />
+		<class alias="AdminShipping_control" classpath="AdminShipping/AdminShipping_control.php" />
+		<class alias="AdminShippingMethods_control" classpath="AdminShippingMethods/AdminShippingMethods_control.php" />
+		<class alias="AdminShippingRates_control" classpath="AdminShippingRates/AdminShippingRates_control.php" />
+		<class alias="AdminShippingZones_control" classpath="AdminShippingZones/AdminShippingZones_control.php" />
+		<class alias="AdminSites_control" classpath="AdminSites/AdminSites_control.php" />
+		<class alias="AdminSitesCompanies_control" classpath="AdminSitesCompanies/AdminSitesCompanies_control.php" />
+		<class alias="AdminSitesOrderRouting_control" classpath="AdminSitesOrderRouting/AdminSitesOrderRouting_control.php" />
+		<class alias="AdminSitesSiteGroups_control"	classpath="AdminSitesSiteGroups/AdminSitesSiteGroups_control.php" />
+		<class alias="AdminSitesSitesAdmin_control"	classpath="AdminSitesSitesAdmin/AdminSitesSitesAdmin_control.php" />
+		<class alias="AdminTaopixOnlineFontLists_control" classpath="AdminTaopixOnlineFontLists/AdminTaopixOnlineFontLists_control.php" />
+		<class alias="AdminTaopixOnlineImageServersAdmin_control" classpath="AdminTaopixOnlineImageServersAdmin/AdminTaopixOnlineImageServersAdmin_control.php" />
+		<class alias="AdminTaopixOnlineVolumesAdmin_control" classpath="AdminTaopixOnlineVolumesAdmin/AdminTaopixOnlineVolumesAdmin_control.php" />
+		<class alias="AdminTaopixOnlineProductURLAdmin_control" classpath="AdminTaopixOnlineProductURLAdmin/AdminTaopixOnlineProductURLAdmin_control.php" />
+		<class alias="AdminDataRetentionAdmin_control" classpath="AdminDataRetentionAdmin/AdminDataRetentionAdmin_control.php" />
+		<class alias="AdminTax_control" classpath="AdminTax/AdminTax_control.php" />
+		<class alias="AdminTaxRates_control" classpath="AdminTaxRates/AdminTaxRates_control.php" />
+		<class alias="AdminTaxZones_control" classpath="AdminTaxZones/AdminTaxZones_control.php" />
+		<class alias="AdminUsers_control" classpath="AdminUsers/AdminUsers_control.php" />
+		<class alias="AdminGiftCards_control" classpath="AdminGiftCards/AdminGiftCards_control.php" />
+		<class alias="AdminVouchers_control" classpath="AdminVouchers/AdminVouchers_control.php" />
+		<class alias="AdminVouchersPromotion_control" classpath="AdminVouchersPromotion/AdminVouchersPromotion_control.php" />
+		<class alias="AdminVouchersSingle_control" classpath="AdminVouchersSingle/AdminVouchersSingle_control.php" />
+		<class alias="AjaxAPI_control" classpath="AjaxAPI/AjaxAPI_control.php" />
+		<class alias="AppAPI_control" classpath="AppAPI/AppAPI_control.php" />
+		<class alias="AppDataAPI_control" classpath="AppDataAPI/AppDataAPI_control.php" />
+		<class alias="AppProductionAPI_control" classpath="AppProductionAPI/AppProductionAPI_control.php" />
+		<class alias="CollectFromStore_control" classpath="CollectFromStore/CollectFromStore_control.php" />
+		<class alias="Customer_control" classpath="Customer/Customer_control.php" />
+		<class alias="Order_control" classpath="Order/Order_control.php" />
+		<class alias="Share_control" classpath="Share/Share_control.php" />
+		<class alias="Welcome_control" classpath="Welcome/Welcome_control.php" />
+		<class alias="OnlineAPI_control" classpath="OnlineAPI/OnlineAPI_control.php" />
+		<class alias="DataRedactionAPI_control" classpath="DataRedactionAPI/DataRedactionAPI_control.php" />
+		<class alias="PaymentIntegrationObj" classpath="Order/PaymentIntegration/PaymentIntegration.php" />
+		<class alias="AdminProduction_control" classpath="AdminProduction/AdminProduction_control.php" />
+		<class alias="AdminExperienceEditing_control" classpath="AdminExperienceEditing/AdminExperienceEditing_control.php" />
+		<class alias="AdminOAuthProvider_control" classpath="AdminOAuthProvider/AdminOAuthProvider_control.php" />
+	</classes>
+
+	<lexicons>
+	</lexicons>
+
+	<parameters>
+		<parameter name="fuseactionVariable" value="fsaction" />
+		<parameter name="defaultFuseaction" value="Welcome.initialize" />
+		<parameter name="precedenceFormOrUrl" value="form" />
+		<parameter name="mode" value="production" />
+		<parameter name="password" value="" />
+		<parameter name="parseWithComments" value="true" />
+		<parameter name="conditionalParse" value="true" />
+		<parameter name="allowLexicon" value="true" />
+		<parameter name="ignoreBadGrammar" value="true" />
+		<parameter name="useAssertions" value="true" />
+		<parameter name="scriptLanguage" value="php4" />
+		<parameter name="scriptFileDelimiter" value="php" />
+		<parameter name="maskedFileDelimiters"
+			value="htm,cfm,cfml,php,php4,asp,aspx,class,inc,js" />
+		<parameter name="characterEncoding" value="utf-8" />
+		<parameter name="debug" value="true" />
+	</parameters>
+
+	<globalfuseactions>
+		<preprocess>
+		</preprocess>
+		<postprocess>
+		</postprocess>
+	</globalfuseactions>
+
+	<plugins>
+		<phase name="preProcess">
+		</phase>
+		<phase name="preFuseaction">
+		</phase>
+		<phase name="postFuseaction">
+		</phase>
+		<phase name="fuseactionException">
+		</phase>
+		<phase name="postProcess">
+		</phase>
+		<phase name="processError">
+		</phase>
+
+	</plugins>
+
+</fusebox>

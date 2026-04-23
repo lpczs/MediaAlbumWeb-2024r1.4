@@ -1,0 +1,93 @@
+/* Full-screen shim for responsive dialog. */
+.tpx-dialog-container
+{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    -webkit-align-items: center;
+            align-items: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    position: fixed;
+    display: none;
+    background-color: rgba(148,148,148,0.6);
+    z-index: 100;
+}
+
+/* Class used to show a responsive dialog. */
+.tpx-dialog-container.tpx-dialog-show
+{
+    display: -webkit-flex;
+    display: flex;
+}
+/* The actual dialog box that appears in the center of the screen. */
+.tpx-dialog-box
+{
+    background-color: white;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    width: auto;
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 40px);
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    overflow: hidden;
+}
+
+/* The expandable/scrollable area for the content of the responsive dialog.  */
+.tpx-dialog-box-content 
+{
+    padding: 0 30px 0 30px;
+    overflow: auto;
+}
+
+.tpx-dialog-box-header
+{
+    padding: 30px 30px 0 30px;
+    font-size: 20px;
+    color: #888;
+    line-height: 1.4;
+}
+
+/* The area that can contain buttons etc at the foot of the dialog */
+.tpx-dialog-box-footer 
+{
+    display: flex;
+    justify-content: center;
+    padding: 0 30px 30px 30px;
+}
+
+/* Position a button on the left side of the footer */
+.tpx-dialog-box__footer-item--left 
+{
+    margin-right: auto;
+}
+
+/* Position a button on the right side of the footer */
+.tpx-dialog-box__footer-item--right 
+{
+    margin-left: auto;
+}
+
+/* Footer text link (e.g. for Cancel buttons etc */
+.tpx-dialog-box__footer-text-link
+{
+    padding: 10px !important;
+    font-size: 14px !important;
+    color: #888 !important;
+    text-decoration: underline !important;
+    display: block;
+    margin-bottom: -10px;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+.tpx-dialog-box__footer-text-link:hover 
+{
+    cursor: pointer;
+    color: black;
+}

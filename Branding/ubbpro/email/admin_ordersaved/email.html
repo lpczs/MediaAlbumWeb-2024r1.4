@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$appname} - Order '{$ordernumber}' Save Confirmation</title>
+</head>
+<body>
+<img src="{$brandLogo}">
+<p>
+<p><b>Note To Production.</b>
+<p>Order number '{$ordernumber}' has been saved to disk by the
+customer.
+<p>{$qty} x {$productname}<br>
+{if $papercode!=''}{#str_LabelPaper#}: {$papername}<br>
+{/if} {if $covercode!=''}{#str_LabelCover#}: {$covername}<br>
+{/if} {#str_LabelShippingMethod#}: {$shippingmethod}<br>
+<br>
+{if $vouchercode!=''}{#str_LabelVoucherCode#}: {$vouchercode} -
+{$vouchername}<br>
+{/if} {#str_LabelOrderTotal#}: {$formattedordertotal}<br>
+{if $ordergiftcardtotal > 0}
+{#str_LabelGiftCard#}: -{$formattedordergiftcardtotal}<br />
+{#str_LabelAmountToPay#}: {$formattedordertotaltopay}<br />
+{/if}
+{if $paymentmethodcode!='NONE'}{#str_LabelPaymentMethod#}:
+{$paymentmethodname}<br>
+{/if} <br>
+------------------------------------------------------------------------------<br>
+<br>
+<b>{#str_LabelShippingAddress#}:</b><br>
+{$shippingaddress}<br>
+<br>
+<b>{#str_LabelBillingAddress#}:</b><br>
+{$billingaddress}<br>
+</body>
+</html>
+
+

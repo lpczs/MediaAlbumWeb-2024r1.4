@@ -1,0 +1,79 @@
+<!-- Application API -->
+<circuit access="public">
+
+	<fuseaction name="Query">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="query()" />
+	</fuseaction>
+
+	<fuseaction name="Insert">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="insert()" />
+	</fuseaction>
+
+	<fuseaction name="Update">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="update()" />
+	</fuseaction>
+
+	<fuseaction name="Delete">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="delete()" />
+	</fuseaction>
+
+	<fuseaction name="Batch">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="batch()" />
+	</fuseaction>
+
+	<fuseaction name="Execute">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="execute()" />
+	</fuseaction>
+
+	<fuseaction name="Authenticate">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="login()" />
+	</fuseaction>
+
+	<fuseaction name="TriggerOrder">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="triggerOrder()" />
+	</fuseaction>
+
+	<fuseaction name="CancelOrder">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="cancelOrder()" />
+	</fuseaction>
+
+	<fuseaction name="TestSession">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="testSession()" />
+	</fuseaction>
+
+	<fuseaction name="EndSession">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="endSession()" />
+	</fuseaction>
+
+	<fuseaction name="DeleteSession">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="deleteSession()" />
+	</fuseaction>
+
+	<fuseaction name="OrderFilesAvailable">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="orderFilesAvailable()" />
+	</fuseaction>
+
+	<fuseaction name="getProjectOrderData">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="getProjectOrderData()" />
+	</fuseaction>
+
+	<fuseaction name="insertOrder">
+		<instantiate object="control" class="AppDataAPI_control" />
+		<invoke object="control" methodcall="insertOrder()" />
+	</fuseaction>
+
+</circuit>

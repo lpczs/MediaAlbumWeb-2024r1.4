@@ -1,0 +1,16 @@
+#
+SET FOREIGN_KEY_CHECKS = 0;
+
+#
+# DDL START
+#
+
+UPDATE `SYSTEMCONFIG` SET `webversiondate` = '2017-08-24';
+UPDATE `SYSTEMCONFIG` SET `webversionnumber` = '2017.2.1';
+UPDATE `SYSTEMCONFIG` SET `webversionstring`= '2017r2.1';
+
+#
+# DDL END
+#
+
+SET FOREIGN_KEY_CHECKS = 1;

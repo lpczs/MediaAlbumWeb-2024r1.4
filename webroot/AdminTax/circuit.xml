@@ -1,0 +1,14 @@
+<!-- Admin Tax -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminTax_control" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="initialize2">
+		<instantiate object="control" class="AdminTax_control" />
+		<invoke object="control" methodcall="initialize2()" />
+	</fuseaction>
+
+</circuit>

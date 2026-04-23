@@ -1,0 +1,4 @@
+table_storage:
+    table_name: 'taopix_migrations'
+check_database_platform: false
+transactional: false

@@ -1,0 +1,29 @@
+{$appname} - Order '{$ordernumber}' Shipping Confirmation
+Hello {$billingcontactfirstname},
+
+We're pleased to inform you that the following items from your order are now on their way.
+
+{$qty} x {$productname}
+{strip}{if ($papercode!='')&&(($papercode!=$defaultpapercode)||($papercount>1))}{#str_LabelPaper#}: {$papername}{/if}{/strip}
+{strip}{if $covercode!=''}{#str_LabelCover#}: {$covername}{/if}{/strip}
+{#str_LabelShippingMethod#}: {$shippingmethod}
+
+{#str_LabelOrderTotal#}: {$formattedordertotal}
+{if $ordergiftcardtotal > 0}
+{#str_LabelGiftCard#}: -{$formattedordergiftcardtotal}
+{#str_LabelAmountToPay#}: {$formattedordertotaltopay}
+{/if}
+{strip}{if $paymentmethodcode!='NONE'}{#str_LabelPaymentMethod#}: {$paymentmethodname}{/if}{/strip}
+
+
+{#str_LabelShippingAddress#}:
+{$shippingaddress}
+
+
+If you have not already done so, you should now complete the ordering process within the client application.
+
+You can access your account at any time via the URL
+{$homeurl}
+
+
+{$emailsignature}

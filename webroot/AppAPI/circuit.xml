@@ -1,0 +1,9 @@
+<!-- Application API -->
+<circuit access="public">
+
+	<fuseaction name="callback">
+		<instantiate object="control" class="AppAPI_control" />
+		<invoke object="control" methodcall="callback()" />
+	</fuseaction>
+	
+</circuit>

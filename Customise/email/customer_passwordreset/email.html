@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$appname} - Password Reset</title>
+</head>
+    <body>
+        <table style="border: 1px solid #000000; border-collapse : collapse; margin-left: 1%; width:600px;">
+            <!-- TAOPIX logo-->
+            <tr>
+                <td height="80px">
+                    <img src="{$brandLogo}" id="headerImage"  height="60px"/>
+                </td>
+            </tr>
+            <tr style="background-color: #575757; text-indent: 12px; font-size: 13px; font-weight:bold; color: #FFFFFF; font-family: Lucida Grande;" >
+                <td width="100%" style="padding-top: 5px; padding-bottom: 5px; word-break:break-all;">
+                    Password Reset Requested
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p><br/>Hello {$contactfirstname},</p>
+                    <p>We have received a request to reset the password for the following account:
+                        <br/><strong>{$loginname}</strong></p>
+
+                    <p>If you made this request, click on the link to continue:</p>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td style="word-break:break-all; text-align: center;">
+                    <table cellspacing="0" cellpadding="0" width="100%
+                                                                  ">
+                        <tr>
+                            <td style="background: green; text-align: center; padding: 15px 0; font-size: 14px; border-radius: 4px;">
+                                <a href="{$reseturl}" style="color: #fff; text-decoration: none; display: block; padding: 0 30px;">Reset my password</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px; display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p>If you didn't make this request, just ignore this email and no changes will be made to your account.<br/><br/></p>
+                    <p>{$emailsignature}</p>
+
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

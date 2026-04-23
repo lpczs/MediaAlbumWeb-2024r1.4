@@ -1,0 +1,7 @@
+{$appname} - Account Locked
+Hello {$contactfirstname},
+
+Your {$appname} account has been locked for {$lockduration} {if $lockduration == 1}minute{else}minutes{/if}, due to a number of unsuccessful login attempts.
+
+
+{$emailsignature}

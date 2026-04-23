@@ -1,0 +1,24 @@
+<!-- CollectFromStore -->
+<circuit access="public">
+	
+	<fuseaction name="initialize">
+		<instantiate object="control" class="CollectFromStore_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="listOrders">
+		<instantiate object="control" class="CollectFromStore_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="listOrders()" />
+	</fuseaction>
+	
+	<fuseaction name="callback">
+		<instantiate object="control" class="CollectFromStore_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="callback()" />
+	</fuseaction>
+	
+</circuit>

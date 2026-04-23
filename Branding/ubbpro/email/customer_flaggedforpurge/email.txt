@@ -1,0 +1,30 @@
+Last chance to order.
+
+Hello {$contactfirstname},
+
+We just wanted to let you know that the projects listed below are due to be deleted soon because they haven’t been accessed for a while.
+
+Make sure you log in before the below dates to place any orders or re-orders!
+
+If you’re happy for these projects to be deleted, you don’t need to do anything
+
+Please click {$homeurl} to Review your Projects.
+
+{if $unorderedprojectlist|@count > 0}
+Unordered projects
+
+{foreach from=$unorderedProjectList item=i}
+    {$i.name} - {$i.product} - Due to be deleted on {$i.purge} *
+{/foreach}
+{/if}
+
+{if $orderedprojectlist|@count > 0}
+Ordered projects
+
+{foreach from=$orderedprojectlist item=i}
+    {$i.name} - {$i.product} - Due to be deleted on {$i.purge} *
+{/foreach}
+{/if}
+
+* Please note that this date may be different in your time zone. Log in to see the exact time/date for your time zone.
+{$emailsignature}

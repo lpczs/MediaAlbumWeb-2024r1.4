@@ -1,0 +1,48 @@
+<!-- Admin Taopix Online / Image Servers Admin -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getgriddata">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+	
+	<fuseaction name="adddisplay">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="imageServerAddDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="editdisplay">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="imageServerEditDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="addeditserver">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="addEditImageServer()" />
+	</fuseaction>
+	
+	<fuseaction name="activate">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="activateImageServer()" />
+	</fuseaction>
+	
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminTaopixOnlineImageServersAdmin_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteImageServer()" />
+	</fuseaction>
+</circuit>

@@ -1,0 +1,9 @@
+Personal Data Removal Requested.
+
+A registered user has requested that their personal data is removed from the system.
+
+Username: {$login}
+
+To remove this user's personal data and permanently disable their account, please log in to Control Centre as an administrator and go to the Customers page. Select the relevant account and click ‘Delete Account Data’.
+
+{$emailsignature}

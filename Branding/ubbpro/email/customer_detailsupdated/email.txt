@@ -1,0 +1,13 @@
+{$appname} - Changed Account Details
+
+Hello {$user}
+
+You have changed the following details in your account for {$homeurl} </p>
+
+{foreach from=$changes item=i key=k}
+• {$i[0]}
+{/foreach}
+
+If this wasn't you, please contact customer services.
+
+{$emailsignature}

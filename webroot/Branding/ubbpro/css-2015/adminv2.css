@@ -1,0 +1,332 @@
+#header {
+    overflow: hidden
+}
+#header div { 
+    line-height: 29px; 
+    height: 29px; 
+    margin-left: 5px; 
+}
+
+#header div img {
+    vertical-align: middle;
+}
+
+#header div, #header h1 {
+    float: left;
+}
+
+#header #logOutBtnHolder {
+    float: right; 
+    margin-right: 5px; 
+    padding-top: 4px;
+}
+
+/* general */
+.grid .x-grid3-header .x-grid3-header-inner .x-grid3-header-offset table .x-grid3-hd-row td.x-grid3-cell{ 
+    font-weight: bold !important;
+}
+
+.inactive, .inactive td {
+    color: gray; 
+    font-style: italic;
+}
+
+.notools .x-tool {
+    background-image: none !important;
+}
+
+.submenu {
+    padding: 5px 22px;
+}
+
+.submenu li {
+    padding: 5px 0; 
+    line-height: 17px;
+}
+
+.submenu a {
+    line-height: 17px; 
+    color: black; 
+    text-decoration:none; 
+    font-family: tahoma,arial,verdana,sans-serif; 
+    font-size: 11px;
+}
+
+.submenu a:visited {
+    color: black; 
+    text-decoration:none;
+}
+
+.submenu a:hover {
+    color: black;
+    text-decoration:none;
+}
+
+.submenu li img {
+    vertical-align: middle; 
+    margin-right: 6px;
+}
+
+#accordionPanel .x-panel-body {
+    background: rgb(237, 240, 252);
+}
+
+.x-window-dlg .x-window-header .x-tool-close {
+    display: none !important;
+}
+
+.left-right-buttons .x-panel-btns table, .left-right-buttons .x-panel-fbar {
+    width: 100% !important;
+}
+
+.left-right-buttons .x-panel-btns .x-btn-right {
+    float: right;
+}
+
+.left-right-buttons .x-panel-btns .x-toolbar-left {
+    width: 0 !important;
+}
+
+.left-right-buttons .x-panel-btns table.x-btn {
+    width: 75px !important;
+}
+
+.width_100 { 
+    width: 100%;
+}
+
+.x-form-check-wrap {
+    text-align: left;
+}
+
+/* branding emails grid */
+#emailsGrid .x-grid-group-hd {
+    padding-top: 0;
+}
+
+#emailsGrid .x-grid-group-hd div {
+    height: 22px; 
+    line-height: 22px;
+}
+
+#emailsGrid .x-grid-group-hd div.x-grid-group-title {
+    background-position: 3px 8px; 
+}
+
+.gridHeaderCheckboxHolder {
+    float:right; 
+    overflow: hidden; 
+}
+
+.gridHeaderCheckboxHolder .gridHeaderCheckbox {
+    float: left;
+}
+
+.gridHeaderCheckboxHolder .gridHeaderButtons {
+    float: right; 
+    margin-left: 10px; 
+    overflow: hidden; 
+    width: 54px; 
+    margin-right:4px;
+}
+
+.gridHeaderCheckboxHolder .gridHeaderButtons .gridHeaderButton {
+    float: left; 
+    margin-left: 5px;
+}
+
+.hide-expand-collapse {
+    margin-left:10px;
+}
+
+.hide-expand-collapse-inactive a span {color: grey !important; font-style:italic;}
+
+.hide-expand-collapse-inactive {margin-left:10px;}
+
+
+
+.x-tree-ec-icon {
+    display:none; 
+}
+
+/* metadata keywords */
+#keywordsGrid .marginLeft10 {
+    margin-left: 10px;
+}
+
+#keywordsGrid div .previewImage {
+    margin-right: 5px; 
+    height: 15px; 
+    vertical-align: middle;
+}
+
+#keywordsGrid .localizedLanguageName {
+    width: 90px !important;
+}
+
+/* manual export */
+.xml_pic { 
+    background-image: url('../utils/ext/images/taopix/xml_simple.png') !important; 
+}
+
+.bxml_pic { 
+    background-image: url('../utils/ext/images/taopix/xml_beautified.png') !important; 
+}
+
+.txt_pic { 
+    background-image: url('../utils/ext/images/taopix/txt_simple.png') !important; 
+}
+
+.tbarText {  
+    width:365px; 
+    overflow:hidden; 
+} 
+
+#startDateLabel { 
+    margin-right: 50px;
+}
+
+#startDateLabel, #filterLabel, #endEndLabel { 
+    color: #245296; 
+    font-size: 12px;
+}
+
+#startDateLabel, #endEndLabel { }
+#buttonGroupEF { 
+    width: 100%;
+}
+
+#buttonGroupEF .x-btn-group-body { 
+    width: 100%; 
+}
+
+#buttonGroupEF .x-btn-group-body .x-table-layout { 
+    width: 100%;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle {
+    width: 100% !important;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .xtb-text { 
+    color: #3E6AAA; 
+    padding: 0; 
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer,
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns,
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns td.x-toolbar-cell { 
+    padding: 0;
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns-right .x-panel-fbar { 
+    float:	none; 
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns .x-toolbar-left table { 
+    margin: 0 auto; 
+}
+
+/* FIXES FOR IE: */
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns.x-panel-btns-right .x-clear { 
+    font: 0 sans-serif; 
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-footer .x-panel-btns .x-toolbar-left { 
+    text-align: center; 
+}
+
+.x-btn-group.x-btn-group-ribbonstyle .x-btn-group-tc { 
+    vertical-align: top; 
+}
+
+div.maskClass div { 
+    padding: 15px; 
+    color: #787878  ; 
+    font-size: 18px !important; 
+    background: white; 
+    border: 0;
+}
+
+.processed-row {
+    background: white url('../utils/ext/images/silk/exclamation.png') no-repeat 10% center; 
+    padding: 1px 0;
+}
+
+/* product configuration */
+.send_to_Bottom { 
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_last.png') !important; 
+}
+
+.send_to_top { 
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_first.png') !important; 
+}
+
+.move_up { 
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_up.png') !important; 
+}
+
+.move_down { 
+    background-image: url('../utils/ext/images/taopix/taopix_arrow_down.png') !important; 
+}
+
+.checkboxComponentChecked {
+    background: url('../utils/ext/images/taopix/checkbox_001.gif') no-repeat !important;
+}
+
+.checkboxComponentUnchecked {
+    background: url('../utils/ext/images/taopix/checkbox_002.gif') no-repeat !important;
+}
+
+.default-list-component-bold {
+    font-weight: bold;
+}
+
+.default-list-component-normal {
+    font-weight: normal;
+}
+
+.list-component-inactive a span {color: #808080 !important;}
+
+input[type="radio"]{
+    width: 16px;
+}
+
+.errorrecord {
+    color: red !important
+}
+
+.highPriority { 
+    margin: 0 auto; 
+    display: block; 
+    background-image: url('../utils/ext/images/silk/flag_red.png') !important; 
+    background-repeat: no-repeat; 
+    width: 16px; 
+    height: 16px;
+}
+
+.x-grid3-cell-inner, .x-grid3-hd-inner { 
+    white-space: normal; 
+}
+
+.loadingShim div {
+    background: white !important; 
+    padding: 10px 20px 10px 15px;
+}
+
+.loadingShim div img {
+    vertical-align: middle; 
+    margin-right: 5px;
+}
+
+/** preview image **/
+#bannerTab #bannerpreviewimage, #desingerSplashScreenTab #previewimage{
+    max-width: 800px;
+    max-height: 800px;
+}
+
+
+/** word wrap **/
+.x-grid3-cell-inner, .x-grid3-hd-inner{
+    white-space: normal !important; 
+}

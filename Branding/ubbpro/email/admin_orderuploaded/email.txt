@@ -1,0 +1,25 @@
+{$appname} - Order '{$ordernumber}' Upload Confirmation
+Note To Production.
+
+Order number '{$ordernumber}.{$itemnumber}' is now ready to process.
+
+{$qty} x {$productname}
+{strip}{if $papercode!=''}{#str_LabelPaper#}: {$papername}{/if}{/strip}
+{strip}{if $covercode!=''}{#str_LabelCover#}: {$covername}{/if}{/strip}
+{#str_LabelShippingMethod#}: {$shippingmethod}
+
+{strip}{if $vouchercode!=''}{#str_LabelVoucherCode#}: {$vouchercode} - {$vouchername}{/if}{/strip}
+{#str_LabelOrderTotal#}: {$formattedordertotal}
+{if $ordergiftcardtotal > 0}
+{#str_LabelGiftCard#}: -{$formattedordergiftcardtotal}
+{#str_LabelAmountToPay#}: {$formattedordertotaltopay}
+{/if}
+{strip}{if $paymentmethodcode!='NONE'}{#str_LabelPaymentMethod#}: {$paymentmethodname}{/if}{/strip}
+
+------------------------------------------------------------------------------
+
+{#str_LabelShippingAddress#}:
+{$shippingaddress}
+
+{#str_LabelBillingAddress#}:
+{$billingaddress}

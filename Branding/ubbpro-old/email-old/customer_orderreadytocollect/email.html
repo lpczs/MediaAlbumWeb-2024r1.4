@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$appname} - Order '{$ordernumber}' Collection Notification</title>
+</head>
+<body>
+<img src="../resources/logo.png">
+<p>
+<p>Hello {$billingcontactfirstname},
+<p>We're pleased to inform you that the following items from your order are now ready to collect.<br>
+<br>
+{$qty} x {$productname}<br>
+{if
+($papercode!='')&&(($papercode!=$defaultpapercode)||($papercount>1))}{#str_LabelPaper#}:
+{$papername}<br>
+{/if} {if $covercode!=''}{#str_LabelCover#}: {$covername}<br>
+{/if} {#str_LabelShippingMethod#}: {$shippingmethodname}<br>
+<br>
+{#str_LabelOrderTotal#}: {$formattedordertotal}<br>
+{if $ordergiftcardtotal > 0}
+{#str_LabelGiftCard#}: -{$formattedordergiftcardtotal}<br />
+{#str_LabelAmountToPay#}: {$formattedordertotaltopay}<br />
+{/if}
+{if $paymentmethodcode!='NONE'}{#str_LabelPaymentMethod#}:
+{$paymentmethodname}<br>
+{/if} <br>
+<br>
+<b>{#str_LabelStoreAddress#}:</b><br>
+{$shippingaddress}<br>
+{if $storetelephonenumber!=''}<br>{#str_LabelTelephoneNumber#}: {$storetelephonenumber}{/if}
+{if $storeemailaddress!=''}<br>{#str_LabelEmailAddress#}: {$storeemailaddress}{/if}
+{if $storeurl!=''}<br>{#str_LabelWebSite#}: {$storeurl}{/if}
+{if $storeopeningtimes!=''}<br><br>{#str_LabelOpeningTimes#}:<br> {$storeopeningtimes}{/if}
+<br>
+<br>
+<br>
+<br>
+You can access your account at any time via the URL <a href="{$homeurl}">{$homeurl}</a><br>
+<br>
+<br>
+Best Regards, <br>
+<br>
+</body>
+</html>
+
+

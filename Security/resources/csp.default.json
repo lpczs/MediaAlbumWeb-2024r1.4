@@ -1,0 +1,70 @@
+{
+    "report-only": false,
+    "report-uri": "",
+    "base-uri": [],
+    "plugin-types":[],
+    "default-src": 
+    {
+        "self": true
+    },
+    "child-src": 
+    {
+        "self": false,
+        "allow": 
+        [
+            "static.addtoany.com"
+        ]
+    },
+    "frame-src":
+    {
+        "self": false,
+        "allow":
+        [
+            "static.addtoany.com"
+        ]
+    },
+    "connect-src": 
+    {
+        "self": true,
+        "allow":
+        [
+            "stats.addtoany.com"
+        ]
+    },
+    "font-src":
+    {
+        "self": true
+    },
+    "img-src":
+    {
+        "self": true,
+        "blob": true,
+        "data": true,
+        "allow": []
+    },
+    "media-src":
+    {
+        "self": true
+    },
+    "object-src":
+    {
+        "self": true
+    },
+    "script-src":
+    {
+        "self": true,
+        "unsafe-inline": true,
+        "unsafe-eval": false,
+        "strict-dynamic": true,
+        "allow":
+        [
+            "ajax.googleapis.com",
+            "*.addtoany.com"
+        ]
+    },
+    "style-src":
+    {
+        "self": true,
+        "unsafe-inline": true
+    }
+}

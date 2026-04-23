@@ -1,0 +1,53 @@
+null {}
+body {background:#ffffff; margin:4px; padding:0px}
+
+.textsmall {font-family:"lucida grande","Arial"; font-size:10; font-weight:normal}
+.text {font-family:"lucida grande","Arial"; font-size:11; font-weight:normal}
+.text1 {font-family:"lucida grande","Arial"; font-size:11; font-weight:bold}
+.text2 {font-family:"lucida grande","Arial"; font-size:13; font-weight:bold}
+.text3 {font-family:"lucida grande","Arial"; font-size:15; font-weight:bold}
+
+.adminPane {background-color: #F0F0F0; font-family:"lucida grande","Arial"; font-size:11}
+.adminTableEntry {background-color:#D5D5F5; border-style:none; empty-cells:show}
+.adminTableEntryBorder {background-color:#D5D5F5; border-top-width:1px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid; border-color:black; empty-cells:show}
+.adminList {background-color:#D5D5F5; border-top-width:1px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid; empty-cells:show}
+
+/* button styles */
+input.button1 {font-family:"lucida grande","Arial"; font-size:11; min-width:55}
+
+/* list table border styles */
+td.tableHeadBorderLeft {border-color:black; border-top-width:1px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid}
+td.tableHeadBorderMiddle {border-color:black; border-top-width:1px; border-bottom-width:1px; border-left-width:0px; border-right-width:1px; border-style:solid}
+td.tableColBorderLeft {border-color:black; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid}
+td.tableColBorderMiddle {border-color:black; border-top-width:0px; border-bottom-width:1px; border-left-width:0px; border-right-width:1px; border-style:solid}
+td.tableColAltBorderLeft {border-color:black; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; border-style:solid; background-color:#E0E0E0}
+td.tableColAltBorderMiddle {border-color:black; border-top-width:0px; border-bottom-width:1px; border-left-width:0px; border-right-width:1px; border-style:solid; background-color:#E0E0E0}
+.cellbackground {background-color:#E0E0E0}
+
+/* unselected tab styles */
+a.tabUnselected, a.tabUnselectedDisabled {display:-moz-inline-block; display:inline-block; background-color:transparent; 
+background-image:url(../images/admin/tab_unselected105.gif); background-repeat:no-repeat;
+text-align:center; font-family:"lucida grande","Arial"; 
+font-size:10; text-decoration:none;
+height:25; width:105; padding:4 0 2 0; margin:0 1 auto; position:relative; top:+1; z-index:1}
+
+a.tabUnselected:hover {color:#002577}
+a.tabUnselected:link, a.tabUnselected:visited {color:#002577}
+a.tabUnselectedDisabled:link, a.tabUnselectedDisabled:visited, a.tabUnselectedDisabled:hover, a.tabUnselectedDisabled:active {color:#5F5F5F; cursor: default}
+
+/* selected tab styles */
+a.tabSelected, a.tabSelectedDisabled {display:-moz-inline-block; display:inline-block; background-color:transparent;
+background-image:url(../images/admin/tab_selected105.gif); background-repeat:no-repeat;
+text-align:center; font-family:"lucida grande","Arial"; 
+font-size:10; text-decoration:none;
+height:25; width:105; padding:4 0 2 0; margin:0 1 auto; position:relative; top:+1; z-index:1}
+
+a.tabSelected:hover {color:#002577}
+a.tabSelected:link, a.tabSelected:visited {color:#002577}
+a.tabSelectedDisabled:link, a.tabSelectedDisabled:visited, a.tabSelectedDisabled:hover, a.tabSelectedDisabled:active {color:#5F5F5F; cursor:default}
+
+/* tab header styles */
+#tabHeader {display:-moz-inline-block; display:inline-block; background-image:url(../images/admin/tab_header.gif); background-repeat:repeat-x; height:10; width:100%; z-index:0}
+#tabHeader2 {display:-moz-inline-block; display:inline-block; background-image:url(../images/admin/tab_header2.gif); background-repeat:repeat-x; height:1; width:100%; z-index:0}
+
+.message {font-family:"lucida grande","Arial"; font-size:12; font-weight:bold; color:red; position:absolute}

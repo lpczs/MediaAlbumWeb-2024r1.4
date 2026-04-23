@@ -1,0 +1,14 @@
+{$appname} - Order '{$ordernumber}' Confirmation
+Hello {$billingcontactfirstname},
+
+Thank you for your order. Your order number is {$ordernumber}, please quote this in any correspondence with us.
+
+The following is a summary of what you have ordered:
+{$emailContent} 
+
+You can access your account at any time via the URL
+{$homeurl}
+
+Best Regards,
+
+© 2015 Ubabybaby, Inc. All rights reserved. 

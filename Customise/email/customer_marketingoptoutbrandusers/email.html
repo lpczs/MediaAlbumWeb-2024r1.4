@@ -1,0 +1,43 @@
+<table style="border: 1px solid #000000; border-collapse : collapse; margin-left: 1%; width:600px;">
+    <!-- TAOPIX logo-->
+    <tr>
+        <td height="80px">
+            <img src="{$brandLogo}" id="headerImage"  height="60px"/>
+        </td>
+    </tr>
+    <tr style="background-color: #575757; text-indent: 12px; font-size: 13px; font-weight:bold; color: #FFFFFF; font-family: Lucida Grande;" >
+        <td width="100%" style="padding-top: 5px; padding-bottom: 5px; word-break:break-all;">
+            Unsubscribed from marketing emails
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td>
+            Hello {$contactfirstname},
+            <br />
+            <br />
+            This email is to let you know that the following account has been unsubscribed from all marketing emails:
+            <br />
+            {$login}
+            <br />
+            <br />
+            If you would like to opt back in to receive marketing emails from us, please log in to My Account and go to Change Preferences.
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:break-all; text-align: center;">
+            <table cellspacing="0" cellpadding="0" width="100%
+                                                          ">
+                <tr>
+                    <td style="background: green; text-align: center; padding: 15px 0; font-size: 14px; border-radius: 4px;">
+                        <a href="{$homeurl}" style="color: #fff; text-decoration: none; display: block; padding: 0 30px;">Log in to My Account</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px; display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:break-all;">
+            {$emailsignature}
+        </td>
+    </tr>
+</table>

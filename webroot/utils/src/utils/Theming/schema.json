@@ -1,0 +1,248 @@
+{
+  "$ref": "#/definitions/ColourScheme",
+  "definitions": {
+      "ColourScheme": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "main": {
+                  "$ref": "#/definitions/Section"
+              },
+              "header": {
+                  "$ref": "#/definitions/Section"
+              },
+              "workarea": {
+                  "$ref": "#/definitions/Section"
+              },
+              "toolpaletteClosed": {
+                  "$ref": "#/definitions/Section"
+              },
+              "toolpaletteOpen": {
+                  "$ref": "#/definitions/Section"
+              },
+              "toolpaletteContent": {
+                  "$ref": "#/definitions/Section"
+              },
+              "dialogs": {
+                  "$ref": "#/definitions/Section"
+              }
+          },
+          "title": "ColourScheme"
+      },
+      "Section": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "colours": {
+                  "$ref": "#/definitions/Colours"
+              },
+              "buttons": {
+                  "$ref": "#/definitions/Buttons"
+              },
+              "contentStyles": {
+                  "$ref": "#/definitions/ContentStyles"
+              }
+          },
+          "title": "Section"
+      },
+      "Buttons": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "standard": {
+                  "$ref": "#/definitions/Button"
+              },
+              "primary": {
+                  "$ref": "#/definitions/Button"
+              },
+              "secondary": {
+                  "$ref": "#/definitions/Button"
+              },
+              "tertiary": {
+                  "$ref": "#/definitions/Button"
+              },
+              "negative": {
+                  "$ref": "#/definitions/Button"
+              },
+              "special": {
+                  "$ref": "#/definitions/Button"
+              },
+              "distinct": {
+                  "$ref": "#/definitions/Button"
+              },
+              "tab": {
+                  "$ref": "#/definitions/Button"
+              },
+              "imageOverlay": {
+                  "$ref": "#/definitions/Button"
+              }
+          },
+          "title": "Buttons"
+      },
+      "Button": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "background": {
+                  "$ref": "#/definitions/States"
+              },
+              "text": {
+                  "$ref": "#/definitions/States"
+              },
+              "icon": {
+                  "$ref": "#/definitions/States"
+              },
+              "border": {
+                  "$ref": "#/definitions/States"
+              },
+              "accent": {
+                  "$ref": "#/definitions/States"
+              },
+              "sizing": {
+                  "$ref": "#/definitions/Sizing"
+              }
+          },
+          "title": "Button"
+      },
+      "States": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "default": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "hover": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "pressed": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "disabled": {
+                  "$ref": "#/definitions/StringVal"
+              }
+          },
+          "title": "States"
+      },
+      "Sizing": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "border": {
+                  "type": ["integer", "string"]
+              },
+              "accent": {
+                  "type": ["integer", "string"]
+              }
+          },
+          "title": "Sizing"
+      },
+      "Colours": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "background": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "text": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "heading": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "link": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "accent": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "overlay": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "border": {
+                  "$ref": "#/definitions/Border"
+              },
+              "border-width": {
+                  "$ref": "#/definitions/BorderWidth"
+              },
+              "rounded-corners": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "icon": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "placeholder": {
+                  "$ref": "#/definitions/StringVal"
+              }
+          },
+          "title": "Colours"
+      },
+      "ContentStyles": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "standard": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "container": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "critical": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "information": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "input": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "notification": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "primary": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "prominent": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "popouts": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "section": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "tip": {
+                  "$ref": "#/definitions/ContentStyle"
+              },
+              "warning": {
+                  "$ref": "#/definitions/ContentStyle"
+              }
+          },
+          "title": "ContentStyles"
+      },
+      "ContentStyle": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "colours": {
+                  "$ref": "#/definitions/Colours"
+              },
+              "buttons": {
+                  "$ref": "#/definitions/Buttons"
+              }
+          },
+          "title": "ContentStyle"
+      },
+      "BorderWidth": {
+          "$ref": "#/definitions/StringVal",
+          "title": "BorderWidth"
+      },
+      "Border": {
+          "type": "string",
+          "title": "Border"
+      },
+      "StringVal": {
+          "type": ["integer", "string"],
+          "title": "StringVal"
+      }
+  }
+}

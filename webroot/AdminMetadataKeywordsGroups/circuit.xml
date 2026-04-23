@@ -1,0 +1,58 @@
+<!-- Admin Keywords Groups -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="addDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="editDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="keywordGroupAdd()" />
+	</fuseaction>
+
+	<fuseaction name="edit">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="keywordGroupEdit()" />
+	</fuseaction>
+
+	<fuseaction name="getProductList">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getProductList()" />
+	</fuseaction>
+
+	<fuseaction name="getAssociatedComponentList">
+		<instantiate object="control" class="AdminMetadataKeywordsGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getAssociatedComponentList()" />
+	</fuseaction>
+
+</circuit>
+

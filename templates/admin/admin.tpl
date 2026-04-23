@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{$langCode}" xml:lang="{$langCode}" dir="ltr">
+    <head>
+		<meta name="csrf-token" content="{csrf_token}" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-language" content="{$langCode}" />
+        <meta http-equiv="content-style-type" content="text/css" />
+        <meta http-equiv="content-script-type" content="text/javascript" />
+        <title>{$appname} - Control Centre</title>
+        <link rel="stylesheet" type="text/css" href="{$webroot}{asset file='/css/admin.css'}" />
+        {* <link rel="stylesheet" type="text/css" href="{$webroot}{asset file='/css/tailwind.css'}" /> *}
+        <link rel="stylesheet" type="text/css" href="{$webroot}/utils/ext/layout-browser.css" />
+        <script type="text/javascript">
+            //<![CDATA[
+            var gLabelPricingTab = "{#str_ButtonPricing#}";
+            var gLabelLicenseKeyTab = "{#str_AutoUpdateTitleLicenseKeys#}";
+            var gLabelPriceDescriptionTab = "{#str_LabelClientPriceDescription#}";
+            var gLabelAdditionalInfoTab = "{#str_LabelAdditionalInformation#}";
+            var gTextFieldBlank = "{#str_ExtJsTextFieldBlank#}";
+            var gLabelLanguageName = "{#str_LabelLanguageName#}";
+            var gLabelInformation = "{#str_LabelInformation#}";
+            var gLabelSelectLanguage = "{#str_LabelSelectLanguage#}";
+            var gExtJsTypeValue = "{#str_ExtJsTypeValue#}";
+            var gLabelCode = "{#str_LabelCode#}";
+            var gLabelStatus = "{#str_LabelStatus#}";
+            var gLabelName = "{#str_LabelName#}";
+            var gLabelSelectCountry = "{#str_LabelSelectCountry#}";
+            var gLabelPriceList = "{#str_LabelPriceList#}";
+            var gLabelFixedQuantityRanges = "{#str_LabelFixedQuantityRanges#}";
+            var gLabelInheritParentQty = "{#str_LabelInheritParentQty#}";
+            var gLabelUseExternalShoppingCart = "{#str_LabelUseExternalShoppingCart#}";
+            var gLabelDefault = "{#str_LabelDefault#}";
+            var gLabelTaxRate = "{#str_LabelPricingIncludesTax#}";
+            var gLabelActive = "{#str_LabelActive#}";
+            var gLabelInactive = "{#str_LabelInactive#}";
+            var gLabelConfirmation = "{#str_LabelConfirmation#}";
+            var gMessageConfirmUnlockUser = "{#str_ConfirmUnlockUser#}";
+            var gButtonUnlock = "{#str_ButtonUnlock#}";
+            var gMessageLoading = "{#str_MessageLoading#}";
+            var gLangCode = "{$langCode}";
+
+            //]]>
+        </script>
+
+        {include file="includes/extjsinclude.tpl"}
+        {include file="includes/maininclude.tpl"}
+
+        <script type="text/javascript">
+            //<![CDATA[
+            accordianWindowInitialized = false;
+            var gIsDashboard = false;
+
+            var sessionId = '{$ref}';
+            var buildInfo = "{$buildversionstring}";
+			var gAdminAuthentificationEnabled = {$adminauthentificationenabled};
+            var reactPanel = null;
+            var userId = '{$userid}';
+
+            Ext.MessageBox.minWidth = 300;
+
+            {literal}
+
+            var itemLoaded = function()
+            {
+                initialize();
+                if (Ext.get('centreRegionPanel')) Ext.get('centreRegionPanel').unmask();
+            };
+
+            var itemClicked = function(panel)
+            {
+                if (panel instanceof HTMLAnchorElement)
+                {
+                   if (reactPanel)
+                    {
+                        reactPanel.hide();
+                        reactPanel = null;
+                    }
+                }
+
+                Ext.get('centreRegionPanel').mask('<img src="{/literal}{$webroot}/images/loading.gif" alt="{#str_ExtJsAlertLoading#}" /> {#str_ExtJsAlertLoading#}{literal}','loadingShim');
+
+                if (Ext.getCmp('MainWindow'))
+                {
+                    windowClose();
+                    accordianWindowInitialized = false;
+                }
+
+                if (typeof uuid !== undefined)
+                {
+                  uuid = 0;
+                }
+
+                var method = '';
+
+                if ((panel.getAttribute) && (panel.getAttribute('method')))
+                {
+                    method = panel.getAttribute('method');
+                }
+                else
+                {
+                    method = 'initialize';
+                }
+
+                var action = '';
+
+                if ((panel.getAttribute) && (panel.getAttribute('faction')))
+                {
+                    action = panel.getAttribute('faction');
+                }
+                else
+                {
+                    action = panel.faction;
+                }
+
+                var thisIsReact = false;
+
+                if ((panel.getAttribute) && (panel.getAttribute('isreact')))
+                {
+                    thisIsReact = true;
+                }
+
+                if (thisIsReact)
+                {
+                    var shadowDom = document.getElementById('shadow').shadowRoot;
+
+                    // Remove old elements, apart from the style tags.
+                    var nonFixedElements = Object.values(shadowDom.children).filter(function(node)
+                    {
+                        return ! node.dataset.shadow;
+                    });
+
+                    var nonFixedElementsLength = nonFixedElements.length;
+
+                    if (nonFixedElementsLength > 0) 
+                    {
+                        for (var i = 0; i < nonFixedElementsLength; i++)
+                        {
+                        nonFixedElements[i].remove();
+                        }
+                    }
+
+                    var type = 0;
+
+                    if (typeof panel.type !== undefined && panel.type !== '')
+                    {
+                        type = panel.type;
+                    }
+
+                    reactPanel = window.Router().get(action, {type: parseInt(type), userId: userId, sessionRef: parseInt(sessionId, 10), documentRoot: shadowDom, container: shadowDom});
+                    reactPanel.display();
+
+                   if (Ext.get('centreRegionPanel')) Ext.get('centreRegionPanel').unmask();
+
+                    if (Ext.getCmp('MainWindow'))
+                    {
+                        windowClose();
+                    }
+
+                    return false;
+                }
+                else
+                {
+                    if (!accordianWindowInitialized)
+                    {
+                        accordianWindowInitialized = true;
+                        Ext.taopix.loadJavascript(centreRegion, '', 'index.php?fsaction=' + action + '.' + method + '&ref='+sessionId, [], '', 'itemLoaded', false);
+                    }
+                }
+            };
+
+            var menuOnExpand = function(panel, animate)
+            {
+                if (typeof panel.isreact !== undefined && panel.isreact == true)
+                {
+                  if (Ext.getCmp('MainWindow'))
+                  {
+                      windowClose();
+                      accordianWindowInitialized = false;
+                  }
+
+                  var shadowDom = document.getElementById('shadow').shadowRoot;
+
+                  // Remove old elements, apart from the style tags.
+                  var nonFixedElements = Object.values(shadowDom.children).filter(function(node)
+                  {
+                    return ! node.dataset.shadow;
+                  });
+
+                  var nonFixedElementsLength = nonFixedElements.length;
+
+                  if (nonFixedElementsLength > 0) 
+                  {
+                    for (var i = 0; i < nonFixedElementsLength; i++)
+                    {
+                      nonFixedElements[i].remove();
+                    }
+                  }
+                  
+                  reactPanel = window.Router().get(panel.faction, {sessionRef: parseInt(sessionId, 10), userId: userId, documentRoot: shadowDom, container: shadowDom});
+                  reactPanel.display();
+                  return false;
+                }
+                else
+                {
+                    if (reactPanel)
+                    {
+                        reactPanel.hide();
+                        reactPanel = null;
+                    }
+
+                    if (panel.hasItems == false)
+                    {
+                        itemClicked(panel);
+                        return false;
+                    }
+                }   
+            };
+
+            var menuOnBeforeRender = function(panel)
+            {
+                if (panel.hasItems == false)
+                {
+                    /* hide expand/collapse icon
+                    Ext.apply(panel, {collapsible: false}); */
+                }
+            };
+
+            Ext.onReady(function(){
+                Ext.QuickTips.init();
+                Ext.form.Field.prototype.msgTarget = 'side';
+
+                logOut = function()
+                {
+
+                    Ext.Ajax.request(
+					{
+						url: '?fsaction=Admin.logout',
+						params:
+						{
+							ref:sessionId
+						}
+					});
+
+                    window.location = "{/literal}{$webroot}{literal}";
+                };
+
+                var bulkEditorTab = new Ext.Panel({
+                    name: 'bulkeditor',
+                    title: "{/literal}{#str_SectionTitleBulkConfiguration#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-application-view-detail',
+                    collapsed: false,
+                    faction: 'AdminExperienceEditingOverview',
+                    isreact: true,
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var experienceTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleOnlineExperiences#}{literal}",
+                    hasItems: true,
+                    iconCls: 'silk-application-osx',
+                    html: "{/literal}<ul class='submenu' id='experienceTab'><li><img src='{$webroot}/utils/ext/images/silk/application_view_tile.png' alt='' /><a href='#' isreact='true' faction='AdminExperienceTheme'>{#str_SectionTitleUIThemes#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/application_side_boxes.png' alt='' /><a href='#' isreact='true' type='0' faction='AdminExperienceEditing'>{#str_SectionTitleUIConfigurations#}</a></li></ul>{literal}",
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var connectorsTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleConnectors#}{literal}",
+                    hasItems: false,
+                    iconCls: 'tpx-shopify-connector',
+                    collapsed: false,
+                    faction: 'AdminConnectors',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var aboutTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleAbout#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-help',
+                    collapsed: false,
+                    faction: 'AdminAbout',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var homeTab = new Ext.Panel({
+                    title: "Home",
+                    hasItems: false,
+                    iconCls: 'silk-home',
+                    collapsed: false,
+                    faction: 'AdminHome',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var constantsTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleConstants#}{literal}",
+                    iconCls: 'silk-report',
+                    hasItems: false,
+                    faction: 'AdminConstants',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var currenciesTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleCurrencies#}{literal}",
+                    iconCls: 'silk-money-dollar',
+                    hasItems: false,
+                    faction: 'AdminCurrencies',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var usersTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleUsers#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-user-suit',
+                    faction: 'AdminUsers',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var taxTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleTax#}{literal}",
+                    hasItems: true,
+                    iconCls: 'silk-coins',
+                            html: "{/literal}<ul class='submenu' id='taxTab'>{if !$TPX_LOGIN_COMPANY_ADMIN}<li><img src='{$webroot}/utils/ext/images/silk/coins.png' alt='' /><a href='#' faction='AdminTaxRates'>{#str_TaxTitleTaxRates#}</a></li>{/if}<li><img src='{$webroot}/utils/ext/images/silk/coins.png' alt='' /><a href='#' faction='AdminTaxZones'>{#str_TaxTitleTaxZones#}</a></li></ul>{literal}",
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var dataExportTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleExport#}{literal}",
+                    hasItems: true,
+                    iconCls: 'silk-server-go',
+                    faction: 'AdminExportManual',
+                    html: "{/literal}<ul class='submenu'><li><img src='{$webroot}/utils/ext/images/silk/server_go.png' alt='' /><a href='#' faction='AdminExportManual'>{#str_ExportTitleManual#}</a></li>{if $TPX_LOGIN_SYSTEM_ADMIN}<li><img src='{$webroot}/utils/ext/images/silk/server_go.png' alt='' /><a href='#' faction='AdminExportEvent'>{#str_ExportTitleEvent#}</a></li>{/if}</ul>{literal}",
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var multiSiteTab = new Ext.Panel({
+                    {/literal}
+                    {if $optionMS}
+                        title: "{#str_SectionTitleMultiSite#}",
+                    {else}
+                        title: "{#str_SectionTitleSites#}",
+                    {/if}
+                    {literal}
+                    hasItems: true,
+                    iconCls: 'silk-sitemap-color',
+                    html: "{/literal}<ul class='submenu'>{if $optionMC}<li><img src='{$webroot}/utils/ext/images/silk/sitemap_color.png' alt='' /><a href='#' faction='AdminSitesCompanies'>{#str_SiteCompanies#}</a></li>{/if}<li><img src='{$webroot}/utils/ext/images/silk/sitemap_color.png' alt='' /><a href='#' faction='AdminSitesSitesAdmin'>{#str_SiteAdmin#}</a></li>{if $optionCFS}<li><img src='{$webroot}/utils/ext/images/silk/sitemap_color.png' alt='' /><a href='#' faction='AdminSitesSiteGroups'>{#str_StoreGroups#}</a></li>{/if}{if $optionMS}<li><img src='{$webroot}/utils/ext/images/silk/sitemap_color.png' alt='' /><a href='#' faction='AdminSitesOrderRouting'>{#str_SiteOrderRouting#}</a></li>{/if}</ul>{literal}",
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var productsTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleProducts#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-book',
+                    cls : 'notools',
+                    faction:'AdminProducts',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var productGroupsTab = new Ext.Panel({
+                    title: "{/literal}{#str_TitleProductGroups#}{literal}",
+                    hasItems: false,
+                    faction:'AdminProductGroups',
+                    iconCls: 'silk-book-link',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                })
+
+                var shippingTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleShipping#}{literal}",
+                    hasItems: true,
+                    iconCls: 'silk-lorry',
+                    html: "{/literal}<ul class='submenu'>{if !$TPX_LOGIN_COMPANY_ADMIN}<li><img src='{$webroot}/utils/ext/images/silk/lorry.png'><a href='#' faction='AdminShippingMethods'>{#str_ShippingTitleShippingMethods#}</a></li>{/if}<li><img src='{$webroot}/utils/ext/images/silk/lorry.png'><a href='#' faction='AdminShippingZones'>{#str_ShippingTitleShippingZones#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/lorry.png'><a href='#' faction='AdminShippingRates'>{#str_ShippingTitleShippingRates#}</a></li></ul>{literal}",
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var paymentMethodsTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitlePaymentMethods#}{literal}",
+                    hasItems: false,
+                    cls : 'notools',
+                    faction:'AdminPaymentMethods',
+                    iconCls: 'silk-creditcards',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var customersTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleCustomers#}{literal}",
+                    hasItems: false,
+                    faction:'AdminCustomers',
+                    cls : 'notools',
+                    iconCls: 'silk-group',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var vouchersTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleVouchersGiftCards#}{literal}",
+                    hasItems: true,
+                    iconCls: 'silk-tag-pink',
+                    html: "{/literal}<ul class='submenu'><li><img src='{$webroot}/utils/ext/images/silk/tag_pink.png' alt=''><a href='#' faction='AdminVouchers' method='displayList'>{#str_VoucherTitleSingleVouchers#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/tag_pink.png' alt=''><a href='#' faction='AdminVouchersPromotion'>{#str_VoucherTitleVoucherPromotions#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/tag_pink.png' alt=''><a href='#' faction='AdminGiftCards' method='displayList'>{#str_VoucherTitleGiftCards#}</a></li></ul>{literal}",
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+
+                var brandingTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleBranding#}{literal}",
+                    cls : 'notools',
+                    hasItems: false,
+                    faction:'AdminBranding',
+                    iconCls: 'silk-layout-header',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var autoUpdateTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleAutoUpdate#}{literal}",
+                    hasItems: true,
+                    html: "{/literal}<ul class='submenu'><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a faction='AdminAutoUpdate' method='initializeApplication' href='#'>{#str_AutoUpdateTitleApplication#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a href='#' faction='AdminAutoUpdate' method='initializeLicenseKeys'>{#str_AutoUpdateTitleLicenseKeys#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a href='#' faction='AdminAutoUpdate' method='initializeProducts'>{#str_AutoUpdateTitleProductCollections#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a href='#' faction='AdminAutoUpdate' method='initializeBackgrounds'>{#str_AutoUpdateTitleBackgrounds#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a href='#' faction='AdminAutoUpdate' method='initializeMasks'>{#str_AutoUpdateTitleMasks#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a href='#' faction='AdminAutoUpdate' method='initializeScrapbookPictures'>{#str_AutoUpdateTitleScrapbook#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/world_go.png' alt=''><a href='#' faction='AdminAutoUpdate' method='initializeFrames'>{#str_AutoUpdateTitleFrames#}</a></li></ul>{literal}",
+                    iconCls: 'silk-world-go',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var componentsTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleComponents#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-bricks',
+                    faction:'AdminComponentCategories',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                {/literal}{if !$optionHOLDES}{literal}
+                var dataRetentionPoliciesTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleManagementPolicies#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-database-delete',
+                    faction:'AdminDataRetentionAdmin',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                 });
+                {/literal}{/if}{literal}
+
+                var collectFromStoreTab = new Ext.Panel({
+                    title: "{/literal}{#str_LabelCollectFromStore#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-basket-put',
+                    faction:'CollectFromStore',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var scheduledTasksTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleScheduledTasks#}{literal}",
+                    hasItems: true,
+                    html: "{/literal}<ul class='submenu'><li><img src='{$webroot}/utils/ext/images/silk/time.png' alt='' /><a faction='AdminScheduledTasks' href='#'>{#str_SectionTitleScheduledTasks#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/time.png' alt='' /><a href='#' faction='AdminScheduledEvents'>{#str_SectionTitleScheduledEvents#}</a></li></ul>{literal}",
+                    iconCls: 'silk-time',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var matadataTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleMetaData#}{literal}",
+                    hasItems: true,
+                    html: "{/literal}<ul class='submenu'><li><img src='{$webroot}/utils/ext/images/silk/attach.png' alt='' /><a faction='AdminMetadataKeywords' href='#'>{#str_SectionTitleMetaDataKeyWords#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/attach.png' alt='' /><a href='#' faction='AdminMetadataKeywordsGroups'>{#str_SectionTitleMetaDataKeyWordGroups#}</a></li></ul>{literal}",
+                    iconCls: 'silk-attach',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var taopixonlineTab = new Ext.Panel({
+                    title: "{/literal}{#str_SectionTitleTAOPIXOnline#}{literal}",
+                    hasItems: true,
+                    html: "{/literal}<ul class='submenu'>{if !$optionHOLDES}<li><img src='{$webroot}/utils/ext/images/silk/database_gear.png' alt='' /><a faction='AdminTaopixOnlineImageServersAdmin' href='#'>{#str_SectionTitleServerManagement#}</a></li>{/if}<li><img src='{$webroot}/utils/ext/images/silk/link_go.png' alt='' /><a faction='AdminTaopixOnlineProductURLAdmin' href='#'>{#str_SectionTitleProductURLs#}</a></li><li><img src='{$webroot}/utils/ext/images/silk/font.png' alt='' /><a faction='AdminTaopixOnlineFontLists' href='#'>{#str_TitleFontLists#}</a></li></ul>{literal}",
+                    iconCls: 'silk-connect',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var productionTab = new Ext.Panel({
+                    title: "{/literal}{#str_LabelProduction#}{literal}",
+                    hasItems: false,
+                    iconCls: 'silk-printer',
+                    faction:'AdminProduction',
+                    cls : 'notools',
+                    listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+                var oauthProviderTab = new Ext.Panel({
+                  title: "{/literal}{#str_LabelOAuth2Providers#}{literal}",
+                  hasItems: false,
+                  iconCls: 'tpx-oauth-provider',
+                  faction: 'AdminOAuthProvider',
+                  cls : 'notools',
+                  listeners: { 'beforeexpand': menuOnExpand, 'beforerender': menuOnBeforeRender }
+                });
+
+
+                var accordion = new Ext.Panel({
+                    region:'west',
+                    width: {/literal}{#kGUIAdminAccordionWidth#|default:50}{literal},
+                    title: "{/literal}{#str_Title#}{literal}",
+                    collapsible: true,
+                    autoScroll: true,
+                    id: 'accordionPanel',
+                    {/literal}
+                    {if $TPX_LOGIN_PRODUCTION_USER}
+                        collapsed:true,
+                    {/if}
+                    {literal}
+                    layout: { type: 'accordion', animate: true , fill:false},
+                    items: [
+                        {/literal}
+                        {if $TPX_LOGIN_SYSTEM_ADMIN}
+                            homeTab,
+                            aboutTab,
+                            constantsTab,
+                            currenciesTab,
+                            usersTab,
+                            taxTab,
+                            dataExportTab,
+                            {if $adminsitesenabled}
+                                multiSiteTab,
+                            {/if}
+                            productsTab,
+                            productGroupsTab,
+                            shippingTab,
+                            paymentMethodsTab,
+                            customersTab,
+                            vouchersTab,
+                            brandingTab,
+                            autoUpdateTab,
+                            componentsTab,
+                            scheduledTasksTab,
+                            matadataTab,
+                            oauthProviderTab
+                            {if $optionDESOL && !$optionHOLDES}
+                            ,dataRetentionPoliciesTab
+                            {/if}
+                            {if $optionDESOL}
+                            ,taopixonlineTab
+                            ,experienceTab
+                            ,bulkEditorTab
+                            {/if}
+                            ,productionTab
+                            {if $optionsSCNTR}
+                            ,connectorsTab
+                            {/if}
+                        {elseif $TPX_LOGIN_COMPANY_ADMIN}
+                            usersTab,
+                            taxTab,
+                            dataExportTab,
+                            productsTab,
+                            productGroupsTab,
+                            componentsTab,
+                            shippingTab,
+                            customersTab,
+                            vouchersTab,
+                            brandingTab,
+                            autoUpdateTab
+                        {elseif $TPX_LOGIN_SITE_ADMIN}
+                            usersTab
+                        {elseif $TPX_LOGIN_BRAND_OWNER}
+                            dataExportTab
+                        {elseif ($TPX_LOGIN_STORE_USER || $TPX_LOGIN_DISTRIBUTION_CENTRE_USER)}
+                            collectFromStoreTab
+                        {elseif $TPX_LOGIN_PRODUCTION_USER}
+                            productionTab
+                        {/if}
+                        {literal}
+                    ],
+                    defaults: { collapsed: true },
+                    bodyStyle:'border-right:0; background: rgb(237, 240, 252)'
+                });
+
+                centreRegion = new Ext.Panel({
+                    region:'center',
+                    cls:'empty',
+                    layout: 'anchor',
+                    id: 'centreRegionPanel',
+                    bodyStyle: 'background:#fff url("{/literal}{$webroot}{literal}/images/logo_transparent.png") 50% 50% no-repeat;',
+                    listeners:
+                    {
+                        render: function(panel) 
+                        {
+                            centreRegion.body.dom.id = "app";
+                            var shadow = document.createElement('div');
+                            shadow.id = 'shadow';
+                            shadow.style = 'display:flex;height:100%;';
+                            centreRegion.body.dom.appendChild(shadow);
+                        }
+                    }
+                });
+
+                /* Viewport that contains all the layout */
+                viewport = new Ext.Viewport({
+                    layout:'border', 
+                    id:'viewportObj',
+                    items: [
+                        { xtype: 'panel', region:'north', html: "<div id='header'><div><img src='{/literal}{$webroot}/images/logo_transparent_thumbnail.png'>&#8203;</div><h1>Control Centre</h1><div id='logOutBtnHolder'></div></div>{literal}" },
+                        accordion,
+                        centreRegion
+                    ]
+                }); /* end of viewport */
+
+                /* set onclick event handlers on sub menu links */
+                var subMenus = document.getElementsByTagName('ul');
+                var subMenuLinks = [];
+                for (var i = 0, subMenu, subMenuLink; i < subMenus.length; i++)
+                {
+                    subMenu = subMenus[i];
+                    if (subMenu.className == 'submenu')
+                    {
+                        subMenuLinks = subMenu.getElementsByTagName('a');
+                        for (var j = 0; j < subMenuLinks.length; j++)
+                        {
+                            subMenuLink = subMenuLinks[j];
+                            subMenuLink.onclick = function(){ itemClicked(this); return false; };
+                        }
+                    }
+                }
+
+                var logOutBtn = new Ext.Button({
+                    renderTo: 'logOutBtnHolder',
+                            text: "{/literal}{#str_LabelLogOut#}{literal}",
+                    handler: logOut
+                });
+
+    	/* if there is only one option then load it */
+{/literal}
+{if $TPX_LOGIN_SYSTEM_ADMIN}
+    {literal}
+                itemClicked(homeTab);
+    {/literal}
+{/if}
+{if ($TPX_LOGIN_STORE_USER || $TPX_LOGIN_DISTRIBUTION_CENTRE_USER)}
+    {literal}
+                itemClicked(collectFromStoreTab);
+    {/literal}
+{/if}
+{if $TPX_LOGIN_SITE_ADMIN}
+    {literal}
+                itemClicked(usersTab);
+    {/literal}
+{/if}
+{if $TPX_LOGIN_BRAND_OWNER}
+    {literal}
+                itemClicked(dataExportTab);
+    {/literal}
+{/if}
+{if $TPX_LOGIN_PRODUCTION_USER}
+    {literal}
+                itemClicked(productionTab);
+    {/literal}
+{/if}
+{literal}
+
+            });
+{/literal}
+        //]]>
+        </script>
+    </head>
+    <body>
+    <script type="text/javascript" src="{$webroot}{asset file='/utils/taopix.js'}"></script>
+    </body>
+</html>

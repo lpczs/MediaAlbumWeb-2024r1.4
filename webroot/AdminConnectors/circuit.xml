@@ -1,0 +1,77 @@
+<!-- Admin Connectors -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="list">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsList()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsEdit()" />
+	</fuseaction>
+
+	<fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="connectorsDisplayEdit()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsAdd()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="connectorsDisplayAdd()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsDelete()" />
+	</fuseaction>
+
+	<fuseaction name="rebuild">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsRebuildTheme()" />
+	</fuseaction>
+
+	<fuseaction name="sync">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsSyncProducts()" />
+	</fuseaction>
+
+	<fuseaction name="syncProductsDisplay">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="connectorsSyncProductsDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="themepush">
+		<instantiate object="control" class="AdminConnectors_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="connectorsInstallTaopixTheme()" />
+	</fuseaction>
+
+</circuit>

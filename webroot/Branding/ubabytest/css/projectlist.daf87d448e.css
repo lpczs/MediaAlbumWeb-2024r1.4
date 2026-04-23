@@ -1,0 +1,785 @@
+body
+{
+    margin: 0;
+    background-color: #EAEAEA;
+    font-family: Arial, "sans-serif";
+    color: #707070;
+    font-size: 62.5%;
+    position: relative;
+}
+
+
+/* ===========================
+    GLOBAL STYLES
+=========================== */
+
+.hidden
+{
+    display: none;
+}
+
+.content-wrap
+{
+    width: calc(100% - 30px);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+h1 
+{
+    font-size: 2.6em;
+    line-height: 1.4;
+}
+
+h2 
+{
+    font-size: 2.2em;
+    line-height: 1.4;
+}
+
+p,
+li
+{
+    font-size: 1.4em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+a 
+{ 
+    text-decoration: none;
+}
+
+.panel
+{
+    background: #fff;
+}
+
+/** Buttons **/
+
+/* Button reset */
+
+button {
+    display: inline-block;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 1em;
+    background: transparent;
+    font-family: Arial, "sans-serif";
+}
+
+button:disabled
+{
+    opacity: 0.6;
+}
+
+.button
+{
+    font-size: 1.4em;
+    border-radius: 5px;
+    padding: 10px 20px 13px;
+    display: inline-block;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.3);
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    line-height: 1.3;
+    transition: 0.3s;
+}
+
+.button.action
+{
+    background-color: #4BA5FF;
+    color: #fff;
+}
+
+.button.action:hover
+{
+    background-color: #3A90E6;
+}
+
+.button.secondary
+{
+    background-color: #D9D9D9;
+    color: #505050;
+}
+
+.button.secondary:hover
+{
+    background: #c3c3c3;
+}
+
+.delete .action.button
+{
+    background-color: #EB3037;
+    color: #fff;
+}
+
+.delete .action.button:hover
+{
+    background: #b51d23;
+}
+
+/** Animated loading dots **/
+
+.animated-loader,
+.animated-loader:before,
+.animated-loader:after
+{
+	border-radius: 2px;
+	width: 2.5em;
+	height: 2.5em;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation: loader-animation 0.8s infinite ease-in-out;
+	animation: loader-animation 0.8s infinite ease-in-out;
+}
+
+.animated-loader
+{
+	color: #cbcbcb;
+	font-size: 4px!important;
+	margin: 10px auto;
+	position: relative;
+	text-indent: -9999em;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+
+.animated-loader:before,
+.animated-loader:after
+{
+	content: '';
+	position: absolute;
+	top: 0;
+}
+
+.animated-loader:before
+{
+	left: -3.5em;
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+
+.animated-loader:after
+{
+  left: 3.5em;
+}
+
+@-webkit-keyframes loader-animation
+{
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 2.5em 0 -1.3em;
+	}
+	40% {
+		box-shadow: 0 2.5em 0 0;
+	}
+}
+
+@keyframes loader-animation
+{
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 2.5em 0 -1.3em;
+	}
+	40% {
+		box-shadow: 0 2.5em 0 0;
+	}
+}
+
+/* ---------------------------
+    MODAL / DIALOG WINDOW
+--------------------------- */
+.shim
+{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(188,188,188,0.7);
+    top: 0;
+}
+
+.modal-wrap
+{
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.modal
+{
+    display: none;
+	max-width: calc(100% - 30px);
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: -30px; /* lifts modal up a bit to account for browser surrounds on mobile */
+    border: 1px solid #b5b5b5;
+}
+
+.modal-size-1
+{
+	max-width: 400px;
+}
+
+.modal-size-2
+{
+	max-width: 500px;
+}
+
+.modal h2 
+{
+    margin: 10px 0 20px;
+}
+
+.modal p
+{
+    font-size: 1.6em;
+    margin-top: 10px;
+}
+
+.modal .button-wrap
+{
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.modal .button-wrap.single-button
+{
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.modal .button
+{
+    font-size: 1.5em;
+    padding: 12px 30px 15px;
+    max-width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal .content
+{
+	padding: 0 0 30px 0;
+    width: 400px;
+    max-width: 100%;
+	margin-top: 30px;
+}
+
+/* Specific size for the share preview modal content */
+.modal.sharepreview .content
+{
+	width: 500px;
+}
+
+.modal input[type="text"]
+{
+    background: #EFEFEF;
+    border: none;
+    border-bottom: 2px solid #C3C3C3;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1.8em;
+}
+
+.modal.loading
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    margin-left: -150px;
+    height: 180px;
+    margin-top: -110px;
+    z-index: 200;
+}
+
+.modal .animated-loader
+{
+    margin-bottom: 30px;
+}
+
+.text-input-wrap
+{
+    position: relative;
+    padding-top: 10px;
+}
+
+.text-input-wrap--with-button
+{
+	display: flex;
+}
+
+.text-input-wrap--with-button input[type="text"]
+{
+	width: auto;
+	flex: auto;
+}
+
+.text-input-wrap--with-button button
+{
+	margin-left: 10px;
+}
+
+.text-input-wrap label /* positions label as placeholder in text box */
+{
+    position: absolute;
+    top: 26px;
+    left: 15px;
+    font-size: 1.8em;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
+.text-input-wrap input:focus + label, /* moves label up when text box is in focus */
+.text-input-wrap input:valid + label,  /* keeps label up when text box is populated */
+.text-input-wrap input.read-only + label  /* position label outside if this is a read-only field (as it should be pre-populated) */
+{
+    top: -12px;
+    left: 0;
+    font-size: 1.2em;
+    opacity: 1;
+}
+
+/* Error and message styles */
+
+.text-input-error
+{
+    margin-top: 10px;
+    background: #ffcbcb;
+    color: #b30d0d;
+    font-size: 1.4em;
+    padding: 10px; 
+}
+
+.text-input-message 
+{
+    position: absolute;
+    width: 100%;
+    background: #fffacb;
+    color: #bb812a;
+    font-size: 1.4em;
+    padding: 5px;
+    box-sizing: border-box;
+    top: calc(0% - 1em - 5px);
+}
+
+
+/* ---------------------------
+    HEADER
+--------------------------- */
+
+header
+{
+    background: #fff;
+    border-bottom: 1px solid #707070;
+    padding: 15px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.logo-image
+{
+    height: 30px;
+    width: auto;
+}
+
+.back-link
+{
+    position: relative;
+    font-size: 1.4em;
+    padding: 0 5px 5px 17px;
+    display: flex;
+    color: #707070;
+    margin-left: 15px;
+}
+
+.back-link:before
+{    
+    content: '';
+    display: block;
+    background: url("../images/project-list/project-list-icons.svg");
+    height: 18px;
+    width: 12px;
+    position: absolute;
+    align-items: center;
+    left: 0;
+    top: 0;
+}
+
+.back-link:hover
+{
+    text-decoration: underline;
+}
+
+
+/* ---------------------------
+    PROJECTS LIST
+    (specific styles)
+--------------------------- */
+
+/* Hide the panel to allow slideDown jquery animation */
+.projects-list.panel.hidden 
+{
+    display: none;
+}
+
+.panel-inner
+{
+    margin-bottom: 15px;
+    position: relative;
+    display: -webkit-flex;
+    display: flex;
+    padding: 20px;
+    align-items: flex-start;
+}
+
+/** Project preview / product thumbnail **/
+
+.project-preview-wrap 
+{
+    width: 112px;
+    border: 1px solid #d2d2d2;
+    flex-shrink: 0;
+}
+
+.product-preview-image 
+{
+    width: 100%;
+    height: auto;
+}
+
+/** Project details (text) **/
+
+.project-details
+{
+    padding: 10px 220px 10px 20px;
+    box-sizing: border-box;
+}
+
+.project-details h2
+{
+    margin: 0 0 10px;
+}
+
+.project-details p
+{
+    margin: 0 0 4px;
+}
+
+.date-of-purge
+{
+    color: #F00;
+}
+
+.date-of-purge a
+{
+    color: #333;
+}
+/** Project options - links **/
+
+.project-options 
+{
+    list-style: none; 
+    margin: 15px 0 -10px 0; 
+    padding: 0; 
+    display: flex; 
+    flex-flow: wrap;    
+}
+
+.project-options li 
+{
+    list-style: none;
+	display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px 10px 0;
+    padding: 0;
+}
+
+.project-options button
+{
+    position: relative;
+    color: #636363;
+    padding: 5px 10px 5px 25px;
+    text-decoration: none;
+	white-space: nowrap;
+}
+
+.project-options button:before
+{
+    content: '';
+    display: block;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    background: url("../images/project-list/project-list-icons.svg");
+    opacity: 0.8;
+    top: 3px;
+    left: 0;
+    transition: 0.2s;
+}
+
+.project-options button:hover
+{
+    text-decoration: underline;
+}
+
+.project-options button:hover:before
+{
+     opacity: 1;   
+}
+
+.project-options button.duplicate:before
+{
+    background-position: 0 -30px;
+}
+
+.project-options button.delete:before
+{
+    background-position: 0 -60px;
+}
+
+.project-options button.rename:before
+{
+    background-position: 0 -90px;
+}
+
+.project-options button.share:before
+{
+    background-position: 0 -120px;
+}
+
+.project-options button:disabled:hover
+{
+    text-decoration: none;
+    cursor: default;
+} 
+
+.project-options button:disabled:hover:before
+{
+     opacity: 0.8;   
+}
+
+
+/** Continue button **/
+
+.projects-list .continue,
+.projects-list .no-button
+{
+    position: absolute;
+    width: 100%;
+    max-width: 200px;
+    right: 20px;
+    top: 20px;
+}
+
+.projects-list .continue
+{
+    font-size: 1.6em;
+    padding: 13px 15px 16px;
+}
+
+.no-button
+{
+    text-align: center;
+    padding-top: 10px;
+    display: inline-block;
+    font-style: italic;
+}
+
+
+/** Project List - empty state **/
+
+.empty-state
+{
+    font-size: 1.6em;
+    text-align: center;
+    padding-top: 18vh;
+    opacity: 0.6;
+}
+
+
+/** Project name **/
+
+.modal.delete p strong
+{
+    display: inline-block;
+    margin-top: 6px;
+}
+
+
+/** Panel animations (after action) **/
+
+/* Pulse the project name after Rename action */
+.panel.rename-panel h2
+{
+	animation: pulse 1s 1 ease;
+}
+
+@keyframes pulse {
+    0% 
+    {
+        color: #fff;
+    }
+    20%
+    {
+        color: #fff;
+    }
+    80% 
+    {
+        color: #333;
+    }
+    100% 
+    {
+        color: #707070;
+    }
+}
+
+
+/* ===========================
+    RESPONSIVE STYLES
+=========================== */
+
+
+@media screen and (max-width: 760px) 
+{
+    
+    header
+    {
+        padding: 10px 15px;    
+    }
+    
+    .panel-inner
+    {
+        padding: 15px;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .project-details
+    {
+        padding: 0;
+        width: 100%;
+    }
+    
+    .project-details h2
+    {
+        font-size: 2em;
+        line-height: 1.3;
+        margin-top: 15px;
+    }
+    
+    .projects-list .continue,
+    .projects-list .no-button
+    {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin-top: 15px;
+        max-width: 65vw;
+    }
+    
+    .project-options
+    {
+        margin-top: 30px;
+		justify-content: center;
+    }
+    
+    .project-options li
+    {
+        justify-content: space-around;
+        margin: 0;
+    }
+    
+    .project-options button
+    {
+        padding: 10px;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .project-options button:before
+    {
+        position: relative;
+        margin: 0 auto 12px;
+    }
+}
+
+
+@media screen and (max-width: 550px) 
+{
+	.text-input-wrap--with-button
+	{
+		flex-direction: column;
+        align-items: center;
+	}
+    
+    .text-input-wrap--with-button button
+    {
+        margin: 10px 0;
+    }
+    
+    .text-input-wrap--with-button input[type="text"]
+    {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 380px) 
+{
+     .project-options
+    {
+        flex-direction: column;
+        margin: 15px 0 0;
+    }
+    
+     .project-options li
+    {
+        width: 100%;
+    }
+    
+     .project-options button
+    {
+        padding: 10px 10px 10px 26px;
+        width: auto;
+    }
+    
+     .project-options button:before
+    {
+        position: absolute;
+        left: 0;
+        margin-left: 0;
+        top: 7px;
+    }
+
+}

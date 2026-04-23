@@ -1,0 +1,37 @@
+{$appname} - Order '{$ordernumber}' Upload File Reminder
+Dear {$billingcontactfirstname},
+
+Thank you for placing your order with us.
+
+We have received your payment for {$projectname} and now would kindly ask you to upload your project to our server so we can start the production process.
+
+To upload your project please follow these easy steps:
+
+1. Open your {$appname} software
+
+2. Choose 'open an existing project'
+
+3. Click on your project (the status should say 'Waiting for Files') and choose the 'send files' option
+
+4. Tick the disclaimer box and choose 'start'
+
+5. Click on the 'Upload Order' button then choose 'continue'
+
+
+Your files will then be uploaded automatically to our server.
+
+Please note, the instructions above apply to users of our most recent version of {$appname}. For those using earlier versions, please follow the steps below:
+
+1. Launch your {$appname} software
+
+2. When the prompt is displayed informing you that you did not finish uploading your project, please click 'Yes' to upload files
+
+3. Please proceed to the shopping cart by clicking on the cart icon or choose 'Order…' from the File menu
+
+4. Click 'OK' to verify the flight check
+
+5. Tick the disclaimer box and choose 'start'
+
+6. Click on the 'Upload Finished Pages' button then choose 'continue'
+
+{$emailsignature}

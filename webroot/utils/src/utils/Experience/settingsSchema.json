@@ -1,0 +1,277 @@
+{
+  "$ref": "#/definitions/Settings",
+  "definitions": {
+      "Settings": {
+          "type": "object",
+          "title": "settings",
+          "additionalProperties": false,
+          "properties": {
+              "guestAccess": {
+                  "$ref": "#/definitions/GuestAccess"
+              },
+              "appMenu": {
+                  "$ref": "#/definitions/AppMenu"
+              },
+              "standardAssetServices": {
+                  "$ref": "#/definitions/StandardAssetServices"
+              },
+              "externalAssetServices": {
+                  "$ref": "#/definitions/ExternalAssetServices"
+              },
+              "previousUploadsWindow": {
+                  "$ref": "#/definitions/PreviousUploadsWindow"
+              },
+              "units": {
+                  "$ref": "#/definitions/Units"
+              },
+              "autoImageEnhancement": {
+                  "$ref": "#/definitions/AutoImageEnhancement"
+              },
+              "savePromptDelay": {
+                  "$ref": "#/definitions/SavePromptDelay"
+              },
+              "inactivityDelay": {
+                  "$ref": "#/definitions/InactivityDelay"
+              },
+              "imageScaling": {
+                  "$ref": "#/definitions/ImageScaling"
+              },
+              "orderButtonLabel": {
+                  "$ref": "#/definitions/OrderButtonLabel"
+              },
+              "submitEditedOrderButtonLabel": {
+                  "$ref": "#/definitions/SubmitEditedOrderButtonLabel"
+              },
+              "defaultProjectName": {
+                  "$ref": "#/definitions/DefaultProjectName"
+              },
+              "logoLinkUrl": {
+                  "$ref": "#/definitions/LogoLinkUrl"
+              },
+              "orderSummaryWindow": {
+                  "$ref": "#/definitions/OrderSummaryWindow"
+              }
+          }
+      },
+      "GuestAccess": {
+          "type": "object",
+          "title": "guestAccess",
+          "additionalProperties": false,
+          "properties": {
+              "allowGuestAccess": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "promptGuestsToSignIn": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "allowGuestsToRegister": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "terms": {
+                  "$ref": "#/definitions/Bool"
+              }
+          }
+      },
+      "AppMenu": {
+          "type": "object",
+          "title": "guestAccess",
+          "additionalProperties": false,
+          "properties": {
+              "saveButton": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "share": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "signInSignOut": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "register": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "language": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "about": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "help": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "changeProduct": {
+                  "$ref": "#/definitions/Bool"
+              }
+          }
+      },
+      "StandardAssetServices": {
+          "type": "object",
+          "title": "standardAssetServices",
+          "properties": {
+              "upload": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "uploadFromPhone": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "previousUploads": {
+                  "$ref": "#/definitions/Bool"
+              }
+          }
+      },
+      "ExternalAssetServices": {
+          "type": "object",
+          "title": "externalAssetServices",
+          "properties": {
+              "libraryLink": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "facebook": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "flickr": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "googlePhotos": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "instagram": {
+                  "$ref": "#/definitions/Bool"
+              }
+          }
+      },
+      "PreviousUploadsWindow": {
+          "type": "object",
+          "title": "previousUploadsWindow",
+          "properties": {
+              "defaultSortOrder": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "defaultPictureListMode": {
+                  "$ref": "#/definitions/StringVal"
+              }
+            }
+      },
+      "Units": {
+          "type": "object",
+          "title": "units",
+          "properties": {
+              "units":{
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "AutoImageEnhancement": {
+          "type": "object",
+          "title": "autoImageEnhancement",
+          "properties": {
+              "enhanceAllUserImagesAuto":{
+                  "$ref": "#/definitions/Bool"
+              },
+              "allowCustomersToOptOut":{
+                  "$ref": "#/definitions/Bool"
+              }
+          }
+      },
+      "SavePromptDelay": {
+          "type": "object",
+          "title": "savePromptDelay",
+          "properties": {
+              "savePromptDelay":{
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "InactivityDelay": {
+          "type": "object",
+          "title": "inactivityDelay",
+          "properties": {
+              "inactivityDelay":{
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "ImageScaling": {
+          "type": "object",
+          "title": "imageScaling",
+          "properties": {
+              "scaleBeforeUpload":{
+                  "$ref": "#/definitions/Bool"
+              },
+              "maxScaleBeforeUploadMP": {
+                  "$ref": "#/definitions/StringVal"
+              },
+              "scaleAfterUpload": {
+                  "$ref": "#/definitions/Bool"
+              },
+              "maxScaleAfterUploadMP": {
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "OrderButtonLabel": {
+          "type": "object",
+          "title": "orderButtonLabel",
+          "properties": {
+              "orderButtonLabel":{
+                  "$ref": "#/definitions/StringVal"
+              },
+              "customOrderButtonLabel": {
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "SubmitEditedOrderButtonLabel": {
+          "type": "object",
+          "title": "submitEditedOrderButtonLabel",
+          "properties": {
+              "submitEditedOrderButtonLabel":{
+                  "$ref": "#/definitions/StringVal"
+              },
+              "customEditedOrderButtonLabel": {
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "DefaultProjectName": {
+          "type": "object",
+          "title": "defaultProjectName",
+          "properties": {
+              "defaultProjectName":{
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "LogoLinkUrl": {
+          "type": "object",
+          "title": "logoLinkUrl",
+          "properties": {
+              "logoLinkUrl":{
+                  "$ref": "#/definitions/StringVal"
+              },
+              "logoLinkToolTipText":{
+                  "$ref": "#/definitions/StringVal"
+              }
+          }
+      },
+      "OrderSummaryWindow": {
+          "type": "object",
+          "title": "orderSummaryWindow",
+          "properties": {
+              "showOrderSummaryWindow":{
+                  "$ref": "#/definitions/Bool"
+              },
+              "showProjectQuantityDropdown":{
+                  "$ref": "#/definitions/Bool"
+              }
+          }
+      },
+      "Bool": {
+          "type": ["boolean"],
+          "title": "Bool"
+      },
+      "StringVal": {
+          "type": ["integer", "string"],
+          "title": "StringVal"
+      }
+  }
+}

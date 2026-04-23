@@ -1,0 +1,2894 @@
+<?php
+
+require_once('../Order/Order_model.php');
+require_once('../Utils/UtilsAddress.php');
+require_once('../Utils/UtilsEmail.php');
+require_once('../Utils/UtilsDataExport.php');
+
+class AppDataAPI_model
+{
+	/**
+	 * Function to query data.
+	 *
+	 * @param array $pJSONArray Command data.
+	 * @return Array
+	 *			'data' => array
+	 *				'resultset' => Array containing the requested data.
+	 *				'numrows' => Number of rows returned but the query.
+	 * 				'query' => This key only appears if debug is enabled. Contains the SQL for the command.
+	 *			'error' => Error message string.
+	 */
+	static function query($pJSONArray)
+	{
+		$resultDataArray = ['resultset' => [], 'numrows' => 0];
+		$resultArray = ['data' => $resultDataArray, 'error' => ''];
+		$result = '';
+		$query = '';
+
+		$dbObj = DatabaseObj::getGlobalDBConnection();
+		if ($dbObj)
+		{
+			foreach($pJSONArray as $index => $node)
+			{
+				if ((isset($node['action'])) && ($node['action'] == 'SELECT'))
+				{
+					// Build sql queries if Extra is empty
+					if ($node['extra'] == '')
+					{
+						$fieldDataType = self::getFieldDataType($node);
+						if ($fieldDataType['error'] == '')
+						{
+							// remove Error element because it is empty
+							unset($fieldDataType['error']);
+
+							$fields = $node['fields'];
+							$reffield = $node['ref'];
+							$operator = $node['operator'];
+							$valueArray = Array();
+							$resultName = Array();
+
+							$queryString = '';
+							$i = 0;
+							foreach ($fields as $key => $value)
+							{
+								$queryString .= '`' . $key . '`,';
+								$resultName[] = $key;
+								$i++;
+							}
+
+							$valueArray[$reffield] = $node['refvalue'];
+							$queryString = substr($queryString, 0, -1);
+							$query = 'SELECT ' . $queryString . ' FROM `' . $node['schema'] . '` WHERE (`' . $reffield . '`' . $operator . ' ?)';
+
+							if ($stmt = $dbObj->prepare($query))
+							{
+								// bind param dynamically
+								if (DatabaseObj::bindParams($stmt, $fieldDataType, $valueArray))
+								{
+									if ($stmt->execute())
+									{
+										$stmt->store_result();
+
+										// bind result dynamically
+										$bindResult = self::bindResult($stmt, $resultName);
+
+										if (count($bindResult) > 0)
+										{
+											$stmt->fetch();
+
+											$resultDataArray['resultset'] = $bindResult;
+											$resultDataArray['numrows'] = $stmt->num_rows;
+
+											$stmt->free_result();
+										}
+
+										if ($pJSONArray['debug'])
+										{
+											$resultDataArray['query'] = $query;
+										}
+
+										$stmt->close();
+										$stmt = null;
+									}
+								}
+								else
+								{
+									$result = 'Error: ' . $dbObj->error;
+								}
+							}
+							else
+							{
+								$result = 'Error: ' . $dbObj->error;
+							}
+						}
+						else
+						{
+							$result = $fieldDataType['error'];
+						}
+					}
+					else
+					{
+						// validate & execute the queries in 'extra' if it is not empty, ignore everything else
+
+						$query = $node['extra'];
+						$paramElement = $node['params'];
+						$fields = $node['fields'];
+
+						// remove the datatype from
+						$dataType = $paramElement['datatype'];
+						unset($paramElement['datatype']);
+
+						// convert datatype string into array
+						$fieldDataType = str_split($dataType);
+
+						$i = 0;
+						$resultName = Array();
+						foreach ($fields as $key => $value)
+						{
+							$resultName[] = $key;
+							$i++;
+						}
+
+						if ($stmt = $dbObj->prepare($query))
+						{
+							//  bind param dynamically
+							if (DatabaseObj::bindParams($stmt, $fieldDataType, $paramElement))
+							{
+								if ($stmt->execute())
+								{
+									$stmt->store_result();
+
+									// bind result dynamically
+									$bindResult = self::bindResult($stmt, $resultName);
+
+									if (count($bindResult) > 0)
+									{
+										$stmt->fetch();
+
+										$resultDataArray['resultset'] = $bindResult;
+										$resultDataArray['numrows'] = $stmt->num_rows;
+
+										$stmt->free_result();
+									}
+
+									if ($pJSONArray['debug'])
+									{
+										$resultDataArray['query'] = $query;
+									}
+
+									$stmt->close();
+									$stmt = null;
+								}
+							}
+							else
+							{
+								$result = 'Error: ' . $dbObj->error;
+							}
+						}
+						else
+						{
+							$result = 'Error: ' . $dbObj->error;
+						}
+					}
+				}
+			}
+
+			$dbObj->close();
+		}
+		else
+		{
+			$result = 'Error: Cannot connect to database';
+		}
+
+		$resultArray['data'] = $resultDataArray;
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+	static function mapFields($pMap, $pDataArray)
+	{
+		$returnArray = array();
+		foreach ($pDataArray as $key => $value)
+		{
+			if (array_key_exists($key, $pMap))
+			{
+				// if there isn't anything to map to this means it needs deleting
+				if ($pMap[$key] != '')
+				{
+					$returnArray[$pMap[$key]] = $value;
+				}
+			}
+			else
+			{
+				$returnArray[$key] = $value;
+			}
+		}
+
+		return $returnArray;
+	}
+
+	static function insertOrder($pJSONArray)
+	{
+		$resultArray = Array();
+
+		$pJSONArray = $pJSONArray[0];
+		$orderHeaderID = 0;
+
+		$dbObj = DatabaseObj::getGlobalDBConnection();
+
+		if ($dbObj)
+		{
+			// start a transaction
+			$dbObj->query('BEGIN');
+
+			// create a field map for the structure conversion
+			$fieldMap = array(
+				'uuid' => 'designeruuid',
+				'browserlanguagecode' => 'languagecode',
+				'ordertotalitemsell' => 'itemtotalsell',
+				'ordertotalitemtax' => 'itemtotaltax',
+				'ordertotalshippingtax' => 'shippingtotaltax',
+				'ordertotal' => 'total',
+				'ordertotalitemcost' => 'itemtotalcost',
+				'ordertotalshippingcost' => 'shippingtotalcost',
+				'ordertotalshippingweight' => 'shippingtotalweight',
+				'ordertotalcost' => 'totalcost',
+				'ordertotaltaxbeforediscount' => 'totaltaxbeforediscount',
+				'ordertotaldiscount' => 'totaldiscount',
+				'ordertotaltax' => 'totaltax',
+				'shippingrequiresdelivery' => 'requiresdelivery',
+				'showpriceswithtax' => 'pricesincludetax'
+			);
+
+			// fix the data by mapping the correct fields
+			$orderHeader = self::mapFields($fieldMap, $pJSONArray['headerarray']);
+
+			// build the DATA API packet
+			$orderHeaderData = array("debug"=>false, array(
+				'action' =>  "INSERT",
+				'schema' => "ORDERHEADER",
+				'extra' => "",
+				'fields' => $orderHeader));
+
+			// insert order header data
+			$orderHeaderInsertResult = self::insert($orderHeaderData, 0, $dbObj);
+
+			// if there is an error rollback and send and error
+			if ($orderHeaderInsertResult['data']['resultset'][0]['error'] != '')
+			{
+				$dbObj->query('ROLLBACK');
+				$dbObj->close();
+				$resultArray['error'] = 'Unable to add order header data: ' . $orderHeaderInsertResult['data']['resultset'][0]['error'];
+				return $resultArray;
+			}
+
+			// grab the order id from the insert
+			// we are only inserting 1 record at a time so there will only be index 0
+			$orderHeaderID = $orderHeaderInsertResult['data']['resultset'][0]['lastinsertid'];
+
+			// insert order item data
+			$cartCount = $pJSONArray['cartitemcount'];
+			$cartArray = $pJSONArray['cartarray'];
+
+			$pictures = array();
+			$externalAssets = array();
+			$calendarCustomisations = array();
+			$components = array();
+
+			for ($i = 0; $i < $cartCount; $i++)
+			{
+				$orderItem = $cartArray[$i];
+				$orderItem['orderid'] = $orderHeaderID;
+
+				// grab the component fields before we attempt to insert the record since they are not a DB column
+				// they will be unset by the field mapping process
+				$pictures = $orderItem['pictures'];
+				$externalAssets = $orderItem['externalassets'];
+				$calendarCustomisations = $orderItem['calendarcustomisations'];
+				$components = $orderItem['components'];
+
+				$fieldMap = array(
+					'collectionname' => 'productcollectionname',
+					'collectioncode' => 'productcollectioncode',
+					'taxtotal' => 'totaltax',
+					'productskucode' => 'skucode',
+					'totalweight' => 'totalshippingweight',
+					'pictures' => '',
+					'externalassets' => '',
+					'calendarcustomisations' => '',
+					'components' => ''
+				);
+
+				$orderItem = self::mapFields($fieldMap, $orderItem);
+
+				$orderItemData = array("debug"=>false, array(
+				'action' =>  "INSERT",
+				'schema' => "ORDERITEMS",
+				'extra' => "",
+				'fields' => $orderItem));
+
+				$orderItemInsertResult = self::insert($orderItemData, 0, $dbObj);
+
+				if ($orderItemInsertResult['data']['resultset'][0]['error'] != '')
+				{
+					$dbObj->query('ROLLBACK');
+					$dbObj->close();
+					$resultArray['error'] = 'Unable to add order item data: ' . $orderItemInsertResult['data']['resultset'][0]['error'];
+					return $resultArray;
+				}
+
+				// grab the current order item id
+				$orderItemID = $orderItemInsertResult['data']['resultset'][0]['lastinsertid'];
+
+				// start the sort order to 1
+				$sortOrder = 1;
+
+				$componentsCount = count($components);
+
+				// only insert componets if there are any
+				if ($componentsCount > 0)
+				{
+					// process components and subcomponents
+					$resultArray = self::insertOrderItemComponents($dbObj, $orderHeaderID, $orderItemID, 0, $orderHeader['userid'], $sortOrder, $components);
+
+					// if there was an error we do not want to continue
+					if ($resultArray['error'] != '')
+					{
+						return $resultArray;
+					}
+				}
+
+				// Single print pictures
+
+				$picturesCount = count($pictures);
+
+				if ($picturesCount > 0)
+				{
+					for ($n = 0; $n < $picturesCount; $n++)
+					{
+						$picture = $pictures[$n];
+						$picture['orderid'] = $orderHeaderID;
+						$picture['orderitemid'] = $orderItemID;
+						$picture['sortorder'] = $sortOrder++;
+
+						// cache the sub component data for later use since it will need removing
+						// from the array record
+						$subComponent = array();
+						$subComponent['code'] = $picture['subcomponentcode'];
+						$subComponent['name'] = $picture['subcomponentname'];
+						$subComponent['categorycode'] = $picture['subcomponentcategory'];
+						$subComponent['unitcost'] = $picture['subcomponentunitcost'];
+						$subComponent['unitweight'] = $picture['subcomponentunitweight'];
+						$subComponent['unitsell'] = $picture['subcomponentunitsell'];
+						$subComponent['totalcost'] = $picture['subcomponenttotalcost'];
+						$subComponent['totalweight'] = $picture['subcomponenttotalweight'];
+                        $subComponent['skucode'] = $picture['subcomponentskucode'];
+
+						// unset the items we don't need
+						unset($picture['subcomponentcategory']);
+						unset($picture['subcomponentcode']);
+						unset($picture['subcomponentname']);
+						unset($picture['subcomponentunitcost']);
+						unset($picture['subcomponentunitweight']);
+						unset($picture['subcomponentunitsell']);
+						unset($picture['subcomponenttotalcost']);
+						unset($picture['subcomponenttotalweight']);
+						unset($picture['subcomponentskucode']);
+
+						$pictureData = array("debug"=>false, array(
+							'action' =>  "INSERT",
+							'schema' => "ORDERITEMCOMPONENTS",
+							'extra' => "",
+							'fields' => $picture));
+
+						$pictureInsertResult = self::insert($pictureData, 0, $dbObj);
+
+						if ($pictureInsertResult['data']['resultset'][0]['error'] != '')
+						{
+							$dbObj->query('ROLLBACK');
+							$dbObj->close();
+							$resultArray['error'] = 'Unable to add single print data: ' . $pictureInsertResult['data']['resultset'][0]['error'];
+							return $resultArray;
+						}
+
+						if ($subComponent['code'] != '')
+						{
+							// the sub component is based on the parent apart form the following changes.
+							$pictureSub = $picture;
+							$pictureSub['componentcode'] = $subComponent['categorycode'] . "." . $subComponent['code'];
+							$pictureSub['componentlocalcode'] = $subComponent['code'];
+							$pictureSub['componentname'] = $subComponent['name'];
+							$pictureSub['componentpath'] = '$SINGLEPRINT\\\\' . $subComponent['code'] . '\\\\$SINGLEPRINTOPTION\\\\';
+							$pictureSub['componentcategorycode'] = $subComponent['categorycode'];
+							$pictureSub['componentunitcost'] = $subComponent['unitcost'];
+							$pictureSub['componentunitweight'] = $subComponent['unitweight'];
+							$pictureSub['componentunitsell'] = $subComponent['unitsell'];
+							$pictureSub['componenttotalcost'] = $subComponent['totalcost'];
+							$pictureSub['componenttotalweight'] = $subComponent['totalweight'];
+							$pictureSub['parentcomponentid'] = $pictureInsertResult['data']['resultset'][0]['lastinsertid'];
+							$pictureSub['sortorder'] = $sortOrder++;
+                            $pictureSub['skucode'] = $subComponent['skucode'];
+
+							$pictureSubData = array("debug"=>false, array(
+								'action' =>  "INSERT",
+								'schema' => "ORDERITEMCOMPONENTS",
+								'extra' => "",
+								'fields' => $pictureSub));
+
+							$pictureInsertResult = self::insert($pictureSubData, 0, $dbObj);
+
+							if ($pictureInsertResult['data']['resultset'][0]['error'] != '')
+							{
+								$dbObj->query('ROLLBACK');
+								$dbObj->close();
+								$resultArray['error'] = 'Unable to add single print data: ' . $pictureInsertResult['data']['resultset'][0]['error'];
+								return $resultArray;
+							}
+						}
+					}
+				}
+
+				// External Assets
+				$externalAssetCount = count($externalAssets);
+
+				if ($externalAssetCount > 0)
+				{
+					for ($n = 0; $n < $externalAssetCount; $n++)
+					{
+						$externalAsset = $externalAssets[$n];
+						$externalAsset['orderid'] = $orderHeaderID;
+						$externalAsset['orderitemid'] = $orderItemID;
+						$externalAsset['sortorder'] = $sortOrder++;
+						// these are hardcoded so that it follows what our clientSideLibrary code is doing
+						$externalAsset['componentcode'] = "TAOPIXASSET";
+						$externalAsset['componentlocalcode'] = "TAOPIXASSET";
+						$externalAsset['componentcategorycode'] = "TAOPIXINTERNAL";
+
+						$fieldMap = array(
+							'externalassetname' => 'componentname',
+							'externalassetid' => 'skucode'
+						);
+
+						$externalAsset = self::mapFields($fieldMap, $externalAsset);
+
+						$externalAssetData = array("debug"=>false, array(
+							'action' =>  "INSERT",
+							'schema' => "ORDERITEMCOMPONENTS",
+							'extra' => "",
+							'fields' => $externalAsset));
+
+						$externalAssetInsertResult = self::insert($externalAssetData, 0, $dbObj);
+
+						if ($externalAssetInsertResult['data']['resultset'][0]['error'] != '')
+						{
+							$dbObj->query('ROLLBACK');
+							$dbObj->close();
+							$resultArray['error'] = 'Unable to add external asset data: ' . $externalAssetInsertResult['data']['resultset'][0]['error'];
+							return $resultArray;
+						}
+					}
+				}
+
+				// Calendar Customisations
+				if ($orderItem['producttype'] == TPX_PRODUCTCOLLECTIONTYPE_CALENDAR)
+				{
+					$calendarCustomisationsCount = count($calendarCustomisations);
+
+					if ($calendarCustomisationsCount > 0)
+					{
+						for ($n = 0; $n < $calendarCustomisationsCount; $n++)
+						{
+							$calendarCustomisation = $calendarCustomisations[$n];
+							$calendarCustomisation['orderid'] = $orderHeaderID;
+							$calendarCustomisation['orderitemid'] = $orderItemID;
+							$calendarCustomisation['sortorder'] = $sortOrder++;
+
+							$calendarCustomisationData = array("debug"=>false, array(
+								'action' =>  "INSERT",
+								'schema' => "ORDERITEMCOMPONENTS",
+								'extra' => "",
+								'fields' => $calendarCustomisation));
+
+							$calendarCustomisationInsertResult = self::insert($calendarCustomisationData, 0, $dbObj);
+
+							if ($calendarCustomisationInsertResult['data']['resultset'][0]['error'] != '')
+							{
+								$dbObj->query('ROLLBACK');
+								$dbObj->close();
+								$resultArray['error'] = 'Unable to add calendar customisation data: ' . $calendarCustomisationInsertResult['data']['resultset'][0]['error'];
+								return $resultArray;
+							}
+						}
+					}
+				}
+			}
+
+			// insert the shipping data
+			$shippingData = $pJSONArray['shippingdata'];
+			$shippingData['orderid'] = $orderHeaderID;
+			$shippingData['userid'] = $orderHeader['userid'];
+
+			$fieldMap = array(
+				'shippingratediscountvalue' => 'shippingdiscountvalue',
+				'shippingratetotalsell' => 'shippingtotalsell'
+			);
+
+			$shippingData = self::mapFields($fieldMap, $shippingData);
+
+			$orderShippingData = array("debug"=>false,array(
+				'action' =>  "INSERT",
+				'schema' => "ORDERSHIPPING",
+				'extra' => "",
+				'fields' => $shippingData));
+
+			$orderShippingInsertResult = self::insert($orderShippingData, 0, $dbObj);
+
+			if ($orderShippingInsertResult['data']['resultset'][0]['error'] != '')
+			{
+				$dbObj->query('ROLLBACK');
+				$dbObj->close();
+				$resultArray['error'] = 'Unable to add order shipping data: ' . $orderShippingInsertResult['data']['resultset'][0]['error'];
+				return $resultArray;
+			}
+
+			$dbObj->query('COMMIT');
+			$dbObj->close();
+
+			// now we need to trigger the order
+			$resultArray = self::triggerOrder([["sessionref" => $pJSONArray['sessionref'], "orderid" => $orderHeaderID]]);
+		}
+		else
+		{
+			$resultArray['error'] = "Error: Cannot connect to database";
+		}
+
+		return $resultArray;
+	}
+
+	static function insertOrderItemComponents($pDBObj, $pOrderHeaderID, $pOrderItemID, $pParentOrderItemID, $pUserID, &$pSortOrder, $pComponents)
+	{
+		$resultArray = array('error' => '');
+
+		foreach ($pComponents as $component)
+		{
+			$component['orderid'] = $pOrderHeaderID;
+			$component['orderitemid'] = $pOrderItemID;
+			// assing the sort order and increment
+			$component['sortorder'] = $pSortOrder++;
+			$component['parentcomponentid'] = $pParentOrderItemID;
+			$component['userid'] = $pUserID;
+
+			// cache the sub component data for later use since it will need removing
+			// from the array record
+			$subComponents = array();
+
+			if (array_key_exists('subcomponent', $component))
+			{
+				$subComponents = $component['subcomponent'];
+
+				// unset the items we don't need
+				unset($component['subcomponent']);
+			}
+
+			if (array_key_exists('keywords', $component))
+			{
+				$keywords = $component['keywords'];
+
+				// unset the items we don't need
+				unset($component['keywords']);
+			}
+
+			$componentData = array("debug"=>false, array(
+				'action' =>  "INSERT",
+				'schema' => "ORDERITEMCOMPONENTS",
+				'extra' => "",
+				'fields' => $component));
+
+			$componentInsertResult = self::insert($componentData, 0, $pDBObj);
+
+			if ($componentInsertResult['data']['resultset'][0]['error'] != '')
+			{
+				$pDBObj->query('ROLLBACK');
+				$pDBObj->close();
+				$resultArray['error'] = 'Unable to add component data: ' . $componentInsertResult['data']['resultset'][0]['error'];
+				return $resultArray;
+			}
+
+			// store the meta data for components
+			foreach ($keywords as $keyword)
+			{
+				$metaFields = array();
+				$metaFields['datecreated'] = '[currentdatetime]';
+				$metaFields['orderid'] = $pOrderHeaderID;
+				$metaFields['orderitemid'] =  $pOrderItemID;
+				$metaFields['orderitemcomponentid'] =  $componentInsertResult['data']['resultset'][0]['lastinsertid'];
+				$metaFields['userid'] = $pUserID;
+				$metaFields['section'] = 'COMPONENT';
+
+				$metaData = array("debug"=>false, array(
+					'action' =>  "INSERT",
+					'schema' => "METADATA",
+					'extra' => "",
+					'fields' => $metaFields));
+
+				$metaDataInsertResult = self::insert($metaData, 0, $pDBObj);
+
+				if ($metaDataInsertResult['data']['resultset'][0]['error'] != '')
+				{
+					$pDBObj->query('ROLLBACK');
+					$pDBObj->close();
+					$resultArray['error'] = 'Unable to add component meta data: ' . $metaDataInsertResult['data']['resultset'][0]['error'];
+					return $resultArray;
+				}
+
+				$metaDataValueFields = array();
+				$metaDataValueFields['metadataid'] = $metaDataInsertResult['data']['resultset'][0]['lastinsertid'];
+				$metaDataValueFields['keywordref'] = $keyword['ref'];
+				$metaDataValueFields['value'] = ($keyword['type'] == 'RADIOGROUP') || ($keyword['type'] == 'POPUP') ? $keyword['valuecode'] : $keyword['value'];
+
+				$metaValuesData = array("debug"=>false, array(
+					'action' =>  "INSERT",
+					'schema' => "METADATAVALUES",
+					'extra' => "",
+					'fields' => $metaDataValueFields));
+
+				$metaDataValuesInsertResult = self::insert($metaValuesData, 0, $pDBObj);
+
+				if ($metaDataValuesInsertResult['data']['resultset'][0]['error'] != '')
+				{
+					$pDBObj->query('ROLLBACK');
+					$pDBObj->close();
+					$resultArray['error'] = 'Unable to add component meta data values: ' . $metaDataValuesInsertResult['data']['resultset'][0]['error'];
+					return $resultArray;
+				}
+			}
+
+			// store any subcomponents
+			if (!empty($subComponents))
+			{
+				self::insertOrderItemComponents($pDBObj, $pOrderHeaderID, $pOrderItemID, $componentInsertResult['data']['resultset'][0]['lastinsertid'], $pUserID, $pSortOrder, $subComponents);
+			}
+		}
+
+		return $resultArray;
+	}
+
+	/**
+	 * Function to INSERT data.
+	 *
+	 * @param array $pJSONArray Command data.
+	 * @param int $pLocalRollback 1 to enable local rollback.
+	 * @param mysqli $pDBObj Database object.
+	 * @return array
+	 *			'data' => array
+	 *				'resultset' => array for each insert query.
+	 *					 'affected' => Number of rows inserted for that query.
+	 *					 'lastinsertid' => Last insert id for that query.
+	 *					 'error' => Error message for that query.
+	 *					 'query' => This key only appears if debug is enabled. Contains the SQL for the command.
+	 *				'affectedrows' => Total number of rows inserted.
+	 *			'error' => API specific error message.
+	 */
+    static function insert($pJSONArray, $pLocalRollback = 1, $pDBObj = null)
+    {
+		$resultDataArray = ['resultset' => [], 'affectedrows' => 0];
+		$resultArray = ['data' => $resultDataArray, 'error' => ''];
+
+		// use the db object passed into the function
+		// if the object is null create a new one
+		$dbObj = $pDBObj;
+
+		if ($dbObj == null)
+		{
+			$dbObj = DatabaseObj::getGlobalDBConnection();
+		}
+
+		if ($dbObj)
+		{
+			$query = Array();
+			$totalAffectedRows = 0;
+			$postInsertActions = [];
+
+			// If errors occur, increase rollbackFlag by 1
+			// only commit if rollbackFlag = 0 ELSE rollback the whole transaction
+			$rollbackFlag = 0;
+
+			if ($pLocalRollback == 1)
+			{
+				$dbObj->query('BEGIN');
+			}
+
+			foreach ($pJSONArray as $index => $node)
+			{
+				if ((isset($node['action'])) && ($node['action'] == 'INSERT'))
+				{
+					$lastInsertID ='';
+					$affectedRows = 0;
+					$error = '';
+					$errorCode = 0;
+
+					$postInsertActions = self::processNodeForPostInsertActions($node);
+
+					// Check if we have any columns to unset for the initial insert.
+					if ([] !== $postInsertActions['unsetCols'])
+					{
+						foreach ($postInsertActions['unsetCols'] as $key => $fieldToUnset)
+						{
+							unset($node['fields'][$fieldToUnset]);
+						}
+					}
+
+					if($node['extra'] == '')
+					{
+						$fieldDataTypeList = self::getFieldDataType($node);
+						if ($fieldDataTypeList['error'] == '')
+						{
+							unset($fieldDataTypeList['error']);
+							$origDataTypes = join('', $fieldDataTypeList);
+
+							$fieldNameList = '`';
+							$fieldDataTypes = '';
+							$placeHolder = '';
+							$valueArray = Array();
+							$fields = $node['fields'];
+							$index = 0;
+							foreach ($fields as $key => $value)
+							{
+								$fieldNameList .= $key. '`,`';
+
+								$valueAsString = (string) $value; // convert the value to a string as we need to compare it as a string
+								if ($valueAsString == '[currentdatetime]')
+								{
+									$placeHolder .= 'now(),';
+								}
+								else
+								{
+									$placeHolder .= '?,';
+									$fieldDataTypes .= substr($origDataTypes, $index, 1);
+									$valueArray[] = $value;
+								}
+
+								$index++;
+							}
+
+							$fieldNameList = substr($fieldNameList, 0, -2);
+							$placeHolder = substr($placeHolder, 0, -1);
+							$query = 'INSERT INTO `' . $node['schema'] . '` (' . $fieldNameList . ') VALUES (' . $placeHolder . ')';
+
+							if ($stmt = $dbObj->prepare($query))
+							{
+								//  bind param dynamically
+								if (DatabaseObj::bindParams($stmt, $fieldDataTypes, $valueArray))
+								{
+									if ($stmt->execute())
+									{
+										$lastInsertID = $dbObj->insert_id;
+										$affectedRows = $stmt->affected_rows;
+										$totalAffectedRows += $affectedRows;
+									}
+									else
+									{
+										$error = 'Error: Insert failed: ' . $dbObj->error;
+										$errorCode = $dbObj->errno;
+										$rollbackFlag++;
+									}
+								}
+								else
+								{
+									$error = 'Error: Unable to bind parameters: ' . $dbObj->error;
+									$rollbackFlag++;
+								}
+
+								$stmt->close();
+								$stmt = null;
+							}
+							else
+							{
+								$error = 'Error: Unable to prepare statement: ' . $dbObj->error;
+								$rollbackFlag++;
+							}
+						}
+						else
+						{
+							$error = $fieldDataTypeList['error'];
+							$rollbackFlag++;
+						}
+					}
+					else
+					{
+						$query = $node['extra'];
+						$paramElement = $node['params'];
+
+						// remove the datatype from
+						$dataType = $paramElement['datatype'];
+						unset($paramElement['datatype']);
+
+						// convert datatype string into array
+						$fieldDataType = str_split($dataType);
+
+						if ($stmt = $dbObj->prepare($node['extra']))
+						{
+							//  bind param dynamically
+							if (DatabaseObj::bindParams($stmt, $fieldDataType, $paramElement))
+							{
+								if ($stmt->execute())
+								{
+									$lastInsertID = $dbObj->insert_id;
+									$affectedRows = $stmt->affected_rows;
+									$totalAffectedRows += $affectedRows;
+								}
+								else
+								{
+									$error = 'Error: Insert failed: ' . $dbObj->error;
+									$rollbackFlag++;
+								}
+							}
+							else
+							{
+								$error = 'Error: Unable to bind parameters: ' . $dbObj->error;
+								$rollbackFlag++;
+							}
+
+							$stmt->close();
+							$stmt = null;
+						}
+						else
+						{
+							$error =  'Error: Unable to prepare statement: ' . $dbObj->error;
+							$rollbackFlag++;
+						}
+					}
+
+					$statementResult['affected'] = $affectedRows;
+					$statementResult['lastinsertid'] = $lastInsertID;
+					$statementResult['error'] = $error;
+					$statementResult['errorcode'] = $errorCode;
+
+					if ($pJSONArray['debug'] == 1)
+					{
+						$statementResult['query'] = $query;
+					}
+
+					$resultDataArray['resultset'][] = $statementResult;
+					$resultDataArray['affectedrows'] = $totalAffectedRows;
+
+					// Check if we need to perform a post insert action
+					if (false !== $postInsertActions['function'])
+					{
+						// We will pass the lastInsertID into any function call as the first param, the rest of the params were generated earlier.
+						$updateResults = call_user_func_array([self::class, $postInsertActions['function']], array_merge([$lastInsertID], $postInsertActions['functionParams'], [$pJSONArray['debug']]));
+
+						if ($updateResults['error'] === '')
+						{
+							foreach ($updateResults['data']['resultset'] as $updateResult)
+							{
+								// If we have an error for this update set that this needs to rollback.
+								if ($updateResult['error'] != '')
+								{
+									$rollbackFlag++;
+								}
+							}
+						}
+					}
+
+					// Add the resultData to the result array.
+					$resultArray['data'] = $resultDataArray;
+				}
+			}
+
+			if ($pLocalRollback == 1)
+			{
+				if ($rollbackFlag > 0)
+				{
+					$dbObj->query('ROLLBACK');
+				}
+				else
+				{
+					$dbObj->query('COMMIT');
+				}
+			}
+
+			$dbObj->close();
+		}
+		else
+		{
+			$resultArray['error'] = 'Error: Cannot connect to database';
+		}
+
+		return $resultArray;
+	}
+
+
+	/**
+	 * Function to UPDATE data.
+	 *
+	 * @param array $pJSONArray Command data.
+	 * @param int $pLocalRollback 1 to enable local rollback.
+	 * @return array
+	 *			'data' => array
+	 *				'resultset' => array for each update query.
+	 *			 		'affected' => Number of rows updated for that query.
+	 *					'error' => Error message for that query.
+	 *					'query' => This key only appears if debug is enabled. Contains the SQL for the command.
+	 *				'affectedrows' => Total number of rows updated.
+	 *			'error' => API specific error message.
+	 */
+    static function update($pJSONArray, $pLocalRollback = 1)
+    {
+		$resultDataArray = ['resultset' => [], 'affectedrows' => 0];
+		$resultArray = ['data' => $resultDataArray, 'error' => ''];
+		$totalAffectedRows = 0;
+
+    	$dbObj = DatabaseObj::getGlobalDBConnection();
+		if ($dbObj)
+        {
+			// if errors occur, increase rollbackFlag by 1
+			// only commit if rollbackFlag = 0 ELSE rollback the whole transaction;
+			$rollbackFlag = 0;
+
+			if ($pLocalRollback == 1)
+			{
+				$dbObj->query('BEGIN');
+			}
+
+			foreach($pJSONArray as $index => $node)
+			{
+				if ((isset($node['action'])) && ($node['action'] == 'UPDATE'))
+				{
+					$affectedRows = 0;
+					$query = '';
+					$error = '';
+
+					// Build sql queries if Extra is empty
+					if ($node['extra'] == '')
+					{
+						$fieldDataTypeList = self::getFieldDataType($node);
+						if ($fieldDataTypeList['error'] == '')
+						{
+							unset($fieldDataTypeList['error']);
+							$origDataTypes = join('', $fieldDataTypeList);
+
+							$affectedRows = 0;
+							$fields = $node['fields'];
+							$reffield = $node['ref'];
+							$operator = $node['operator'];
+							$valueArray = Array();
+							$fieldDataTypes = '';
+							$updateString = '';
+							$index = 0;
+
+							foreach ($fields as $key => $value)
+							{
+								$valueAsString = (string) $value; // convert the value to a string as we need to compare it as a string
+								if ($valueAsString == '[currentdatetime]')
+								{
+									$updateString .= '`' . $key . '` = now(),';
+								}
+								else
+								{
+									$updateString .= '`' . $key . '` = ?,';
+									$fieldDataTypes .= substr($origDataTypes, $index, 1);
+									$valueArray[] = $value;
+								}
+								$index++;
+							}
+
+							$valueArray[$reffield] = $node['refvalue'];
+
+							// Add datatype back for the ref because the loop above only loop around fields
+							$refDataType = substr($origDataTypes, $index, 1);
+							$fieldDataTypes .= substr($refDataType, -1);
+
+							$updateString = substr($updateString, 0, -1);
+
+							$query = 'UPDATE `' . $node['schema'] . '` SET ' . $updateString . ' WHERE (`' . $reffield . '` ' . $operator . ' ?)';
+							if ($stmt = $dbObj->prepare($query))
+							{
+								// bind param dynamically
+								if (DatabaseObj::bindParams($stmt, $fieldDataTypes, $valueArray))
+								{
+									if ($stmt->execute())
+									{
+										$queryResult = DatabaseObj::getQueryResultInfo($dbObj->info);
+										$affectedRows += $queryResult['changed'];
+										$totalAffectedRows += $queryResult['changed'];
+									}
+									else
+									{
+										$error = 'Error: Update failed: ' . $dbObj->error;
+										$rollbackFlag++;
+									}
+								}
+								else
+								{
+									$error = 'Error: Unable to bind parameters: ' . $dbObj->error;
+									$rollbackFlag++;
+								}
+
+								$stmt->close();
+								$stmt = null;
+							}
+							else
+							{
+								$error = 'Error: Unable to prepare the last statement: ' . $dbObj->error;
+								$rollbackFlag++;
+							}
+
+						}
+						else
+						{
+							$error = $fieldDataTypeList['error'];
+							$rollbackFlag++;
+						}
+					}
+					else
+					{
+						// validate & execute the queries in 'extra' if it is not empty, ignore everything else
+
+						$query = $node['extra'];
+						$paramElement = $node['params'];
+
+						// remove the datatype from
+						$dataType = $paramElement['datatype'];
+						unset($paramElement['datatype']);
+
+						// convert datatype string into array
+						$fieldDataType = str_split($dataType);
+
+						if ($stmt = $dbObj->prepare($node['extra']))
+						{
+							//  bind param dynamically
+							if (DatabaseObj::bindParams($stmt, $fieldDataType, $paramElement))
+							{
+								if ($stmt->execute())
+								{
+									$queryResult = DatabaseObj::getQueryResultInfo($dbObj->info);
+									$affectedRows += $queryResult['changed'];
+									$totalAffectedRows += $queryResult['changed'];
+								}
+								else
+								{
+									$error = 'Error: Update failed: ' . $dbObj->error;
+									$rollbackFlag++;
+								}
+							}
+							else
+							{
+								$error = 'Error: Unable to bind parameters: ' . $dbObj->error;
+								$rollbackFlag++;
+							}
+
+							$stmt->close();
+							$stmt = null;
+						}
+						else
+						{
+							$error =  'Error: Unable to prepare statement: ' . $dbObj->error;
+							$rollbackFlag++;
+						}
+					}
+
+					if ($pLocalRollback == 1)
+					{
+						if ($rollbackFlag > 0)
+						{
+							$dbObj->query('ROLLBACK');
+						}
+						else
+						{
+							$dbObj->query('COMMIT');
+						}
+					}
+
+					$statementResult['affected'] = $affectedRows;
+					$statementResult['error'] = $error;
+
+					if ((isset($pJSONArray['debug'])) && ($pJSONArray['debug'] == 1))
+					{
+						$statementResult['query'] = $query;
+					}
+
+					$resultDataArray['resultset'][] = $statementResult;
+					$resultDataArray['affectedrows'] = $totalAffectedRows;
+				}
+			}
+
+			// Add the resultData to the result array.
+			$resultArray['data'] = $resultDataArray;
+
+			$dbObj->close();
+		}
+		else
+		{
+			$statementResult['error'] = 'Error: Cannot connect to database';
+		}
+
+		return $resultArray;
+    }
+
+
+	/**
+	 * Function to DELETE records.
+	 *
+	 * @param array $pJSONArray Command data.
+	 * @param int $pLocalRollback 1 to enable local rollback.
+	 * @return array
+	 *			'data' => array
+	 *				'resultset' => array for each delete query.
+	 *			 		'affected' => Number of rows deleted by that query.
+	 *					'error' => Error message for that query.
+	 *					'query' => This key only appears if debug is enabled. Contains the SQL for the command.
+	 *				'affectedrows' => Total number of rows deleted.
+	 *			'error' => API specific error message.
+	 */
+	static function delete($pJSONArray, $pLocalRollback = 1)
+	{
+		$resultDataArray = ['resultset' => [], 'affectedrows' => 0];
+		$resultArray = ['data' => $resultDataArray, 'error' => ''];
+
+		$dbObj = DatabaseObj::getGlobalDBConnection();
+		if ($dbObj)
+		{
+			$query = Array();
+			$totalAffectedRows = 0;
+
+			// for rollback if an error occurs
+			$rollbackFlag = 0;
+
+			if ($pLocalRollback == 1)
+			{
+				$dbObj->query('BEGIN');
+			}
+
+			foreach($pJSONArray as $index => $node)
+			{
+				if ((isset($node['action'])) && ($node['action'] == 'DELETE'))
+				{
+					$affectedRows = 0;
+					$statementResult = Array();
+					$error = '';
+
+					if ($node['extra'] == '')
+					{
+						$fieldDataType = self::getFieldDataType($node);
+						if ($fieldDataType['error'] == '')
+						{
+							unset($fieldDataType['error']);
+
+							$reffield = $node['ref'];
+							$refvalue = $node['refvalue'];
+							$operator = $node['operator'];
+							$query = 'DELETE FROM `' . $node['schema'] . '` WHERE (`' . $reffield . '`' . $operator. '?)';
+							if ($stmt = $dbObj->prepare($query))
+							{
+								if ($stmt->bind_param($fieldDataType[0], $refvalue))
+								{
+									if ($stmt->execute())
+									{
+										$affectedRows = $dbObj->affected_rows;
+										$totalAffectedRows += $dbObj->affected_rows;
+									}
+									else
+									{
+										$error = 'Error: Delete failed: ' . $dbObj->error;
+										$rollbackFlag++;
+									}
+								}
+								else
+								{
+									$error = 'Error: Unable to bind parameters: ' . $dbObj->error;
+									$rollbackFlag++;
+								}
+
+								$stmt->close();
+								$stmt = null;
+							}
+							else
+							{
+								$error = 'Error: Unable to prepare statement: ' . $dbObj->error;
+								$rollbackFlag++;
+							}
+						}
+						else
+						{
+							$error = $fieldDataType['error'];
+							$rollbackFlag++;
+						}
+					}
+					else
+					{
+						$query = $node['extra'];
+						$paramElement = $node['params'];
+
+						// remove the datatype from
+						$dataType = $paramElement['datatype'];
+						unset($paramElement['datatype']);
+
+						// convert datatype string into array
+						$fieldDataType = str_split($dataType);
+
+						if ($stmt = $dbObj->prepare($node['extra']))
+						{
+							//  bind param dynamically
+							if (DatabaseObj::bindParams($stmt, $fieldDataType, $paramElement))
+							{
+								if ($stmt->execute())
+								{
+									$affectedRows = $dbObj->affected_rows;
+									$totalAffectedRows += $dbObj->affected_rows;
+								}
+								else
+								{
+									$error = 'Error: Update failed: ' . $dbObj->error;
+									$rollbackFlag++;
+								}
+							}
+							else
+							{
+								$error = 'Error: Unable to bind parameters: ' . $dbObj->error;
+								$rollbackFlag++;
+							}
+
+							$stmt->close();
+							$stmt = null;
+						}
+						else
+						{
+							$error =  'Error: Unable to prepare statement: ' . $dbObj->error;
+							$rollbackFlag++;
+						}
+					}
+
+					$statementResult['affected'] = $affectedRows;
+					$statementResult['error'] = $error;
+
+					if ($pJSONArray['debug'] == 1)
+					{
+						$statementResult['query'] = $query;
+					}
+
+					$resultDataArray['resultset'][] = $statementResult;
+					$resultDataArray['affectedrows'] = $totalAffectedRows;
+				}
+			}
+
+			if ($pLocalRollback == 1)
+			{
+				if ($rollbackFlag > 0)
+				{
+					$dbObj->query('ROLLBACK');
+				}
+				else
+				{
+					$dbObj->query('COMMIT');
+				}
+			}
+
+			// Add the resultData to the result array.
+			$resultArray['data'] = $resultDataArray;
+
+			$dbObj->close();
+		}
+		else
+		{
+			$statementResult['error'] = 'Error: Cannot connect to database';
+		}
+
+		return $resultArray;
+	}
+
+
+	/**
+	 * Function to EXECUTE extra queries.
+	 *
+	 * @param array $pJSONArray Command data.
+	 * @param int $pLocalRollback 1 to enable local rollback.
+	 * @return array
+	 * 			'error' => Error message string.
+	 */
+    static function execute($pJSONArray, $pLocalRollback = 1)
+    {
+    	$resultDataArray = ['resultset' => []];
+		$resultArray = ['data' => $resultDataArray, 'error' => ''];
+
+    	$dbObj = DatabaseObj::getGlobalDBConnection();
+		if ($dbObj)
+	    {
+			$statementResult = Array();
+
+			$rollbackFlag = 0;
+
+			if ($pLocalRollback == 1)
+			{
+				$dbObj->query('BEGIN');
+			}
+
+			foreach($pJSONArray as $index => $node)
+			{
+				if ((isset($node['action'])) && ($node['action'] == 'EXECUTE'))
+				{
+					$error = '';
+					$query = $node['query'];
+					if (! $dbObj->query($node['query']))
+					{
+						$error = 'Error: ' . $dbObj->error;
+						$rollbackFlag++;
+					}
+
+					if ($pJSONArray['debug'] == 1)
+					{
+						$statementResult['query'] = $query;
+					}
+
+					$statementResult['error'] = $error;
+
+					$resultDataArray['resultset'][] = $statementResult;
+				}
+			}
+
+			if ($pLocalRollback > 0)
+			{
+				if ($rollbackFlag > 0)
+				{
+					$dbObj->query('ROLLBACK');
+				}
+				else
+				{
+					$dbObj->query('COMMIT');
+				}
+			}
+
+			// Add the resultData to the result array.
+			$resultArray['data'] = $resultDataArray;
+
+			$dbObj->close();
+		}
+		else
+		{
+			$resultArray['error'] = 'Error: Cannot connect to database';
+		}
+
+		return $resultArray;
+	}
+
+
+	/**
+	 * Function to execute BATCH.
+	 *
+	 * @param array $pJSONArray Command data.
+	 * @return array
+	 *			'query' => Query result array.
+	 *			'insert' => Insert result array.
+	 *			'update' => Update result array.
+	 *			'delete' => Delete result array.
+	 *			'execute' => Execute message for that query.
+	 */
+	 static function batch($pJSONArray)
+	 {
+		$finalResult = Array();
+
+		$dbObj = DatabaseObj::getGlobalDBConnection();
+		if ($dbObj)
+		{
+			// for rollback if an error occurs
+			$dbObj->query('BEGIN');
+
+			// set localRollback = 0 to rollback every query if one fails
+			$queryResult  = self::query($pJSONArray);
+			$insertResult = self::insert($pJSONArray,0);
+			$updateResult = self::update($pJSONArray,0);
+			$deleteResult = self::delete($pJSONArray,0);
+			$executeResult = self::execute($pJSONArray,0);
+
+			$finalResult['query'] = $queryResult;
+			$finalResult['insert'] = $insertResult;
+			$finalResult['update'] = $updateResult;
+			$finalResult['delete'] = $deleteResult;
+			$finalResult['execute'] = $executeResult;
+
+			$dbObj->query('COMMIT');
+
+			$dbObj->close();
+		}
+
+		return $finalResult;
+	}
+
+
+	/**
+	* Bind result dynamically.
+
+	* @param mysqli_stmt $pStmt Current query statement object.
+	* @param array $pColumnList Array of column names.
+	* @return array Array containing each result row
+	*/
+	static function bindResult(&$pStmt, $pColumnList)
+	{
+		$params = Array();
+		$data = Array();
+		$result = Array();
+
+		foreach($pColumnList as $col_name)
+		{
+			$params[$col_name] = &$data[$col_name];
+		}
+
+		if (call_user_func_array(Array($pStmt, 'bind_result'), array_values($params)))
+		{
+			$copy = function ($a) { return $a;};
+
+			$result = Array();
+			while($pStmt->fetch())
+			{
+				$result[] = array_map($copy, $params);
+			}
+
+			$resultArray['data'] = $result;
+		}
+
+		return $result;
+	}
+
+
+	/*
+	* Produce datatype string for bindding params
+	* @params: JSONNote
+	* @return: String
+	*
+	*/
+	static function getFieldDataType($pJSONNote)
+	{
+		$resultArray = Array();
+		$result = '';
+
+		$dbObj = DatabaseObj::getGlobalDBConnection();
+		if ($dbObj)
+		{
+			$integerDataTypeList = Array('TINYINT', 'INT', 'SMALLINT', 'MEDIUMINT', 'BIGINT');
+			$doubleDataTypeList = Array('FLOAT', 'DOUBLE', 'DECIMAL');
+
+			$tableName = $pJSONNote['schema'];
+
+			if (isset($pJSONNote['action']))
+			{
+				// get a list of fields we need to query the data type for
+
+				$fieldArray = Array();
+
+				switch ($pJSONNote['action'])
+				{
+					case 'DELETE':
+						$deleteKeyField = $pJSONNote['ref'];
+						$fieldArray[$deleteKeyField] = $pJSONNote['refvalue'];
+						break;
+					case 'INSERT':
+						$fieldArray = $pJSONNote['fields'];
+						break;
+					case 'SELECT':
+						$keyField = $pJSONNote['ref'];
+						$fieldArray[$keyField] = $pJSONNote['refvalue'];
+						break;
+					case 'UPDATE':
+						$fieldArray = $pJSONNote['fields'];
+						$keyField = $pJSONNote['ref'];
+						$fieldArray[$keyField] = $pJSONNote['refvalue'];
+						break;
+					case 'EXECUTE':
+						// Do nothing as queries are executed without preparing statements.
+						break;
+					default:
+						$result = 'Error: Unknown Command.';
+				}
+
+				if ($stmt = $dbObj->prepare('SELECT `column_name`, `data_type` FROM INFORMATION_SCHEMA.COLUMNS WHERE `table_name` = ?'))
+				{
+					if ($stmt->bind_param('s', $tableName))
+					{
+						if ($stmt->bind_result($columnName, $dataType))
+						{
+							if ($stmt->execute())
+							{
+								$dbArray = Array();
+
+								while ($stmt->fetch())
+								{
+									$dbArray[$columnName] = $dataType;
+								}
+
+								if (count($dbArray) > 0)
+								{
+									foreach ($fieldArray as $key => $value)
+									{
+										if (array_key_exists($key, $dbArray))
+										{
+											$dataType = $dbArray[$key];
+
+											if (in_array(strtoupper($dataType), $integerDataTypeList))
+											{
+												$resultArray[] .= 'i';
+											}
+											else if (in_array(strtoupper($dataType), $doubleDataTypeList))
+											{
+												$resultArray[] .= 'd';
+											}
+											else
+											{
+												$resultArray[] .= 's';
+											}
+										}
+										else
+										{
+											$result = "Error: Column '" . $key . "' does not exist." ;
+											break;
+										}
+									}
+								}
+								else
+								{
+									$result = "Error: Table '" . $tableName . "' does not exist." ;
+								}
+							}
+						}
+					}
+
+					$stmt->free_result();
+					$stmt->close();
+					$stmt = null;
+				}
+			}
+
+			$dbObj->close();
+		}
+		else
+		{
+			$result = 'Error: Cannot connect to database';
+		}
+
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+
+	/**
+	* Performs the login process for the user based in the POST parameters
+	*
+	* @static
+	*
+	* @param array $pCommandArray
+	*   the array will contain:
+	*      'key' - the encryption key 'key' used to decrypt the login parameters
+	*      'systemkey' - the system key used to encrypt the encryption key that is sent back and used for all future communications
+	*
+	* @return array
+	*   the result array will contain the login response to be echo'd back to the calling application
+	*
+	* @author Loc Dinh
+	* @since Version 3.0.0
+	*/
+	static function login($pLoginDetails)
+	{
+		global $gConstants;
+		global $gSession;
+		global $ac_config;
+
+		$resultArray = Array();
+		$result = '';
+		$sessionRef = 0;
+		$sessionKey = '';
+		$systemCertificate = '';
+		$userID = 0;
+		$userName = '';
+		$siteCode = '';
+		$siteKey = '';
+
+		$login = $pLoginDetails['user'];
+		$password = $pLoginDetails['password'];
+
+		$userAccountArray = DatabaseObj::getUserAccountFromLoginAndPassword($login, $password, TPX_PASSWORDFORMAT_CLEARTEXT);
+		$result = $userAccountArray['result'];
+
+		if ($result == '')
+		{
+			if ($userAccountArray['isactive'] == 0)
+			{
+				$result = 'Error: Account Not Active';
+			}
+		}
+		else
+		{
+			$result = 'Error: Account Not Found';
+		}
+
+		if ($result == '')
+		{
+			if (($userAccountArray['iscustomer'] == 0) && (($userAccountArray['usertype'] == TPX_LOGIN_API)))
+			{
+				$userID = $userAccountArray['recordid'];
+				$userName = $userAccountArray['contactfirstname'] . ' ' . $userAccountArray['contactlastname'];
+				$systemConfigArray = DatabaseObj::getSystemConfig();
+				$systemCertificate = $systemConfigArray['systemcertificate'];
+			}
+			else
+			{
+				// the login is either invalid or inactive
+				$result = 'Error: Not API Account';
+			}
+		}
+
+
+		// if the login is successful create a new session for the API user
+		if ($result == '')
+		{
+			$sessionRef = DatabaseObj::startSession($userAccountArray['recordid'], $userAccountArray['login'], $userAccountArray['contactfirstname'] . ' ' . $userAccountArray['contactlastname'],
+				TPX_LOGIN_API, $userAccountArray['companycode'], $userAccountArray['owner'], $userAccountArray['webbrandcode'], '', '', Array());
+
+			DatabaseObj::updateActivityLog($sessionRef, 0, $userAccountArray['recordid'], $userAccountArray['login'], $userAccountArray['contactfirstname'] . ' ' . $userAccountArray['contactlastname'], 0,
+						'DATAAPI', 'LOGIN', '', 1);
+
+			// create a hash for next communication
+			$keyString = $pLoginDetails['nexttransref'];
+			$gSession['sessionkey'] = $keyString;
+
+			DatabaseObj::updateSession();
+		}
+
+		$resultArray['ref'] = $sessionRef;
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+
+	/**
+	* Test the specified session
+	*
+	*/
+	static function testSession($pJSONArray)
+	{
+		global $gSession;
+
+		$resultArray = Array();
+		$result = '';
+
+		$sessionRef = (int) $pJSONArray[0]['sessionref'];
+
+		if ($gSession['ref'] != $sessionRef)
+		{
+			$gSession = DatabaseObj::getSessionData($sessionRef);
+		}
+
+		if ($gSession['ref'] == 0)
+		{
+			$result = 'Error: Session is invalid or expired';
+		}
+
+		$resultArray['error'] = $result;
+		$resultArray['sessionenabled'] = $gSession['sessionenabled'];
+
+		return $resultArray;
+	}
+
+
+	/**
+	* End the specified session
+	*
+	*/
+	static function endSession($pJSONArray)
+	{
+		$resultArray = Array();
+		$result = '';
+
+		$sessionRef = (int) $pJSONArray[0]['sessionref'];
+
+		$gSession = DatabaseObj::getSessionData($sessionRef);
+		if ($gSession['ref'] > 0)
+		{
+			DatabaseObj::disableSession($sessionRef, 0);
+		}
+		else
+		{
+			$result = 'Error: Cart Session is invalid or expired';
+		}
+
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+
+	/**
+	* Delete the specified session
+	*
+	*/
+	static function deleteSession($pJSONArray)
+	{
+		$resultArray = Array();
+		$result = '';
+
+		$sessionRef = (int) $pJSONArray[0]['sessionref'];
+
+		$gSession = DatabaseObj::getSessionData($sessionRef);
+		if ($gSession['ref'] > 0)
+		{
+			AuthenticateObj::endWebSession($sessionRef);
+			DatabaseObj::deleteSession($sessionRef);
+		}
+		else
+		{
+			$result = 'Error: Cart Session is invalid or expired';
+		}
+
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+
+	/**
+	* Trigger a previously inserted order
+	*
+	*/
+	static function triggerOrder($pJSONArray)
+	{
+		// include the shopping cart module
+        require_once('../Order/Order_model.php');
+
+		global $ac_config;
+		global $gSession;
+        global $gConstants;
+
+		$resultArray = Array();
+		$result = '';
+
+		$apiUserID = $gSession['userid'];
+		$apiUserLogin = $gSession['userlogin'];
+		$apiUserName = $gSession['username'];
+		$source = TPX_SOURCE_DESKTOP;
+		$fromThirdPartyBasket = false;
+		$orderItemArray = Array();
+		$projectRefArray = array();
+		$orderItemCount = 0;
+		$groupCode = '';
+		$orderNumber = '';
+		$webBrandCode = '';
+		$ownerCode = '';
+		$userID = 0;
+		$itemProjectRef = '';
+		$itemUploadRef = '';
+		$source = 0;
+		$orderItemRecordID = 0;
+		$siteCompanyCode = '';
+		$orderSessionRef = 0;
+
+
+		// process the order session we have been supplied with
+		$hasSession = false;
+		if ($pJSONArray[0]['sessionref'] === TPX_DATA_API_NO_ORDER_SESSION_REF)
+		{
+			// if we have been provided with the no order session ref (ie: when taopix was not involved in the order process) we will continue to use the data api session
+			// these orders can only ever be new orders and can never be re-orders
+			$hasSession = true;
+			$fromThirdPartyBasket = true;
+
+			$isReOrder = 0;
+		}
+		else
+		{
+			$orderSessionRef = (int) $pJSONArray[0]['sessionref'];
+			// if we have been provided with an order session ref attempt to load it and if it appears to be successful grab the re-order status from the session
+			// load the order session
+			$gSession = DatabaseObj::getSessionData($orderSessionRef);
+			if ($gSession['ref'] > 0)
+			{
+				$hasSession = true;
+
+				$isReOrder = $gSession['order']['isreorder'];
+			}
+		}
+
+
+		// trigger the order if we have a valid session
+		if ($hasSession == true)
+		{
+			$dbObj = DatabaseObj::getGlobalDBConnection();
+			if ($dbObj)
+			{
+				$orderID = $pJSONArray[0]['orderid'];
+
+				if ($stmt = $dbObj->prepare('SELECT `oh`.`groupcode`, `oh`.`ordernumber`, `oh`.`webbrandcode`, `oh`.`ownercode`, `oh`.`userid`,
+													`oi`.`projectref`, `oi`.`uploadref`, `oi`.`source`, `oi`.`id`, `oi`.`currentcompanycode`
+											FROM `ORDERHEADER` oh, `ORDERITEMS` oi
+											WHERE `oi`.`orderid` = `oh`.`id` AND `oh`.`id` = ? AND `oi`.`parentorderitemid` = 0'))
+				{
+					if ($stmt->bind_param('i', $orderID))
+					{
+						if ($stmt->execute())
+						{
+							if ($stmt->store_result())
+                        	{
+								if ($stmt->num_rows > 0)
+								{
+									if ($stmt->bind_result($groupCode, $orderNumber, $webBrandCode, $ownerCode, $userID,
+										$itemProjectRef, $itemUploadRef, $source, $orderItemRecordID, $siteCompanyCode))
+									{
+											while ($stmt->fetch())
+											{
+												$item = Array();
+												$item['groupcode'] = $groupCode;
+												$item['ordernumber'] = $orderNumber;
+												$item['webbrandcode'] = $webBrandCode;
+												$item['ownercode'] = $ownerCode;
+												$item['userid'] = $userID;
+												$item['itemprojectref'] = $itemProjectRef;
+												$item['itemuploadref'] = $itemUploadRef;
+												$item['source'] = $source;
+												$item['orderitemrecordid'] = $orderItemRecordID;
+												$item['sitecompanycode'] = $siteCompanyCode;
+
+												$orderItemArray[] = $item;
+												$projectRefArray[$itemProjectRef] = $itemProjectRef;
+											}
+									}
+									else
+									{
+										// could not bind result
+										$result = 'Error: Unable to bind result: ' . $dbObj->error;
+									}
+								}
+								else
+								{
+									$result = 'Error: No matching order';
+								}
+							}
+							else
+							{
+								// could not store result
+      							$result = 'Error: Unable to store result: ' . $dbObj->error;
+							}
+						}
+						else
+						{
+							// could not execute statement
+							$result = 'Error: Find order failed: ' . $dbObj->error;
+						}
+					}
+					else
+					{
+						// could not bind parameters
+						$result = 'Error: Unable to bind parameters: ' . $dbObj->error;
+					}
+
+					$stmt->free_result();
+					$stmt->close();
+					$stmt = null;
+				}
+				else
+				{
+					$result = 'Error: Unable to prepare statement: ' . $dbObj->error;
+				}
+
+   				// if we have no error we need to update the order item upload and status fields
+				// if the uploadorderid has not been provided then we set it to the orderid
+				// if the uploadordernumber has not been provided then we set it to the order number
+				// if the uploadorderitemid has not been provided then we set it to the id
+                // if the source is the online designer we do not allow an upload
+				// if an original orderid has been provided (re-order) we do not allow an upload
+				// if an original orderid has been provided (re-order) we set the status based on the original item status
+				if ($result == '')
+				{
+					if ($ac_config['SERVERLOCATION'] == 'REMOTE')
+					{
+						$status = TPX_ITEM_STATUS_FILES_ON_REMOTE_FTP_SERVER;
+					}
+					else
+					{
+						$status = TPX_ITEM_STATUS_FILES_RECEIVED;
+					}
+
+				   if ($stmt = $dbObj->prepare("UPDATE `ORDERITEMS` AS oi SET `uploadgroupcode` = IF(`uploadgroupcode` = '', ?, `uploadgroupcode`),
+										   `uploadorderid` = IF(`uploadorderid` = 0, `orderid`, `uploadorderid`),
+										   `uploadordernumber` = IF(`uploadordernumber` = '', ?, `uploadordernumber`),
+										   `uploadorderitemid` = IF(`uploadorderitemid` = 0, `id`, `uploadorderitemid`),
+										   `canupload` = IF(`source` = 0, IF(`origorderid` > 0, 0, 1), 0),
+										   `canuploadproductcodeoverride` = 0,
+										   `canuploadpagecountoverride` = 0,
+										   `productcodepurchased` = `productcode`,
+										   `pagecountpurchased` = `pagecount`,
+										   `status` = IF(`id` = `uploadorderitemid`, 0, IF((SELECT `status` FROM (SELECT `id`, `status` FROM `ORDERITEMS`) AS oi2 WHERE `oi2`.`id` = `oi`.`uploadorderitemid`) >= 5, 5, ?)),
+										   `statusdescription` = '',
+										   `statustimestamp` = '0000-00-00 00:00:00',
+										   `active` = 0,
+										   `activetimestamp` = now(),
+										   `activeuserid` = 0
+										   WHERE `orderid` = ?"))
+					{
+						if ($stmt->bind_param('ssii', $orderItemArray[0]['groupcode'], $orderItemArray[0]['ordernumber'], $status, $orderID))
+						{
+							if (! $stmt->execute())
+							{
+								// could not execute statement
+								$result = 'Error: Update Items failed: ' . $dbObj->error;
+							}
+						}
+						else
+						{
+							$result = 'Error: Unable to bind parameters: ' . $dbObj->error;
+						}
+
+						$stmt->free_result();
+						$stmt->close();
+						$stmt = null;
+					}
+					else
+					{
+						$result = 'Error: Unable to prepare statement: ' . $dbObj->error;
+					}
+				}
+
+				if ($result == '')
+				{
+					if ($stmt = $dbObj->prepare("UPDATE `ORDERHEADER` SET `sessionid` = ?, `orderready` = 1, `shoppingcarttype` = 1, `totaltopay` = `total` WHERE `id` = ?"))
+					{
+						if ($stmt->bind_param('ii', $orderSessionRef, $orderID))
+						{
+							if (! $stmt->execute())
+							{
+								// could not execute statement
+								$result = 'Error: Update Header failed: ' . $dbObj->error;
+							}
+						}
+						else
+						{
+							$result = 'Error: Unable to bind parameters: ' . $dbObj->error;
+						}
+
+						$stmt->free_result();
+						$stmt->close();
+						$stmt = null;
+					}
+					else
+					{
+						$result = 'Error: Unable to prepare statement: ' . $dbObj->error;
+					}
+				}
+
+				if ($result == '')
+				{
+					// if the order has not been triggered from basket API
+					// write the order status cache file to state that the order process has been completed
+					if (! $fromThirdPartyBasket)
+					{
+						Order_Model::writeOrderStatusCacheFile('UPLOAD', true);
+					}
+				}
+
+				if ($result == '')
+				{
+					// we set order number and source to the value of the first order item as it should be the same for all items in the order.
+					$orderNumber = $orderItemArray[0]['ordernumber'];
+					$source = $orderItemArray[0]['source'];
+
+					// update the activity log
+					DatabaseObj::updateActivityLog($gSession['ref'], $orderID, $gSession['userid'], $gSession['userlogin'], $gSession['username'], 0,
+									'ORDER', 'ORDER-CREATION', $orderNumber, 1);
+
+					// trigger the data event
+					DataExportObj::EventTrigger(TPX_TRIGGER_ORDER_CREATED, 'ORDER', $orderID, $orderID);
+
+					 // if this is an online order and not an reorder we need to queue an event to generate the order data
+					if (($gConstants['optiondesol']) && ($isReOrder == 0) && ($source == TPX_SOURCE_ONLINE))
+					{
+						$taskInfo = DatabaseObj::getTask('TAOPIX_ONLINEORDERCREATION');
+
+	                    if ($taskInfo['result'] == '')
+	                    {
+	                        $orderItemCount = count($orderItemArray);
+
+	                        for ($i = 0; $i < $orderItemCount; $i++)
+							{
+								$orderItem = $orderItemArray[$i];
+
+								$eventResultArray = DatabaseObj::createEvent('TAOPIX_ONLINEORDERCREATION', $orderItem['sitecompanycode'],
+	                                        $orderItem['groupcode'], $orderItem['webbrandcode'], $taskInfo['nextRunTime'],
+	                                        0, $orderItem['ownercode'], $orderItem['itemprojectref'], $orderItem['itemuploadref'], $orderID, '', '', '', '', $orderID,
+	                                        $orderItem['orderitemrecordid'], $orderItem['userid'], '', '', $orderItem['userid']);
+
+							}
+
+							if (! $fromThirdPartyBasket)
+							{
+								// if the order is via the high level api then we must now empty the users basket as the order has now been placed.
+								if ($gSession['order']['basketapiworkflowtype'] == TPX_BASKETWORKFLOWTYPE_HIGHLEVELCHECKOUT)
+								{
+									$projectRefList = implode(',', $projectRefArray);
+
+									DatabaseObj::removeItemsFromBasket($gSession['basketref'], $projectRefList);
+								}
+							}
+	                    }
+					}
+				}
+
+				$dbObj->close();
+
+				// if we have an order session, update it now as we want to record the fact that the order session has been processed
+				if (($result == '') && (! $pJSONArray[0]['sessionref'] === TPX_DATA_API_NO_ORDER_SESSION_REF))
+				{
+					$gSession['order']['processed'] = 1;
+					$gSession['order']['currentstage'] = 'complete';
+                    DatabaseObj::updateSession();
+				}
+
+				// clean up project order cache data
+				DatabaseObj::insertCleanUpProjectOrderDataCacheTask($projectRefArray);
+			}
+			else
+			{
+				$result = 'Error: Cannot connect to database';
+			}
+		}
+		else
+		{
+			$result = 'Error: Cart Session is invalid or expired';
+		}
+
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+
+	/**
+	* Cancel a shopping cart session
+	*
+	*/
+	static function cancelOrder($pJSONArray)
+	{
+		global $ac_config;
+		global $gSession;
+
+		// load the order session
+		$gSession = DatabaseObj::getSessionData((int) $pJSONArray[0]['sessionref']);
+		if ($gSession['ref'] > 0)
+		{
+			// write the order status cache file to state that the order process has been cancelled
+			Order_Model::writeOrderStatusCacheFile('CANCEL', true);
+		}
+
+		return self::deleteSession($pJSONArray);
+	}
+
+
+	/**
+   	* Split & decrypt username & password from POST params
+   	*
+   	* @static
+	*
+	* @param array $pLoginDetails
+	*   the array will contain:
+	*      'user' - API username transfered in clear text
+	*      'password' - API encrypted password
+	*
+   	* @return array $resultArray
+   	*	the array will contain:
+   	*   	decrypted username
+   	*		decrypted password
+	*		decrypted next transaction reference
+	*		whether a new IV has been generated in a Binary format
+   	*
+   	* @author Loc Dinh
+	* @since Version 3.0.0
+ 	*/
+	static function decryptPOST($pMode)
+	{
+		global $ac_config;
+		global $gSession;
+
+		$resultArray = Array();
+		$result = '';
+		$iv = '';
+		$regenerateIV = false;
+
+		if ($pMode == 'authenticate')
+		{
+			// decode login details for authentication
+			$loginData = UtilsObj::getPOSTParam('login', '');
+
+			if (strpos($loginData, '!') === 0)
+			{
+				$pos = strpos($loginData, '!', 1);
+				// the second character is a version identifier so we need to start reading at character 3
+				$iv = substr($loginData, 2, $pos - 1);
+				$iv = base64_decode($iv);
+				$loginData = substr($loginData, $pos + 2);
+				// if we have a base64 encoded IV we know that the system sending the data API endpoint will expect a fresh IV
+				$regenerateIV = true;
+			}
+			else
+			{
+				// retrieve an old style IV
+				$pos = strpos($loginData, '=');
+				$iv = substr($loginData, 0, $pos);
+				$loginData = substr($loginData, $pos + 1);
+			}
+
+			UtilsObj::decodeTransmissionString($loginData, $postLength);
+			$loginData = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $loginData, MCRYPT_MODE_CBC, $iv);
+			$loginData = substr($loginData, 0, $postLength);
+
+			$loginDetails = explode('~~~~', $loginData);
+
+			$username = $loginDetails[0];
+			$password = $loginDetails[1];
+			$nextTransRef = $loginDetails[2];
+
+			UtilsObj::decodeTransmissionString($password, $passwordLength);
+			$password = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $password, MCRYPT_MODE_CBC, $iv);
+			$password = substr($password, 0, $passwordLength);
+
+			UtilsObj::decodeTransmissionString($nextTransRef, $nextTransRefLength);
+			$nextTransRef = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $nextTransRef, MCRYPT_MODE_CBC, $iv);
+			$nextTransRef = substr($nextTransRef, 0, $nextTransRefLength);
+
+			$resultArray['nexttransref'] = $nextTransRef;
+			$resultArray['user'] = $username;
+			$resultArray['password'] = $password;
+		}
+		else
+		{
+			// decode header, json string from data api call
+			$header = UtilsObj::getPOSTParam('header', '');
+			$jsonData = UtilsObj::getPOSTParam('json', '');
+
+			if (strpos($header,'!') === 0)
+			{
+				// base64 encoded IVs are bookended with exclamation marks so we can use them to pull out the encoded IV
+				$pos = strpos($header, '!', 1);
+				// the second character is a version identifier so we need to start reading at character 3
+				$iv = substr($header, 2, $pos - 1);
+				// we need to decode the IV back to its binary format to use it
+				$iv = base64_decode($iv);
+				$header = substr($header, $pos + 2);
+				// if we have a base64 encoded IV we know that the system sending the data API endpoint will expect a fresh IV
+				$regenerateIV = true;
+			}
+			else
+			{
+				// retrieve an old style IV
+				$pos = strpos($header, '=');
+				$iv = substr($header, 0, $pos);
+				$header = substr($header, $pos + 1);
+			}
+
+			// decrypt the data
+			UtilsObj::decodeTransmissionString($header, $headerLength);
+			$header = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $header, MCRYPT_MODE_CBC, $iv);
+			$header = substr($header, 0, $headerLength);
+
+			// extract the parameters
+			$headerData = explode('~~~~', $header);
+			$sessionid = $headerData[0];
+			$transRef = $headerData[1];
+			$nextTransRef = $headerData[2];
+
+
+			// load the data api session and authenticate it
+			$gSession = DatabaseObj::getSessionData($sessionid);
+			if (AuthenticateObj::dataAPISessionActive($sessionid))
+			{
+				// decode transRef
+				UtilsObj::decodeTransmissionString($transRef, $transRefLength);
+				$transRef = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $transRef, MCRYPT_MODE_CBC, $iv);
+				$transRef = substr($transRef, 0, $transRefLength);
+
+				// decode nextTransRef
+				UtilsObj::decodeTransmissionString($nextTransRef, $nextTransRefLength);
+				$nextTransRef = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $nextTransRef, MCRYPT_MODE_CBC, $iv);
+				$nextTransRef = substr($nextTransRef, 0, $nextTransRefLength);
+
+				// decode jsonString
+				UtilsObj::decodeTransmissionString($jsonData, $jsonLength);
+				$jsonData = mcrypt_decrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], $jsonData, MCRYPT_MODE_CBC, $iv);
+				$jsonData = substr($jsonData, 0, $jsonLength);
+
+				// compare the sessionkey (previous nextTransRef session saved from Login)
+				// if mismatched return error only
+				if ($transRef != $gSession['sessionkey'])
+				{
+					$result = 'Error: Invalid transaction reference.';
+				}
+				else
+				{
+					// update the session key with the next transaction ref
+					$gSession['sessionkey'] = $nextTransRef;
+					DatabaseObj::updateSession();
+
+					// Validate the JSON string, the result after decoded has to be an associative Array
+					$tempResult = json_decode($jsonData, true);
+					if (is_array($tempResult) && isset($tempResult[0]))
+					{
+						$resultArray = $tempResult;
+					}
+					else
+					{
+						$result = 'Error: Invalid JSON Format.';
+					}
+				}
+			}
+			else
+			{
+				$result = 'Error: Data API Session is invalid or expired.';
+			}
+		}
+
+		if ($regenerateIV === true)
+		{
+			$iv = random_bytes(8);
+		}
+
+		$resultArray['error'] = $result;
+		$resultArray['iv'] = $iv;
+		$resultArray['ivregenerated'] = $regenerateIV;
+		$resultArray['debug'] = UtilsObj::getGETParam('debug', '0');
+
+		return $resultArray;
+	}
+
+	/**
+	* Check if the order files for an order are available.
+	* The order might be in the process of being cleaned up so a re-order will not be possible
+	*
+	*/
+	static function orderFilesAvailable($pJSONArray)
+	{
+		$resultArray = array();
+		$dataAvailable = true;
+		$result = '';
+
+		$orderItemID = (int) $pJSONArray[0]['orderitemid'];
+
+		$orderItemDataArray = DatabaseObj::getOrderItemById($orderItemID);
+
+		$result = $orderItemDataArray['result'];
+
+		if ($result == "")
+		{
+			$dataAvailable = $orderItemDataArray['dataavailable'] == 1;
+		}
+		else
+		{
+			$result = 'Error: Order not found';
+			$dataAvailable = false;
+		}
+
+		$resultArray['dataavailable'] = $dataAvailable;
+		$resultArray['error'] = $result;
+
+		return $resultArray;
+	}
+
+	static function getProjectOrderData($pJSONArray)
+	{
+		global $gConstants;
+
+		$resultArray = array('error' => TPX_DATA_API_ERROR_NONE, 'errormessage' => '', 'missingprojectrefs' => array(), 'orderdata' => array());
+
+		$projectRefList = $pJSONArray[0]['projectreflist'];
+		$missingProjectRefArray = $projectRefList;
+
+		$projectLookUpResultArray = array();
+		$orderData = array();
+		$headerArray = array();
+		$cartItemsArray = array();
+
+		// check to make sure that we have recieved a list of project refs in the notification
+		if (count($projectRefList) > 0)
+		{
+			$dbObj = DatabaseObj::getGlobalDBConnection();
+			if ($dbObj)
+			{
+				$orderNumber = $pJSONArray[0]['ordernumber'];
+
+				$bindPlaceHolders = array();
+				$bindParamChars = '';
+
+				foreach ($projectRefList as $projectRef)
+				{
+					$bindPlaceHolders[] = '?';
+					$bindParamChars .= 's';
+				}
+
+				$queryIn = implode(',', $bindPlaceHolders);
+
+				// look up the records from the projectrefs provided in the notification
+				$sql = 'SELECT `projectref`, `projectdata`, `projectdatalength` FROM `projectorderdatacache` WHERE `projectref` IN (' . $queryIn . ')';
+
+				if ($stmt = $dbObj->prepare($sql))
+				{
+					if ($stmt->bind_param($bindParamChars, ...$projectRefList))
+					{
+						if ($stmt->execute())
+						{
+							if ($stmt->store_result())
+							{
+								if ($stmt->num_rows > 0)
+								{
+									if ($stmt->bind_result($projectRef, $projectData, $projectDataLength))
+									{
+											while ($stmt->fetch())
+											{
+												// we have the projectdata data now unserialize it back into an array
+												if ($projectDataLength > 0)
+												{
+													$projectData = gzuncompress($projectData, $projectDataLength);
+												}
+
+												$projectItem = unserialize($projectData);
+
+												// record the projectrefs that we have been unable to find.
+												$missingProjectRefArray = array_diff($missingProjectRefArray, [$projectRef]);
+
+												$projectLookUpResultArray[] = $projectItem;
+											}
+									}
+									else
+									{
+										// could not bind result
+										$resultArray['error'] = TPX_DATA_API_ERROR_DATABASE;
+										$resultArray['errormessage'] = 'Error: Unable to bind result: ' . $dbObj->error;
+									}
+								}
+								else
+								{
+									$resultArray['error'] = TPX_DATA_API_ERROR_NOITEMSFOUND;
+									$resultArray['errormessage'] = 'Error: No matching records';
+								}
+							}
+							else
+							{
+								// could not store result
+								$resultArray['error'] = TPX_DATA_API_ERROR_DATABASE;
+								$resultArray['errormessage'] = 'Error: Unable to store result: ' . $dbObj->error;
+							}
+						}
+						else
+						{
+							// could not execute statement
+							$resultArray['error'] = TPX_DATA_API_ERROR_DATABASE;
+							$resultArray['errormessage'] = 'Error: Find order failed: ' . $dbObj->error;
+						}
+					}
+					else
+					{
+						// could not bind parameters
+						$resultArray['error'] = TPX_DATA_API_ERROR_DATABASE;
+						$resultArray['errormessage'] = 'Error: Unable to bind parameters: ' . $dbObj->error;
+					}
+
+					$stmt->free_result();
+					$stmt->close();
+					$stmt = null;
+				}
+				else
+				{
+					$resultArray['error'] = TPX_DATA_API_ERROR_DATABASE;
+					$resultArray['errormessage'] = 'Error: Unable to prepare statement: ' . $dbObj->error;
+				}
+			}
+			else
+			{
+				$resultArray['error'] = TPX_DATA_API_ERROR_DATABASE;
+				$resultArray['errormessage'] = 'Error: Cannot connect to database';
+			}
+
+			if ($resultArray['error'] == TPX_DATA_API_ERROR_NONE)
+			{
+				// process the data into the correct format that the client side library is expecting.
+				$orderItemCount = count($projectLookUpResultArray);
+
+				// check to see if the ref key exisits in the project data.
+				// If it does then we know this was created via exteral shopping cart and we need to return the sessionref
+				// If the ref key does not exist then it was the E-commerece API that initialised the order. No session exitst so we need to return the constant value
+				$orderData['sessionref'] = (array_key_exists('ref', $projectLookUpResultArray[0]) ? $projectLookUpResultArray[0]['ref'] : TPX_DATA_API_NO_ORDER_SESSION_REF);
+				$orderData['reorder'] = $projectLookUpResultArray[0]['reorder'];
+
+				$headerArray['datecreated'] = '[currentdatetime]';
+				$headerArray['ownercode'] = $projectLookUpResultArray[0]['ownercode'];
+				$headerArray['groupcode'] = $projectLookUpResultArray[0]['groupcode'];
+				$headerArray['groupdata'] = $projectLookUpResultArray[0]['groupdata'];
+				$headerArray['orderdate'] = '[currentdatetime]';
+				$headerArray['ordernumber'] = $orderNumber;
+				$headerArray['origorderid'] = $projectLookUpResultArray[0]['origorderid'];
+				$headerArray['origordernumber'] = $projectLookUpResultArray[0]['origordernumber'];
+				$headerArray['webbrandcode'] = $projectLookUpResultArray[0]['brandcode'];
+				$headerArray['uuid'] = $projectLookUpResultArray[0]['uuid'];
+				$headerArray['browserlanguagecode'] = $projectLookUpResultArray[0]['languagecode'];
+				$headerArray['userid'] = $projectLookUpResultArray[0]['userid'];
+
+				$licenseKeyArray = DatabaseObj::getLicenseKeyFromCode($headerArray['groupcode']);
+				$userAccountArray = DatabaseObj::getUserAccountFromID($headerArray['userid']);
+
+				if (($userAccountArray['usedefaultcurrency'] == 1) || ($headerArray['userid'] <= 0))
+				{
+					// if the account uses default or we dont have a userid that means we go by licence key
+					$currencyCode = $licenseKeyArray['currencycode'];
+				}
+				else
+				{
+					$currencyCode = $userAccountArray['currencycode'];
+				}
+
+				$currencyArray = DatabaseObj::getCurrency($currencyCode);
+
+				$headerArray['currencycode'] = $currencyCode;
+				$headerArray['currencyname'] = $currencyArray['name'];
+				$headerArray['currencyisonumber'] = $currencyArray['isonumber'];
+				$headerArray['currencysymbol'] = $currencyArray['symbol'];
+				$headerArray['currencysymbolatfront'] = $currencyArray['symbolatfront'];
+				$headerArray['currencydecimalplaces'] = $currencyArray['decimalplaces'];
+				$headerArray['currencyexchangerate'] = $currencyArray['exchangerate'];
+				$headerArray['basecurrencycode'] = $gConstants['defaultcurrencycode'];
+				$headerArray['paymentmethodcode'] = '';
+				$headerArray['paymentmethodname'] = '';
+				$headerArray['itemcount'] = $orderItemCount;
+				$headerArray['ccilogid'] = 0;
+
+				$headerArray['ordertotalitemsell'] = 0.00;
+				$headerArray['ordertotalitemtax'] = 0.00;
+				$headerArray['shippingtotalsell'] = 0.00;
+				$headerArray['ordertotalshippingtax'] = 0.00;
+				$headerArray['ordertotal'] = 0.00;
+				$headerArray['ordertotalitemcost'] = 0.00;
+				$headerArray['ordertotalshippingcost'] = 0.00;
+				$headerArray['ordertotalshippingweight'] = 0.0000;
+				$headerArray['ordertotalcost'] = 0.00;
+				$headerArray['totalsellbeforediscount'] = 0.00;
+				$headerArray['ordertotaltaxbeforediscount'] = 0.00;
+				$headerArray['ordertotaldiscount'] = 0.00;
+				$headerArray['totalsell'] = 0.00;
+				$headerArray['ordertotaltax'] = 0.00;
+
+				$headerArray['billingcustomeraddress1'] = $userAccountArray['address1'];
+				$headerArray['billingcustomeraddress2'] = $userAccountArray['address2'];
+				$headerArray['billingcustomeraddress3'] = $userAccountArray['address3'];
+				$headerArray['billingcustomeraddress4'] = $userAccountArray['address4'];
+				$headerArray['billingcustomercity'] = $userAccountArray['city'];
+				$headerArray['billingcustomercounty'] = $userAccountArray['county'];
+				$headerArray['billingcustomerstate'] = $userAccountArray['state'];
+				$headerArray['billingcustomerregioncode'] = $userAccountArray['regioncode'];
+				$headerArray['billingcustomerregion'] = $userAccountArray['region'];
+				$headerArray['billingcustomerpostcode'] = $userAccountArray['postcode'];
+				$headerArray['billingcustomercountrycode'] = $userAccountArray['countrycode'];
+				$headerArray['billingcustomercountryname'] = $userAccountArray['countryname'];
+				$headerArray['billingcustomertelephonenumber'] = $userAccountArray['telephonenumber'];
+				$headerArray['billingcustomeremailaddress'] = $userAccountArray['emailaddress'];
+				$headerArray['billingcontactfirstname'] = $userAccountArray['contactfirstname'];
+				$headerArray['billingcontactlastname'] = $userAccountArray['contactlastname'];
+				$headerArray['useremaildestination'] = '';
+				$headerArray['paymentgatewaycode'] = '';
+				$headerArray['paymentreceived'] = 1;
+				$headerArray['paymentreceivedtimestamp'] = '[currentdatetime]';
+				$headerArray['paymentreceiveddate'] = '[currentdatetime]';
+				$headerArray['paymentreceiveduserid'] = -1;
+				$headerArray['voucherpromotioncode'] = '';
+				$headerArray['voucherpromotionname'] = '';
+				$headerArray['vouchercode'] = '';
+				$headerArray['vouchername'] = '';
+				$headerArray['voucherdiscountsection'] = '';
+				$headerArray['voucherdiscounttype'] = '';
+				$headerArray['voucherdiscountvalue'] = 0.00;
+				$headerArray['totalbeforediscount'] = 0.00;
+				$headerArray['shippingrequiresdelivery'] = 0;
+				$headerArray['showpriceswithtax'] = 0;
+				$headerArray['showzerotax'] = 0;
+				$headerArray['showtaxbreakdown'] = 0;
+				$headerArray['showalwaystaxtotal'] = 0;
+				$headerArray['shippingtotalsellbeforediscount'] = 0.00;
+
+				$orderData['headerarray'] = $headerArray;
+				$orderData['cartitemcount'] = $orderItemCount;
+
+				// For multi line orders the batchref for each item we generate needs to be set to the batchref of the first item we process
+				$batchRef = $projectLookUpResultArray[0]['batchref'];
+				$itemNumber = 0;
+
+				// For each project record we have found we need to put them into the cart array as one multi line order.
+				// As we store each project as a seperate record the record itself will only contain 1 item so we only need to read the first one in items array.
+				foreach ($projectLookUpResultArray as $projectRecord)
+				{
+					$lineItem = $projectRecord['items'][0];
+
+					$orderItem = array();
+					$orderItem['datecreated'] = '[currentdatetime]';
+					$orderItem['orderid'] = 0;
+					$orderItem['userid'] = $headerArray['userid'];
+					$orderItem['projectref'] = $lineItem['projectref'];
+					$orderItem['projectreforig'] = $lineItem['projectreforig'];
+					$orderItem['projectname'] = $lineItem['projectname'];
+					$orderItem['origorderid'] =  $headerArray['origorderid'];
+					$orderItem['origorderitemid'] = $lineItem['origorderitemid'];
+					$orderItem['shareid'] = $lineItem['shareid'];
+					$orderItem['source'] = $lineItem['source'];
+					$orderItem['uploadgroupcode'] = $lineItem['uploadgroupcode'];
+					$orderItem['uploadorderid'] = $lineItem['uploadorderid'];
+					$orderItem['uploadordernumber'] = $lineItem['uploadordernumber'];
+					$orderItem['uploadorderitemid'] = $lineItem['uploadorderitemid'];
+					$orderItem['uploadbatchref'] = $batchRef;
+					$orderItem['uploadref'] = $lineItem['uploadref'];
+					$orderItem['collectioncode'] = $lineItem['collectioncode'];
+					$orderItem['collectionname'] = $lineItem['collectionname'];
+					$orderItem['productcode'] = $lineItem['productcode'];
+					$orderItem['productname'] = $lineItem['productname'];
+					$orderItem['pagecount'] = $lineItem['pagecount'];
+					$orderItem['itemnumber'] = ++$itemNumber;
+					$orderItem['producttype'] = $lineItem['producttype'];
+					$orderItem['productpageformat'] = $lineItem['productpageformat'];
+					$orderItem['productspreadpageformat'] = $lineItem['productspreadformat'];
+					$orderItem['productcover1format'] = $lineItem['productcover1format'];
+					$orderItem['productcover2format'] = $lineItem['productcover2format'];
+					$orderItem['productoutputformat'] = $lineItem['productoutputformat'];
+					$orderItem['productheight'] = $lineItem['productheight'];
+					$orderItem['productwidth'] = $lineItem['productwidth'];
+					$orderItem['uploadappversion'] = $lineItem['uploadappversion'];
+					$orderItem['uploadappplatform'] = $lineItem['uploadappplatform'];
+					$orderItem['uploadappcputype'] = $lineItem['uploadappcputype'];
+					$orderItem['uploadapposversion'] = $lineItem['uploadapposversion'];
+					$orderItem['taxcode'] = '';
+					$orderItem['taxname'] = '';
+					$orderItem['taxrate'] = 0.00;
+					$orderItem['qty'] = $lineItem['qty'];
+					$orderItem['producttotalsell'] = 0.00;
+					$orderItem['producttotaltax'] = 0.00;
+					$orderItem['subtotal'] = 0.00;
+					$orderItem['discountvalue'] = 0.00;
+					$orderItem['totalsell'] = 0.00;
+					$orderItem['taxtotal'] = 0.00;
+					$orderItem['producttotalweight'] = 0.0000;
+
+					// check to see if the orignal data had the price calculated if it was then we must set the price.
+					if (array_key_exists('itemtotalsell', $lineItem))
+					{
+						$orderItem['producttotalsell'] = $lineItem['itemproducttotalsell'];
+						$orderItem['totalsell'] = $lineItem['itemtotalsell'];
+						$orderItem['subtotal'] = $lineItem['itemsubtotal'];
+					}
+
+					$orderItem['productinfo'] = '';
+					$orderItem['orderwebversion'] = '';
+					$orderItem['productunitcost'] = $lineItem['productunitcost'];
+					$orderItem['productunitsell'] = 0.00;
+					$orderItem['productskucode'] = $lineItem['productskucode'];
+					$orderItem['productdefaultpagecount'] = $lineItem['productdefaultpagecount'];
+					$orderItem['productunitweight'] = $lineItem['productunitweight'];
+					$orderItem['producttotalcost'] = $lineItem['productunitcost'] * $orderItem['qty'];
+					$orderItem['totalcost'] = $orderItem['producttotalcost'];
+					$orderItem['totalweight'] = $orderItem['productunitweight'] * $orderItem['qty'];
+					$orderItem['voucherapplied'] = 0;
+					$orderItem['assetid'] = 0;
+
+					$orderItem['externalassets'] = array();
+					$orderItem['pictures'] = array();
+					$orderItem['calendarcustomisations'] = array();
+					$orderItem['components'] = array();
+
+					$sortOrder = 1;
+
+					// Process the external assets attached to the item
+					foreach ($lineItem['externalassets'] as $taopixAssetItem)
+					{
+						$externalAsset = array();
+						$externalAsset['datecreated'] = '[currentdatetime]';
+						$externalAsset['orderid'] = 0;
+						$externalAsset['orderitemid'] = 0;
+						$externalAsset['userid'] = $headerArray['userid'];
+						$externalAsset['externalassetservicecode'] = $taopixAssetItem['servicecode'];
+						$externalAsset['externalassetservicename'] = $taopixAssetItem['servicename'];
+						$externalAsset['externalassetpricetype'] = $taopixAssetItem['pricetype'];
+						$externalAsset['externalassetid'] = $taopixAssetItem['id'];
+						$externalAsset['externalassetname'] = $taopixAssetItem['name'];
+						$externalAsset['sortorder'] = $sortOrder++; // the sort order of the component within the order item
+						$externalAsset['pricingmodel'] = TPX_PRICINGMODEL_PERQTY;
+						$externalAsset['componentunitcost'] = $taopixAssetItem['unitcost'];
+						$externalAsset['componentunitsell'] = $taopixAssetItem['unitsell'];
+						$externalAsset['componenttotalcost'] = $externalAsset['componentunitcost'] * $orderItem['qty'];
+						$externalAsset['componenttotalsell'] = $externalAsset['componentunitsell'] * $orderItem['qty'];
+						$externalAsset['componenttotaltax'] = 0.00;
+						$externalAsset['externalassetunitcost'] = $taopixAssetItem['assetunitcost'];
+						$externalAsset['externalassetunitsell'] = $taopixAssetItem['assetunitsell'];
+						$externalAsset['externalassetexpirydate'] = $taopixAssetItem['expirationdate'];
+						$externalAsset['externalassetpageref'] = $taopixAssetItem['pageref'];
+						$externalAsset['externalassetpagenumber'] = $taopixAssetItem['pagenumber'];
+						$externalAsset['externalassetpagename'] = $taopixAssetItem['pagename'];
+						$externalAsset['externalassetboxref'] = $taopixAssetItem['boxref'];
+
+						$orderItem['externalassets'][] = $externalAsset;
+					}
+
+					$sortOrder = 1;
+
+					// If the project was a photo prints project then we need to process each print.
+					// Each print will consist of the component and subcomponent data.
+					foreach ($lineItem['pictures'] as $picture)
+					{
+						$pictureComponent = array();
+						$pictureComponent['datecreated'] = '[currentdatetime]';
+						$pictureComponent['orderid'] = 0;
+						$pictureComponent['orderitemid'] = 0;
+						$pictureComponent['userid'] = $headerArray['userid'];
+						$pictureComponent['parentcomponentid'] = 0;
+						$pictureComponent['setid'] = $picture['setid'];
+						$pictureComponent['setname'] = $picture['setname'];
+						$pictureComponent['externalassetservicecode'] = $picture['assetservicecode'];
+						$pictureComponent['externalassetservicename'] = $picture['assetservicename'];
+						$pictureComponent['externalassetpricetype'] = $picture['assetpricetype'];
+						$pictureComponent['externalassetid'] = $picture['assetid'];
+						$pictureComponent['componentcode'] = $picture['componentcategory'] . '.' . $picture['componentcode'];
+						$pictureComponent['componentlocalcode'] = $picture['componentcode'];
+						$pictureComponent['skucode'] = $picture['skucode'];
+						$pictureComponent['componentname'] = $picture['componentname'];
+						$pictureComponent['componentpath'] = '$SINGLEPRINT\\\\';
+						$pictureComponent['componentcategorycode'] = $picture['componentcategory'];
+						$pictureComponent['subcomponentcategory'] = $picture['subcomponentcategory'];
+						$pictureComponent['subcomponentcode'] = $picture['subcomponentcode'];
+						$pictureComponent['subcomponentname'] = $picture['subcomponentname'];
+						$pictureComponent['subcomponentskucode'] = $picture['subcomponentskucode'];
+						$pictureComponent['subcomponentunitcost'] = $picture['subcomponentunitcost'];
+						$pictureComponent['subcomponentunitweight'] = $picture['subcomponentunitweight'];
+						$pictureComponent['subcomponentunitsell'] = $picture['subcomponentunitsell'];
+						$pictureComponent['quantity'] = $picture['componentqty'];
+						$pictureComponent['subcomponenttotalcost'] = $picture['subcomponentunitcost'] * $pictureComponent['quantity'] * $orderItem['qty'];
+						$pictureComponent['subcomponenttotalweight'] = $picture['subcomponentunitweight'] * $pictureComponent['quantity'] * $orderItem['qty'];
+						$pictureComponent['sortorder'] = $sortOrder++;
+						$pictureComponent['pricingmodel'] = TPX_PRICINGMODEL_PERPRODCMPQTY;
+						$pictureComponent['islist'] = 1;
+						$pictureComponent['externalassetunitcost'] = $picture['assetcost'];
+						$pictureComponent['externalassetunitsell'] = $picture['assetsell'];
+						$pictureComponent['externalassetpageref'] = $picture['pageref'];
+						$pictureComponent['externalassetpagenumber'] = $picture['pagenumber'];
+						$pictureComponent['externalassetpagename'] = $picture['pagename'];
+						$pictureComponent['externalassetboxref'] = $picture['boxref'];
+						$pictureComponent['componenttotalsell'] = $picture['unitsell'] * $pictureComponent['quantity'] * $orderItem['qty'];
+						$pictureComponent['componenttotaltax'] = 0.00;
+						$pictureComponent['componentunitcost'] = $picture['unitcost'];
+						$pictureComponent['componentunitweight'] = $picture['unitweight'];
+						$pictureComponent['componentunitsell'] = $picture['unitsell'];
+						$pictureComponent['componenttotalcost'] = $pictureComponent['componentunitcost'] * $pictureComponent['quantity'] * $orderItem['qty'];
+						$pictureComponent['componenttotalweight'] = $pictureComponent['componentunitweight'] * $pictureComponent['quantity'] * $orderItem['qty'];
+
+						$orderItem['pictures'][] = $pictureComponent;
+					}
+
+					// If the project was a calendar project then we need to process the calendar customistaions.
+					foreach ($lineItem['calendarcustomisations'] as $code => $calendarCustomisation)
+					{
+						$orderCalendarCustom = array();
+						$componentCodePieces = explode('.', $calendarCustomisation['componentcode']);
+
+						$orderCalendarCustom['datecreated'] = '[currentdatetime]';
+						$orderCalendarCustom['orderid'] = 0;
+						$orderCalendarCustom['orderitemid'] = 0;
+						$orderCalendarCustom['userid'] = $headerArray['userid'];
+						$orderCalendarCustom['componentcode'] = $calendarCustomisation['componentcode'];
+						$orderCalendarCustom['componentunitcost'] = $calendarCustomisation['unitcost'];
+						$orderCalendarCustom['componentlocalcode'] = $componentCodePieces[1];
+						$orderCalendarCustom['skucode'] = $calendarCustomisation['skucode'];
+						$orderCalendarCustom['componentname'] = $calendarCustomisation['componentname'];
+						$orderCalendarCustom['componentpath'] = '$CALENDARCUSTOMISATION\\';
+						$orderCalendarCustom['componentcategorycode'] = $calendarCustomisation['componentcategory'];
+						$orderCalendarCustom['pricingmodel'] = TPX_PRICINGMODEL_PERPRODCMPQTY;
+                        $orderCalendarCustom['islist'] = 1;
+						$orderCalendarCustom['quantity'] = $calendarCustomisation['componentqty'];
+						$orderCalendarCustom['componentunitcost'] = $calendarCustomisation['unitcost'];
+						$orderCalendarCustom['componentunitsell'] = $calendarCustomisation['unitsell'];
+						$orderCalendarCustom['componenttotalcost'] = $orderCalendarCustom['componentunitcost'] * $orderItem['qty'];
+						$orderCalendarCustom['componenttotalsell'] = $orderCalendarCustom['componentunitsell'] * $orderItem['qty'];
+						$orderCalendarCustom['componenttotaltax'] = 0.00;
+
+						$orderItem['calendarcustomisations'][] = $orderCalendarCustom;
+					}
+
+					// If the project is a Retro Prints, then we need to convert the data into a component.
+					if (array_key_exists('retroprints', $lineItem))
+					{
+						foreach ($lineItem['retroprints'] as $retroPrint)
+						{
+							$retroPrintComponent = [];
+							$retroPrintComponent['datecreated'] = '[currentdatetime]';
+							$retroPrintComponent['orderid'] = 0;
+							$retroPrintComponent['orderitemid'] = 0;
+							$retroPrintComponent['userid'] = $headerArray['userid'];
+							$retroPrintComponent['parentcomponentid'] =	0;
+							$retroPrintComponent['componentcode'] = 'TAOPIX_RETRO_PRINTS';
+							$retroPrintComponent['componentname'] = 'en RETROPRINTS';
+							$retroPrintComponent['componentcategorycode'] = 'TAOPIX_RETRO_PRINTS';
+							$retroPrintComponent['componentcategoryname'] = 'en RETROPRINTS';
+							$retroPrintComponent['componentlocalcode'] = 'PAGE_' . $retroPrint['pagenumber'];
+							$retroPrintComponent['quantity'] = (($retroPrint['quantity'] === '0') ? 1 : $retroPrint['quantity']);
+							$retroPrintComponent['islist'] = 1;
+							$retroPrintComponent['pricingmodel'] = TPX_PRICINGMODEL_PERPRODCMPQTY;
+							$retroPrintComponent['externalassetpagenumber'] = $retroPrint['pagenumber'];
+
+							$orderItem['components'][] = $retroPrintComponent;
+						}
+					}
+
+					// if we have components from the designer we only need to add the place holder information and the userid
+					// to both the component and subcomponent. This is due to the fact that the data is already in the correct
+					// format in the project order data.
+					if (!empty($lineItem['components']))
+					{
+						$orderItem['components'] = array_merge($orderItem['components'], $lineItem['components']);
+
+						self::addComponentPlaceHolderData($orderItem['components'], $headerArray['userid']);
+					}
+
+					$orderData['cartarray'][] = $orderItem;
+
+				}
+
+				// add the default shipping array
+				$orderData['shippingdata'] = array();
+				$orderData['shippingdata']['datecreated'] = '[currentdatetime]';
+				$orderData['shippingdata']['shippingmethodcode'] = '';
+				$orderData['shippingdata']['shippingmethodname'] = '';
+				$orderData['shippingdata']['shippingratesell'] = 0.00;
+				$orderData['shippingdata']['shippingratediscountvalue'] = 0.00;
+				$orderData['shippingdata']['shippingratetaxcode'] = '';
+				$orderData['shippingdata']['shippingratetaxname'] = '';
+				$orderData['shippingdata']['shippingratetaxrate'] = 0;
+				$orderData['shippingdata']['shippingratecalctax'] = 0.00;
+				$orderData['shippingdata']['shippingratetaxtotal'] = 0.00;
+				$orderData['shippingdata']['shippingratetotalsell'] = 0.00;
+				$orderData['shippingdata']['shippingcustomername'] = '';
+				$orderData['shippingdata']['shippingcustomeraddress1'] = '';
+				$orderData['shippingdata']['shippingcustomeraddress2'] = '';
+				$orderData['shippingdata']['shippingcustomeraddress3'] = '';
+				$orderData['shippingdata']['shippingcustomeraddress4'] = '';
+				$orderData['shippingdata']['shippingcustomercity'] = '';
+				$orderData['shippingdata']['shippingcustomercounty'] = '';
+				$orderData['shippingdata']['shippingcustomerstate'] = '';
+				$orderData['shippingdata']['shippingcustomerregioncode'] = '';
+				$orderData['shippingdata']['shippingcustomerregion'] = '';
+				$orderData['shippingdata']['shippingcustomerpostcode'] = '';
+				$orderData['shippingdata']['shippingcustomercountrycode'] = '';
+				$orderData['shippingdata']['shippingcustomercountryname'] = '';
+				$orderData['shippingdata']['shippingcustomertelephonenumber'] = '';
+				$orderData['shippingdata']['shippingcustomeremailaddress'] = '';
+				$orderData['shippingdata']['shippingcontactfirstname'] = '';
+				$orderData['shippingdata']['shippingcontactlastname'] = '';
+				$orderData['shippingdata']['shippingratecode'] = '';
+				$orderData['shippingdata']['shippingrateinfo'] = '';
+				$orderData['shippingdata']['shippingratecost'] = 0.00;
+
+				// We need to check to see if we were unable to find some of the records as this will be a partial order.
+				// If it is a partial order then we must return the correct partial order error code.
+				if (count($missingProjectRefArray) > 0)
+				{
+					$resultArray['error'] = TPX_DATA_API_ERROR_PARTIALORDER;
+					$resultArray['errormessage'] = 'Error: Some project refs could not be found';
+				}
+			}
+		}
+		else
+		{
+			$resultArray['error'] = TPX_DATA_API_ERROR_NOPROJECTREFS;
+			$resultArray['errormessage'] = 'Error: No project refs provided';
+		}
+
+		$resultArray['missingprojectrefs'] = $missingProjectRefArray;
+		$resultArray['orderdata'] = $orderData;
+
+		return $resultArray;
+	}
+
+	private static function orderRoutingUpdate($pItemId, $pSiteCode, $pDebug)
+	{
+		$updateResult = [];
+
+		// Get constants from globals.
+		$constants = UtilsObj::getGlobalValue('gConstants', []);
+
+		// Only set order routing information if we have multisite.
+		if ($constants['optionms'])
+		{
+			// A site code has been specified so get the details for this site.
+			$siteInfo = DatabaseObj::getSiteFromCode($pSiteCode);
+
+			// If we have data for the passed site code.
+			if ($siteInfo['result'] == '')
+			{
+				$companyCode = $siteInfo['companycode'];
+				$siteKey = $siteInfo['productionsitekey'];
+				$siteHash = md5($pSiteCode . $pItemId . $siteKey);
+
+				// Build the update command.
+				$command = [
+					[
+						'action' => 'UPDATE',
+						'schema' => 'ORDERITEMS',
+						'fields' => [
+							'currentcompanycode' => $companyCode,
+							'currentowner' => $pSiteCode,
+							'currentownertype' => 1,
+							'origcompanycode' => $companyCode,
+							'origowner' => $pSiteCode,
+							'origownertype' => 1,
+							'ownerorderkey' => $siteHash
+						],
+						'ref' => 'id',
+						'refvalue' => $pItemId,
+						'operator' => '=',
+						'datatype' => 'ssissisi',
+						'extra' => '',
+						'debug' => $pDebug
+					],
+				];
+
+				// Perform this command without roll back as we are in a transaction already.
+				$updateResult = self::update($command, 0);
+			}
+		}
+
+		return $updateResult;
+	}
+
+	/**
+	 * Processes node information to see if we need to perform any action after the insert process.
+	 *
+	 * @param array $pNode Current node we are working with.
+	 * @return array array containing function, function params and any fields that we need to unset on the insert.
+	 */
+	static function processNodeForPostInsertActions($pNode)
+	{
+		$returnArray = [
+			'function' => false,
+			'functionParams' => [],
+			'unsetCols' => [],
+		];
+
+		// If we are processing the orderitems and we have passed a sitecode we may have multi line routing to perform.
+		if ((array_key_exists('schema', $pNode)) && ('ORDERITEMS' === $pNode['schema']) && (isset($pNode['fields']['sitecode'])))
+		{
+			// Unset the sitecode column.
+			$returnArray['unsetCols'][] = 'sitecode';
+
+			// If the sitecode is not the default we need to perform routing for the order.
+			if ('' !== $pNode['fields']['sitecode'])
+			{
+				$returnArray['function'] = 'orderRoutingUpdate';
+				$returnArray['functionParams'] = [
+					$pNode['fields']['sitecode']
+				];
+			}
+		}
+
+		return $returnArray;
+	}
+
+	/**
+	 * Add the place holder information that the insertOrder function overwrites witht he correct data along with the userid.
+ 	 *
+	 * @param array $pComponentArray component selections from the designer
+	 * @param int $pUserID the ID of the user the order is assigned to
+	 */
+	static function addComponentPlaceHolderData(&$pComponentArray, $pUserID)
+	{
+		foreach($pComponentArray as &$component)
+        {
+            $component['datecreated'] = '[currentdatetime]';
+			$component['orderid'] = 0;
+			$component['orderitemid'] = 0;
+			$component['userid'] = $pUserID;
+			$component['parentcomponentid'] =	0;
+
+			if (!empty($component['subcomponent']))
+            {
+                self::addComponentPlaceHolderData($component['subcomponent'], $pUserID);
+            }
+        }
+	}
+}
+
+?>

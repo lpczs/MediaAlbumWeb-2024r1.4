@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>{$appname} - Order '{$ordernumber}' Upload Reminder</title>
+        <style type="text/css">
+            {literal}
+            /* Client-specific Styles */
+            #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" button. */
+            body{width:100% !important;} .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+            body{-webkit-text-size-adjust:none;} /* Prevent Webkit platforms from changing default text sizes. */
+
+            /* Reset Styles */
+            body{margin:0; padding:0;}
+            img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+            table td{border-collapse:collapse;}
+            #backgroundTable{height:100% !important; margin:0; padding:0; width:100% !important;}
+
+            /* Template Styles */
+            body, #backgroundTable { background-color: #F8F8F8; }
+
+            td.headerContent{
+                line-height:100%;
+                padding-top: 15px;
+                padding-bottom: 30px;
+                vertical-align:middle;
+            }
+            #headerImage{ height:auto; max-width: 800px !important; }
+
+            h1, .h1{
+                color: #FFFFFF;
+                display: block;
+                font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                font-size: 13px;
+                font-weight:bold;
+                line-height:25px;
+                margin-top:0 !important;
+                margin-right:0 !important;
+                margin-bottom:0px !important;
+                margin-left:0 !important;
+                text-align: left;
+                height: 25px;
+                padding-left: 12px;
+                /*padding-top: 5px;
+                padding-right: 0;
+                padding-bottom: 6px;
+                */
+            }
+
+            #emailTitleBar {
+                background-color: #575757;
+            }
+
+            #templateBody {
+                background-color: #ffffff;
+                border: 0;
+            }
+            #templateBody div{
+                color:#333333;
+                font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+                font-size:12px;
+                line-height:16px;
+                text-align: left;
+            }
+
+            #templateContents {
+                border-left-width:1px;
+                border-right-width:1px;
+                border-bottom-width:1px;
+                border-left-style:solid;
+                border-right-style:solid;
+                border-bottom-style:solid;
+                border-left-color:#CDCDCD;
+                border-right-color:#CDCDCD;
+                border-bottom-color:#CDCDCD;
+                border-top: 0;
+            }
+            {/literal}
+        </style>
+    </head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+    <center>
+        <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable">
+            <tr>
+                <td align="center" valign="top">
+
+                    <!-- // Begin Template Container \\ -->
+                    <table border="0" cellpadding="0" cellspacing="0" width="800" id="templateContainer">
+                        <tr>
+                            <td align="center" valign="top">
+                                <!-- // Begin Template Header \\ -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="800" id="templateHeader">
+                                    <tr>
+                                        <td class="headerContent" style="line-height:100%; padding-top: 15px; padding-bottom: 30px; vertical-align:middle;">
+                                            <img src="{$brandLogo}" style="max-width:800px;" id="headerImage" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- // End Template Header \\ -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top">
+                                <!-- // Begin Template Body \\ -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="800" id="templateBody" bgcolor="ffffff">
+                                    <tr>
+                                        <td valign="top">
+                                            <table id="emailTitleBar" border="0" bgcolor="575757" cellpadding="0" cellspacing="0" height="25px" width="100%">
+                                                <tr>
+                                                    <td>
+                                                        <h1 class="h1" style='padding-left: 12px; margin: 0; height: 25px; line-height:25px; font-size: 13px; font-weight:bold; color: #FFFFFF; display: block; font-family:"Lucida Grande",Helvetica,Arial,Verdana,sans-serif;'>{$appname} - Order '{$ordernumber}' Upload Reminder</h1>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <table border="0" cellpadding="10" cellspacing="0" height="100%" width="100%" id="templateContents" style="border-left-width:1px; border-right-width:1px; border-bottom-width:1px; border-left-style:solid; border-right-style:solid; border-bottom-style:solid; border-left-color:#CDCDCD; border-right-color:#CDCDCD; border-bottom-color:#CDCDCD; border-top: 0;">
+                                                <tr>
+                                                    <td valign="top">
+                                                        <div>
+                                                            Dear {$billingcontactfirstname},
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top">
+                                                        <div>
+                                                            <p>Thank you for placing your order with us.<p>
+
+															<p>We have received your payment for <em><strong>{$projectname}</strong></em> and now would kindly ask you to upload your project to our server so we can start the production process.</p>
+
+															<p>To upload your project please follow these easy steps:</p>
+
+															<p>1. Open your {$appname} software
+															<br />
+															2. Choose 'open an existing project'
+															<br />
+															3. Click on your project (the status should say 'Waiting for Files') and choose the 'send files' option
+															<br />
+															4. Tick the disclaimer box and choose 'start'
+															<br />
+															5. Click on the 'Upload Order' button then choose 'continue'
+															<br />
+															<br/>
+
+															Your files will then be uploaded automatically to our server.</p>
+
+															<p><strong>Please note, the instructions above apply to users of our most recent version of {$appname}. For those using earlier versions, please follow the steps below:</strong></p>
+
+															<p>1. Launch your {$appname} software
+															<br />
+															2. When the prompt is displayed informing you that you did not finish uploading your project, please click 'Yes' to upload files
+															<br />
+															3. Please proceed to the shopping cart by clicking on the cart icon or choose 'Order…' from the File menu
+															<br />
+															4. Click 'OK' to verify the flight check
+															<br />
+															5. Tick the disclaimer box and choose 'start'
+															<br />
+															6. Click on the 'Upload Finished Pages' button then choose 'continue'</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top">
+                                                        <div>
+                                                            {$emailsignature}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- // End Template Body \\ -->
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- // End Template Container \\ -->
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>

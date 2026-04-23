@@ -1,0 +1,141 @@
+<!-- Admin Products -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="productActivate">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productActivate()" />
+	</fuseaction>
+	
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="productEditDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="onlineWizardDisplay">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="onlineWizardDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="onlineWizardEdit">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="onlineWizardEdit()" />
+	</fuseaction>		
+	
+	<fuseaction name="productConfigDisplay">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="productConfigDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="product3DPreviewDisplay">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="product3DPreviewDisplay()" />
+	</fuseaction>
+	
+	<fuseaction name="getProductTree">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="getProductTree()" />
+	</fuseaction>
+	
+	<fuseaction name="getComponentsFromCategory">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getComponentsFromCategory()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productDelete()" />
+	</fuseaction>
+	
+	<fuseaction name="getProductsConfigPricingGridData">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getProductsConfigPricingGridData()" />
+	</fuseaction>
+	
+	<fuseaction name="refreshProductTree">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="refreshProductTree()" />
+	</fuseaction>
+	
+	<fuseaction name="getPreviewImage">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getPreviewImage() " />
+	</fuseaction>
+	
+	<fuseaction name="uploadPreviewImage">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="uploadPreviewImage()" />
+	</fuseaction>
+	
+	<fuseaction name="saveProductConfig">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="saveProductConfig()" />
+	</fuseaction>
+	
+	<fuseaction name="deleteNodesFromProductConfig">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="deleteNodesFromProductConfig()" />
+	</fuseaction>
+
+	<fuseaction name="productLinkingList">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="productLinkingList()" />
+	</fuseaction>
+
+	<fuseaction name="getLinkedProductCode">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="getLinkedProductCode()" />
+	</fuseaction>
+
+	<fuseaction name="checkProductDeletionWarnings">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="checkProductDeletionWarnings()" />
+	</fuseaction>
+	
+	<fuseaction name="getLinkingPreviewGridData">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="getLinkingPreviewGridData()" />
+	</fuseaction>
+
+	<fuseaction name="linkingPreviewDisplay">
+		<instantiate object="control" class="AdminProducts_control" />
+		<invoke object="control" methodcall="linkingPreviewDisplay()" />
+	</fuseaction>
+</circuit>

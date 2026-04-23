@@ -1,0 +1,13 @@
+Account To Be Removed Soon
+
+Hello {$contactfirstname},
+
+Account: {$login} ({$emailaddress})
+
+The above account has been marked for automatic deletion from our system because it has been inactive for more than {$redactiondays} days.
+
+Unless this account is used within the next {$redactionnotificationdays} days, it will be permanently disabled and all associated personal data will be deleted from our system on {$redactiondatelocal}.
+
+You can access your account at any time via the URL {$homeurl}
+
+{$emailsignature}

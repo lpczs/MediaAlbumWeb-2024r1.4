@@ -1,0 +1,101 @@
+<!-- Admin Branding -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+	
+	<fuseaction name="brandingActivate">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="brandingActivate()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="brandingAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="brandingAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="brandingEditDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="brandingEdit()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="brandingDelete()" />
+	</fuseaction>
+	
+	<fuseaction name="list">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="brandList()" />
+	</fuseaction>
+	
+	<fuseaction name="unsubscribeAllUsers">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="unsubscribeAllUsers()" />
+	</fuseaction>
+
+	<fuseaction name="getBrandFilePreview">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getBrandFilePreview()" />
+	</fuseaction>
+
+	<fuseaction name="uploadBrandFile">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="uploadBrandFile()" />
+	</fuseaction>
+
+	<fuseaction name="getAuthentication">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getAuthentication()" />
+	</fuseaction>
+
+	<fuseaction name="authenticate">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="authenticate()" />
+	</fuseaction>
+
+	<fuseaction name="downloadKey">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="downloadKey()" />
+	</fuseaction>
+
+	<!-- <fuseaction name="generateKey">
+		<instantiate object="control" class="AdminBranding_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="downloadKey(true)" />
+	</fuseaction> -->
+
+</circuit>

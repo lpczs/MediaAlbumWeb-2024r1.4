@@ -1,0 +1,64 @@
+/* 
+
+Responsive styles go here 
+
+*/
+
+/* --------------------------
+    Share preview
+-------------------------- */
+body {
+    background-color: ghostwhite;
+}
+.share-preview
+{
+    margin: 0;
+}
+
+.share-preview .header
+{
+    height: 54px;
+    border-bottom: 1px solid #c3c3c3;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.share-preview .header img
+{
+    max-height: 34px;
+    width: auto;
+}
+
+.share-preview .preview-iframe
+{
+    border: none;
+    height: calc(100% - 54px);
+    width: 100vw;
+    position: fixed;
+    bottom: 0px !important;
+}
+
+/* Shows when share link is not available */
+.share-error-message
+{
+    text-align: center;
+    padding-top: 80px;
+    color: #343434;
+    font-family: "Helvetica Neue", Arial,Helvetica,Verdana,sans-serif;
+}
+
+.share-error-message p
+{
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.share-preview.no-branding .header
+{
+    display: none;
+}
+
+.share-preview.no-branding .preview-iframe
+{
+    height: 100%;
+}

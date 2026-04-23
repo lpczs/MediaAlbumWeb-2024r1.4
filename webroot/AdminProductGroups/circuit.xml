@@ -1,0 +1,105 @@
+<!-- Admin Taopix Online / Data Retention Policies Admin -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="getGridData">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="getGridData()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="addDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="add">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productGroupAdd()" />
+	</fuseaction>
+
+    <fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="editDisplay()" />
+	</fuseaction>
+
+    <fuseaction name="edit">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="productGroupEdit()" />
+	</fuseaction>
+
+	<fuseaction name="checkDelete">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="checkDelete()" />
+	</fuseaction>
+
+	<fuseaction name="delete">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteProductGroup()" />
+	</fuseaction>
+
+	<fuseaction name="duplicate">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="duplicate()" />
+	</fuseaction>
+
+	<fuseaction name="getCollectionGridData">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getCollectionGridData()" />
+	</fuseaction>
+
+	<fuseaction name="getPreviewGridData">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getPreviewGridData()" />
+	</fuseaction>
+
+	<fuseaction name="getLayoutPreviewData">
+		<instantiate object="control" class="AdminProductGroups_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="getLayoutPreviewData()" />
+	</fuseaction>
+
+	<fuseaction name="getLayoutGridData">
+	<instantiate object="control" class="AdminProductGroups_control" />
+	<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+	<invoke object="control" methodcall="assertCsrfToken()" />
+	<invoke object="control" methodcall="getLayoutGridData()" />
+	</fuseaction>
+
+	<fuseaction name="getMultipleLayoutPreviewData">
+	<instantiate object="control" class="AdminProductGroups_control" />
+	<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+	<invoke object="control" methodcall="assertCsrfToken()" />
+	<invoke object="control" methodcall="getMultipleLayoutPreviewData()" />
+	</fuseaction>
+
+
+	<fuseaction name="previewDisplay">
+	<instantiate object="control" class="AdminProductGroups_control" />
+	<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+	<invoke object="control" methodcall="assertCsrfToken()" />
+	<invoke object="control" methodcall="previewDisplay()" />
+	</fuseaction>
+</circuit>

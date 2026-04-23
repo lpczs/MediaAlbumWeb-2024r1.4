@@ -1,0 +1,11 @@
+Personal Data Removal
+
+Hello {$contactfirstname},
+
+You have requested that your personal data is removed from our system.
+
+To prevent the removal, please log in before {$redactiondatelocal}.
+
+You can access your account at any time via the URL {$homeurl}
+
+{$emailsignature}

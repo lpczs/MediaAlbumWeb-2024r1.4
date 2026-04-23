@@ -1,0 +1,16 @@
+<!-- Admin Connectors -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminExperienceEditing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="saveExperience">
+		<instantiate object="control" class="AdminExperienceEditing_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="saveExperience()" />
+	</fuseaction>
+
+</circuit>

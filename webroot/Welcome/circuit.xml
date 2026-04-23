@@ -1,0 +1,88 @@
+<!-- Welcome -->
+<circuit access="public">
+	<fuseaction name="initialize">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET', 'POST'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="processLogin">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="processLogin()" />
+	</fuseaction>
+
+	<fuseaction name="loginExpire">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="loginExpire()" />
+	</fuseaction>
+
+	<fuseaction name="initNewAccount">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="initNewAccount()" />
+	</fuseaction>
+
+	<fuseaction name="createNewAccountLarge">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="createNewAccountLarge()" />
+	</fuseaction>
+
+    <fuseaction name="createNewAccountSmall">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="createNewAccountSmall()" />
+	</fuseaction>
+
+	<fuseaction name="initForgotPassword">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST', 'GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="initForgotPassword()" />
+	</fuseaction>
+
+	<fuseaction name="initForgotPasswordFromEmail">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST', 'GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="initForgotPasswordFromEmail()" />
+	</fuseaction>
+
+	<fuseaction name="resetPasswordRequest">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="resetPasswordRequest()" />
+	</fuseaction>
+
+	<fuseaction name="resetPassword">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST', 'GET'])" />
+		<invoke object="control" methodcall="resetPassword()" />
+	</fuseaction>
+
+	<fuseaction name="resetPasswordProcess">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="resetPasswordProcess()" />
+	</fuseaction>
+	
+	<fuseaction name="resetPasswordProcessAuthCode">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="resetPasswordProcessAuthCode()" />
+	</fuseaction>
+
+	<fuseaction name="updateEmailRequest">
+		<instantiate object="control" class="Welcome_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="updateEmailRequest()" />
+	</fuseaction>
+</circuit>

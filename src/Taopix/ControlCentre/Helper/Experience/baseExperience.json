@@ -1,0 +1,437 @@
+{
+  "WIZARD": {
+    "dat": {
+      "dat": "std"
+    },
+    "advdao": {
+      "alcvr1": false,
+      "albcvr": false,
+      "itl": false
+    },
+    "assl": {
+      "apst": true,
+      "fe": false
+    },
+    "psoo": {
+      "aftspitpaps": false
+    },
+    "ws": {
+      "sws": true
+    },
+    "aps": {
+      "dso": "dt",
+      "tmbl": "st"
+    },
+    "psms": {
+      "dm": "isp"
+    },
+    "pcms": {
+      "dm": "idpc"
+    },
+    "cvr1s": {
+      "acs": true
+    },
+    "bcvrs": {
+      "acs": true
+    },
+    "spss": {
+      "sspss": true
+    },
+    "prvs": {
+      "sprvs": true,
+      "abc": true,
+      "sv": true,
+      "obo": true,
+      "ebo": true,
+      "ppeb": false
+    },
+    "hed": {
+      "logo": true,
+      "prjs": true,
+      "pr": true,
+      "pd": true,
+      "pnapc": true,
+      "oeb": true
+    },
+    "nav": {
+      "bct": true
+    }
+  },
+  "EDITOR": {
+    "et": {
+      "gc": false
+    },
+    "pe": {
+      "cepl": true,
+      "autl": false
+    },
+    "txted": {
+      "txtcc": true,
+      "txtfmc": true,
+      "txtfsmc": true,
+      "txtfntsmc": true,
+      "txtfcmc": true,
+      "txtcb": true,
+      "txtbb": true,
+      "txtib": true,
+      "txtub": true,
+      "txtsb": true,
+      "txtomc": true,
+      "txtapmc": true,
+      "txtavmc": true,
+      "txtacmc": true,
+      "txtwdmc": true,
+      "txtsmc": true,
+      "txtmde": "flt"
+    },
+    "hed": {
+      "logo": true,
+      "sv": true,
+      "shprj": true,
+      "cp": true,
+      "prjs": true,
+      "pr": true,
+      "pd": true,
+      "pnapc": true,
+      "oeb": true,
+      "obo": true,
+      "urb": {
+        "urbm": false,
+        "urbl": false
+      },
+      "vms": {
+        "vmsm": false,
+        "vmsl": false
+      },
+      "hh": "md"
+    },
+    "co": {
+      "scoop": false,
+      "scooo": true
+    },
+    "tpal": {
+      "sapb": true,
+      "ssdb": true,
+      "msup": "msuc"
+    },
+    "ce": {
+      "cep": false,
+      "ace": false,
+      "ses": false
+    },
+    "cset": {
+      "csetp": false
+    },
+    "p": {
+      "pp": true,
+      "apb": true,
+      "afb": true,
+      "saa": true,
+      "dpmso": "dt",
+      "dpmtl": "fft"
+    },
+    "b": {
+      "bp": true,
+      "des": true,
+      "c": true,
+      "cf": true,
+      "atap": true,
+      "ebb": true
+    },
+    "l": {
+      "lp": true,
+      "ctf": true,
+      "pbf": true,
+      "cf": true,
+      "atap": true
+    },
+    "stk": {
+      "stp": true,
+      "cf": true
+    },
+    "set": {
+      "setp": true
+    },
+    "bo": {
+      "bpo": true,
+      "raf": true,
+      "flh": true,
+      "flv": true,
+      "hzna": true,
+      "e": true,
+      "ae": true,
+      "br": true,
+      "cn": true,
+      "fltr": true,
+      "trans": true,
+      "ms": true,
+      "mcf": true,
+      "cmb": true
+    },
+    "pbo": {
+      "pbop": true,
+      "raf": true,
+      "r90": true,
+      "flh": true,
+      "flv": true,
+      "hzna": true,
+      "e": true,
+      "ae": true,
+      "br": true,
+      "cn": true,
+      "fltr": true,
+      "bdr": true,
+      "bs": true,
+      "rc": true,
+      "btrans": true,
+      "bcol": true,
+      "sh": true,
+      "blr": true,
+      "dis": true,
+      "an": true,
+      "op": true,
+      "ex": true,
+      "shcol": true,
+      "ms": true,
+      "mcf": true,
+      "cmb": true,
+      "trans": true,
+      "atp": true,
+      "ar": true,
+      "sap": true,
+      "fps": true,
+      "fptb": true,
+      "ndg": true,
+      "adv": true,
+      "lbp": true,
+      "shp": true,
+      "ssel": true,
+      "slbp": true,
+      "swp": true,
+      "cpb": true
+    },
+    "sto": {
+      "stop": true,
+      "r90": true,
+      "raf": true,
+      "flh": true,
+      "flv": true,
+      "hzna": true,
+      "trans": true,
+      "atp": true,
+      "ar": true,
+      "sap": true,
+      "fps": true,
+      "ndg": true,
+      "adv": true,
+      "lbp": true,
+      "bdr": true,
+      "bs": true,
+      "rc": true,
+      "btrans": true,
+      "bcol": true,
+      "e": true,
+      "br": true,
+      "cn": true,
+      "fltr": true,
+      "sh": true,
+      "blr": true,
+      "dis": true,
+      "an": true,
+      "op": true,
+      "ex": true,
+      "shcol": true,
+      "shp": true,
+      "ssel": true,
+      "slbp": true
+    },
+    "tbo": {
+      "tbop": true,
+      "bk": true,
+      "bkc": true,
+      "bktrans": true,
+      "bdr": true,
+      "bs": true,
+      "btrans": true,
+      "bcol": true,
+      "atp": true,
+      "ar": true,
+      "sap": true,
+      "fps": true,
+      "ndg": true,
+      "adv": true,
+      "lbp": true
+    },
+    "sbo": {
+      "sbop": true,
+      "bdr": true,
+      "bs": true,
+      "rc": true,
+      "btrans": true,
+      "bcol": true,
+      "sh": true,
+      "blr": true,
+      "dis": true,
+      "an": true,
+      "op": true,
+      "ex": true,
+      "shcol": true,
+      "ms": true,
+      "mcf": true,
+      "cmb": true,
+      "atp": true,
+      "trans": true,
+      "ar": true,
+      "sap": true,
+      "fps": true,
+      "ndg": true,
+      "adv": true,
+      "lbp": true,
+      "shp": true,
+      "ssel": true,
+      "slbp": true,
+      "bk": true,
+      "bkc": true,
+      "bktrans": true
+    },
+    "wa": {
+      "g": {
+        "urb": {
+          "urbm": true,
+          "urbl": true
+        },
+        "vms": {
+          "vmsm": true,
+          "vmsl": true
+        },
+        "pnam": true,
+        "socm": true
+      },
+      "dv": "ls",
+      "prvm": {
+        "zc": true,
+        "ipo": true,
+        "u3dp": true
+      },
+      "evm": {
+        "ls": true,
+        "pg": false,
+        "grd": true
+      },
+      "lv": {
+        "zc": true,
+        "pab": true,
+        "lay": false,
+        "apbx": true,
+        "atb": true,
+        "adpg": true,
+        "smbp": "right",
+        "smbi": "dots"
+      },
+      "spv": {
+        "zc": true,
+        "nppb": true,
+        "pab": true,
+        "lay": false,
+        "apbx": true,
+        "atb": true,
+        "dpg": true,
+        "apg": false,
+        "ptb": true,
+        "ptap": true,
+        "ptrp": true,
+        "smbp": "right",
+        "smbi": "dots"
+      },
+      "gv": {
+        "gsc": true,
+        "crp": true,
+        "adpg": true,
+        "smbi": "dots"
+      }
+    },
+    "up": {
+      "suppoo": true,
+      "suppoord": true
+    },
+    "usp": {
+      "eusp": true,
+      "rappp": 2
+    },
+    "sg": {
+      "isgs": true
+    }
+  },
+  "SETTINGS": {
+    "ga": {
+      "aga": true,
+      "pgtsi": false,
+      "agtr": true,
+      "trm": true
+    },
+    "am": {
+      "sb": true,
+      "shr": true,
+      "siso": true,
+      "reg": true,
+      "lang": true,
+      "ab": true,
+      "h": true,
+      "cp": true
+    },
+    "as": {
+      "upl": true,
+      "ufp": true,
+      "pu": true
+    },
+    "eas": {
+      "ll": true,
+      "fb": true,
+      "flk": true,
+      "gp": true,
+      "ig": true
+    },
+    "puw": {
+      "dso": "dt",
+      "dplm": "fft"
+    },
+    "u": {
+      "u": "mm"
+    },
+    "aie": {
+      "eauia": false,
+      "actoo": true
+    },
+    "spd": {
+      "spd": 10
+    },
+    "id": {
+      "id": 15
+    },
+    "is": {
+      "sbu": false,
+      "msbump": 2,
+      "sau": false,
+      "msaump": 36
+    },
+    "obl": {
+      "obl": "atbkt",
+      "cobl": ""
+    },
+    "sbobl": {
+      "sbobl": "sbmt",
+      "ceobl": ""
+    },
+    "dpn": {
+      "dpn": "en Untitled"
+    },
+    "llurl": {
+      "llurl": "",
+      "llttt": "en Back to Website"
+    },
+    "osw": {
+      "sosw": true,
+      "spqd": true
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<table style="border: 1px solid #000000; border-collapse : collapse; margin-left: 1%; width:600px;">
+    <!-- TAOPIX logo-->
+    <tr>
+        <td height="80px">
+            <img src="{$brandLogo}" id="headerImage"  height="60" alt="" />
+        </td>
+    </tr>
+    <tr style="background-color: #575757; text-indent: 12px; font-size: 13px; font-weight:bold; color: #FFFFFF; font-family: Lucida Grande;" >
+        <td width="100%" style="padding-top: 5px; padding-bottom: 5px; word-break:break-all;">
+            Account To Be Removed Soon
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:normal;">
+            Hello {$contactfirstname},
+            <br />
+            <br />
+			Account: {$login} ({$emailaddress})
+            <br />
+            <br />
+			The above account has been marked for automatic deletion from our system because it has been inactive for more than {$redactiondays} days.
+            <br />
+
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:normal;">
+			<div id="messageContent">
+				Unless this account is used within the next {$redactionnotificationdays} days, it will be permanently disabled and all associated personal data will be deleted from our system on {$redactiondatelocal}.
+
+			</div> <!-- content -->
+		</td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:normal;">
+			To prevent the removal, please log in before this date.
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:normal;">
+            You can access your account at any time via the URL <a href="{$homeurl}">{$homeurl}</a>
+        </td>
+    </tr>
+    <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px;  display: block; color: #575757; font-family: Lucida Grande;">
+        <td style="word-break:break-all;">
+            {$emailsignature}
+        </td>
+    </tr>
+</table>

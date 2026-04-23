@@ -1,0 +1,77 @@
+<!-- Admin Scheduled Tasks -->
+<circuit access="public">
+
+	<fuseaction name="initialize">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="displayList">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="displayList()" />
+	</fuseaction>
+
+	<fuseaction name="editDisplay">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="taskEditDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="addDisplay">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="taskAddDisplay()" />
+	</fuseaction>
+
+	<fuseaction name="taskActivate">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="taskActivate()" />
+	</fuseaction>
+
+	<fuseaction name="taskDelete">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="taskDelete()" />
+	</fuseaction>
+
+	<fuseaction name="taskAdd">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="taskAdd()" />
+	</fuseaction>
+
+	<fuseaction name="getScriptInfo">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+		<invoke object="control" methodcall="getScriptInfo()" />
+	</fuseaction>
+
+	<fuseaction name="taskEdit">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="taskEdit()" />
+	</fuseaction>
+
+	<fuseaction name="taskSchedulerActivate">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="taskSchedulerActivate()" />
+	</fuseaction>
+
+	<fuseaction name="taskRunNow">
+		<instantiate object="control" class="AdminScheduledTasks_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="taskRunNow()" />
+	</fuseaction>
+
+</circuit>

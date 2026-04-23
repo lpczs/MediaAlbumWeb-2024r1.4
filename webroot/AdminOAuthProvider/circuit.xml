@@ -1,0 +1,34 @@
+<!-- Admin OAuthProvider Methods -->
+<circuit access="public">
+    <fuseaction name="initialize">
+        <instantiate object="control" class="AdminOAuthProvider_control" />
+        <invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+        <invoke object="control" methodcall="initialize()" />
+    </fuseaction>
+
+    <fuseaction name="getGridData">
+        <instantiate object="control" class="AdminOAuthProvider_control" />
+        <invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+        <invoke object="control" methodcall="getGridData()" />
+    </fuseaction>
+
+    <fuseaction name="getProvider">
+        <instantiate object="control" class="AdminOAuthProvider_control" />
+        <invoke object="control" methodcall="assertRequestMethod(['GET'])" />
+        <invoke object="control" methodcall="getProvider()" />
+    </fuseaction>
+
+    <fuseaction name="save">
+        <instantiate object="control" class="AdminOAuthProvider_control" />
+        <invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+        <invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="save()" />
+    </fuseaction>
+
+    <fuseaction name="delete">
+        <instantiate object="control" class="AdminOAuthProvider_control" />
+        <invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+        <invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="delete()" />
+    </fuseaction>
+</circuit>

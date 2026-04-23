@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{$appname} - Password Reset</title>
+<style type="text/css">
+    {literal}
+    .existingTableCell {
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .existingTableHeaderCell {
+        padding-bottom: 6px; 
+        width: 150px;
+    }
+    {/literal}
+</style>
+</head>
+    <body>
+        <table style="border: 1px solid #000000; border-collapse : collapse; margin-left: 1%; width:600px;">
+            <!-- TAOPIX logo-->
+            <tr>
+                <td height="80px">
+                    <img src="{$brandLogo}" id="headerImage"  height="60px"/>
+                </td>
+            </tr>
+            <tr style="background-color: #575757; text-indent: 12px; font-size: 13px; font-weight:bold; color: #FFFFFF; font-family: Lucida Grande;" >
+                <td width="100%" style="padding-top: 5px; padding-bottom: 5px; word-break:break-all;">
+                    Password Reset Requested
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p>Hello,</p>
+                    <p>
+                        We have received a request to reset the password for the following account:
+                        <br/>{$loginname}
+                    </p>
+                    <p>There are multiple accounts registered to this email address. </p>
+                    <p>Please choose which account you would like to reset the password for, and enter that username instead of your email on the forgotten password form.</p>
+                   
+                    <div>
+                        <p>The following accounts are registered to this email address:
+                        </p>
+                        
+                        <table border="0" style="font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                                <tr>
+                                    <td class="existingTableCell existingTableHeaderCell" style="font-weight: bold; padding-top: 10px;">Username</td>
+                                    <td class="existingTableCell existingTableHeaderCell" style="font-weight: bold; padding-top: 10px;">Last logged in</td>
+                                </tr>
+                            {foreach from=$accountlist item=i key=prd}
+                                <tr>
+                                    <td class="existingTableCell">{$i.login}</td>
+                                    <td class="existingTableCell" style="font-style: italic;">{$i.lastlogindate}</td>
+                                </tr>
+                            {/foreach}
+                        </table>
+
+                    </div>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px;  display: block; color: #575757; font-family: Lucida Grande;">
+                <td style="word-break:break-all; text-align: center; padding-top:10px;">
+                    <table cellspacing="0" cellpadding="0" width="100%
+                                                                  ">
+                        <tr>
+                            <td style="background: green; text-align: center; padding: 15px 0; font-size: 14px; border-radius: 4px;">
+                                <a href="{$reseturl}" style="color: #fff; text-decoration: none; display: block; padding: 0 30px;">Reset my password via username</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="padding: 10px; border: 0px solid #CDCDCD; font-size: 12px; line-height: 20px; display: block; color: #575757; font-family: Lucida Grande;">
+                <td>
+                    <p>If you didn't make this request, just ignore this email and no changes will be made to your account.<br/><br/></p>
+                    <p>{$emailsignature}</p>
+
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

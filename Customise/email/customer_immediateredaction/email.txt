@@ -1,0 +1,11 @@
+Personal Data Removal.
+
+Hello {$contactfirstname},
+
+You have requested that your personal data is removed from our system.
+
+This will be carried out with immediate effect.
+
+As a result, you can no longer sign in to your account.
+
+{$emailsignature}

@@ -1,0 +1,4 @@
+{$appname} - Order '{$ordernumber}' Shipping Notification
+The following order has been shipped to your distribution centre:
+
+{$qty} x {$productname}

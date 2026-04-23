@@ -1,0 +1,105 @@
+<!-- Customer -->
+<circuit access="public">
+	<fuseaction name="initialize">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="initialize()" />
+	</fuseaction>
+
+	<fuseaction name="initialize2">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="initialize2()" />
+	</fuseaction>
+
+	<fuseaction name="logout">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="logout()" />
+	</fuseaction>
+
+    <fuseaction name="yourOrders">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="yourOrders()" />
+	</fuseaction>
+
+    <fuseaction name="displayOnlineProjectList">
+        <instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="displayOnlineProjectList()" />
+    </fuseaction>
+
+	<fuseaction name="accountDetails">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="accountDetails()" />
+	</fuseaction>
+
+	<fuseaction name="updateAccountDetails">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updateAccountDetails()" />
+	</fuseaction>
+
+	<fuseaction name="changePassword">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changePassword()" />
+	</fuseaction>
+
+	<fuseaction name="updatePassword">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updatePassword()" />
+	</fuseaction>
+
+	<fuseaction name="changePreferences">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="changePreferences()" />
+	</fuseaction>
+
+	<fuseaction name="updatePreferences">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="updatePreferences()" />
+	</fuseaction>
+
+    <fuseaction name="showPreview">
+        <instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST', 'GET'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="showPreview()" />
+    </fuseaction>
+
+    <fuseaction name="updateGiftCard">
+        <instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+        <invoke object="control" methodcall="updateGiftCard()" />
+    </fuseaction>
+
+	<fuseaction name="verifyPassword">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="verifyPassword()" />
+	</fuseaction>
+
+	<fuseaction name="deleteOrder">
+		<instantiate object="control" class="Customer_control" />
+		<invoke object="control" methodcall="assertRequestMethod(['POST'])" />
+		<invoke object="control" methodcall="assertCsrfToken()" />
+		<invoke object="control" methodcall="deleteOrder()" />
+	</fuseaction>
+</circuit>

@@ -1,0 +1,18 @@
+{$appname} - [新訂單] Ubabybaby訂單確認 編號'{$ordernumber}'
+親愛的{$billingcontactfirstname},
+
+感謝您惠顧Ubabybaby的產品﹗付款確定後成品約將七至十個工作天製作完成; 如果該訂單包括書套或禮盒,生產時間約延長5個工作日。
+
+以下是您所訂購產品的訂單詳細資料，如發覺有任何錯誤，請盡快致電 (852) 3655-6123與我們聯絡修正。
+
+{$emailContent} 
+
+聯絡電話：{$billingcustomertelephonenumber}
+電郵地址：{$billingcustomeremailaddress}
+
+您可隨時透過 {$homeurl} 登入『您的賬戶』,查看訂單狀態或者再次訂購。
+
+再次感謝您惠顧Ubabybaby的產品.
+
+© 2016 Ubabybaby, Inc. All rights reserved. 
+

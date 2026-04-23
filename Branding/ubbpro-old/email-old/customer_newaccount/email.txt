@@ -1,0 +1,14 @@
+{$appname} - New Account Confirmation
+Hello {$contactfirstname},
+
+Thank you for registering with Ubabybaby 'Online'.
+
+Your username is: {$loginname}
+
+You can access your account at any time via the URL
+{$homeurl}
+
+
+Best Regards,
+
+© 2015 Ubabybaby, Inc. All rights reserved. 

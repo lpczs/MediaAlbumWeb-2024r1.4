@@ -1,0 +1,8 @@
+{$appname} - Order Re-Routed
+Note To Production.
+
+The following orders have been re-routed to your production site:
+{$orders}
+
+Reason: {$reason}
+Routed By: {$user}

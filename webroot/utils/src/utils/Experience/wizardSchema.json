@@ -1,0 +1,227 @@
+{
+  "$ref": "#/definitions/Wizard",
+  "definitions": {
+    "Wizard": {
+      "type": "object",
+      "title": "wizard",
+      "additionalProperties": false,
+      "properties": {
+        "designAssistantType": {
+          "$ref": "#/definitions/DesignAssistantType"
+        },
+        "advancedDesignAssistantOptions": {
+          "$ref": "#/definitions/AdvancedDesignAssistantOptions"
+        },
+        "assistantLocation": {
+          "$ref": "#/definitions/AssistantLocation"
+        },
+        "pictureSelectionOnlyOptions": {
+          "$ref": "#/definitions/PictureSelectionOnlyOptions"
+        },
+        "welcomeScreen": {
+          "$ref": "#/definitions/WelcomeScreen"
+        },
+        "addPicturesStep": {
+          "$ref": "#/definitions/AddPicturesStep"
+        },
+        "picSelectionModeStep": {
+          "$ref": "#/definitions/PicSelectionModeStep"
+        },
+        "pageCountModeStep": {
+          "$ref": "#/definitions/PageCountModeStep"
+        },
+        "cover1Step": {
+          "$ref": "#/definitions/Cover1Step"
+        },
+        "backCoverStep": {
+          "$ref": "#/definitions/BackCoverStep"
+        },
+        "smartPictureSelectionStep": {
+          "$ref": "#/definitions/SmartPictureSelectionStep"
+        },
+        "previewStep": {
+          "$ref": "#/definitions/PreviewStep"
+        },
+        "header": {
+          "$ref": "#/definitions/Header"
+        },
+        "navigation": {
+          "$ref": "#/definitions/Navigation"
+        }
+      }
+    },
+    "DesignAssistantType": {
+      "title": "designAssistantType",
+      "type": "object",
+      "properties": {
+        "designAssistantType": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "AdvancedDesignAssistantOptions": {
+      "title": "advancedDesignAssistantOptions",
+      "type": "object",
+      "properties": {
+        "applyLayoutToCover1": {
+          "$ref": "#/definitions/Bool"
+        },
+        "applyLayoutToBackCover": {
+          "$ref": "#/definitions/Bool"
+        },
+        "includeTextLayouts": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "AssistantLocation": {
+      "title": "assistantLocation",
+      "type": "object",
+      "properties": {
+        "atProjectStart": {
+          "$ref": "#/definitions/Bool"
+        },
+        "fromEditor": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "PictureSelectionOnlyOptions": {
+      "title": "pictureSelectionOnlyOptions",
+      "type": "object",
+      "properties": {
+        "autoFlowSelectedPicturesAtProjectStart": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "WelcomeScreen": {
+      "title": "welcomeScreen",
+      "type": "object",
+      "properties": {
+        "showWelcomeScreen": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "AddPicturesStep": {
+      "title": "addPicturesStep",
+      "type": "object",
+      "properties": {
+        "defaultSortOrder": {
+          "$ref": "#/definitions/StringVal"
+        },
+        "thumbnailLayout": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "PicSelectionModeStep": {
+      "title": "picSelectionModeStep",
+      "type": "object",
+      "properties": {
+        "defaultMode": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "PageCountModeStep": {
+      "title": "pageCountModeStep",
+      "type": "object",
+      "properties": {
+        "defaultMode": {
+          "$ref": "#/definitions/StringVal"
+        }
+      }
+    },
+    "Cover1Step": {
+      "title": "cover1Step",
+      "type": "object",
+      "properties": {
+        "allowCustomersToSelectPicturesAndText": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "BackCoverStep": {
+      "title": "backCoverStep",
+      "type": "object",
+      "properties": {
+        "allowCustomersToSelectPicturesAndText": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "SmartPictureSelectionStep": {
+      "title": "smartPictureSelectionStep",
+      "type": "object",
+      "properties": {
+        "showSmartPictureSelectionStep": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "PreviewStep": {
+      "title": "previewStep",
+      "type": "object",
+      "properties": {
+        "showPreviewStep": {
+          "$ref": "#/definitions/Bool"
+        },
+        "allowBackgroundChange": {
+          "$ref": "#/definitions/Bool"
+        },
+        "save": {
+          "$ref": "#/definitions/Bool"
+        },
+        "orderButton": {
+          "$ref": "#/definitions/Bool"
+        },
+        "editButton": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Header": {
+      "title": "header",
+      "type": "object",
+      "properties": {
+        "logo": {
+          "$ref": "#/definitions/Bool"
+        },
+        "projectSummary": {
+          "$ref": "#/definitions/Bool"
+        },
+        "price": {
+          "$ref": "#/definitions/Bool"
+        },
+        "priceDisclaimer": {
+          "$ref": "#/definitions/Bool"
+        },
+        "projectNameAndPageCount": {
+          "$ref": "#/definitions/Bool"
+        },
+        "optionsAndExtrasButton": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Navigation": {
+      "title": "navigation",
+      "type": "object",
+      "properties": {
+        "breadcrumbTrail": {
+          "$ref": "#/definitions/Bool"
+        }
+      }
+    },
+    "Bool": {
+      "type": ["boolean"],
+      "title": "Bool"
+    },
+    "StringVal": {
+        "type": ["integer", "string"],
+        "title": "StringVal"
+    }
+  }
+}

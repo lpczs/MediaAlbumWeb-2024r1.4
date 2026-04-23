@@ -1,0 +1,6 @@
+framework:
+    cache:
+        directory: '%kernel.cache_dir%/pools'
+        pools:
+            doctrine.system_cache_pool:
+                adapter: cache.system

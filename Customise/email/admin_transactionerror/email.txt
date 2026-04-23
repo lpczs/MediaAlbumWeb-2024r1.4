@@ -1,0 +1,5 @@
+{$appname} - Payment ERROR
+
+A payment security check failed with the following details:
+
+{$data}
