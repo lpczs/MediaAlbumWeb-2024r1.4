@@ -47,6 +47,56 @@ class ExternalCustomerAccountObj
     const API_USER = "apiTPX";
 	const API_PWD  = 'ouAdZjaHiQ$Um6XbV^:N';
 
+	private static function getStringParam($pParamArray, $pKey)
+	{
+		if (isset($pParamArray[$pKey]) && ($pParamArray[$pKey] !== ''))
+		{
+			return trim((string) $pParamArray[$pKey]);
+		}
+
+		return '';
+	}
+
+	private static function resolveBrandCode($pParamArray)
+	{
+		$brandKeys = array('brandcode', 'newbrandcode', 'origbrandcode');
+		foreach ($brandKeys as $brandKey)
+		{
+			$brandCode = self::getStringParam($pParamArray, $brandKey);
+			if ($brandCode !== '')
+			{
+				return $brandCode;
+			}
+		}
+
+		$groupKeys = array('groupcode', 'accountgroupcode', 'newgroupcode', 'origgroupcode');
+		foreach ($groupKeys as $groupKey)
+		{
+			$groupCode = self::getStringParam($pParamArray, $groupKey);
+			if (($groupCode !== '') && class_exists('DatabaseObj') && method_exists('DatabaseObj', 'getLicenseKeyFromCode'))
+			{
+				$licenseKeyData = DatabaseObj::getLicenseKeyFromCode($groupCode);
+				if (is_array($licenseKeyData) && !empty($licenseKeyData['webbrandcode']))
+				{
+					return trim((string) $licenseKeyData['webbrandcode']);
+				}
+			}
+		}
+
+		global $gSession;
+		if (isset($gSession['webbrandcode']) && ($gSession['webbrandcode'] !== ''))
+		{
+			return trim((string) $gSession['webbrandcode']);
+		}
+
+		return '';
+	}
+
+	private static function shouldBypassExternalCustomerAPI($pParamArray)
+	{
+		return (self::resolveBrandCode($pParamArray) === 'PHOTOBOOKAPP');
+	}
+
 
 	/*
 	* Processes a request to create an account within an external system
@@ -118,6 +168,15 @@ class ExternalCustomerAccountObj
 		$result = '';
 		$userArray = Array();
 		$apiSession = '';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			$resultArray['result'] = '';
+			$resultArray['accountcode'] = $pParamArray['accountcode'];
+			$resultArray['useraccount'] = $pParamArray['useraccount'];
+			$resultArray['useraccount']['isactive'] = 1;
+			return $resultArray;
+		}
 
 		
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
@@ -320,6 +379,11 @@ class ExternalCustomerAccountObj
 	
 
 		$result = '';
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			return $result;
+		}
+
 		$accountGroupCode = $pParamArray['accountgroupcode'];
 		if ($accountGroupCode !== 'STSTEPHENS') {
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
@@ -531,6 +595,12 @@ class ExternalCustomerAccountObj
 	*/
 	static function updateActiveStatus($pParamArray)
 	{
+		$result = '';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			return $result;
+		}
 
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
@@ -597,6 +667,12 @@ class ExternalCustomerAccountObj
 	*/
 	static function deleteAccount($pParamArray)
 	{
+		$result = '';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			return $result;
+		}
 	
 	
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
@@ -695,7 +771,15 @@ class ExternalCustomerAccountObj
 	{
 		$resultArray = Array();
 		$result = '';
-		$lang = (strpos(pParamArray['languagecode'], 'zh') !== false) ? 'zh' : 'en';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			$resultArray['result'] = 'NOTHANDLED';
+			$resultArray['redirecturl'] = '';
+			return $resultArray;
+		}
+
+		$lang = (strpos($pParamArray['languagecode'], 'zh') !== false) ? 'zh' : 'en';
 		
 		$redirectURL = "https://www.ubabybaby.com/$lang/customer/account/forgotpassword/";
 
@@ -754,6 +838,16 @@ class ExternalCustomerAccountObj
 		//$newpassword = $pParamArray['newpassword'];
 	 	$contactFirstName = '';
 	 	$contactLastName = '';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			$resultArray['result'] = 'NOTHANDLED';
+			$resultArray['sendnotification'] = false;
+			$resultArray['storepassword'] = true;
+			$resultArray['contactfirstname'] = '';
+			$resultArray['contactlastname'] = '';
+			return $resultArray;
+		}
 
 	    $apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
@@ -927,9 +1021,16 @@ class ExternalCustomerAccountObj
 	* @author Kevin Gale
 	* @since Version 3.5.0
 	*/
-	static function updateAccountBalance($pParamArray)
+static function updateAccountBalance($pParamArray)
 	{
-        $accountGroupCode = $pParamArray['accountgroupcode'];
+		$result = '';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			return $result;
+		}
+
+        $accountGroupCode = (isset($pParamArray['accountgroupcode']) ? $pParamArray['accountgroupcode'] : '');
 		if ($accountGroupCode !== 'STSTEPHENS') { 
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
@@ -978,7 +1079,8 @@ class ExternalCustomerAccountObj
 	} else {
 		$result = '';
 	}
-	
+
+		return $result;
 	}
 
 
@@ -1002,6 +1104,13 @@ class ExternalCustomerAccountObj
 	*/
 	static function updateGiftCardBalance($pParamArray)
 	{
+		$result = '';
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			return $result;
+		}
+
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
 		$apiReqId =  $apiResult['id'];     
@@ -1044,18 +1153,15 @@ class ExternalCustomerAccountObj
 		else {
 		
 		//$result = 'str_ErrorCannotChangePassword';
-		}	
-	
-	
-	
+		}
 
-	
-	
+		return $result;
 	}
 
 
 	/*
 	* Requests an external login
+
 	*
 	*
 	* @param array $pParamArray
@@ -1132,6 +1238,16 @@ class ExternalCustomerAccountObj
 		$updateGiftCardBalance = false;
 		
 		$userAccountArray = $pParamArray['useraccount'];
+
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			$resultArray['result'] = 'NOTHANDLED';
+			$resultArray['useraccount'] = $userAccountArray;
+			$resultArray['updateaccountbalance'] = $updateAccountBalance;
+			$resultArray['updategiftcardbalance'] = $updateGiftCardBalance;
+			$resultArray['passwordformat'] = $userAccountArray['passwordformat'];
+			return $resultArray;
+		}
 
 		$accountGroupCode = $pParamArray['accountgroupcode'];
 		if ($accountGroupCode !== 'STSTEPHENS') {
@@ -1403,6 +1519,10 @@ class ExternalCustomerAccountObj
 	*/		
 	static function updatePassword($pParamArray)
 	{
+		if (self::shouldBypassExternalCustomerAPI($pParamArray))
+		{
+			return 'NOTHANDLED';
+		}
 		
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
