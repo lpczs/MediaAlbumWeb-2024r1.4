@@ -11,8 +11,8 @@ use Taopix\ControlCentre\Helper\Create\Project;
 
 class OnlineAPI_control
 {
-	static function create($pBasketWorkFlowType = TPX_BASKETWORKFLOWTYPE_NORMAL)
-	{
+		static function create($pBasketWorkFlowType = TPX_BASKETWORKFLOWTYPE_NORMAL)
+		{
         global $gSession;
 		global $gConstants;
 		global $ac_config;
@@ -44,8 +44,39 @@ class OnlineAPI_control
 		$largeScreenWizardMode = 0;
 		$enableSwitchingEditor = 0;
 		$onlineEditorMode = 0;
-		$aiModeOverride = -1;
-		$newGuestWorkFlowMode = -1;
+			$aiModeOverride = -1;
+			$newGuestWorkFlowMode = -1;
+			$logMultiLineWorkflowDebug = static function($stage, $brandCodeForLog, $groupCodeForLog, $workflowValue, $extra = array()) use ($productIdent)
+			{
+				$payload = array(
+					'stage' => $stage,
+					'host' => $_SERVER['HTTP_HOST'] ?? '',
+					'uri' => $_SERVER['REQUEST_URI'] ?? '',
+					'brandcode' => $brandCodeForLog,
+					'groupcode' => $groupCodeForLog,
+					'usemultilinebasketworkflow' => $workflowValue,
+					'productid_present' => ($productIdent != '')
+				);
+
+				if (!empty($extra))
+				{
+					$payload = array_merge($payload, $extra);
+				}
+
+				UtilsObj::writeToDebugFileInLogsFolder('debug-multiline-workflow.log', 'TAOPIX_DEBUG_MULTILINE', $payload);
+			};
+
+			$logMultiLineWorkflowDebug(
+				'create-entry',
+				$brandCode,
+				$groupCode,
+				'unknown',
+				array(
+					'fsaction' => UtilsObj::getGETParam('fsaction', ''),
+					'request_method' => $_SERVER['REQUEST_METHOD'] ?? '',
+					'madbgmultiline' => UtilsObj::getGETParam('madbgmultiline', 0)
+				)
+			);
 
         if ($pBasketWorkFlowType == TPX_BASKETWORKFLOWTYPE_HIGHLEVELAPI)
         {
@@ -504,14 +535,20 @@ class OnlineAPI_control
 											$resultArray['productcode'] = $createProjectConfig['productcode'];
 											$resultArray['userdata'] = $createProjectConfig['userdata'];
 
-											 if ($pBasketWorkFlowType == TPX_BASKETWORKFLOWTYPE_HIGHLEVELAPI)
-											 {
-											 	$brandingArray = DatabaseObj::getBrandingFromCode($createProjectConfig['brandcode']);
+												 if ($pBasketWorkFlowType == TPX_BASKETWORKFLOWTYPE_HIGHLEVELAPI)
+												 {
+												 	$brandingArray = DatabaseObj::getBrandingFromCode($createProjectConfig['brandcode']);
+													$logMultiLineWorkflowDebug(
+														'highlevel-api-validation',
+														$createProjectConfig['brandcode'],
+														$createProjectConfig['groupcode'],
+														$brandingArray['usemultilinebasketworkflow']
+													);
 
-											 	if ($brandingArray['usemultilinebasketworkflow'] == 0)
-											 	{
-											 		$resultArray['result'] = TPX_ONLINE_ERROR_HIGHLEVELNOTENABLED;
-											 	}
+												 	if ($brandingArray['usemultilinebasketworkflow'] == 0)
+												 	{
+												 		$resultArray['result'] = TPX_ONLINE_ERROR_HIGHLEVELNOTENABLED;
+												 	}
 											 }
 
 											if ($licenseKeyDataArray['isactive'] == 1 && $licenseKeyDataArray['availableonline'] == 1)
@@ -862,12 +899,21 @@ class OnlineAPI_control
 			$error = '';
 			$isSingleItemWorkFlow = true;
 
-			$brandingArray = DatabaseObj::getBrandingFromCode($brandCode);
-			// first check to see if the system has brands set to use Multiline Basket API
-			// this is to capture old product URL's being invoked when Multiline Basket API is set for the brand
-			// now check to see if the brand used to create the project is using Multiline Basket API
-			if ($brandingArray['usemultilinebasketworkflow'] == 1)
-			{
+				$brandingArray = DatabaseObj::getBrandingFromCode($brandCode);
+				$logMultiLineWorkflowDebug(
+					'legacy-product-url-check',
+					$brandCode,
+					$groupCode,
+					$brandingArray['usemultilinebasketworkflow'],
+					array(
+						'basketworkflowtype' => $pBasketWorkFlowType
+					)
+				);
+				// first check to see if the system has brands set to use Multiline Basket API
+				// this is to capture old product URL's being invoked when Multiline Basket API is set for the brand
+				// now check to see if the brand used to create the project is using Multiline Basket API
+				if ($brandingArray['usemultilinebasketworkflow'] == 1)
+				{
 				$isSingleItemWorkFlow = false;
 
 				$hl_config = UtilsObj::readWebBrandConfigFile('../config/onlinebaskethighlevelapi.conf', $brandCode);
@@ -881,13 +927,22 @@ class OnlineAPI_control
 					$homeURL = UtilsObj::getArrayParam($hl_config, 'REDIRECTIONURL');
 				}
 
-				if ($homeURL != '')
-				{
+					if ($homeURL != '')
+					{
 					// redirect back to the home URL with the mawebhlcreate parameter which is set to the
 					// original product URL id as well as any other parameters that might have been attached to the URL
 					// this allows the creation of a basket for the user to allow multi line item ordering
-					$homeURL = UtilsObj::correctPath($homeURL, '/', true);
-					$homeURL .= $hl_config['HIGHLEVELBASKETAPIREDIRECTPAGE'] . '?mawebhlcreate='. $productIdent;
+						$homeURL = UtilsObj::correctPath($homeURL, '/', true);
+						$homeURL .= $hl_config['HIGHLEVELBASKETAPIREDIRECTPAGE'] . '?mawebhlcreate='. $productIdent;
+						$logMultiLineWorkflowDebug(
+							'legacy-product-url-redirect',
+							$brandCode,
+							$groupCode,
+							$brandingArray['usemultilinebasketworkflow'],
+							array(
+								'redirecturl' => $homeURL
+							)
+						);
 
 					if (array_key_exists('gwm', $_GET))
 					{
