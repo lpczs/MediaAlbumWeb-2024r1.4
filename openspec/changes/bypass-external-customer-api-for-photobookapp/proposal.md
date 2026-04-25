@@ -5,6 +5,8 @@ Customer account operations for the `PHOTOBOOKAPP` brand are currently routed th
 ## What Changes
 
 - Introduce brand-based bypass behavior for external customer account scripting when the resolved brand is `PHOTOBOOKAPP`.
+- Add a dedicated `resolveGroupCode()` path so bypass decisions can also be driven from effective groupcode (license key) context.
+- Support explicit legacy groupcode bypass overrides (for example `STSTEPHENS`) even when the resolved brand is not `PHOTOBOOKAPP`.
 - Ensure account flows for `PHOTOBOOKAPP` are handled by Taopix core mechanisms rather than external customer API logic:
   - registration
   - login/authentication
@@ -14,8 +16,8 @@ Customer account operations for the `PHOTOBOOKAPP` brand are currently routed th
 - Explicitly align bypass strategy by hook contract:
   - `login`, `resetPasswordInit`, `resetPassword`, `updatePassword`: use `NOTHANDLED` so Taopix native flow continues.
   - `createAccount`, `updateAccountDetails`, `updateAccountBalance`, `updateGiftCardBalance`, `updateActiveStatus`, `deleteAccount`: bypass external API with success/no-op-compatible return values (same pattern as `updateAccountDetails`/`updateAccountBalance`), not `NOTHANDLED`.
-- Define a robust brand resolution rule that does not rely on hardcoded license-key lists and supports future `PHOTOBOOKAPP` license keys automatically.
-- Preserve existing external-customer-account behavior for non-`PHOTOBOOKAPP` brands.
+- Define robust brand/groupcode resolution rules that do not rely on hardcoded license-key lists and support future `PHOTOBOOKAPP` license keys automatically.
+- Preserve existing external-customer-account behavior for non-`PHOTOBOOKAPP` brands, except explicitly configured groupcode bypass overrides.
 
 ## Capabilities
 

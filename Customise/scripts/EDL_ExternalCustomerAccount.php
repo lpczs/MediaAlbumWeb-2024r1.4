@@ -44,6 +44,8 @@ class ExternalCustomerAccountObj
 {
 
 	private static $API_URI = "https://www.ubabybaby.com/en/inchoo-api/inchoo/json";
+	private static $BYPASS_BRAND_CODES = array('PHOTOBOOKAPP');
+	private static $BYPASS_GROUP_CODES = array('STSTEPHENS');
     const API_USER = "apiTPX";
 	const API_PWD  = 'ouAdZjaHiQ$Um6XbV^:N';
 
@@ -52,6 +54,45 @@ class ExternalCustomerAccountObj
 		if (isset($pParamArray[$pKey]) && ($pParamArray[$pKey] !== ''))
 		{
 			return trim((string) $pParamArray[$pKey]);
+		}
+
+		return '';
+	}
+
+	private static function resolveGroupCode($pParamArray)
+	{
+		$groupKeys = array('groupcode', 'accountgroupcode', 'newgroupcode', 'origgroupcode');
+		foreach ($groupKeys as $groupKey)
+		{
+			$groupCode = self::getStringParam($pParamArray, $groupKey);
+			if ($groupCode !== '')
+			{
+				return $groupCode;
+			}
+		}
+
+		global $gSession;
+		$sessionGroupKeys = array('groupcode', 'accountgroupcode');
+		foreach ($sessionGroupKeys as $sessionGroupKey)
+		{
+			if (isset($gSession[$sessionGroupKey]) && ($gSession[$sessionGroupKey] !== ''))
+			{
+				return trim((string) $gSession[$sessionGroupKey]);
+			}
+		}
+
+		return '';
+	}
+
+	private static function resolveBrandFromGroupCode($pGroupCode)
+	{
+		if (($pGroupCode !== '') && class_exists('DatabaseObj') && method_exists('DatabaseObj', 'getLicenseKeyFromCode'))
+		{
+			$licenseKeyData = DatabaseObj::getLicenseKeyFromCode($pGroupCode);
+			if (is_array($licenseKeyData) && !empty($licenseKeyData['webbrandcode']))
+			{
+				return trim((string) $licenseKeyData['webbrandcode']);
+			}
 		}
 
 		return '';
@@ -69,18 +110,11 @@ class ExternalCustomerAccountObj
 			}
 		}
 
-		$groupKeys = array('groupcode', 'accountgroupcode', 'newgroupcode', 'origgroupcode');
-		foreach ($groupKeys as $groupKey)
+		$groupCode = self::resolveGroupCode($pParamArray);
+		$groupBrandCode = self::resolveBrandFromGroupCode($groupCode);
+		if ($groupBrandCode !== '')
 		{
-			$groupCode = self::getStringParam($pParamArray, $groupKey);
-			if (($groupCode !== '') && class_exists('DatabaseObj') && method_exists('DatabaseObj', 'getLicenseKeyFromCode'))
-			{
-				$licenseKeyData = DatabaseObj::getLicenseKeyFromCode($groupCode);
-				if (is_array($licenseKeyData) && !empty($licenseKeyData['webbrandcode']))
-				{
-					return trim((string) $licenseKeyData['webbrandcode']);
-				}
-			}
+			return $groupBrandCode;
 		}
 
 		global $gSession;
@@ -94,7 +128,25 @@ class ExternalCustomerAccountObj
 
 	private static function shouldBypassExternalCustomerAPI($pParamArray)
 	{
-		return (self::resolveBrandCode($pParamArray) === 'PHOTOBOOKAPP');
+		$resolvedBrandCode = strtoupper(self::resolveBrandCode($pParamArray));
+		if (($resolvedBrandCode !== '') && in_array($resolvedBrandCode, self::$BYPASS_BRAND_CODES, true))
+		{
+			return true;
+		}
+
+		$resolvedGroupCode = strtoupper(self::resolveGroupCode($pParamArray));
+		if (($resolvedGroupCode !== '') && in_array($resolvedGroupCode, self::$BYPASS_GROUP_CODES, true))
+		{
+			return true;
+		}
+
+		if ($resolvedGroupCode === '')
+		{
+			return false;
+		}
+
+		$resolvedBrandFromGroupCode = strtoupper(self::resolveBrandFromGroupCode($resolvedGroupCode));
+		return (($resolvedBrandFromGroupCode !== '') && in_array($resolvedBrandFromGroupCode, self::$BYPASS_BRAND_CODES, true));
 	}
 
 
@@ -384,8 +436,6 @@ class ExternalCustomerAccountObj
 			return $result;
 		}
 
-		$accountGroupCode = $pParamArray['accountgroupcode'];
-		if ($accountGroupCode !== 'STSTEPHENS') {
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
 		$apiReqId =  $apiResult['id'];     
@@ -556,16 +606,6 @@ class ExternalCustomerAccountObj
 		   
 		   
 		}
-		
-		else {
-		
-		$result = 'str_ErrorAccountTaskNotAllowed';
-		}		
-		
-		
-		
-		
-	}
 		
 
 	
@@ -1030,8 +1070,6 @@ static function updateAccountBalance($pParamArray)
 			return $result;
 		}
 
-        $accountGroupCode = (isset($pParamArray['accountgroupcode']) ? $pParamArray['accountgroupcode'] : '');
-		if ($accountGroupCode !== 'STSTEPHENS') { 
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
 		$apiReqId =  $apiResult['id'];     
@@ -1076,12 +1114,8 @@ static function updateAccountBalance($pParamArray)
 		//$result = 'str_ErrorCannotChangePassword';
 		}	
 	
-	} else {
-		$result = '';
-	}
-
-		return $result;
-	}
+			return $result;
+		}
 
 
 	/*
@@ -1249,9 +1283,6 @@ static function updateAccountBalance($pParamArray)
 			return $resultArray;
 		}
 
-		$accountGroupCode = $pParamArray['accountgroupcode'];
-		if ($accountGroupCode !== 'STSTEPHENS') {
-
 		$apiResult = self::apiLogin(self::API_USER,self::API_PWD);
 		$apiSession = $apiResult['result'];
 		$apiReqId =  $apiResult['id']; 
@@ -1394,13 +1425,6 @@ static function updateAccountBalance($pParamArray)
 		
 		}
 		
-
-		}
-
-		else {
-			// non external accounts
-			$result = 'NOTHANDLED';
-		}
 
 		$resultArray['result'] = $result;
 		$resultArray['useraccount'] = $userAccountArray;

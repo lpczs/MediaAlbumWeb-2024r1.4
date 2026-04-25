@@ -4,14 +4,14 @@
 
 The system already supports a fallback model where script methods can return `NOTHANDLED` and Taopix native logic continues. However, not all call sites interpret `NOTHANDLED` identically: some paths explicitly treat it as “continue internally,” while others expect success/empty result and would treat `NOTHANDLED` as failure.
 
-The change must therefore bypass external API behavior for all `PHOTOBOOKAPP`-bound license keys without maintaining explicit per-license-key lists, while preserving existing behavior for all other brands.
+The change must therefore bypass external API behavior for all `PHOTOBOOKAPP`-bound license keys without maintaining explicit per-license-key lists, while preserving existing behavior for all other brands except explicitly configured legacy groupcode bypass overrides.
 
 ## Goals / Non-Goals
 
 **Goals:**
 - Ensure `PHOTOBOOKAPP` customer flows are executed by Taopix native account mechanisms rather than external customer API logic.
 - Apply bypass behavior to all current and future license keys mapped to `PHOTOBOOKAPP`.
-- Preserve existing external integration behavior for non-`PHOTOBOOKAPP` brands.
+- Preserve existing external integration behavior for non-`PHOTOBOOKAPP` brands, except explicit legacy groupcode bypass overrides.
 - Make bypass decisions deterministic across hook methods with a single brand-resolution rule.
 
 **Non-Goals:**
@@ -22,12 +22,15 @@ The change must therefore bypass external API behavior for all `PHOTOBOOKAPP`-bo
 
 ## Decisions
 
-### 1. Centralize brand resolution inside `EDL_ExternalCustomerAccount.php`
+### 1. Centralize brand and groupcode resolution inside `EDL_ExternalCustomerAccount.php`
 
-**Decision:** Add a shared helper to resolve effective brand for each hook invocation using ordered fallbacks:
-1. Direct brand params if present (`brandcode`, `newbrandcode`, `origbrandcode`)
-2. Group-code derived brand using Taopix lookup (`DatabaseObj::getLicenseKeyFromCode(...)['webbrandcode']`) from available group fields (`groupcode`, `accountgroupcode`, `newgroupcode`, `origgroupcode`)
-3. Session fallback (`$gSession['webbrandcode']`) when available
+**Decision:** Add shared helpers to resolve effective groupcode and effective brand for each hook invocation using ordered fallbacks:
+1. Resolve groupcode from request/session (`groupcode`, `accountgroupcode`, `newgroupcode`, `origgroupcode`, then session group context when present)
+2. Resolve brand from direct brand params if present (`brandcode`, `newbrandcode`, `origbrandcode`)
+3. Resolve brand from groupcode mapping (`DatabaseObj::getLicenseKeyFromCode(...)['webbrandcode']`)
+4. Session fallback (`$gSession['webbrandcode']`) when available
+
+`shouldBypassExternalCustomerAPI(...)` MUST evaluate bypass eligibility using both resolved brand and resolved groupcode-derived brand so bypass still works when one context is missing, and MUST support explicit groupcode override entries (for legacy non-`PHOTOBOOKAPP` bypass needs such as `STSTEPHENS`).
 
 **Rationale:**
 - Not all hooks are guaranteed to receive `brandcode` consistently.

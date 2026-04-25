@@ -9,10 +9,11 @@ The system MUST bypass external customer account API handling when the effective
 
 #### Scenario: Bypass is not enabled for other brands
 - **WHEN** a customer account scripting hook is invoked and the effective brand resolves to a brand other than `PHOTOBOOKAPP`
+- **AND** the effective groupcode is not part of explicit bypass groupcode overrides
 - **THEN** existing external customer account API behavior MUST remain unchanged
 
-### Requirement: Effective brand resolution without license-key allowlists
-The system MUST determine the effective brand for a hook invocation without relying on hardcoded license-key lists.
+### Requirement: Effective brand and groupcode resolution without license-key allowlists
+The system MUST determine effective brand and groupcode context for a hook invocation without relying on hardcoded license-key lists.
 
 #### Scenario: Resolve brand from explicit brand fields
 - **WHEN** hook parameters include a brand field (`brandcode`, `newbrandcode`, or `origbrandcode`)
@@ -21,6 +22,18 @@ The system MUST determine the effective brand for a hook invocation without rely
 #### Scenario: Resolve brand from groupcode mapping
 - **WHEN** explicit brand fields are unavailable and a groupcode field is present (`groupcode`, `accountgroupcode`, `newgroupcode`, or `origgroupcode`)
 - **THEN** the system MUST resolve the effective brand via license-key-to-brand lookup
+
+#### Scenario: Resolve effective groupcode from invocation context
+- **WHEN** a hook invocation includes any supported groupcode field (`groupcode`, `accountgroupcode`, `newgroupcode`, or `origgroupcode`)
+- **THEN** the system MUST resolve and retain an effective groupcode value for bypass decision logic
+
+#### Scenario: Bypass decision also supports groupcode-derived context
+- **WHEN** brand context is missing, stale, or not directly supplied and effective groupcode can be resolved
+- **THEN** bypass eligibility MUST still be evaluated from groupcode-derived brand mapping instead of defaulting directly to non-bypass behavior
+
+#### Scenario: Explicit groupcode override enables bypass
+- **WHEN** a hook invocation resolves an effective groupcode that is configured in bypass overrides (for example `STSTEPHENS`)
+- **THEN** bypass behavior MUST be enabled even when resolved brand is not `PHOTOBOOKAPP`
 
 #### Scenario: Fallback resolution from session context
 - **WHEN** neither explicit brand fields nor groupcode-derived brand can be resolved
