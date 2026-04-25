@@ -4,6 +4,8 @@
 - [x] 1.2 Extend the helper to resolve brand via license-key lookup from available groupcode fields (`groupcode`, `accountgroupcode`, `newgroupcode`, `origgroupcode`) when explicit brand is missing.
 - [x] 1.3 Add final fallback resolution from session web brand context and default to existing behavior when brand remains unresolved.
 - [x] 1.4 Add a shared helper/guard that returns whether PHOTOBOOKAPP bypass should apply for the current hook invocation.
+- [x] 1.5 Add a shared `resolveGroupCode` helper and ensure bypass checks can evaluate groupcode-derived brand context directly.
+- [x] 1.6 Add explicit groupcode override bypass support for legacy keys (e.g., `STSTEPHENS`) without weakening PHOTOBOOKAPP-by-brand behavior.
 
 ## 2. NOTHANDLED-Compatible Hook Bypass
 
