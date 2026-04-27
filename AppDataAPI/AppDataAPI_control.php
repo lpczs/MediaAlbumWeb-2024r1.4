@@ -8,7 +8,7 @@ class AppDataAPI_control
 	static function login()
 	{
 		$decryptedPOST = AppDataAPI_model::decryptPOST('authenticate');
-		UtilsObj::writeToDebugFileInLogsFolder('tpx-fran.txt','',$decryptedPOST);  
+	
 		
 		if ($decryptedPOST['error'] == '')
 		{
@@ -18,7 +18,7 @@ class AppDataAPI_control
 		{
 			$result = Array('error' => $decryptedPOST['error']);
 		}
-		UtilsObj::writeToDebugFileInLogsFolder('tpx-fran.txt','',$result);
+		
 		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
 	}
 
@@ -26,7 +26,7 @@ class AppDataAPI_control
 	static function query()
 	{
 		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
-        UtilsObj::writeToDebugFileInLogsFolder('tpx-fran-query.txt','',$decryptedPOST);
+       
 		if ($decryptedPOST['error'] == '')
 		{
 			$result = AppDataAPI_model::query($decryptedPOST);
@@ -43,7 +43,7 @@ class AppDataAPI_control
 	static function insert()
 	{
 		$decryptedPOST = AppDataAPI_model::decryptPOST('dataapicall');
-		UtilsObj::writeToDebugFileInLogsFolder('tpx-fran-insert.txt','',$decryptedPOST);
+		
 
 		if ($decryptedPOST['error'] == '')
 		{
@@ -53,7 +53,7 @@ class AppDataAPI_control
 		{
 			$result = Array('error' => $decryptedPOST['error']);
 		}
-		UtilsObj::writeToDebugFileInLogsFolder('tpx-fran-insert.txt','',$result);
+		
 		AppDataAPI_view::echoBack($result, $decryptedPOST['iv'], $decryptedPOST['ivregenerated']);
 	}
 

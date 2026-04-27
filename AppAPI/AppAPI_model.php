@@ -699,7 +699,7 @@ class AppAPI_model
                         $inactiveProductCollectionCode = $cartItemArray['collectioncode'];
                         $inactiveLayoutCode = $cartItemArray['productcode'];
 
-                        UtilsObj::writeToDebugFileInLogsFolder('ProductInactive.log', 'INACTIVEPRODUCT', array('licensekey' => $groupCode, 'productcollectioncode' => $inactiveProductCollectionCode, 'productcode' => $inactiveLayoutCode));
+                        
 
                         break;
                     }

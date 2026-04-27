@@ -895,7 +895,7 @@ class AppDataAPI_model
 		{
 			$resultArray['error'] = 'Error: Cannot connect to database';
 		}
-		UtilsObj::writeToDebugFileInLogsFolder('tpx-fran-insert.txt','',$resultArray);     
+		  
 		return $resultArray;
 	}
 
@@ -2119,7 +2119,7 @@ class AppDataAPI_model
 			$loginData = substr($loginData, 0, $postLength);
 
 			$loginDetails = explode('~~~~', $loginData);
-			UtilsObj::writeToDebugFileInLogsFolder('tpx-fran.txt','',$loginDetails);
+			
 
 			$username = $loginDetails[0];
 			$password = $loginDetails[1];
