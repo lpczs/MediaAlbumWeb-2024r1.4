@@ -13,7 +13,7 @@ class AppDataAPI_view
 			$resultString = strlen($resultString) . '=' . base64_encode(mcrypt_encrypt(MCRYPT_BLOWFISH, $ac_config['DATAAPISECRETKEY'], 
 					$resultString, MCRYPT_MODE_CBC, $pIV));
 
-            UtilsObj::debugString($resultString);
+        
 			// we only send the IV if we are sure that the receiving system is expecting one
 			if ($pIVRegenerated === true)
 			{

@@ -233,7 +233,7 @@ class AdminTaopixOnlineProductURLAdmin_model
 
 										$url = $onlineDesignerURL . '?fsaction=OnlineAPI.create&id=' . $productIdent;
 										$theItem['url'] = $url;
-										UtilsObj::debugString($systemConfigArray['systemkey']);
+									
 									}
 
 									$theItem['id'] = $id;
